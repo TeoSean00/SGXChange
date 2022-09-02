@@ -1,5 +1,11 @@
 # WAD2_project
 
+'''To navigate github,
+Firstly, git pull
+To add your code, 'cd ..' to the main directory first -> 'git add .' -> 'git commit -m "wtv msg"' -> 'git push' '''
+
+# To add any required packages to be installed into requirements.txt -> 'pip install requirements.txt'
+
 This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup
