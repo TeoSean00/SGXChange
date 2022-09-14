@@ -59,6 +59,28 @@
       </form>
     </div>
   </nav>
+  <ol>
+      <li>
+        <router-link to="/UniversityPage">
+          UniversityPage
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/">
+          Home
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/ModulePage">
+          ModulePage
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/ModuleMappingPage">
+          ModuleMappingPage
+        </router-link>
+      </li>
+    </ol>
 </template>
 
 <script>

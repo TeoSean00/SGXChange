@@ -1,3 +1,3 @@
 <template>
-    HomePage
+    University Page
 </template>

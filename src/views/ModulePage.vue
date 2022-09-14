@@ -1,3 +1,3 @@
 <template>
-    HomePage
+    Module Page
 </template>
