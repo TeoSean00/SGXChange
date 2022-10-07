@@ -1,7 +1,19 @@
-.light {
-    background-color: blue;
+.unicard {
+    background-color: papayawhip;
+    border-radius: 10%;
+    padding: 20px;
 }
 
-.dark {
-    background-color: black;
+.uniitem {
+    background-color: papayawhip;
+}
+
+.iconborder {
+    border: 2px black solid;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

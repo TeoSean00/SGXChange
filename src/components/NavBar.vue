@@ -1,5 +1,4 @@
 <template>
-
   <nav class="navbar navbar-expand navbar-light bg-light">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto ">
@@ -10,7 +9,12 @@
         </li>
         <li class="nav-item active">
           <router-link to="/UniversityPage" class="nav-link">
-            UniversityPage
+            Universities
+          </router-link>
+        </li>
+        <li class="nav-item active">
+          <router-link to="/ModuleMappingPage" class="nav-link">
+            ModuleMapping
           </router-link>
         </li>
         <li class="nav-item active">
@@ -18,25 +22,22 @@
             ModulePage
           </router-link>
         </li>
+      </ul>
+      <ul class="navbar-nav">
         <li class="nav-item active">
-          <router-link to="/ModuleMappingPage" class="nav-link">
-            ModuleMappingPage
+          <router-link to="/ModulePage" class="nav-link iconborder">
+            <i class="fa-solid fa-user "></i>
           </router-link>
         </li>
       </ul>
     </div>
-    <button @click="colorMode = colorMode === 'dark' ? 'light' : 'dark'">
-    colorMode {{ colorMode }}
-    </button>
   </nav>
 </template>
 
 <script>
-import { useColorMode } from '@vueuse/core';
 export default {
   data() {
     return {
-        colorMode: useColorMode()
     };
   },
   methods: {
