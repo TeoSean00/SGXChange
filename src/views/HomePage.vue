@@ -43,6 +43,7 @@
 <script >
 import UniCardSmall from "@/components/UniCardSmall.vue";
 
+
 export default {
   name: "HomePage",
   data() {

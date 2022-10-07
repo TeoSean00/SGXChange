@@ -18,9 +18,7 @@
           </router-link>
         </li>
         <li class="nav-item active">
-          <router-link to="/ModulePage" class="nav-link">
-            ModulePage
-          </router-link>
+            <span v-on:click="scrollToAbout" class="nav-link">About</span>
         </li>
       </ul>
       <ul class="navbar-nav">
@@ -41,6 +39,10 @@ export default {
     };
   },
   methods: {
+    scrollToAbout() {
+      let element = document.getElementById('about');
+      element.scrollIntoView({ behavior: "smooth" });
+    }
   },
 };
 </script>
