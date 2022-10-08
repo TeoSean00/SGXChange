@@ -1,5 +1,9 @@
 # WAD2_project
 
+``` Deployed on 
+wad2-sgxchange-49qt89hea-k3ithloh.vercel.app
+```
+
 '''To navigate github,
 Firstly, git pull
 To add your code, 'cd ..' to the main directory first -> 'git add .' -> 'git commit -m "wtv msg"' -> 'git push' '''
