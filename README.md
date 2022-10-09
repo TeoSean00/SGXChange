@@ -9,16 +9,6 @@ Firstly, git pull
 To add your code, 'cd ..' to the main directory first -> 'git add .' -> 'git commit -m "wtv msg"' -> 'git push'
 
 
-# To utilise Firestore and its queries/fetches in your vue components,
-
-```
-<script>
-import db from './Firebase/firebaseInit'
-import { collection, getDocs, doc, getDoc } (THIS DEPENDS ON WHAT METHODS U NEED, refer to firestore query documentation)
-from "firebase/firestore";
-</script>
-```
-
 # To add any required packages to be installed into requirements.txt -> 'pip install requirements.txt'
 
 This template should help get you started developing with Vue 3 in Vite.
@@ -48,4 +38,3 @@ npm run dev
 ```sh
 npm run build
 ```
-
