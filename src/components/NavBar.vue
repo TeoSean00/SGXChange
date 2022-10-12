@@ -22,8 +22,11 @@
         </li>
       </ul>
       <ul class="navbar-nav">
-        <li class="nav-item active">
-          <router-link to="/ModulePage" class="nav-link iconborder">
+        <li class="nav-item active d-flex">
+          <Search class=""/>
+        </li>
+        <li class="nav-item active d-flex">
+          <router-link to="/ModulePage" class="nav-link iconborder m-auto">
             <i class="fa-solid fa-user "></i>
           </router-link>
         </li>
@@ -33,16 +36,17 @@
 </template>
 
 <script>
+import Search from './Search.vue';
 export default {
-  data() {
-    return {
-    };
-  },
-  methods: {
-    scrollToAbout() {
-      let element = document.getElementById('about');
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  },
+    data() {
+        return {};
+    },
+    methods: {
+        scrollToAbout() {
+            let element = document.getElementById("about");
+            element.scrollIntoView({ behavior: "smooth" });
+        }
+    },
+    components: { Search }
 };
 </script>
