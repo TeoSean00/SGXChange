@@ -53,7 +53,7 @@ export default {
 .search-wrapper.active .input-holder {
     width:450px;
     border-radius: 50px;
-    background: white;
+    background: lightblue;
     transition: all .5s cubic-bezier(0.000, 0.105, 0.035, 1.570);
 }
 .search-wrapper .input-holder .search-input {
@@ -86,7 +86,7 @@ export default {
     height:70px;
     border:none;
     border-radius:6px;
-    background: #FFF;
+    background: rgb(247, 237, 237);
     padding:0px;
     outline:none;
     position: relative;
