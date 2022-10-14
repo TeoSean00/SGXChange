@@ -26,10 +26,10 @@
 } */
 
 .marquee-img {
-  padding-left: 5em;
-  padding-right: 5em;
-  padding-top: 40px;
-  padding-bottom: 40px;
+  margin-left: 5em;
+  margin-right: 5em;
+  margin-top: 40px;
+  margin-bottom: 40px;
 }
 
 .marquee-wrapper {
@@ -57,7 +57,7 @@
   }
 }
 
-.marquee h3:hover {
+.marquee:hover {
   -moz-animation-play-state: paused;
   -webkit-animation-play-state: paused;
   animation-play-state: paused;
