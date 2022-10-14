@@ -1,22 +1,64 @@
 .unicard {
-    border: 0;
-    background-color: white;
-    border-radius: 10%;
-    padding: 20px;
+  border: 0;
+  background-color: white;
+  border-radius: 10%;
+  padding: 20px;
 }
 
 .uniitem {
-    background-color: white;
+  background-color: white;
 }
 
 .iconborder {
-    
-    border: 2px black solid;
-    border-radius: 50%;
-    height: 30px;
-    width: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  border: 2px black solid;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* body {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+} */
+
+.marquee-img {
+  padding-left: 5em;
+  padding-right: 5em;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.marquee-wrapper {
+  overflow: hidden;
+  background-color: black;
+}
+
+.marquee {
+  display: flex;
+  animation-name: marquee;
+  animation-duration: 30s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-direction: normal;
+  transform: translateX(0);
+  background-color: black;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.marquee h3:hover {
+  -moz-animation-play-state: paused;
+  -webkit-animation-play-state: paused;
+  animation-play-state: paused;
+}
