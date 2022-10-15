@@ -75,11 +75,17 @@
   <Vue3Marquee :pauseOnHover="true">
     <div class="card" v-for="avatar in avatarArray" :key="avatar">
       <router-link to="/">
-        <img src="../assets/school.jpg" width="235" height="350" />
+        <img
+          class="uni-img"
+          src="../assets/school.jpg"
+          width="235"
+          height="350"
+        />
         <!-- <button style="border: 0px margin-top: 20px; margin-bottom: 0px">
         New York
       </button> -->
-        <button class="btn">University Name</button>
+        <h2 class="uni-header">University Name</h2>
+        <!-- <button class="btn">University Name</button> -->
       </router-link>
     </div>
   </Vue3Marquee>
@@ -129,7 +135,15 @@ export default {
   /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
 }
 
-.btn {
+.uni-img {
+  position: relative;
+}
+
+.uni-header {
+  position: absolute;
+}
+
+/* .btn {
   background-color: white;
   padding: 5px;
   margin: 10px 0;
@@ -140,5 +154,5 @@ export default {
 .btn:hover {
   background: rgb(226, 226, 226);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-}
+} */
 </style>
