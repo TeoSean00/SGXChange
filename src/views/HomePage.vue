@@ -21,6 +21,8 @@
 import UniCardSmall from "@/components/UniCardSmall.vue";
 // import Search from "@/components/Search.vue";
 // import Carousel from "@/components/Carousel.vue";
+import { reactive } from "vue";
+import { Vue3Marquee } from "vue3-marquee";
 import Marquee from "@/components/Marquee.vue";
 
 export default {

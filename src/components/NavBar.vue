@@ -3,7 +3,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <img src="../images/WebsiteLogo.png" style="width: 50px" alt="" />
+          <img src="../assets/WebsiteLogo.png" style="width: 50px" alt="" />
         </li>
         <li class="nav-item active">
           <router-link to="/" class="nav-link"> Home </router-link>
