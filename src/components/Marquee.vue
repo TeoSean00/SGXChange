@@ -1,75 +1,3 @@
-<!-- <template> -->
-
-<!-- <div class="marquee-wrapper">
-    <div class="marquee">
-      <img
-        class="marquee-img rounded-3"
-        src="https://placeimg.com/235/350/any"
-      />
-      <img
-        class="marquee-img rounded-3"
-        src="https://placeimg.com/235/350/any"
-      />
-      <img
-        class="marquee-img rounded-3"
-        src="https://placeimg.com/235/350/any"
-      />
-      <img
-        class="marquee-img rounded-3"
-        src="https://placeimg.com/235/350/any"
-      />
-      <img
-        class="marquee-img rounded-3"
-        src="https://placeimg.com/235/350/any"
-      />
-      <img
-        class="marquee-img rounded-3"
-        src="https://placeimg.com/235/350/any"
-      />
-      <img
-        class="marquee-img rounded-3"
-        src="https://placeimg.com/235/350/any"
-      />
-      <img
-        class="marquee-img rounded-3"
-        src="https://placeimg.com/235/350/any"
-      />
-      <img
-        class="marquee-img rounded-3"
-        src="https://placeimg.com/235/350/any"
-      />
-      <img
-        class="marquee-img rounded-3"
-        src="https://placeimg.com/235/350/any"
-      />
-      <img
-        class="marquee-img rounded-3"
-        src="https://placeimg.com/235/350/any"
-      />
-      <img
-        class="marquee-img rounded-3"
-        src="https://placeimg.com/235/350/any"
-      />
-      <img
-        class="marquee-img rounded-3"
-        src="https://placeimg.com/235/350/any"
-      />
-      <img
-        class="marquee-img rounded-3"
-        src="https://placeimg.com/235/350/any"
-      />
-      <img
-        class="marquee-img rounded-3"
-        src="https://placeimg.com/235/350/any"
-      />
-      <img
-        class="marquee-img rounded-3"
-        src="https://placeimg.com/235/350/any"
-      />
-    </div>
-  </div> -->
-<!-- </template> -->
-
 <!-- Pull the images from firestore and the name of the place -->
 <template>
   <div>
@@ -86,11 +14,16 @@
           <!-- <button style="border: 0px margin-top: 20px; margin-bottom: 0px">
         New York
       </button> -->
-          <h2 class="uni-header display-5">University Name</h2>
+          <h2 class="uni-header display-5 text-center">University Name</h2>
           <!-- <button class="btn">University Name</button> -->
         </router-link>
       </div>
     </Vue3Marquee>
+    <div class="text-center">
+      <router-link to="/UniversityPage" id="seeUni">
+        See All Universities
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -148,15 +81,18 @@ export default {
   color: black;
 }
 
+#seeUni {
+  color: black;
+}
 /* .btn {
   background-color: white;
   padding: 5px;
   margin: 10px 0;
   transition: all 0.2s;
   font-size: 30px;
-}
+} */
 
-.btn:hover {
+/* .btn:hover {
   background: rgb(226, 226, 226);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 } */
