@@ -72,23 +72,26 @@
 
 <!-- Pull the images from firestore and the name of the place -->
 <template>
-  <Vue3Marquee :pauseOnHover="true">
-    <div class="card" v-for="avatar in avatarArray" :key="avatar">
-      <router-link to="/">
-        <img
-          class="uni-img"
-          src="../assets/school.jpg"
-          width="235"
-          height="350"
-        />
-        <!-- <button style="border: 0px margin-top: 20px; margin-bottom: 0px">
+  <div>
+    <h2 class="text-center mt-3">Where do you want to go?</h2>
+    <Vue3Marquee :pauseOnHover="true">
+      <div class="card" v-for="avatar in avatarArray" :key="avatar">
+        <router-link to="/">
+          <img
+            class="uni-img"
+            src="../assets/school.jpg"
+            width="235"
+            height="350"
+          />
+          <!-- <button style="border: 0px margin-top: 20px; margin-bottom: 0px">
         New York
       </button> -->
-        <h2 class="uni-header">University Name</h2>
-        <!-- <button class="btn">University Name</button> -->
-      </router-link>
-    </div>
-  </Vue3Marquee>
+          <h2 class="uni-header display-5">University Name</h2>
+          <!-- <button class="btn">University Name</button> -->
+        </router-link>
+      </div>
+    </Vue3Marquee>
+  </div>
 </template>
 
 <script>
@@ -141,6 +144,8 @@ export default {
 
 .uni-header {
   position: absolute;
+  top: 175px;
+  color: black;
 }
 
 /* .btn {
