@@ -7,6 +7,7 @@
     "preview": "vite preview --port 4173"
   },
   "dependencies": {
+    "@fontsource/montserrat": "^4.5.13",
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
     "@fortawesome/free-brands-svg-icons": "^6.2.0",
     "@fortawesome/free-regular-svg-icons": "^6.2.0",
@@ -15,12 +16,12 @@
     "@vueuse/firebase": "^9.3.0",
     "bootstrap": "^5.2.1",
     "bootstrap-vue": "^2.22.0",
-    "firebase": "^9.11.0",
     "keen-slider": "^6.8.2",
     "vue": "^3.2.39",
     "vue-router": "^4.1.5",
     "vue-scrollto": "^2.20.0",
-    "vue-search-input": "^1.1.10"
+    "vue-search-input": "^1.1.10",
+    "vue3-marquee": "^3.1.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.1.2",

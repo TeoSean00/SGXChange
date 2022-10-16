@@ -1,63 +1,45 @@
-
 <template>
-    <Search/>
-    <Carousel/>
-    <div class="container-fluid p-4">
-        <div class="row">
-            <div class="col d-flex align-content-center">
-
-                <!-- <div id="carouselExampleControls" class="carousel slide w-100 h-75" data-ride="carousel">
-                    <div class="carousel-inner ">
-                        <div class="carousel-item active ">
-                        <img class="d-block w-100" src="../assets/school.jpg" style="height: 400px" alt="First slide">
-                        </div>
-                        <div class="carousel-item">
-                        <img class="d-block w-100" src="../assets/school.jpg" style="height: 400px" alt="Second slide">
-                        </div>
-                        <div class="carousel-item">
-                        <img class="d-block w-100" src="../assets/school.jpg" style="height: 400px" alt="Third slide">
-                        </div>
-                    </div>
-                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div> -->
-            </div>
-        </div>
-        <div class="row">
-            <h2>
-                Suggested universities
-            </h2>
-        </div>
-        <div class="row d-flex justify-content-start">
-            <UniCardSmall
-            class="unicard"
-            v-for="i in 9"
-            :key="i"
-            />
-        </div>
+  <!-- <div id="searchbar">
+        <Search/>
+    </div> -->
+  <!-- <div id="carousel">
+        <Carousel/>
+    </div> -->
+  <div>
+    <Marquee />
+  </div>
+  <div class="container-fluid p-4">
+    <div class="row">
+      <h2>Suggested universities</h2>
     </div>
+    <div class="row d-flex justify-content-start">
+      <UniCardSmall class="unicard" v-for="i in 9" :key="i" />
+    </div>
+  </div>
 </template>
-<script >
+<script>
 import UniCardSmall from "@/components/UniCardSmall.vue";
-import Search from "@/components/Search.vue";
-import Carousel from "@/components/Carousel.vue";
+// import Search from "@/components/Search.vue";
+// import Carousel from "@/components/Carousel.vue";
+import { reactive } from "vue";
+import { Vue3Marquee } from "vue3-marquee";
+import Marquee from "@/components/Marquee.vue";
 
 export default {
   name: "HomePage",
   data() {
-    return {
-    };
+    return {};
   },
   components: {
     UniCardSmall,
-    Search,
-    Carousel,
-},
-}
+    // Search,
+    // Carousel,
+    Marquee,
+  },
+};
 </script>
+<style scoped>
+#carousel {
+  position: relative;
+}
+</style>
