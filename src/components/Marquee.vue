@@ -84,16 +84,8 @@ export default {
 #seeUni {
   color: black;
 }
-/* .btn {
-  background-color: white;
-  padding: 5px;
-  margin: 10px 0;
-  transition: all 0.2s;
-  font-size: 30px;
-} */
 
-/* .btn:hover {
-  background: rgb(226, 226, 226);
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-} */
+#seeUni:hover {
+  text-decoration: none;
+}
 </style>
