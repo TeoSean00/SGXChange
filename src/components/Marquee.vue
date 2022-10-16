@@ -40,7 +40,7 @@ export default {
   setup() {
     const avatarArray = reactive([]);
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 10; i++) {
       avatarArray.push(
         `https://avatars.dicebear.com/api/avataaars/${Math.random()
           .toString(36)
