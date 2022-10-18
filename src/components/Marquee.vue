@@ -3,7 +3,7 @@
   <div class="marquee">
     <h5 class="marquee-header text-center mt-3">Where do you want to go?</h5>
     <Vue3Marquee :pauseOnHover="true" :duration="60">
-      <div class="marquee-card" v-for="avatar in avatarArray" :key="avatar">
+      <div class="card" v-for="avatar in avatarArray" :key="avatar">
         <router-link to="/">
           <img
             class="marquee-uni-image"
@@ -61,3 +61,80 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.marquee {
+  background-color: black;
+  border-radius: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.marquee-header {
+  padding-top: 40px;
+  padding-bottom: 30px;
+  font-size: 16px;
+  color: white;
+}
+.card {
+  width: 235px;
+  height: 350px;
+  border: 0px;
+  margin: 20px 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: black;
+}
+
+.marquee-uni-image {
+  position: relative;
+  border-radius: 25px;
+  opacity: 0;
+}
+
+.marquee-uni-image:hover {
+  opacity: 1;
+}
+
+.marquee-uni-name {
+  position: absolute;
+  top: 150px;
+  color: white;
+}
+
+.marquee-footer {
+  font-size: 16px;
+  padding-bottom: 30px;
+  padding-top: 20px;
+}
+
+#seeUni {
+  color: white;
+}
+
+#seeUni:hover {
+  text-decoration: none;
+}
+
+.marquee-btn {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin: 10px 0;
+  transition: all 0.2s;
+  background-color: black;
+  border-radius: 2px;
+  border-color: white;
+  font-size: 23px;
+  border-radius: 25px;
+  padding-left: 80px;
+  padding-right: 80px;
+}
+
+.marquee-btn:hover {
+  background: rgb(255, 255, 255);
+  color: black;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+</style>
