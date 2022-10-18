@@ -8,6 +8,7 @@
                 <li class="list-group-item uniitem">Region</li>
                 <li class="list-group-item uniitem">GPA cutoff</li>
             </ul>
+            <a href="#" class="btn btn-primary">View</a>
         </div>
     </div>
 </template>

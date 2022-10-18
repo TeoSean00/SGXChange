@@ -14,6 +14,7 @@
     </div>
     <div class="row d-flex justify-content-start">
       <UniCardSmall class="unicard" v-for="i in 9" :key="i" />
+      <!-- some binding needed for unicard data, need to wait for backend -->
     </div>
   </div>
 </template>
