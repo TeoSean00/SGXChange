@@ -4,31 +4,25 @@
     <h5 class="marquee-header text-center mt-3">Where do you want to go?</h5>
     <Vue3Marquee :pauseOnHover="true" :duration="60">
       <div class="card" v-for="avatar in avatarArray" :key="avatar">
-        <router-link to="/">
-          <img
-            class="marquee-uni-image"
-            src="../assets/school.jpg"
-            width="235"
-            height="350"
-          />
-          <h2 class="marquee-uni-name display-5 text-center">
-            University Name
-          </h2>
-          <!-- <button class="btn">University Name</button> -->
-        </router-link>
+        <MarqueeCard
+          v-on:switch="hideBtn"
+          v-on:switchOn="showBtn"
+        ></MarqueeCard>
       </div>
     </Vue3Marquee>
-    <div class="text-center marquee-anywhere">
-      <router-link to="/UniversityPage" id="seeUni">
-        <button class="marquee-btn">Take me anywhere</button>
-      </router-link>
-    </div>
+    <div class="marquee-footer" :class="{ invisible: hover, visible: !hover }">
+      <div class="text-center marquee-anywhere">
+        <router-link to="/UniversityPage" id="seeUni">
+          <button class="marquee-btn marquee-btn-hide">Take me anywhere</button>
+        </router-link>
+      </div>
 
-    <div class="text-center marquee-footer">
-      <router-link to="/UniversityPage" id="seeUni">
-        See All Universities
-        <a-space><arrow-right-outlined /></a-space>
-      </router-link>
+      <div class="text-center marquee-seeAllUni marquee-btn-hide">
+        <router-link to="/UniversityPage" id="seeUni">
+          See All Universities
+          <a-space><arrow-right-outlined /></a-space>
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -37,12 +31,19 @@
 import { reactive, defineComponent } from "vue";
 import { Vue3Marquee } from "vue3-marquee";
 import { ArrowRightOutlined } from "@ant-design/icons-vue";
+import MarqueeCard from "./MarqueeCard.vue";
 
 export default {
   name: "CardsPauseOnHover",
   components: {
     Vue3Marquee,
     ArrowRightOutlined,
+    MarqueeCard,
+  },
+  data() {
+    return {
+      hover: false,
+    };
   },
   setup() {
     const avatarArray = reactive([]);
@@ -58,6 +59,17 @@ export default {
     return {
       avatarArray,
     };
+  },
+  methods: {
+    hideBtn() {
+      // console.log("hello");
+      this.hover = true;
+      // console.log(this.hover);
+    },
+    showBtn() {
+      this.hover = false;
+      // console.log(this.hover);
+    },
   },
 };
 </script>
@@ -85,29 +97,17 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: black;
-}
-
-.marquee-uni-image {
+  background-color: transparent;
   position: relative;
-  border-radius: 25px;
-  opacity: 0;
 }
 
-.marquee-uni-image:hover {
-  opacity: 1;
-}
-
-.marquee-uni-name {
-  position: absolute;
-  top: 150px;
-  color: white;
+.marquee-seeAllUni {
+  font-size: 16px;
 }
 
 .marquee-footer {
-  font-size: 16px;
-  padding-bottom: 30px;
-  padding-top: 20px;
+  margin-top: -30px;
+  padding-bottom: 40px;
 }
 
 #seeUni {
@@ -119,9 +119,6 @@ export default {
 }
 
 .marquee-btn {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  margin: 10px 0;
   transition: all 0.2s;
   background-color: black;
   border-radius: 2px;

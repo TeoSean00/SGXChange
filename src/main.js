@@ -4,6 +4,7 @@ import { router } from "./router/index";
 // import "ant-design-vue";
 import Antd from "ant-design-vue";
 import "ant-design-vue/dist/antd.css";
+// import VueGoogleMaps from "@fawmi/vue-google-maps";
 
 import "@fontsource/montserrat/100.css";
 import "@fontsource/montserrat/200.css";
