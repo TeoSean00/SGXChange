@@ -8,6 +8,10 @@
   <div>
     <Marquee />
   </div>
+  <div>
+    <!-- <GoogleMap /> -->
+  </div>
+
   <div class="container-fluid p-4">
     <div class="row">
       <h2>Suggested universities</h2>
@@ -25,6 +29,7 @@ import UniCardSmall from "@/components/UniCardSmall.vue";
 import { reactive } from "vue";
 import { Vue3Marquee } from "vue3-marquee";
 import Marquee from "@/components/Marquee.vue";
+// import GoogleMap from "@/components/GoogleMap.vue";
 
 export default {
   name: "HomePage",
@@ -36,6 +41,7 @@ export default {
     // Search,
     // Carousel,
     Marquee,
+    // GoogleMap,
   },
 };
 </script>

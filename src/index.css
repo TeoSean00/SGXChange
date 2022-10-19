@@ -1,4 +1,3 @@
-
 .unicard {
   border: 0;
   background-color: white;
@@ -23,47 +22,3 @@
 body {
   font-family: "Montserrat", sans-serif;
 }
-
-/* body {
-  display: flex;
-  align-items: center;
-  height: 100vh;
-} */
-
-/* .marquee-img {
-  margin-left: 5em;
-  margin-right: 5em;
-  margin-top: 40px;
-  margin-bottom: 40px;
-}
-
-.marquee-wrapper {
-  overflow: hidden;
-  background-color: white;
-}
-
-.marquee {
-  display: flex;
-  animation-name: marquee;
-  animation-duration: 30s;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-  animation-direction: normal;
-  transform: translateX(0);
-  background-color: yellow;
-}
-
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-100%);
-  }
-}
-
-.marquee:hover {
-  -moz-animation-play-state: paused;
-  -webkit-animation-play-state: paused;
-  animation-play-state: paused;
-} */
