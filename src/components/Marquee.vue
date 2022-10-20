@@ -1,7 +1,7 @@
 <!-- Pull the images from firestore and the name of the place -->
 <template>
   <div>
-    <h2 class="text-center mt-3">Where do you want to go?</h2>
+    <h1 class="text-center mt-4 p-5">Where do you want to go?</h1>
     <Vue3Marquee :pauseOnHover="true">
       <div class="card" v-for="avatar in avatarArray" :key="avatar">
         <router-link to="/">

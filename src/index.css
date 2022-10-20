@@ -1,4 +1,6 @@
-
+html{
+  scroll-behavior: smooth;
+}
 .unicard {
   border: 0;
   background-color: white;
