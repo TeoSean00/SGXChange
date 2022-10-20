@@ -23,7 +23,7 @@ const app = createApp(App).use(router).use(Antd);
 
 app.use(VueGoogleMaps, {
   load: {
-    key: "APIKEYHERE",
+    key: import.meta.env.VITE_GOOGLE_MAP_API_KEY,
   },
 });
 

@@ -137,6 +137,9 @@
       <div class="col-1"></div>
       <div class="col">
         <!-- module information -->
+        <div>
+          <GoogleMap></GoogleMap>
+        </div>
         <h2 class="my-4">Module Information</h2>
         <!-- one module each -->
         <div class="card my-4" style="width: 30rem">
@@ -187,3 +190,15 @@
     </div>
   </div>
 </template>
+
+<script>
+import GoogleMap from "@/components/GoogleMap.vue";
+// console.log(import.meta.env.VITE_GOOGLE_MAP_API_KEY);
+
+export default {
+  name: "UniPage",
+  components: {
+    GoogleMap,
+  },
+};
+</script>
