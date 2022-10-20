@@ -1,20 +1,35 @@
 <template>
-  <GMapMap
-    :center="{ lat: 51.093048, lng: 6.84212 }"
-    :zoom="7"
-    map-type-id="terrain"
-    style="width: 100vw; height: 900px"
-  >
+  <GMapMap class="gMap" :center="center" :zoom="15" map-type-id="terrain">
+    <GMapMarker
+      :key="index"
+      v-for="(m, index) in markers"
+      :position="m.position"
+      :clickable="true"
+      @click="openInfoWindow(marker.id)"
+    />
   </GMapMap>
 </template>
-
 <script>
 export default {
-  name: "App",
   data() {
     return {
-      center: { lat: 51.093048, lng: 6.84212 },
+      center: { lat: 1.296568, lng: 103.852119 },
+      markers: [
+        {
+          position: {
+            lat: 1.296568,
+            lng: 103.852119,
+          },
+        },
+      ],
     };
   },
 };
 </script>
+
+<style scoped>
+.gMap {
+  width: 500px;
+  height: 300px;
+}
+</style>

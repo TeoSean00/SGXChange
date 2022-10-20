@@ -21,15 +21,18 @@
       <!-- some binding needed for unicard data, need to wait for backend -->
     </div>
   </div>
+
+  <div>
+    <GoogleMap></GoogleMap>
+  </div>
 </template>
 <script>
 import UniCardSmall from "@/components/UniCardSmall.vue";
 // import Search from "@/components/Search.vue";
 // import Carousel from "@/components/Carousel.vue";
 import { reactive } from "vue";
-import { Vue3Marquee } from "vue3-marquee";
 import Marquee from "@/components/Marquee.vue";
-// import GoogleMap from "@/components/GoogleMap.vue";
+import GoogleMap from "@/components/GoogleMap.vue";
 
 export default {
   name: "HomePage",
@@ -41,7 +44,7 @@ export default {
     // Search,
     // Carousel,
     Marquee,
-    // GoogleMap,
+    GoogleMap,
   },
 };
 </script>

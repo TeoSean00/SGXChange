@@ -4,7 +4,7 @@ import { router } from "./router/index";
 // import "ant-design-vue";
 import Antd from "ant-design-vue";
 import "ant-design-vue/dist/antd.css";
-// import VueGoogleMaps from "@fawmi/vue-google-maps";
+import VueGoogleMaps from "@fawmi/vue-google-maps";
 
 import "@fontsource/montserrat/100.css";
 import "@fontsource/montserrat/200.css";
@@ -20,6 +20,12 @@ import "vue3-marquee/dist/style.css";
 import "./index.css";
 
 const app = createApp(App).use(router).use(Antd);
+
+app.use(VueGoogleMaps, {
+  load: {
+    key: "APIKEYHERE",
+  },
+});
 
 app.mount("#app");
 // app.mount("#app");
