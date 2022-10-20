@@ -8,7 +8,9 @@
                 <li class="list-group-item uniitem">Region</li>
                 <li class="list-group-item uniitem">GPA cutoff</li>
             </ul>
-            <a href="#" class="btn btn-primary">View</a>
+            <router-link class="btn btn-primary float-right" to="UniversityPage">View</router-link> 
+            <!-- pass props here -->
         </div>
     </div>
 </template>
+<!-- define props, data etc here -->

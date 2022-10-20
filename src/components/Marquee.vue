@@ -83,8 +83,8 @@ export default {
 }
 
 .marquee-header {
-  padding-top: 40px;
-  padding-bottom: 30px;
+  padding-top: 20px;
+  padding-bottom: 0px;
   font-size: 16px;
   color: white;
 }
@@ -102,12 +102,14 @@ export default {
 }
 
 .marquee-seeAllUni {
+  margin-top: 15px;
   font-size: 16px;
 }
 
 .marquee-footer {
-  margin-top: -30px;
-  padding-bottom: 40px;
+  margin-top: 20px;
+  padding-top: 0px;
+  padding-bottom: 30px;
 }
 
 #seeUni {
