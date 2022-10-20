@@ -16,12 +16,17 @@
   <div id="marquee">
     <Marquee />
   </div>
+  <div>
+    <!-- <GoogleMap /> -->
+  </div>
+
   <div class="container-fluid p-4">
     <div class="row">
       <h2>Suggested universities</h2>
     </div>
     <div class="row d-flex justify-content-start">
       <UniCardSmall class="unicard" v-for="i in 9" :key="i" />
+      <!-- some binding needed for unicard data, need to wait for backend -->
     </div>
   </div>
 </template>
@@ -33,6 +38,7 @@ import UniCardSmall from "@/components/UniCardSmall.vue";
 import { reactive } from "vue";
 import { Vue3Marquee } from "vue3-marquee";
 import Marquee from "@/components/Marquee.vue";
+// import GoogleMap from "@/components/GoogleMap.vue";
 
 export default {
   name: "HomePage",
@@ -45,6 +51,7 @@ export default {
     // Search,
     // Carousel,
     Marquee,
+    // GoogleMap,
   },
 };
 </script>
