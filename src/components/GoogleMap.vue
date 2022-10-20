@@ -29,7 +29,7 @@ export default {
 
 <style scoped>
 .gMap {
-  width: 500px;
+  width: 100%;
   height: 300px;
 }
 </style>
