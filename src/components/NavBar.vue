@@ -19,7 +19,7 @@
           </router-link>
         </li>
         <li class="nav-item active">
-          <span v-on:click="scrollToAbout" class="nav-link">About</span>
+          <span style="cursor: pointer;" v-on:click="scrollToAbout" class="nav-link">About</span>
         </li>
       </ul>
       <ul class="navbar-nav me-4">
