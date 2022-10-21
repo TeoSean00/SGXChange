@@ -3,6 +3,8 @@
 </template>
 
 <script setup>
+
+
 // I commented out query first, will be working on it once yall see this
 // import db from "../service/Firebase/firebaseInit";
 // import { collection, getDocs, doc, getDoc } from "firebase/firestore";
