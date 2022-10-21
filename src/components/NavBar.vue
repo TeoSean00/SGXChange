@@ -72,7 +72,7 @@
 import Search from "./Search.vue";
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { useRouter } from 'vue-router'
-import { auth } from '../service/firebase/firebaseInit'
+import { auth } from '@/service/firebase/firebaseInit'
 
 export default {
   data() {
