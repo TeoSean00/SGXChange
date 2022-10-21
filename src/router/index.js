@@ -4,7 +4,7 @@ import UniversityPage from '../views/UniversityPage.vue'
 import ModulePage from '../views/ModulePage.vue'
 import ModuleMappingPage from '../views/ModuleMappingPage.vue'
 
-export const router = createRouter({
+const router = createRouter({
     history: createWebHistory(),
     routes: [
       {
@@ -27,5 +27,33 @@ export const router = createRouter({
         name: "ModuleMappingPage",
         component: ModuleMappingPage,
       },
+      {
+        path: "/RegisterPage",
+        name: "RegisterPage",
+        component: () => import('../views/Register.vue')
+      },
+      {
+        path: "/SignInPage",
+        name: "SignInPage",
+        component: () => import('../views/Signin.vue')
+      },
+      {
+        path: "/ProfilePage",
+        name: "ProfilePage",
+        component: () => import('../views/ProfilePage.vue')
+      }
     ],
-  });
+});
+  
+// router.beforeEach((to, from, next) => {
+//   if (to.matched.some((record) => record.meta.requiresAuth)) {
+//     if (getAuth().currentUser){
+//       next()
+//     } else {
+//       alert('you need to log in first')
+//       next('/SignInPage')
+//     }
+//   }
+// })
+
+export default router;
