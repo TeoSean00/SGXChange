@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomePage from '../views/HomePage.vue'
-import UniversityPage from '../views/UniversityPage.vue'
-import ModulePage from '../views/ModulePage.vue'
-import ModuleMappingPage from '../views/ModuleMappingPage.vue'
+import HomePage from '@/views/HomePage.vue'
+import UniversityPage from '@/views/UniversityPage.vue'
+import ModulePage from '@/views/ModulePage.vue'
+import ModuleMappingPage from '@/views/ModuleMappingPage.vue'
 
 const router = createRouter({
     history: createWebHistory(),
