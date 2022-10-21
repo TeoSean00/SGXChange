@@ -1,9 +1,9 @@
-export default{
-    apiKey: "AIzaSyBhqjawFwCVWmsS4J6ZHixZnXcLJbQWzVU",
-    authDomain: "wad2-sgxchange.firebaseapp.com",
-    projectId: "wad2-sgxchange",
-    storageBucket: "wad2-sgxchange.appspot.com",
-    messagingSenderId: "179888934863",
-    appId: "1:179888934863:web:ddd1c4274fb93c8becccba",
-    measurementId: "G-4WWWED6EYF"
-}
+export default {
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
+};

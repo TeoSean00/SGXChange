@@ -1,9 +1,9 @@
 <template>
   <nav class="navbar navbar-expand navbar-light bg-light">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav ms-3 me-auto">
         <li class="nav-item active">
-          <img src="../assets/WebsiteLogo.png" style="width: 50px" alt="" />
+          <img src="../assets/WebsiteLogo.png" class="m-1" style="width: 50px" alt="" />
         </li>
 
         <li class="nav-item active">
@@ -20,7 +20,7 @@
 
         <li class="nav-item active">
           <router-link to="/ModuleMappingPage" class="nav-link">
-            ModuleMapping
+            Module Mapping
           </router-link>
         </li>
 
@@ -29,7 +29,7 @@
         </li>
       </ul>
 
-      <ul class="navbar-nav">
+      <ul class="navbar-nav me-4">
         <li class="nav-item active d-flex">
           <Search class="" />
         </li>
@@ -60,8 +60,8 @@
 
         <li class="nav-item active d-flex">
           <router-link to="/ProfilePage" class="nav-link iconborder m-auto">
-            <i class="fa-solid fa-user"></i>
-          </router-link>
+            <i class="bi bi-person-circle" style="font-size: 1.5rem;"></i>
+        </router-link>
         </li>
       </ul>
     </div>
