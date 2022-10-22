@@ -6,6 +6,7 @@ import ModuleMappingPage from "@/views/ModuleMappingPage.vue";
 import Register from "@/views/Register.vue";
 import SignIn from "@/views/SignIn.vue";
 import ProfilePage from "@/views/ProfilePage.vue";
+import UniversityInfo from '@/views/UniversityInfo.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -44,6 +45,11 @@ const router = createRouter({
       path: "/ProfilePage",
       name: "ProfilePage",
       component: ProfilePage,
+    },
+    {
+      path: "/universityinfo/:name",
+      name: "UniversityInfo",
+      component: UniversityInfo,
     },
   ],
 });
