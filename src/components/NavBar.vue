@@ -80,14 +80,14 @@
 import Search from "./Search.vue";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { useRouter } from "vue-router";
-import { auth } from "@/service/firebase/firebaseInit.js";
+import { auth } from "../service/Firebase/firebaseInit"
 
 export default {
   data() {
     return {
       router: useRouter(),
       isLoggedIn: false,
-      finalName: "",
+      finalName: ""
     };
   },
   methods: {
