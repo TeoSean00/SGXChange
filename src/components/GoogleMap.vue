@@ -1,5 +1,18 @@
 <template>
-  <GMapMap class="gMap" :center="center" :zoom="15" map-type-id="terrain">
+  <GMapMap
+    class="gMap"
+    :center="center"
+    :zoom="15"
+    map-type-id="roadmap"
+    :options="{
+      zoomControl: true,
+      mapTypeControl: false,
+      scaleControl: true,
+      streetViewControl: true,
+      rotateControl: true,
+      fullscreenControl: false,
+    }"
+  >
     <GMapMarker
       :key="index"
       v-for="(m, index) in markers"

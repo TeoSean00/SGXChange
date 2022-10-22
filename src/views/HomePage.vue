@@ -8,30 +8,27 @@
   <Banner></Banner>
   <div class="button-banner d-flex align-center justify-content-center">
     <div class="d-flex justify-content-center align-items-center p-5">
-      <router-link to="/ModuleMappingPage" class="btn btn-dark m-5 btn-lg ">Get help for module mapping</router-link>
+      <router-link to="/ModuleMappingPage" class="btn btn-dark m-5 btn-lg"
+        >Get help for module mapping</router-link
+      >
       <span class="h3">or</span>
-      <a class="btn btn-light m-5 btn-lg" href="#marquee">Browse Universities</a>
+      <a class="btn btn-light m-5 btn-lg" href="#marquee"
+        >Browse Universities</a
+      >
     </div>
   </div>
   <ArrowAnimation></ArrowAnimation>
   <div id="marquee" class="container-fluid px-3">
     <Marquee />
   </div>
-  <div>
-    <!-- <GoogleMap /> -->
-  </div>
-  <div>
-    <GoogleMap></GoogleMap>
-  </div>
 </template>
 <script>
 import Banner from "@/components/Banner.vue";
-import ArrowAnimation from "@/components/ArrowAnimation.vue"
+import ArrowAnimation from "@/components/ArrowAnimation.vue";
 // import Search from "@/components/Search.vue";
 // import Carousel from "@/components/Carousel.vue";
 import { reactive } from "vue";
 import Marquee from "@/components/Marquee.vue";
-import GoogleMap from "@/components/GoogleMap.vue";
 
 export default {
   name: "HomePage",
@@ -44,7 +41,6 @@ export default {
     // Search,
     // Carousel,
     Marquee,
-    GoogleMap,
   },
 };
 </script>
@@ -55,5 +51,4 @@ export default {
 .button-banner {
   height: 75vh;
 }
-
 </style>
