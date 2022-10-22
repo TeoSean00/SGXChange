@@ -5,7 +5,6 @@
       <div class="col h2">University Name</div>
       <div class="col-1"></div>
     </div>
-    <button class="btn btn-primary" v-on:click="testing">test</button>
     <div class="row mb-3">
       <div class="col-1"></div>
       <div class="col-4">
