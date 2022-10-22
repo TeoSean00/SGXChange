@@ -3,6 +3,7 @@ import HomePage from '../views/HomePage.vue'
 import UniversityPage from '../views/UniversityPage.vue'
 import ModulePage from '../views/ModulePage.vue'
 import ModuleMappingPage from '../views/ModuleMappingPage.vue'
+import UniversityInfo from '../views/UniversityInfo.vue'
 
 export const router = createRouter({
     history: createWebHistory(),
@@ -26,6 +27,11 @@ export const router = createRouter({
         path: "/ModuleMappingPage",
         name: "ModuleMappingPage",
         component: ModuleMappingPage,
+      },
+      {
+        path: "/universityinfo/:name",
+        name: "UniversityInfo",
+        component: UniversityInfo,
       },
     ],
   });
