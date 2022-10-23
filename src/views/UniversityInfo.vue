@@ -1,12 +1,9 @@
 <template>
-      <div class="container-fluid">
+      <div class="container-fluid" style="max-width:fit-content;margin-left:8rem;margin-right:8rem;">
     <div class="row mb-3">
-      <div class="col-1"></div>
       <div class="col h2">University Name</div>
-      <div class="col-1"></div>
     </div>
     <div class="row mb-3">
-      <div class="col-1"></div>
       <div class="col-4">
         <div class="d-inline me-1">
           <svg
@@ -37,10 +34,8 @@
           ><a href="/" class="text-dark"> Save</a></span
         >
       </div>
-      <div class="col-1"></div>
     </div>
     <div class="row mb-5">
-      <div class="col-1"></div>
       <div class="col-6">
         <img
           src="../assets/440px-University_of_St._Gallen_EUR-HSG_Institute_Building.jpg"
@@ -74,10 +69,8 @@
           alt=""
         />
       </div>
-      <div class="col-1"></div>
     </div>
     <div class="row mb-3">
-      <div class="col-1"></div>
       <div class="col">
         <!-- Uni info , e.g past GPA -->
         <span class="me-2"
@@ -93,18 +86,14 @@
           ><i class="bi bi-thermometer-half m-1"></i>Climate: Cool</span
         >
       </div>
-      <div class="col-1"></div>
     </div>
     <!-- hr filler -->
     <div class="row">
-      <div class="col-1"></div>
       <div class="col">
         <hr />
       </div>
-      <div class="col-1"></div>
     </div>
     <div class="row">
-      <div class="col-1"></div>
       <div class="col">
         <ul style="list-style-type: none">
           <!-- check if accomodation provided -->
@@ -124,17 +113,13 @@
           </li>
         </ul>
       </div>
-      <div class="col-1"></div>
     </div>
     <div class="row">
-      <div class="col-1"></div>
       <div class="col">
         <hr />
       </div>
-      <div class="col-1"></div>
     </div>
     <div class="row">
-      <div class="col-1"></div>
       <div class="col">
         <!-- module information -->
         <div>
@@ -186,7 +171,6 @@
           </div>
         </div>
       </div>
-      <div class="col-1"></div>
     </div>
   </div>
 </template>
