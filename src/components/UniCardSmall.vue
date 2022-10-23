@@ -33,10 +33,7 @@ export default {
         return {
         };
     },
-    props: ['universityName', 'gpaReq','IgpaNinetyPercentile','IgpaTenPercentile','NoOfPlacesSem1','NoOfPlacesSem2','CountryId','RegionId','imgURL'],        
-    methods: {
-        
-    },
+    props: ['universityName', 'gpaReq','IgpaNinetyPercentile','IgpaTenPercentile','NoOfPlacesSem1','NoOfPlacesSem2','CountryId','RegionId','imgURL'],
     components: {
         Tilt
     },
