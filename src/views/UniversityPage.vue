@@ -172,6 +172,7 @@ export default {
       universityInfo['RegionId'] = doc.data().RegionId
       universityInfo['imgURL'] = doc.data().img1
       this.items.push(universityInfo)
+      console.log(1)
   });
   }
 };
