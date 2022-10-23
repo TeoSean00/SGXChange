@@ -1,8 +1,8 @@
 <template>
     <div id="searchwrapper" class="search-wrapper bg-light">
         <div class="input-holder">
-            <input v-model="searchItem" type="text" class="search-input" placeholder="Type to search" />
-            <button class="search-icon" v-on:click='searchToggle();'><span></span></button>
+            <input v-model="searchItem" type="text" class="search-input" placeholder="Enter key to search" v-on:keyup.enter="searchUni"/>
+            <button class="search-icon" v-on:click='searchToggle'><span></span></button>
         </div>
     </div>
 </template>
@@ -19,6 +19,12 @@ export default {
             var container = document.getElementById('searchwrapper')
             container.classList.toggle('active')
             this.searchItem = ""
+        },
+        searchUni (){
+            if(this.searchItem != ""){
+
+                this.$router.replace('/UniversityPage/' + this.searchItem)
+            }
         }
     },
 };
