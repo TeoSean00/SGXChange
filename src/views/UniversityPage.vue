@@ -80,7 +80,7 @@ import UniCardSmall from "@/components/UniCardSmall.vue";
 import {fireStore} from "@/service/Firebase/firebaseInit"
 import { collection, getDocs } from "firebase/firestore";
 
-const querySnapshot = await getDocs(collection(fireStore, "Universities"));
+
 
 
 export default {
@@ -102,9 +102,9 @@ export default {
   components: {
     UniCardSmall
   },
-  mounted() {
+  async mounted() {
     console.log('mounted2')
-
+    const querySnapshot = await getDocs(collection(fireStore, "Universities"));
     querySnapshot.forEach((doc) => {
       let universityInfo = {}
       // put key-value pairs
