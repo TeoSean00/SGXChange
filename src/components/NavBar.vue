@@ -3,12 +3,14 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-3 me-auto align-items-center">
         <li class="nav-item active d-flex">
-          <img
-            src="../assets/WebsiteLogo.png"
-            class="m-1"
-            style="width: 50px"
-            alt=""
-          />
+          <router-link to="/" class="nav-link">
+            <img
+              src="../assets/WebsiteLogo.png"
+              class="m-1"
+              style="width: 50px"
+              alt=""
+            />
+          </router-link>
         </li>
 
         <li class="nav-item active d-flex align-middle">
