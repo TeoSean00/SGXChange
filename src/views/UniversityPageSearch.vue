@@ -2,7 +2,7 @@
 <div class="container-fluid mt-5">
     <div class="row">
         <div class="col-1"></div>
-        <div class="col"><h2>All universities</h2></div>
+        <div class="col"><h2>Searched for: {{ searchKey }}</h2></div>
         <div class="col-1"></div>
     </div>
     <div class="row">
@@ -62,6 +62,7 @@ export default {
         currentPage: 1,
         items: [],
         outputUni: [],
+        searchKey: ""
     };
   },
   computed: {
@@ -74,12 +75,12 @@ export default {
   },
   async mounted() {
     console.log(this.$route.params.uni)
-    var searchKey = this.$route.params.uni
+    this.searchKey = this.$route.params.uni
     const getUni = await getDocs(collection(fireStore, "Universities"));
     getUni.forEach((doc) => {
       let universityInfo = {}
       // put key-value pairs
-      if( doc.data().UniversityName.includes(searchKey)){
+      if( doc.data().UniversityName.includes(this.searchKey)){
         universityInfo['name'] = doc.data().UniversityName
         universityInfo['gpaReq'] = doc.data().GpaRequirement
         this.outputUni.push(universityInfo)
