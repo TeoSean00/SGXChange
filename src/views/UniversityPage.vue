@@ -33,7 +33,11 @@
     </div>
     <div class="row">
         <div class="col-1"></div>
-            <UniCardSmall class="col unicard" v-for="i in 4" :key="i" />
+        <!-- put variables as props -->
+            <UniCardSmall class="col unicard" v-for="uni in items.slice(0,4)" :key="uni"
+            :universityName="uni.name"
+            :gpaReq="uni.gpaReq"
+            />
         <div class="col-1"></div>
     </div>
     <div class="row">
@@ -73,6 +77,12 @@
 <script>
 import UniCardSmall from "@/components/UniCardSmall.vue";
 
+import {fireStore} from "@/service/Firebase/firebaseInit"
+import { collection, getDocs } from "firebase/firestore";
+
+
+
+
 export default {
   name: "UniversityPage",
   data() {
@@ -81,17 +91,27 @@ export default {
         perPage: 3,
         // this will be v-modelled to change according to what user clicks
         currentPage: 1,
-        items: [
-        ]
+        items: []
     };
   },
   computed: {
       rows() {
         return this.items.length
       }
-  }, 
+  },
   components: {
     UniCardSmall
   },
+  async mounted() {
+    console.log('mounted2')
+    const querySnapshot = await getDocs(collection(fireStore, "Universities"));
+    querySnapshot.forEach((doc) => {
+      let universityInfo = {}
+      // put key-value pairs
+      universityInfo['name'] = doc.data().UniversityName
+      universityInfo['gpaReq'] = doc.data().GpaRequirement
+      this.items.push(universityInfo)
+  });
+  }
 };
 </script>
