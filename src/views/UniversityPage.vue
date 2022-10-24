@@ -27,9 +27,9 @@
     <div class="row">
         <div class="col"><h2>All universities</h2></div>
     </div>
-    <div class="row">
+    <div class="d-flex flex-wrap">
         <!-- put variables as props -->
-            <UniCardSmall class="col unicard" v-for="(uni,index) in items.slice(row1start,row1end)" :key="index"
+          <UniCardSmall class="unicard" v-for="(uni,index) in items.slice(row1start,row1end)" :key="index"
             :universityName="uni.name"
             :gpaReq="uni.gpaReq"
             :IgpaNinetyPercentile = "uni.IgpaNinetyPercentile"
@@ -39,10 +39,11 @@
             :CountryId = "uni.CountryId"
             :RegionId = "uni.RegionId"
             :imgURL = "uni.imgURL"
-                />
-        <div class="w-100"></div>
-            <UniCardSmall class="col unicard" v-for="uni in items.slice(row2start,row2end)" :key="uni" 
-            :universityName="uni.name" 
+            />
+
+        <!-- <div class="w-100"></div> -->
+            <!-- <UniCardSmall class="col unicard" v-for="uni in items.slice(row2start,row2end)" :key="uni"
+            :universityName="uni.name"
             :gpaReq="uni.gpaReq"
             :IgpaNinetyPercentile = "uni.IgpaNinetyPercentile"
             :IgpaTenPercentile = "uni.IgpaTenPercentile"
@@ -51,7 +52,7 @@
             :CountryId = "uni.CountryId"
             :RegionId = "uni.RegionId"
             :imgURL = "uni.imgURL"
-            />
+            /> -->
     </div>
 </div>
 <br>
@@ -69,9 +70,11 @@
     <!-- paginated items should change as well , use array.slice(start,end)-->
     <!-- create a new component for paginated items  -->
     <li class="page-item"><a class="page-link active" @click="togglePage">1</a></li>
+    <li class="page-item" v-for="li in lastPage " :key="li"><a class="page-link" @click="togglePage">{{li + 1}}</a></li>
+    <!-- <li class="page-item"><a class="page-link active" @click="togglePage">1</a></li>
     <li class="page-item"><a class="page-link" @click="togglePage">2</a></li>
     <li class="page-item"><a class="page-link" @click="togglePage">3</a></li>
-    <li class="page-item"><a class="page-link" @click="togglePage">4</a></li>
+    <li class="page-item"><a class="page-link" @click="togglePage">4</a></li> -->
     <li class="page-item">
       <a class="page-link" @click="togglePage">Next</a>
     </li>
@@ -101,39 +104,69 @@ export default {
         // this will be v-modelled to change according to what user clicks
         currentPage: 1,
         firstPage: 1,
-        lastPage: 4,
+        lastPage: 0,
         items: [],
 
     };
   },methods:{
+    pagination(){
+      this.lastPage = Math.ceil(this.items.length / this.perPage) - 1
+      console.log(this.lastPage)
+    },
     togglePage: function(){
         if (event.target.text=='Previous'){
+          if(this.currentPage != 1){
             this.currentPage-=1
+          }
         }
         else if (event.target.text=='Next'){
+          if(this.currentPage != this.lastPage + 1){
             this.currentPage+=1
-            console.log(this.currentPage)
+          }
+
+            // console.log(this.currentPage)
         } else {
             this.currentPage = parseInt(event.target.text)
         }
-        
+
         const pagelinks = document.getElementsByClassName('page-link')
         // goes through the pagination buttons and removes all active classes
         // also checks if currentPage == 1, then add disbaled class to previous btn
         // also if currentPage == last, then add disabled class to next btn
         for (const li of pagelinks){
-            console.log(li)
             li.classList.remove('active')
             li.classList.remove('disabled')
-            if (li.text == 'Previous' && this.currentPage==this.firstPage){
-                li.classList.add('disabled')
-            } else if (li.text == 'Next' && this.currentPage==this.lastPage){
-                li.classList.add('disabled')
-            } else if (parseInt(li.text) == this.currentPage){
-                event.target.classList.add('active')
+
+            if(parseInt(li.text) === this.currentPage){
+              console.log(li.text)
+              li.classList.add('active')
             }
-            
+            // if (li.text == 'Previous' && this.currentPage==this.firstPage){
+            //     li.classList.add('disabled')
+            // } else if (li.text == 'Next' && this.currentPage==this.lastPage){
+            //     li.classList.add('disabled')
+            // } else if (parseInt(li.text) == this.currentPage){
+            //     event.target.classList.add('active')
+            // }
+
         }
+    },
+    async getAllUniversities() {
+      const getAllUni = await getDocs(collection(fireStore, "Universities"));
+      getAllUni.forEach((doc) => {
+        let universityInfo = {}
+        // put key-value pairs
+        universityInfo['name'] = doc.data().UniversityName
+        universityInfo['gpaReq'] = doc.data().GpaRequirement
+        universityInfo['IgpaNinetyPercentile'] = doc.data().IgpaNinetyPercentile
+        universityInfo['IgpaTenPercentile'] = doc.data().IgpaTenPercentile
+        universityInfo['NoOfPlacesSem1'] = doc.data().NoOfPlacesSem1
+        universityInfo['NoOfPlacesSem2'] = doc.data().NoOfPlacesSem2
+        universityInfo['CountryId'] = doc.data().CountryId
+        universityInfo['RegionId'] = doc.data().RegionId
+        universityInfo['imgURL'] = doc.data().img1
+        this.items.push(universityInfo)
+    });
     }
   },
   computed: {
@@ -144,36 +177,22 @@ export default {
         return ((this.currentPage-1)*this.perPage)
       },
       row1end() {
-        return this.row1start+ (this.perPage/2)
+        return this.row1start+ (this.perPage)
       },
-      row2start(){
-        return this.row1end 
-      },
-      row2end() {
-        return this.row2start+ this.perPage/2
-      },
+      // row2start(){
+      //   return this.row1end
+      // },
+      // row2end() {
+      //   return this.row2start+ this.perPage/2
+      // },
 
   },
   components: {
     UniCardSmall
   },
   async mounted() {
-    const querySnapshot = await getDocs(collection(fireStore, "Universities"));
-    querySnapshot.forEach((doc) => {
-      let universityInfo = {}
-      // put key-value pairs
-      universityInfo['name'] = doc.data().UniversityName
-      universityInfo['gpaReq'] = doc.data().GpaRequirement
-      universityInfo['IgpaNinetyPercentile'] = doc.data().IgpaNinetyPercentile
-      universityInfo['IgpaTenPercentile'] = doc.data().IgpaTenPercentile
-      universityInfo['NoOfPlacesSem1'] = doc.data().NoOfPlacesSem1
-      universityInfo['NoOfPlacesSem2'] = doc.data().NoOfPlacesSem2
-      universityInfo['CountryId'] = doc.data().CountryId
-      universityInfo['RegionId'] = doc.data().RegionId
-      universityInfo['imgURL'] = doc.data().img1
-      this.items.push(universityInfo)
-      console.log(1)
-  });
+    await this.getAllUniversities()
+    this.pagination()
   }
 };
 </script>

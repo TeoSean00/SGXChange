@@ -195,7 +195,7 @@
 <script>
 import GoogleMap from "@/components/GoogleMap.vue";
 // console.log(import.meta.env.VITE_GOOGLE_MAP_API_KEY);
-import {fireStore} from "@/service/Firebase/firebaseInit"
+import { fireStore } from "@/service/Firebase/firebaseInit"
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 
 export default {
