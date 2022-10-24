@@ -11,7 +11,7 @@
       width="235"
       height="350"
     />
-    <h2 class="marquee-uni-name display-5 text-center">University Name</h2>
+    <h6 class="marquee-uni-name display-5 text-center">{{ universityName }}</h6>
   </router-link>
 </template>
 
@@ -19,6 +19,7 @@
 export default {
   name: "MarqueeCard",
   emits: ["switch", "switchOn"],
+  props: ['universityName', 'universityImg'],
   data() {
     return {
       hover: false,
@@ -37,5 +38,6 @@ export default {
   position: absolute;
   top: 150px;
   color: white;
+  font-size: xx-large;
 }
 </style>
