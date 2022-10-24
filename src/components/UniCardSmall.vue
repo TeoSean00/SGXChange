@@ -1,7 +1,7 @@
 <template>
      <tilt>
         <div class="card" style="width: 300px;">
-            <router-link :to="`/universityPage`">
+            <router-link :to="`/universityInfo/` + universityName">
             <img class="card-img-top" :src="imgURL" alt="">
             <div class="card-body">
                 <h6 style="height:2.5rem;color:black;display:flex;align-items: center;"> {{ universityName }} </h6>
