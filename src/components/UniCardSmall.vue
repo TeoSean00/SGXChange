@@ -1,7 +1,6 @@
 <template>
-
-        <div class="card" >
-            <tilt>
+    <tilt>
+        <div class="card" > 
             <router-link :to="`/universityInfo/` + universityName">
             <img class="card-img-top" :src="imgURL" alt="">
             <div class="card-body">
@@ -15,16 +14,13 @@
                     </li>
                     <span class="badge text-bg-dark m-1">10th Perc : {{IgpaTenPercentile}}</span>
                     <span class="badge text-bg-dark m-1">90th Perc : {{IgpaNinetyPercentile}}</span>
-                    <span class="badge text-bg-dark m-1">Vacancy sem1 : {{NoOfPlacesSem1}}</span>
-                    <span class="badge text-bg-dark m-1">Vacancy sem2 : {{NoOfPlacesSem2}}</span>
                 </ul>
                 <!-- <router-link class="btn btn-dark float-right" to="UniversityPage">View</router-link> -->
                 <!-- pass props here -->
             </div>
             </router-link>
-            </tilt>
         </div>
-
+    </tilt>
 </template>
 <!-- define props, data etc here -->
 <script>
@@ -35,7 +31,7 @@ export default {
         return {
         };
     },
-    props: ['universityName', 'gpaReq','IgpaNinetyPercentile','IgpaTenPercentile','NoOfPlacesSem1','NoOfPlacesSem2','CountryId','RegionId','imgURL'],
+    props: ['universityName', 'gpaReq','IgpaNinetyPercentile','IgpaTenPercentile','CountryId','RegionId','imgURL'],
     components: {
         Tilt
     },
