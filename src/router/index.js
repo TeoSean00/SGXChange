@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomePage from "@/views/HomePage.vue";
 import UniversityPage from "@/views/UniversityPage.vue";
+import UniversityPageSearch from "@/views/UniversityPageSearch.vue";
 import ModulePage from "@/views/ModulePage.vue";
 import ModuleMappingPage from "@/views/ModuleMappingPage.vue";
 import Register from "@/views/Register.vue";
@@ -15,6 +16,11 @@ const router = createRouter({
       path: "/",
       name: "HomePage",
       component: HomePage,
+    },
+    {
+      path: "/UniversityPage/search",
+      name: "UniversityPageSearch",
+      component: UniversityPageSearch,
     },
     {
       path: "/UniversityPage",
@@ -47,7 +53,7 @@ const router = createRouter({
       component: ProfilePage,
     },
     {
-      path: "/universityinfo/:name",
+      path: "/UniversityInfo/:name",
       name: "UniversityInfo",
       component: UniversityInfo,
     },

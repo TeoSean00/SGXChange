@@ -1,12 +1,9 @@
 <template>
-      <div class="container-fluid">
+      <div class="container-fluid" style="max-width:fit-content;margin-left:8rem;margin-right:8rem;">
     <div class="row mb-3">
-      <div class="col-1"></div>
-      <div class="col h2">University Name</div>
-      <div class="col-1"></div>
+      <div class="col h2">{{ uniName }}</div>
     </div>
     <div class="row mb-3">
-      <div class="col-1"></div>
       <div class="col-4">
         <div class="d-inline me-1">
           <svg
@@ -37,10 +34,8 @@
           ><a href="/" class="text-dark"> Save</a></span
         >
       </div>
-      <div class="col-1"></div>
     </div>
     <div class="row mb-5">
-      <div class="col-1"></div>
       <div class="col-6">
         <img
           src="../assets/440px-University_of_St._Gallen_EUR-HSG_Institute_Building.jpg"
@@ -74,38 +69,34 @@
           alt=""
         />
       </div>
-      <div class="col-1"></div>
     </div>
     <div class="row mb-3">
-      <div class="col-1"></div>
-      <div class="col">
+      <div class="col d-flex">
         <!-- Uni info , e.g past GPA -->
-        <span class="me-2"
-          ><i class="bi bi-book m-1"></i> Historical cGPA: 3.21</span
+        <span class="me-2 pt-1"
+          ><i class="bi bi-book m-1"></i> <span style="font-weight:bold;">Historical cGPA:</span> {{ gpaReq }}</span
         >
         <!-- Academic window -->
-        <span class="mx-2"
-          ><i class="bi bi-calendar4-week m-1"></i>Academic Window: Sep'23 -
-          Dec'23</span
-        >
+        <div class="mx-2 d-flex">
+          <i class="bi bi-calendar4-week m-1"></i>
+          <span class="pt-1" v-html="academicCalendar"></span>
+        </div>
+
         <!-- Climate  -->
-        <span class="mx-2"
-          ><i class="bi bi-thermometer-half m-1"></i>Climate: Cool</span
+        <span class="mx-2 pt-1"
+          ><i class="bi bi-thermometer-half m-1"></i><span style="font-weight:bold;">Climate:</span> Cool</span
         >
       </div>
-      <div class="col-1"></div>
     </div>
     <!-- hr filler -->
     <div class="row">
-      <div class="col-1"></div>
       <div class="col">
         <hr />
       </div>
-      <div class="col-1"></div>
     </div>
     <div class="row">
-      <div class="col-1"></div>
       <div class="col">
+        <h4>General Info</h4>
         <ul style="list-style-type: none">
           <!-- check if accomodation provided -->
           <li class="my-4">
@@ -122,19 +113,31 @@
             <i style="font-size: 2rem" class="bi bi-translate me-4"></i
             >Language: English, Portugese, Spanish
           </li>
+          <!-- Website Url -->
+          <li class="my-4">
+            <i style="font-size: 2rem; margin-right:18px ;" class="fa-solid fa-computer"></i>
+            <a :href="uniUrl">{{ uniUrl }}</a>
+          </li>
         </ul>
       </div>
-      <div class="col-1"></div>
     </div>
     <div class="row">
-      <div class="col-1"></div>
       <div class="col">
         <hr />
       </div>
-      <div class="col-1"></div>
     </div>
     <div class="row">
-      <div class="col-1"></div>
+      <div class="col">
+        <h4>Description</h4>
+        <p>{{ uniDesc }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <hr />
+      </div>
+    </div>
+    <div class="row">
       <div class="col">
         <!-- module information -->
         <div>
@@ -186,36 +189,53 @@
           </div>
         </div>
       </div>
-      <div class="col-1"></div>
     </div>
   </div>
 </template>
 <script>
 import GoogleMap from "@/components/GoogleMap.vue";
 // console.log(import.meta.env.VITE_GOOGLE_MAP_API_KEY);
+import {fireStore} from "@/service/Firebase/firebaseInit"
+import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 
 export default {
   name: "UniPage",
+  data() {
+    return {
+      uniName: '',
+      academicCalendar: '',
+      gpaReq: '',
+      uniDesc: '',
+      uniUrl: '',
+    }
+  },
   components: {
     GoogleMap,
   },
-  beforeRouteUpdate(to, from, next){
-    // HEAP CODE for reference
-    // axios
-    //   .get(
-    //     "http://caifan.ap-southeast-1.elasticbeanstalk.com/api/university/" +
-    //       to.params.name
-    //   )
-    //   .then((response) => {
-    //     console.log(response.data)
-    //     this.university = response.data;
-    //     this.getCountry();
-    //     this.getRegion();
-    //   })
-    //   .catch((error) => console.log(error.response));;
+
+  mounted(){
+    this.uniName = this.$route.params.name
+    this.getInfo()
   },
   methods: {
-
+    async getInfo() {
+      let q = query(collection(fireStore, "Universities"), where("UniversityName", "==", this.uniName))
+      let getDegreeUni = await getDocs(q)
+      getDegreeUni.forEach((doc) => {
+        // Academic Cal
+        var tempCal = doc.data().AcademicCalendar.split('\n')
+        for (let item of tempCal){
+          item = item.split(':')
+          this.academicCalendar += `<span style="font-weight:bold;">${item[0]}</span>` + ":" + item[1].replace('/n', '') + "<br/>"
+        }
+        // Gpa
+        this.gpaReq = doc.data().GpaRequirement
+        // Uni Desc
+        this.uniDesc = doc.data().Description
+        // Uni Url
+        this.uniUrl = doc.data().HostUniversityWebsite
+      });
+    }
   }
 };
 </script>

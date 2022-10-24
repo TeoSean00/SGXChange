@@ -5,9 +5,10 @@
         v-model="searchItem"
         type="text"
         class="search-input"
-        placeholder="Type to search"
+        placeholder="Enter key to search"
+        v-on:keyup.enter="searchUni"
       />
-      <button class="search-icon" v-on:click="searchToggle()">
+      <button class="search-icon" v-on:click="searchToggle">
         <span></span>
       </button>
     </div>
@@ -25,6 +26,24 @@ export default {
       var container = document.getElementById("searchwrapper");
       container.classList.toggle("active");
       this.searchItem = "";
+    },
+    searchUni() {
+      if (this.searchItem != "") {
+        if (this.$route.name != "UniversityPageSearch") {
+          console.log("path1");
+          this.$router.push({
+            path: "/UniversityPage/search",
+            query: { search: this.searchItem },
+          });
+        } else {
+          //I put catch because i dont know how to solve the error
+          console.log("path2");
+          this.$router.push({
+            path: "/UniversityPage/search",
+            query: { search: this.searchItem },
+          });
+        }
+      }
     },
   },
 };
