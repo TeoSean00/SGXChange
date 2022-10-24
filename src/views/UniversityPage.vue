@@ -1,6 +1,7 @@
 <template>
-    <!-- Suggested Uni Section -->
-<!-- <div class="container-fluid mt-5">
+  <!-- Suggested Uni Section -->
+  <!-- <div class="container-fluid mt-5">
+
     <div class="row">
         <div class="col-1"></div>
         <div class="col">
@@ -15,32 +16,59 @@
     </div>
 </div> -->
   <!-- All Uni list section -->
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<div class="container-fluid mt-5" style="max-width:fit-content;margin-left:8rem;margin-right:8rem;">
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+
+  <div
+    class="container-fluid mt-5"
+    style="max-width: fit-content; margin-left: 8rem; margin-right: 8rem"
+  >
+    <!-- UniFilterBar -->
+    <a-menu
+      class="uni-filter-bar"
+      v-model:selectedKeys="current"
+      mode="horizontal"
+    >
+      <a-menu-item key="All"> All </a-menu-item>
+      <a-menu-item key="1"> Africa </a-menu-item>
+      <a-menu-item key="2"> Asia </a-menu-item>
+      <a-menu-item key="4"> Central America </a-menu-item>
+      <a-menu-item key="5"> Europe </a-menu-item>
+      <a-menu-item key="6"> North America </a-menu-item>
+      <a-menu-item key="8"> South America </a-menu-item>
+      <a-menu-item key="3"> The Caribbean </a-menu-item>
+      <a-menu-item key="7"> Oceania </a-menu-item>
+    </a-menu>
+
+    <br />
     <div class="row">
-        <div class="col"><h2>All universities</h2></div>
+      <div class="col"><h2>Universities</h2></div>
     </div>
     <div class="d-flex flex-wrap">
-        <!-- put variables as props -->
-          <UniCardSmall class="unicard" v-for="(uni,index) in items.slice(row1start,row1end)" :key="index"
-            :universityName="uni.name"
-            :gpaReq="uni.gpaReq"
-            :IgpaNinetyPercentile = "uni.IgpaNinetyPercentile"
-            :IgpaTenPercentile = "uni.IgpaTenPercentile"
-            :CountryId = "uni.CountryId"
-            :RegionId = "uni.RegionId"
-            :imgURL = "uni.imgURL"
-            />
+      <!-- put variables as props -->
+      <UniCardSmall
+        class="unicard"
+        v-for="(uni, index) in items.slice(row1start, row1end)"
+        :key="index"
+        :universityName="uni.name"
+        :gpaReq="uni.gpaReq"
+        :IgpaNinetyPercentile="uni.IgpaNinetyPercentile"
+        :IgpaTenPercentile="uni.IgpaTenPercentile"
+        :NoOfPlacesSem1="uni.NoOfPlacesSem1"
+        :NoOfPlacesSem2="uni.NoOfPlacesSem2"
+        :CountryId="uni.CountryId"
+        :RegionId="uni.RegionId"
+        :imgURL="uni.imgURL"
+      />
 
-        <!-- <div class="w-100"></div> -->
-            <!-- <UniCardSmall class="col unicard" v-for="uni in items.slice(row2start,row2end)" :key="uni"
+      <!-- <div class="w-100"></div> -->
+      <!-- <UniCardSmall class="col unicard" v-for="uni in items.slice(row2start,row2end)" :key="uni"
             :universityName="uni.name"
             :gpaReq="uni.gpaReq"
             :IgpaNinetyPercentile = "uni.IgpaNinetyPercentile"
@@ -52,132 +80,177 @@
             :imgURL = "uni.imgURL"
             /> -->
     </div>
-</div>
-<br>
-<br>
-<br>
-<br>
-<!-- pagination -->
-<nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center">
-    <li class="page-item">
-      <a class="page-link disabled" @click="togglePage">Previous</a>
-    </li>
-    <!-- this part should be v-for based on no. of items in data -->
-    <!-- they should be buttons that bind to v-model currentPage-->
-    <!-- paginated items should change as well , use array.slice(start,end)-->
-    <!-- create a new component for paginated items  -->
-    <li class="page-item"><a class="page-link active" @click="togglePage">1</a></li>
-    <li class="page-item" v-for="li in (lastPage-1)" :key="li"><a class="page-link" @click="togglePage">{{li + 1}}</a></li>
-    <li class="page-item">
-      <a class="page-link" @click="togglePage">Next</a>
-    </li>
-  </ul>
-</nav>
-<br>
-<br>
-<br>
-
+  </div>
+  <br />
+  <br />
+  <br />
+  <br />
+  <!-- pagination -->
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item">
+        <a class="page-link" @click="togglePage">Previous</a>
+      </li>
+      <!-- this part should be v-for based on no. of items in data -->
+      <!-- they should be buttons that bind to v-model currentPage-->
+      <!-- paginated items should change as well , use array.slice(start,end)-->
+      <!-- create a new component for paginated items  -->
+      <li class="page-item">
+        <a class="page-link active" @click="togglePage">1</a>
+      </li>
+      <li class="page-item" v-for="li in lastPage" :key="li">
+        <a class="page-link" @click="togglePage">{{ li + 1 }}</a>
+      </li>
+      <!-- <li class="page-item"><a class="page-link active" @click="togglePage">1</a></li>
+    <li class="page-item"><a class="page-link" @click="togglePage">2</a></li>
+    <li class="page-item"><a class="page-link" @click="togglePage">3</a></li>
+    <li class="page-item"><a class="page-link" @click="togglePage">4</a></li> -->
+      <li class="page-item">
+        <a class="page-link" @click="togglePage">Next</a>
+      </li>
+    </ul>
+  </nav>
+  <br />
+  <br />
+  <br />
 </template>
 
 <script>
 import UniCardSmall from "@/components/UniCardSmall.vue";
-
-import {fireStore} from "@/service/Firebase/firebaseInit"
+import { fireStore } from "@/service/Firebase/firebaseInit";
 import { collection, getDocs } from "firebase/firestore";
-
-
-
+import UniFilterBar from "../components/UniFilterBar.vue";
+import { defineComponent, ref } from "vue";
 
 export default {
   name: "UniversityPage",
   data() {
     return {
-        // items per page set to default
-        perPage: 8,
-        // this will be v-modelled to change according to what user clicks
-        currentPage: 1,
-        firstPage: 1,
-        lastPage: 5,
-        items: [],
-
+      // items per page set to default
+      perPage: 8,
+      // this will be v-modelled to change according to what user clicks
+      currentPage: 1,
+      firstPage: 1,
+      lastPage: 0,
+      items: [],
+      // Doesnt work when I use options API
+      // current: "All",
     };
-  },methods:{
-    pagination(){
-      this.lastPage = Math.ceil(this.items.length / this.perPage)
+  },
+  setup() {
+    const current = ref(["All"]);
+    return {
+      current,
+    };
+  },
+
+  methods: {
+    pagination() {
+      this.lastPage = Math.ceil(this.items.length / this.perPage) - 1;
+      console.log(this.lastPage);
     },
-    togglePage: function(){
-        if (event.target.text=='Previous'){
-          if(this.currentPage != 1){
-            this.currentPage-=1
-          }
+    togglePage: function () {
+      if (event.target.text == "Previous") {
+        if (this.currentPage != 1) {
+          this.currentPage -= 1;
         }
-        else if (event.target.text=='Next'){
-          if(this.currentPage != this.lastPage + 1){
-            this.currentPage+=1
-          }
-
-            // console.log(this.currentPage)
-        } else {
-            this.currentPage = parseInt(event.target.text)
+      } else if (event.target.text == "Next") {
+        if (this.currentPage != this.lastPage + 1) {
+          this.currentPage += 1;
         }
 
-        const pagelinks = document.getElementsByClassName('page-link')
-        // goes through the pagination buttons and removes all active classes
-        // also checks if currentPage == 1, then add disbaled class to previous btn
-        // also if currentPage == last, then add disabled class to next btn
-        for (const li of pagelinks){
-            li.classList.remove('active')
-            li.classList.remove('disabled')
+        // console.log(this.currentPage)
+      } else {
+        this.currentPage = parseInt(event.target.text);
+      }
 
-            if(parseInt(li.text) === this.currentPage){
-              console.log(li.text)
-              li.classList.add('active')
-            }
-            if (li.text == 'Previous' && this.currentPage==this.firstPage){
-                li.classList.add('disabled')
-            } else if (li.text == 'Next' && this.currentPage==this.lastPage){
-                li.classList.add('disabled')
-            } else if (parseInt(li.text) == this.currentPage){
-                event.target.classList.add('active')
-            }
+      const pagelinks = document.getElementsByClassName("page-link");
+      // goes through the pagination buttons and removes all active classes
+      // also checks if currentPage == 1, then add disbaled class to previous btn
+      // also if currentPage == last, then add disabled class to next btn
+      for (const li of pagelinks) {
+        li.classList.remove("active");
+        li.classList.remove("disabled");
 
+        if (parseInt(li.text) === this.currentPage) {
+          console.log(li.text);
+          li.classList.add("active");
         }
+        // if (li.text == 'Previous' && this.currentPage==this.firstPage){
+        //     li.classList.add('disabled')
+        // } else if (li.text == 'Next' && this.currentPage==this.lastPage){
+        //     li.classList.add('disabled')
+        // } else if (parseInt(li.text) == this.currentPage){
+        //     event.target.classList.add('active')
+        // }
+      }
     },
     async getAllUniversities() {
-      const getAllUni = await getDocs(collection(fireStore, "Universities"));
-      getAllUni.forEach((doc) => {
-        let universityInfo = {}
-        // put key-value pairs
-        universityInfo['name'] = doc.data().UniversityName
-        universityInfo['gpaReq'] = doc.data().GpaRequirement
-        universityInfo['IgpaNinetyPercentile'] = doc.data().IgpaNinetyPercentile
-        universityInfo['IgpaTenPercentile'] = doc.data().IgpaTenPercentile
-        universityInfo['CountryId'] = doc.data().CountryId
-        universityInfo['RegionId'] = doc.data().RegionId
-        universityInfo['imgURL'] = doc.data().img1
-        this.items.push(universityInfo)
-    });
-    }
+      if (this.current == "All") {
+        const getAllUni = await getDocs(collection(fireStore, "Universities"));
+        getAllUni.forEach((doc) => {
+          let universityInfo = {};
+          // put key-value pairs
+          universityInfo["name"] = doc.data().UniversityName;
+          universityInfo["gpaReq"] = doc.data().GpaRequirement;
+          universityInfo["IgpaNinetyPercentile"] =
+            doc.data().IgpaNinetyPercentile;
+          universityInfo["IgpaTenPercentile"] = doc.data().IgpaTenPercentile;
+          universityInfo["NoOfPlacesSem1"] = doc.data().NoOfPlacesSem1;
+          universityInfo["NoOfPlacesSem2"] = doc.data().NoOfPlacesSem2;
+          universityInfo["CountryId"] = doc.data().CountryId;
+          universityInfo["RegionId"] = doc.data().RegionId;
+          universityInfo["imgURL"] = doc.data().img1;
+          this.items.push(universityInfo);
+        });
+      } else {
+        console.log(this.current);
+        const getAllUni = await getDocs(
+          collection(fireStore, "Universities"),
+          where("RegionId", "==", this.current)
+        );
+        getAllUni.forEach((doc) => {
+          let universityInfo = {};
+          // put key-value pairs
+          universityInfo["name"] = doc.data().UniversityName;
+          universityInfo["gpaReq"] = doc.data().GpaRequirement;
+          universityInfo["IgpaNinetyPercentile"] =
+            doc.data().IgpaNinetyPercentile;
+          universityInfo["IgpaTenPercentile"] = doc.data().IgpaTenPercentile;
+          universityInfo["NoOfPlacesSem1"] = doc.data().NoOfPlacesSem1;
+          universityInfo["NoOfPlacesSem2"] = doc.data().NoOfPlacesSem2;
+          universityInfo["CountryId"] = doc.data().CountryId;
+          universityInfo["RegionId"] = doc.data().RegionId;
+          universityInfo["imgURL"] = doc.data().img1;
+          this.items.push(universityInfo);
+        });
+      }
+    },
   },
   computed: {
-      rows() {
-        return this.items.length
-      },
-      row1start(){
-        return ((this.currentPage-1)*this.perPage)
-      },
-      row1end() {
-        return this.row1start+ (this.perPage)
-      },
-
+    rows() {
+      return this.items.length;
+    },
+    row1start() {
+      return (this.currentPage - 1) * this.perPage;
+    },
+    row1end() {
+      return this.row1start + this.perPage;
+    },
+    // row2start(){
+    //   return this.row1end
+    // },
+    // row2end() {
+    //   return this.row2start+ this.perPage/2
+    // },
   },
   components: {
-    UniCardSmall
+    UniCardSmall,
+    UniFilterBar,
   },
   async mounted() {
-    await this.getAllUniversities()
-    this.pagination()
-  }
+    await this.getAllUniversities();
+    this.pagination();
+  },
 };
 </script>
