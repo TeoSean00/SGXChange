@@ -70,11 +70,7 @@
     <!-- paginated items should change as well , use array.slice(start,end)-->
     <!-- create a new component for paginated items  -->
     <li class="page-item"><a class="page-link active" @click="togglePage">1</a></li>
-    <li class="page-item" v-for="li in lastPage " :key="li"><a class="page-link" @click="togglePage">{{li + 1}}</a></li>
-    <!-- <li class="page-item"><a class="page-link active" @click="togglePage">1</a></li>
-    <li class="page-item"><a class="page-link" @click="togglePage">2</a></li>
-    <li class="page-item"><a class="page-link" @click="togglePage">3</a></li>
-    <li class="page-item"><a class="page-link" @click="togglePage">4</a></li> -->
+    <li class="page-item" v-for="li in (lastPage-1)" :key="li"><a class="page-link" @click="togglePage">{{li + 1}}</a></li>
     <li class="page-item">
       <a class="page-link" @click="togglePage">Next</a>
     </li>
@@ -104,14 +100,13 @@ export default {
         // this will be v-modelled to change according to what user clicks
         currentPage: 1,
         firstPage: 1,
-        lastPage: 0,
+        lastPage: 5,
         items: [],
 
     };
   },methods:{
     pagination(){
-      this.lastPage = Math.ceil(this.items.length / this.perPage) - 1
-      console.log(this.lastPage)
+      this.lastPage = Math.ceil(this.items.length / this.perPage)
     },
     togglePage: function(){
         if (event.target.text=='Previous'){
@@ -141,13 +136,13 @@ export default {
               console.log(li.text)
               li.classList.add('active')
             }
-            // if (li.text == 'Previous' && this.currentPage==this.firstPage){
-            //     li.classList.add('disabled')
-            // } else if (li.text == 'Next' && this.currentPage==this.lastPage){
-            //     li.classList.add('disabled')
-            // } else if (parseInt(li.text) == this.currentPage){
-            //     event.target.classList.add('active')
-            // }
+            if (li.text == 'Previous' && this.currentPage==this.firstPage){
+                li.classList.add('disabled')
+            } else if (li.text == 'Next' && this.currentPage==this.lastPage){
+                li.classList.add('disabled')
+            } else if (parseInt(li.text) == this.currentPage){
+                event.target.classList.add('active')
+            }
 
         }
     },
@@ -193,6 +188,7 @@ export default {
   async mounted() {
     await this.getAllUniversities()
     this.pagination()
+    console.log(this.lastPage)
   }
 };
 </script>
