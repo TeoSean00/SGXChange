@@ -14,8 +14,6 @@
                     </li>
                     <span class="badge text-bg-dark m-1">10th Perc : {{IgpaTenPercentile}}</span>
                     <span class="badge text-bg-dark m-1">90th Perc : {{IgpaNinetyPercentile}}</span>
-                    <span class="badge text-bg-dark m-1">Vacancy sem1 : {{NoOfPlacesSem1}}</span>
-                    <span class="badge text-bg-dark m-1">Vacancy sem2 : {{NoOfPlacesSem2}}</span>
                 </ul>
                 <!-- <router-link class="btn btn-dark float-right" to="UniversityPage">View</router-link> -->
                 <!-- pass props here -->
@@ -33,7 +31,7 @@ export default {
         return {
         };
     },
-    props: ['universityName', 'gpaReq','IgpaNinetyPercentile','IgpaTenPercentile','NoOfPlacesSem1','NoOfPlacesSem2','CountryId','RegionId','imgURL'],
+    props: ['universityName', 'gpaReq','IgpaNinetyPercentile','IgpaTenPercentile','CountryId','RegionId','imgURL'],
     components: {
         Tilt
     },

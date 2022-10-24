@@ -34,8 +34,6 @@
             :gpaReq="uni.gpaReq"
             :IgpaNinetyPercentile = "uni.IgpaNinetyPercentile"
             :IgpaTenPercentile = "uni.IgpaTenPercentile"
-            :NoOfPlacesSem1 = "uni.NoOfPlacesSem1"
-            :NoOfPlacesSem2 = "uni.NoOfPlacesSem2"
             :CountryId = "uni.CountryId"
             :RegionId = "uni.RegionId"
             :imgURL = "uni.imgURL"
@@ -63,7 +61,7 @@
 <nav aria-label="Page navigation example">
   <ul class="pagination justify-content-center">
     <li class="page-item">
-      <a class="page-link" @click="togglePage">Previous</a>
+      <a class="page-link disabled" @click="togglePage">Previous</a>
     </li>
     <!-- this part should be v-for based on no. of items in data -->
     <!-- they should be buttons that bind to v-model currentPage-->
@@ -155,8 +153,6 @@ export default {
         universityInfo['gpaReq'] = doc.data().GpaRequirement
         universityInfo['IgpaNinetyPercentile'] = doc.data().IgpaNinetyPercentile
         universityInfo['IgpaTenPercentile'] = doc.data().IgpaTenPercentile
-        universityInfo['NoOfPlacesSem1'] = doc.data().NoOfPlacesSem1
-        universityInfo['NoOfPlacesSem2'] = doc.data().NoOfPlacesSem2
         universityInfo['CountryId'] = doc.data().CountryId
         universityInfo['RegionId'] = doc.data().RegionId
         universityInfo['imgURL'] = doc.data().img1
@@ -174,12 +170,6 @@ export default {
       row1end() {
         return this.row1start+ (this.perPage)
       },
-      // row2start(){
-      //   return this.row1end
-      // },
-      // row2end() {
-      //   return this.row2start+ this.perPage/2
-      // },
 
   },
   components: {
@@ -188,7 +178,6 @@ export default {
   async mounted() {
     await this.getAllUniversities()
     this.pagination()
-    console.log(this.lastPage)
   }
 };
 </script>
