@@ -3,10 +3,12 @@
   <div class="marquee">
     <!-- <h5 class="marquee-header text-center mt-3">Featured</h5> -->
     <Vue3Marquee :pauseOnHover="true" :duration="60">
-      <div class="card" v-for="avatar in avatarArray" :key="avatar">
+      <div class="card" v-for="uni in universities" :key="uni">
         <MarqueeCard
           v-on:switch="hideBtn"
           v-on:switchOn="showBtn"
+          :universityName="uni.name"
+          :universityImg="uni.imgUrl"
         ></MarqueeCard>
       </div>
     </Vue3Marquee>
@@ -32,6 +34,8 @@ import { reactive, defineComponent } from "vue";
 import { Vue3Marquee } from "vue3-marquee";
 import { ArrowRightOutlined } from "@ant-design/icons-vue";
 import MarqueeCard from "./MarqueeCard.vue";
+import {fireStore} from "@/service/Firebase/firebaseInit"
+import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 
 export default {
   name: "CardsPauseOnHover",
@@ -43,22 +47,26 @@ export default {
   data() {
     return {
       hover: false,
+      universities: [],
     };
   },
   setup() {
-    const avatarArray = reactive([]);
+    // const avatarArray = reactive([]);
 
-    for (let i = 0; i < 10; i++) {
-      avatarArray.push(
-        `https://avatars.dicebear.com/api/avataaars/${Math.random()
-          .toString(36)
-          .substr(2, 6)}.svg`
-      );
-    }
+    // for (let i = 0; i < 10; i++) {
+    //   avatarArray.push(
+    //     `https://avatars.dicebear.com/api/avataaars/${Math.random()
+    //       .toString(36)
+    //       .substr(2, 6)}.svg`
+    //   );
+    // }
 
-    return {
-      avatarArray,
-    };
+    // return {
+    //   avatarArray,
+    // };
+  },
+  mounted(){
+    this.getInfo()
   },
   methods: {
     hideBtn() {
@@ -70,6 +78,23 @@ export default {
       this.hover = false;
       // console.log(this.hover);
     },
+    async getInfo() {
+      const getUniversities = await getDocs(collection(fireStore, "Universities"));
+      getUniversities.forEach((doc) => {
+        let universityInfo = {}
+        // put key-value pairs
+        universityInfo['name'] = doc.data().UniversityName
+        // universityInfo['gpaReq'] = doc.data().GpaRequirement
+        // universityInfo['IgpaNinetyPercentile'] = doc.data().IgpaNinetyPercentile
+        // universityInfo['IgpaTenPercentile'] = doc.data().IgpaTenPercentile
+        // universityInfo['NoOfPlacesSem1'] = doc.data().NoOfPlacesSem1
+        // universityInfo['NoOfPlacesSem2'] = doc.data().NoOfPlacesSem2
+        // universityInfo['CountryId'] = doc.data().CountryId
+        // universityInfo['RegionId'] = doc.data().RegionId
+        universityInfo['imgURL'] = doc.data().img1
+        this.universities.push(universityInfo)
+    });
+    }
   },
 };
 </script>
