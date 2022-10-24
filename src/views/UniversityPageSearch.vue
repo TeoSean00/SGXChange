@@ -73,36 +73,28 @@ export default {
   components: {
     UniCardSmall
   },
+  methods:{
+    async searchFunc(searchItem){
+      this.outputUni = []
+      this.searchKey = searchItem
+      const getUni = await getDocs(collection(fireStore, "Universities"));
+      getUni.forEach((doc) => {
+        let universityInfo = {}
+        // put key-value pairs
+        if( doc.data().UniversityName.toLowerCase().includes(this.searchKey.toLowerCase())){
+          universityInfo['name'] = doc.data().UniversityName
+          universityInfo['gpaReq'] = doc.data().GpaRequirement
+          this.outputUni.push(universityInfo)
+        }
+      })
+    }
+  },
   async mounted() {
-    console.log(this.$route.params.uni)
-    this.searchKey = this.$route.params.uni
-    const getUni = await getDocs(collection(fireStore, "Universities"));
-    getUni.forEach((doc) => {
-      let universityInfo = {}
-      // put key-value pairs
-      if( doc.data().UniversityName.includes(this.searchKey)){
-        universityInfo['name'] = doc.data().UniversityName
-        universityInfo['gpaReq'] = doc.data().GpaRequirement
-        this.outputUni.push(universityInfo)
-      }
-    })
-    console.log(this.outputUni)
+    // console.log(this.$route)
+    this.searchFunc(this.$route.query.search)
   },
   async beforeRouteUpdate(to, from, next){
-
-    // HEAP CODE for reference
-    // axios
-    //   .get(
-    //     "http://caifan.ap-southeast-1.elasticbeanstalk.com/api/university/" +
-    //       to.params.name
-    //   )
-    //   .then((response) => {
-    //     console.log(response.data)
-    //     this.university = response.data;
-    //     this.getCountry();
-    //     this.getRegion();
-    //   })
-    //   .catch((error) => console.log(error.response));;
+    this.searchFunc(to.query.search)
   },
 };
 </script>
