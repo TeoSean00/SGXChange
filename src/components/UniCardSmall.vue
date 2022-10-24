@@ -1,6 +1,7 @@
 <template>
-     <tilt>
-        <div class="card" style="width: 300px;">
+
+        <div class="card" >
+            <tilt>
             <router-link :to="`/universityInfo/` + universityName">
             <img class="card-img-top" :src="imgURL" alt="">
             <div class="card-body">
@@ -21,8 +22,9 @@
                 <!-- pass props here -->
             </div>
             </router-link>
+            </tilt>
         </div>
-    </tilt>
+
 </template>
 <!-- define props, data etc here -->
 <script>
