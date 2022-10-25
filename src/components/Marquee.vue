@@ -12,7 +12,7 @@
         ></MarqueeCard>
       </div>
     </Vue3Marquee>
-    <div class="marquee-footer" :class="{ invisible: hover, visible: !hover }">
+    <div class="marquee-footer">
       <div class="text-center marquee-anywhere">
         <router-link to="/UniversityPage" id="seeUni">
           <button class="marquee-btn marquee-btn-hide">Take me anywhere</button>
@@ -83,7 +83,7 @@ export default {
       getUniversities.forEach((doc) => {
         let universityInfo = {}
         // put key-value pairs
-        universityInfo['name'] = doc.data().UniversityName
+        universityInfo['name'] = doc.data()['Host University']
         // universityInfo['gpaReq'] = doc.data().GpaRequirement
         // universityInfo['IgpaNinetyPercentile'] = doc.data().IgpaNinetyPercentile
         // universityInfo['IgpaTenPercentile'] = doc.data().IgpaTenPercentile
@@ -91,7 +91,8 @@ export default {
         // universityInfo['NoOfPlacesSem2'] = doc.data().NoOfPlacesSem2
         // universityInfo['CountryId'] = doc.data().CountryId
         // universityInfo['RegionId'] = doc.data().RegionId
-        universityInfo['imgURL'] = doc.data().img1
+        universityInfo['imgUrl'] = doc.data()['Uni Image link 1']
+        console.log(universityInfo.imgURL)
         this.universities.push(universityInfo)
     });
     }
