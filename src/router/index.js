@@ -7,9 +7,10 @@ import ModuleMappingPage from "@/views/ModuleMappingPage.vue";
 import Register from "@/views/Register.vue";
 import SignIn from "@/views/SignIn.vue";
 import ProfilePage from "@/views/ProfilePage.vue";
-import UniversityInfo from '@/views/UniversityInfo.vue'
+import UniversityInfo from "@/views/UniversityInfo.vue";
 
 const router = createRouter({
+  mode: "hash",
   history: createWebHistory(),
   routes: [
     {
@@ -21,6 +22,11 @@ const router = createRouter({
       path: "/UniversityPage/search",
       name: "UniversityPageSearch",
       component: UniversityPageSearch,
+    },
+    {
+      path: "/UniversityInfo/:name",
+      name: "UniversityInfo",
+      component: UniversityInfo,
     },
     {
       path: "/UniversityPage",
@@ -51,11 +57,6 @@ const router = createRouter({
       path: "/ProfilePage",
       name: "ProfilePage",
       component: ProfilePage,
-    },
-    {
-      path: "/UniversityInfo/:name",
-      name: "UniversityInfo",
-      component: UniversityInfo,
     },
   ],
 });

@@ -303,7 +303,7 @@ export default {
   methods: {
     // Get Uni Info
     async getUniInfo() {
-      let q = query(collection(fireStore, "Universities"), where("Host University", "==", this.uniName))
+      let q = query(collection(fireStore, "Universities"), where("HostUniversity", "==", this.uniName))
       let getDegreeUni = await getDocs(q)
       getDegreeUni.forEach((doc) => {
         // console.log(doc.data())
@@ -318,22 +318,22 @@ export default {
         // Uni Icon URL
         this.uniIcon = doc.data().Icon
         // Uni Desc
-        this.uniDesc = doc.data()['Description']
+        this.uniDesc = doc.data().UniDescription
         // Uni Url
-        this.uniUrl = doc.data()['Uni Website Link']
-        // Uni Accom boolean
-        this.hasAccom = doc.data().Accommodation
-        // Uni course url
-        this.uniCourseUrl = doc.data().CourseCatalogLink
-        // World Ranking
-        this.uniRanking = doc.data().WorldRanking
+        this.uniUrl = doc.data().UniWebsiteLink
+        // // Uni Accom boolean
+        // this.hasAccom = doc.data().Accommodation
+        // // Uni course url
+        // this.uniCourseUrl = doc.data().CourseCatalogLink
+        // // World Ranking
+        // this.uniRanking = doc.data().WorldRanking
         // Uni exchange spots
         this.numSlots1 = doc.data().NoOfPlacesSem1
         this.numSlots2 = doc.data().NoOfPlacesSem2
-        // igpa info
-        this.igpaTen = doc.data().IgpaTenPercentile
-        this.igpaNinety = doc.data().IgpaNinetyPercentile
-        console.log(this.numSlots1)
+        // // igpa info
+        // this.igpaTen = doc.data().IgpaTenPercentile
+        // this.igpaNinety = doc.data().IgpaNinetyPercentile
+        // console.log(this.numSlots1)
       });
 
 
