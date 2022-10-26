@@ -57,10 +57,17 @@
     <div :class="{testingOutput: testDisplay}">
       <h4>Test Output</h4>
       <div v-for="out in testOutput" :key="out">{{ out }}</div>
-      <div class="d-flex">
-        <UniCardSmall class="col unicard" v-for="uni in uniOutput" :key="uni"
-            :universityName="uni"
-            :gpaReq="uni"
+      <div class="d-flex flex-wrap">
+        <UniCardSmall class="unicard" v-for="uni in uniOutput" :key="uni"
+            :universityName="uni.name"
+            :gpaReq="uni.gpaReq"
+            :IgpaNinetyPercentile="uni.IgpaNinetyPercentile"
+            :IgpaTenPercentile="uni.IgpaTenPercentile"
+            :NoOfPlacesSem1="uni.NoOfPlacesSem1"
+            :NoOfPlacesSem2="uni.NoOfPlacesSem2"
+            :CountryId="uni.CountryId"
+            :RegionId="uni.RegionId"
+            :imgURL="uni.imgURL"
             />
       </div>
 
@@ -72,13 +79,13 @@ import ModuleCard from "@/components/ModuleCard.vue";
 import UniCardSmall from "@/components/UniCardSmall.vue";
 
 import {fireStore} from "@/service/Firebase/firebaseInit"
-import { collection, getDocs, where, query, limit } from "firebase/firestore";
+import { collection, getDocs, where, query, limit, doc, getDoc } from "firebase/firestore";
 export default {
     data() {
         return {
           universities: [],
           degrees: [],
-          baskets: ['Managing', 'Tech & Society', 'Cultures', 'IS Major Core', 'IS Depth Electives', 'Civilisations', 'Global Exposure'],
+          baskets: [],
           selectedBaskets: {},
           form1: false,
           form2: true,
@@ -128,8 +135,25 @@ export default {
             //   //   this.degrees.push(doc.data().DegreeName)
             //   // })
             // },
-            showForm() {
+            async showForm() {
                 this.form2 = false
+                var tempDegrees = []
+                if(this.selectedDegree != 'default'){
+                  tempDegrees.push(this.selectedDegree)
+                }
+                if(this.selectedSecondDegree != 'default'){
+                  tempDegrees.push(this.selectedSecondDegree)
+                }
+                for (let degree of tempDegrees){
+                  let q = doc(fireStore, "DegreeToBaskets", degree)
+                  let getBaskets = await getDoc(q)
+
+                  for( let bask of getBaskets.data().Baskets){
+                    if(!this.baskets.includes(bask)){
+                      this.baskets.push(bask)
+                    }
+                  }
+                }
             },
             addToBasket(basket){
               if (basket in this.selectedBaskets){
@@ -138,7 +162,6 @@ export default {
               else{
                 this.selectedBaskets[basket] = 1
               }
-              console.log(this.selectedBaskets)
             },
             removeFromBasket(basket){
               if (basket in this.selectedBaskets){
@@ -150,21 +173,51 @@ export default {
               this.form2 = true
               this.testDisplay = false
               this.testOutput = []
+              var tempUni = []
               // Getting output universities
-              let q = query(collection(fireStore, "Universities"), limit(3))
-              let getChosenUniversities = await getDocs(q)
-
-              getChosenUniversities.forEach((doc) => {
-                this.uniOutput.push(doc.data().UniversityName)
-              });
-
+              // console.log(this.selectedBaskets)
+              for(let basket in this.selectedBaskets){
+                let q = doc(fireStore, "BasketToUniversities", basket)
+                let getUni = await getDoc(q)
+                if (tempUni.length == 0){
+                  tempUni = getUni.data().Universities
+                }
+                else{
+                  for( let uni of tempUni){
+                      if(!this.getUni.data().Universities.includes(uni)){
+                        tempUni.remove(bask)
+                      }
+                    }
+                }
+              }
+              // Get Data for each output uni
+              for(let uni of tempUni){
+                let uniInfo = query(collection(fireStore, "Universities"), where("HostUniversity", "==", uni))
+                let getUniversities = await getDocs(uniInfo)
+                getUniversities.forEach((doc) =>{
+                  console.log(doc.data())
+                  let universityInfo = {}
+                  // put key-value pairs
+                  universityInfo["name"] = doc.data().HostUniversity;
+                  universityInfo["gpaReq"] = doc.data().GPA;
+                  // universityInfo["IgpaNinetyPercentile"] =
+                  //   doc.data().IgpaNinetyPercentile;
+                  // universityInfo["IgpaTenPercentile"] = doc.data().IgpaTenPercentile;
+                  universityInfo["NoOfPlacesSem1"] = doc.data().NoOfPlacesSem1;
+                  universityInfo["NoOfPlacesSem2"] = doc.data().NoOfPlacesSem2;
+                  universityInfo["CountryId"] = doc.data().Country;
+                  universityInfo["RegionId"] = doc.data().Region;
+                  universityInfo["imgURL"] = doc.data().UniImageLink1;
+                  this.uniOutput.push(universityInfo)
+                })
+              }
               // End
               for ( const [key, value] of Object.entries(this.selectedBaskets)){
                 if (value != 0){
                   this.testOutput.push(`${key} : ${value}`)
                 }
               }
-              console.log(this.testOutput)
+              // console.log(this.testOutput)
             }
         },
     }
