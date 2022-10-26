@@ -3,8 +3,8 @@
   <div class="marquee">
     <!-- <h5 class="marquee-header text-center mt-3">Featured</h5> -->
     <Vue3Marquee :pauseOnHover="true" :duration="60">
-      <div class="card" v-for="uni in universities" :key="uni">
-        <MarqueeCard
+      <div class="" v-for="uni in universities" :key="uni">
+        <MarqueeCard class="card"
           v-on:switch="hideBtn"
           v-on:switchOn="showBtn"
           :universityName="uni.name"

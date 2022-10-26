@@ -33,13 +33,13 @@ export default {
 
 <style scoped>
 .marquee-uni-image {
-  position: static;
+  position: absolute;
   border-radius: 25px;
+  object-fit: cover;
 }
 
 .marquee-uni-name {
-  position: absolute;
-  top: 150px;
+  position: relative;
   color: white;
   font-size: xx-large;
 }
