@@ -191,19 +191,19 @@ export default {
         getAllUni.forEach((doc) => {
           let universityInfo = {};
           // put key-value pairs
-          universityInfo["name"] = doc.data()['Host University'];
-          universityInfo["gpaReq"] = doc.data()['GPA'];
-          universityInfo["IgpaNinetyPercentile"] =
-            doc.data().IgpaNinetyPercentile;
+          universityInfo["name"] = doc.data().HostUniversity;
+          universityInfo["gpaReq"] = doc.data().GPA;
+          // universityInfo["IgpaNinetyPercentile"] =
+          //   doc.data().IgpaNinetyPercentile;
           // universityInfo["IgpaTenPercentile"] = doc.data().IgpaTenPercentile;
-          // universityInfo["NoOfPlacesSem1"] = doc.data().NoOfPlacesSem1;
-          // universityInfo["NoOfPlacesSem2"] = doc.data().NoOfPlacesSem2;
-          universityInfo["CountryId"] = doc.data()['Country'];
-          universityInfo["RegionId"] = doc.data()['Region'];
-          universityInfo["imgURL"] = doc.data()['Uni Image link 1'];
+          universityInfo["NoOfPlacesSem1"] = doc.data().NoOfPlacesSem1;
+          universityInfo["NoOfPlacesSem2"] = doc.data().NoOfPlacesSem2;
+          universityInfo["CountryId"] = doc.data().Country;
+          universityInfo["RegionId"] = doc.data().Region;
+          universityInfo["imgURL"] = doc.data().UniImageLink1;
           this.items.push(universityInfo);
-        });
-      } else {
+          });
+        } else {
         console.log(this.current);
         const getAllUni = await getDocs(
           collection(fireStore, "Universities"),

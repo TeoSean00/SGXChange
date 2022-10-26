@@ -98,7 +98,7 @@ export default {
         const getUniversities = await getDocs(collection(fireStore, "Universities"));
 
         getUniversities.forEach((doc) => {
-          this.universities.push(doc.data()['Host University'])
+          this.universities.push(doc.data().HostUniversity)
         });
 
     },

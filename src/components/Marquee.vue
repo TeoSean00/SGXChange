@@ -83,7 +83,7 @@ export default {
       getUniversities.forEach((doc) => {
         let universityInfo = {}
         // put key-value pairs
-        universityInfo['name'] = doc.data()['Host University']
+        universityInfo['name'] = doc.data().HostUniversity
         // universityInfo['gpaReq'] = doc.data().GpaRequirement
         // universityInfo['IgpaNinetyPercentile'] = doc.data().IgpaNinetyPercentile
         // universityInfo['IgpaTenPercentile'] = doc.data().IgpaTenPercentile
@@ -91,7 +91,7 @@ export default {
         // universityInfo['NoOfPlacesSem2'] = doc.data().NoOfPlacesSem2
         // universityInfo['CountryId'] = doc.data().CountryId
         // universityInfo['RegionId'] = doc.data().RegionId
-        universityInfo['imgUrl'] = doc.data()['Uni Image link 1']
+        universityInfo['imgUrl'] = doc.data().UniImageLink1
         console.log(universityInfo.imgURL)
         this.universities.push(universityInfo)
     });
