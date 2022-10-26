@@ -191,16 +191,16 @@ export default {
         getAllUni.forEach((doc) => {
           let universityInfo = {};
           // put key-value pairs
-          universityInfo["name"] = doc.data().UniversityName;
-          universityInfo["gpaReq"] = doc.data().GpaRequirement;
+          universityInfo["name"] = doc.data()['Host University'];
+          universityInfo["gpaReq"] = doc.data()['GPA'];
           universityInfo["IgpaNinetyPercentile"] =
             doc.data().IgpaNinetyPercentile;
-          universityInfo["IgpaTenPercentile"] = doc.data().IgpaTenPercentile;
-          universityInfo["NoOfPlacesSem1"] = doc.data().NoOfPlacesSem1;
-          universityInfo["NoOfPlacesSem2"] = doc.data().NoOfPlacesSem2;
-          universityInfo["CountryId"] = doc.data().CountryId;
-          universityInfo["RegionId"] = doc.data().RegionId;
-          universityInfo["imgURL"] = doc.data().img1;
+          // universityInfo["IgpaTenPercentile"] = doc.data().IgpaTenPercentile;
+          // universityInfo["NoOfPlacesSem1"] = doc.data().NoOfPlacesSem1;
+          // universityInfo["NoOfPlacesSem2"] = doc.data().NoOfPlacesSem2;
+          universityInfo["CountryId"] = doc.data()['Country'];
+          universityInfo["RegionId"] = doc.data()['Region'];
+          universityInfo["imgURL"] = doc.data()['Uni Image link 1'];
           this.items.push(universityInfo);
         });
       } else {

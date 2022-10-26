@@ -1,6 +1,6 @@
 <template>
     <tilt>
-        <div class="card" > 
+        <div class="card" >
             <router-link :to="`/universityInfo/` + universityName">
             <img class="card-img-top" :src="imgURL" alt="">
             <div class="card-body">
@@ -12,8 +12,8 @@
                     <li class="list-group-item uniitem">
                         Minimum gpa: {{gpa}}
                     </li>
-                    <span class="badge text-bg-dark m-1">10th Perc : {{IgpaTenPercentile}}</span>
-                    <span class="badge text-bg-dark m-1">90th Perc : {{IgpaNinetyPercentile}}</span>
+                    <!-- <span class="badge text-bg-dark m-1">10th Perc : {{IgpaTenPercentile}}</span>
+                    <span class="badge text-bg-dark m-1">90th Perc : {{IgpaNinetyPercentile}}</span> -->
                 </ul>
                 <!-- <router-link class="btn btn-dark float-right" to="UniversityPage">View</router-link> -->
                 <!-- pass props here -->
@@ -42,16 +42,16 @@ export default {
             }
             return "NA"
         },
-        IgpaNinetyPercentile(){
-            if(this.IgpaNinetyPercentile == null){
-                return "NA"
-            } return this.IgpaNinetyPercentile
-        },
-        IgpaTenPercentile(){
-            if(this.IgpaTenPercentile == null){
-                return "NA"
-            } return this.IgpaTenPercentile
-        },
+        // IgpaNinetyPercentile(){
+        //     if(this.IgpaNinetyPercentile == null){
+        //         return "NA"
+        //     } return this.IgpaNinetyPercentile
+        // },
+        // IgpaTenPercentile(){
+        //     if(this.IgpaTenPercentile == null){
+        //         return "NA"
+        //     } return this.IgpaTenPercentile
+        // },
 
     },
     mounted(){

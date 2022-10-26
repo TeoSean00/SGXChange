@@ -7,7 +7,7 @@
     <img
       :class="{ visible: hover, invisible: !hover }"
       class="marquee-uni-image"
-      src="../assets/school.jpg"
+      :src="universityImg"
       width="235"
       height="350"
     />
@@ -25,6 +25,9 @@ export default {
       hover: false,
     };
   },
+  mounted(){
+    console.log(this.universityImg)
+  }
 };
 </script>
 

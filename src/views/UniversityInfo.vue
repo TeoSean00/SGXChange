@@ -87,9 +87,9 @@
       <div class="col py-3">
         <div class="ps-5 pt-2 d-flex flex-column gap-4">
           <span><b>Min Gpa : </b>{{gpaReq}}</span>
-          <b>10th/90th Percentile : 
+          <b>10th/90th Percentile :
           <span class="badge text-bg-danger m-1">{{igpaTen}}</span>
-           | 
+           |
            <span class="badge text-bg-success m-1">{{igpaNinety}}</span>
           </b>
         </div>
@@ -143,7 +143,7 @@
           <p class="d-flex align-items-center gap-3">Semester 1: <b style="font-size:x-large">{{numSlots1}}</b></p>
           <p class="d-flex align-items-center gap-3">Semester 2: <b style="font-size:x-large">{{numSlots2}}</b></p>
         </div>
-        
+
       </div>
     </div>
     <div class="row">
@@ -208,7 +208,7 @@
             ></Module>
           </div>
         </div>
-        
+
         <!-- one module each -->
         <div class="card my-4" style="width: 30rem">
           <div class="card-body">
@@ -303,23 +303,24 @@ export default {
   methods: {
     // Get Uni Info
     async getUniInfo() {
-      let q = query(collection(fireStore, "Universities"), where("UniversityName", "==", this.uniName))
+      let q = query(collection(fireStore, "Universities"), where("Host University", "==", this.uniName))
       let getDegreeUni = await getDocs(q)
       getDegreeUni.forEach((doc) => {
-        // Academic Cal
-        var tempCal = doc.data().AcademicCalendar.split('\n')
-        for (let item of tempCal){
-          item = item.split(':')
-          this.academicCalendar += `<span style="font-weight:bold;">${item[0]} : </span>` + item[1].replace('/n', '') + "<br><br>"
-        }
+        // console.log(doc.data())
+        // Academic Cal (Remove temp because breaks code)
+        // var tempCal = doc.data().AcademicCalendar.split('\n')
+        // for (let item of tempCal){
+        //   item = item.split(':')
+        //   this.academicCalendar += `<span style="font-weight:bold;">${item[0]} : </span>` + item[1].replace('/n', '') + "<br><br>"
+        // }
         // Gpa
-        this.gpaReq = doc.data().GpaRequirement
+        this.gpaReq = doc.data()['GPA']
         // Uni Icon URL
         this.uniIcon = doc.data().Icon
         // Uni Desc
-        this.uniDesc = doc.data().Description
+        this.uniDesc = doc.data()['Description']
         // Uni Url
-        this.uniUrl = doc.data().HostUniversityExchangeWebsite
+        this.uniUrl = doc.data()['Uni Website Link']
         // Uni Accom boolean
         this.hasAccom = doc.data().Accommodation
         // Uni course url
@@ -335,8 +336,8 @@ export default {
         console.log(this.numSlots1)
       });
 
-      
-      
+
+
     },
 
     // Get Mod Info

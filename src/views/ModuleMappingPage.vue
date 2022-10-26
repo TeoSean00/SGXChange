@@ -98,26 +98,36 @@ export default {
         const getUniversities = await getDocs(collection(fireStore, "Universities"));
 
         getUniversities.forEach((doc) => {
-          this.universities.push(doc.data().UniversityName)
+          this.universities.push(doc.data()['Host University'])
         });
 
     },
     methods: {
             async getDegree() {
               this.degrees = []
-              let q = query(collection(fireStore, "DegreeUniversities"), where("UniversityName", "==", this.selectedUni))
+              let q = query(collection(fireStore, "DegreeToBaskets"))
               let getDegreeUni = await getDocs(q)
               getDegreeUni.forEach((doc) => {
-                this.getDegreeName(doc.data().DegreeId)
+                // console.log(doc.data().Universities)
+                // if(this.getDegreeName(doc.data().Universities)){
+                //   this.degrees.push(doc.id)
+                // }
+                this.degrees.push(doc.id)
               });
             },
-            async getDegreeName(degreeId) {
-              let degreeName = query(collection(fireStore, "Degrees"), where("DegreeId", "==", degreeId))
-              let getDegreeName = await getDocs(degreeName)
-              getDegreeName.forEach((doc) => {
-                this.degrees.push(doc.data().DegreeName)
-              })
-            },
+            // async getDegreeName(uniArray) {
+            //   // console.log(uniArray.includes(this.selectedUni))
+
+            //   if(uniArray.includes(this.selectedUni)){
+            //     return true
+            //   }
+            //   return false
+            //   // let degreeName = query(collection(fireStore, "Degrees"), where("DegreeId", "==", degreeId))
+            //   // let getDegreeName = await getDocs(degreeName)
+            //   // getDegreeName.forEach((doc) => {
+            //   //   this.degrees.push(doc.data().DegreeName)
+            //   // })
+            // },
             showForm() {
                 this.form2 = false
             },
