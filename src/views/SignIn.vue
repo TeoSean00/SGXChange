@@ -35,10 +35,10 @@
             </svg>
             <div class="form">
             <label for="email">Email</label>
-            <input @click="onEmail" id="email" type="text" v-model="email" />
+            <input type="text" @click="onEmail" id="email"  v-model="email" />
             <label for="password">Password</label>
-            <input @click="onPassword" type="password" v-model="password" />
-            <input @click="onSubmit" type="submit" id="submit" value="Submit" />
+            <input type="password" @click="onPassword" v-model="password" />
+            <input @click="onSubmit(); signIn();" type="submit" id="submit" value="Submit" />
             </div>
         </div>
         </div>

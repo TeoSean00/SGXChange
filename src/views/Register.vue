@@ -44,10 +44,10 @@
             </svg>
             <div class="form">
             <label for="email">Email</label>
-            <input @click="onEmail" id="email" type="text" v-model="email" />
+            <input @click="onEmail" id="email" type="text" v-model="email" placeholder=""/>
             <label for="password">Password</label>
-            <input @click="onPassword" type="password" v-model="password" />
-            <input @click="onSubmit" type="submit" id="submit" value="Submit" />
+            <input @click="onPassword" type="password" v-model="password" placeholder=""/>
+            <input @click="onSubmit(); register();" type="submit" id="submit" value="Submit" />
             </div>
         </div>
         </div>
@@ -58,6 +58,7 @@
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { useRouter } from 'vue-router'
 import anime from "animejs/lib/anime.es.js";
+// import app from "../service/Firebase/firebaseInit";
 
 export default {
     name: 'Register',
@@ -71,6 +72,10 @@ export default {
     },
     methods: {
         register(){
+            console.log("started register");
+            console.log(this.email);
+            console.log(this.password);
+            console.log(getAuth());
             createUserWithEmailAndPassword(getAuth(), this.email, this.password)
             .then((user) => {
                 alert('Your account has been successfully created')
@@ -135,7 +140,6 @@ export default {
         },
     }
 }   
-
 </script>
 
 
