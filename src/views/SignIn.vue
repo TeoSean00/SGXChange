@@ -225,6 +225,7 @@ export default {
   color: #333333;
   line-height: 1.2;
   text-align: center;
+  padding-bottom: 22px;
 }
 
 /*------------------------------------------------------------------
