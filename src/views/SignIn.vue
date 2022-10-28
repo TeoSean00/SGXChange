@@ -1,49 +1,52 @@
 <template>
-    <div class="page">
-        <div class="container">
-        <div class="left bg-light">
-            <div class="login">Sign In</div>
-            <div class="eula">
-            Welcome to SGXchange!
-            <p class="register">
+  <div class="limiter">
+    <div class="container-login100">
+      <div class="wrap-login100">
+        <!-- remove validateform -->
+        <div class="login100-form">
+          <span class="login100-form-title p-b-43"> Sign In </span>
+
+          <div
+            class="wrap-input100 validate-input"
+            data-validate="Valid email is required: ex@abc.xyz"
+          >
+            <input class="input100" type="text" name="email" v-model="email" placeholder=" " required />
+            <span class="focus-input100"></span>
+            <span class="label-input100">Email</span>
+          </div>
+
+          <div
+            class="wrap-input100 validate-input"
+            data-validate="Password is required"
+          >
+            <input class="input100" type="password" name="pass" v-model="password" placeholder=" " required/>
+            <span class="focus-input100"></span>
+            <span class="label-input100">Password</span>
+          </div>
+
+          <div class="flex-sb-m w-full p-t-3 p-b-32">
+            <div>
+              <a href="#" class="txt1"> Forgot Password? </a>
+            </div>
+          </div>
+          <div class="container-login100-form-btn">
+            <button @click="signIn()" class="login100-form-btn">Login</button>
+          </div>
+
+          <p class="register">
                 Don't have an account?
                 <div
                 ><router-link to="/RegisterPage">Register Here</router-link></div
                 >
             </p>
-            </div>
         </div>
-        <div class="right">
-            <svg viewBox="0 0 320 300">
-            <defs>
-                <linearGradient
-                inkscape:collect="always"
-                id="linearGradient"
-                x1="13"
-                y1="193.49992"
-                x2="307"
-                y2="193.49992"
-                gradientUnits="userSpaceOnUse"
-                >
-                <stop style="stop-color: #0047AB" offset="0" id="stop876" />
-                <stop style="stop-color: #0093FF" offset="1" id="stop878" />
-                </linearGradient>
-            </defs>
-            <path
-                d="m 40,120.00016 239.99984,-3.2e-4 c 0,0 24.99263,0.79932 25.00016,35.00016 0.008,34.20084 -25.00016,35 -25.00016,35 h -239.99984 c 0,-0.0205 -25,4.01348 -25,38.5 0,34.48652 25,38.5 25,38.5 h 215 c 0,0 20,-0.99604 20,-25 0,-24.00396 -20,-25 -20,-25 h -190 c 0,0 -20,1.71033 -20,25 0,24.00396 20,25 20,25 h 168.57143"
-            />
-            </svg>
-            <div class="form">
-            <label for="email">Email</label>
-            <input @click="onEmail" id="email" type="text" v-model="email" />
-            <label for="password">Password</label>
-            <input @click="onPassword" type="password" v-model="password" />
-            <input @click="onSubmit(); signIn();" type="submit" id="submit" value="Submit" />
-            </div>
-        </div>
-        </div>
+        <div class="login100-more"></div>
+      </div>
     </div>
-<About></About>
+  </div>
+
+
+  <About></About>
   <!-- <h1>Sign in with your Account</h1>
   <p><input type="text" placeholder="Email" v-model="email" /></p>
   <p><input type="password" placeholder="Password" v-model="password" /></p>
@@ -52,8 +55,6 @@
     Don't have an account?
     <router-link to="/RegisterPage">Register Here</router-link>
   </p> -->
-
-  
 </template>
 
 <script>
@@ -63,191 +64,400 @@ import anime from "animejs/lib/anime.es.js";
 // import About from "../components/About.vue";
 
 export default {
-    name: "SignIn",
-    data() {
-        return {
-            email: "",
-            password: "",
-            router: useRouter(),
-            current: null,
-        };
+  name: "SignIn",
+  data() {
+    return {
+      email: "",
+      password: "",
+      router: useRouter(),
+      current: null,
+    };
+  },
+  methods: {
+    signIn() {
+      signInWithEmailAndPassword(getAuth(), this.email, this.password)
+        .then((user) => {
+          alert("you have successfully signed in");
+          console.log("successfully logged in user is", user);
+          this.router.push("/ProfilePage");
+        })
+        .catch((error) => {
+          console.log("error.code");
+          alert(error.message);
+        });
     },
-    methods: {
-        signIn() {
-            signInWithEmailAndPassword(getAuth(), this.email, this.password)
-                .then((user) => {
-                alert("you have successfully signed in");
-                console.log("successfully logged in user is", user);
-                this.router.push("/ProfilePage");
-            })
-                .catch((error) => {
-                console.log("error.code");
-                alert(error.message);
-            });
-        },
-        onEmail() {
-            if (this.current)
-                this.current.pause();
-            this.current = anime({
-                targets: "path",
-                strokeDashoffset: {
-                    value: 0,
-                    duration: 700,
-                    easing: "easeOutQuart",
-                },
-                strokeDasharray: {
-                    value: "240 1386",
-                    duration: 700,
-                    easing: "easeOutQuart",
-                },
-            });
-        },
-        onPassword() {
-            if (this.current)
-                this.current.pause();
-            this.current = anime({
-                targets: "path",
-                strokeDashoffset: {
-                    value: -336,
-                    duration: 700,
-                    easing: "easeOutQuart",
-                },
-                strokeDasharray: {
-                    value: "240 1386",
-                    duration: 700,
-                    easing: "easeOutQuart",
-                },
-            });
-        },
-        onSubmit() {
-            if (this.current)
-                this.current.pause();
-            this.current = anime({
-                targets: "path",
-                strokeDashoffset: {
-                    value: -730,
-                    duration: 700,
-                    easing: "easeOutQuart",
-                },
-                strokeDasharray: {
-                    value: "530 1386",
-                    duration: 700,
-                    easing: "easeOutQuart",
-                },
-            });
-        },
-    },
-    // components: {
-    //     About,
+    // onEmail() {
+    //   if (this.current) this.current.pause();
+    //   this.current = anime({
+    //     targets: "path",
+    //     strokeDashoffset: {
+    //       value: 0,
+    //       duration: 700,
+    //       easing: "easeOutQuart",
+    //     },
+    //     strokeDasharray: {
+    //       value: "240 1386",
+    //       duration: 700,
+    //       easing: "easeOutQuart",
+    //     },
+    //   });
     // },
+    // onPassword() {
+    //   if (this.current) this.current.pause();
+    //   this.current = anime({
+    //     targets: "path",
+    //     strokeDashoffset: {
+    //       value: -336,
+    //       duration: 700,
+    //       easing: "easeOutQuart",
+    //     },
+    //     strokeDasharray: {
+    //       value: "240 1386",
+    //       duration: 700,
+    //       easing: "easeOutQuart",
+    //     },
+    //   });
+    // },
+    // onSubmit() {
+    //   if (this.current) this.current.pause();
+    //   this.current = anime({
+    //     targets: "path",
+    //     strokeDashoffset: {
+    //       value: -730,
+    //       duration: 700,
+    //       easing: "easeOutQuart",
+    //     },
+    //     strokeDasharray: {
+    //       value: "530 1386",
+    //       duration: 700,
+    //       easing: "easeOutQuart",
+    //     },
+    //   });
+    // },
+  },
+  // components: {
+  //     About,
+  // },
 };
 </script>
 
 <style scoped>
-@import url("https://rsms.me/inter/inter-ui.css");
-::selection {
-  background: #2d2f36;
-}
-::-webkit-selection {
-  background: #2d2f36;
-}
-::-moz-selection {
-  background: #2d2f36;
-}
-body {
-  background: white;
-  font-family: "Inter UI", sans-serif;
-  margin: 0;
-  padding: 20px;
-}
-.page {
-  /* background-color: #707075; */
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  height: 40%;
-  position: absolute;
-  place-content: center;
+.limiter {
   width: 100%;
+  margin: 0 auto;
 }
-@media (max-width: 767px) {
-  .page {
-    height: auto;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
+
+.container-login100 {
+  width: 100%;
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  background: #f2f2f2;
+}
+
+.wrap-login100 {
+  width: 100%;
+  background: #fff;
+  overflow: hidden;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  flex-direction: row-reverse;
+  /* position: relative; */
+}
+
+.login100-more {
+  width: calc(100% - 560px);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  top: 0px;
+  left: auto;
+  z-index: 1;
+  background-image: url("../assets/SMU_1.jpeg");
+
+}
+
+.sch-img {
+  object-fit: cover;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/*==================================================================
+[ Form ]*/
+
+.login100-more::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.login100-form {
+  width: 560px;
+  min-height: 100vh;
+  display: block;
+  background-color: #f7f7f7;
+  padding: 173px 55px 55px 55px;
+}
+
+.login100-form-title {
+  width: 100%;
+  display: block;
+  font-size: 30px;
+  color: #333333;
+  line-height: 1.2;
+  text-align: center;
+}
+
+/*------------------------------------------------------------------
+[ Input ]*/
+
+.wrap-input100 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  width: 100%;
+  height: 80px;
+  position: relative;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.label-input100 {
+  font-size: 18px;
+  color: #999999;
+  line-height: 1.2;
+
+  display: block;
+  position: absolute;
+  pointer-events: none;
+  width: 100%;
+  padding-left: 24px;
+  left: 0;
+  top: 30px;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.input100 {
+  display: block;
+  width: 100%;
+  background: transparent;
+  font-size: 18px;
+  color: #555555;
+  line-height: 1.2;
+  padding: 0 26px;
+}
+
+input.input100 {
+  height: 100%;
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+/*---------------------------------------------*/
+
+.focus-input100 {
+  position: absolute;
+  display: block;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  top: -1px;
+  left: -1px;
+  pointer-events: none;
+  border: 1px solid #6675df;
+  border-radius: 10px;
+
+  visibility: hidden;
+  opacity: 0;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+
+  -webkit-transform: scaleX(1.1) scaleY(1.3);
+  -moz-transform: scaleX(1.1) scaleY(1.3);
+  -ms-transform: scaleX(1.1) scaleY(1.3);
+  -o-transform: scaleX(1.1) scaleY(1.3);
+  transform: scaleX(1.1) scaleY(1.3);
+}
+
+.input100:focus + .focus-input100 {
+  visibility: visible;
+  opacity: 1;
+
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
+}
+
+.input100:focus {
+  height: 48px;
+}
+
+.input100:focus + .focus-input100 + .label-input100 {
+  top: 14px;
+  font-size: 13px;
+}
+
+.input100:not(:placeholder-shown) + .focus-input100 + .label-input100 {
+  top: 14px;
+  font-size: 13px;
+}
+
+.input100:not(:placeholder-shown) {
+  height: 48px !important;
+}
+
+/* 
+.has-val {
+  height: 48px !important;
+}
+
+.has-val + .focus-input100 + .label-input100 {
+  top: 14px;
+  font-size: 13px;
+} */
+
+/*------------------------------------------------------------------
+[ Button ]*/
+.container-login100-form-btn {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.login100-form-btn {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  width: 100%;
+  height: 50px;
+  border-radius: 10px;
+  background: #6675df;
+  border-style: none;
+
+  font-size: 12px;
+  color: #fff;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.login100-form-btn:hover {
+  background: #333333;
+}
+
+/*------------------------------------------------------------------
+[ Responsive ]*/
+
+@media (max-width: 992px) {
+  .login100-form {
+    width: 50%;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .login100-more {
+    width: 50%;
   }
 }
+
+@media (max-width: 768px) {
+  .login100-form {
+    width: 100%;
+  }
+
+  .login100-more {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .login100-form {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 70px;
+  }
+}
+
+/*------------------------------------------------------------------
+[ Alert validate ]*/
+
+.validate-input {
+  position: relative;
+}
+
+/* @media (max-width: 992px) {
+  .alert-validate::before {
+    visibility: visible;
+    opacity: 1;
+  }
+} */
+
+.input100:focus + .focus-input100 {
+  visibility: visible;
+  opacity: 1;
+
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
+}
+
+/* This is the original styling */
 
 .register {
   padding-top: 20px;
 }
-.container {
-  display: flex;
-  height: 320px;
-  margin: 0 auto;
-  width: 640px;
-}
-@media (max-width: 767px) {
-  .container {
-    flex-direction: column;
-    height: 630px;
-    width: 320px;
-  }
-}
-.left {
-  height: calc(100% - 40px);
-  top: 20px;
-  position: relative;
-  width: 50%;
-}
-@media (max-width: 767px) {
-  .left {
-    height: 100%;
-    left: 20px;
-    width: calc(100% - 40px);
-    max-height: 270px;
-  }
-}
-.login {
-  font-size: 50px;
-  font-weight: 900;
-  margin: 50px 40px 40px;
-}
-.eula {
-  color: #999;
-  font-size: 14px;
-  line-height: 1.5;
-  margin: 40px;
-}
-.right {
-  background: #474a59;
-  box-shadow: 0px 0px 40px 16px rgba(0, 0, 0, 0.22);
-  color: #f1f1f2;
-  position: relative;
-  width: 50%;
-}
-@media (max-width: 767px) {
-  .right {
-    flex-shrink: 0;
-    height: 100%;
-    width: 100%;
-    max-height: 350px;
-  }
-}
-svg {
-  position: absolute;
-  width: 320px;
-}
-path {
-  fill: none;
-  stroke: url(#linearGradient);
-  stroke-width: 4;
-  stroke-dasharray: 240 1386;
-}
-.form {
-  margin: 40px;
-  position: absolute;
-}
+
 label {
   color: #c2c2c5;
   display: block;
@@ -256,28 +466,10 @@ label {
   margin-top: 20px;
   margin-bottom: 5px;
 }
+
 input {
-  background: transparent;
   border: 0;
-  color: #f2f2f2;
-  font-size: 20px;
-  height: 30px;
-  line-height: 30px;
   outline: none !important;
-  width: 100%;
 }
-input::-moz-focus-inner {
-  border: 0;
-}
-#submit {
-  color: #707075;
-  margin-top: 40px;
-  transition: color 300ms;
-}
-#submit:focus {
-  color: #f2f2f2;
-}
-#submit:active {
-  color: #d0d0d2;
-}
+
 </style>
