@@ -47,7 +47,7 @@
             <input @click="onEmail" id="email" type="text" v-model="email" />
             <label for="password">Password</label>
             <input @click="onPassword" type="password" v-model="password" />
-            <input @click="onSubmit" type="submit" id="submit" value="Submit" />
+            <input @click="onSubmit(); register();" type="submit" id="submit" value="Submit" />
             </div>
         </div>
         </div>
