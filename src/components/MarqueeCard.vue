@@ -5,7 +5,7 @@
     @mouseout="(hover = false), $emit('switchOn')"
   >
     <img
-      :class="{ visible: hover, invisible: !hover }"
+      :class="{ unfade: hover, faded: !hover }"
       class="marquee-uni-image"
       :src="universityImg"
       width="235"
@@ -19,19 +19,23 @@
 export default {
   name: "MarqueeCard",
   emits: ["switch", "switchOn"],
-  props: ['universityName', 'universityImg'],
+  props: ["universityName", "universityImg"],
   data() {
     return {
       hover: false,
     };
   },
-  mounted(){
-    console.log(this.universityImg)
-  }
+  mounted() {
+    console.log(this.universityImg);
+  },
 };
 </script>
 
 <style scoped>
+h6 {
+  font-weight: bold;
+}
+
 .marquee-uni-image {
   position: absolute;
   border-radius: 25px;
@@ -42,5 +46,13 @@ export default {
   position: relative;
   color: white;
   font-size: xx-large;
+}
+
+.unfade {
+  filter: grayscale(0%);
+}
+
+.faded {
+  filter: grayscale(80%);
 }
 </style>
