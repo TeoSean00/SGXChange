@@ -18,10 +18,11 @@
     </div>
   </div>
   <ArrowAnimation></ArrowAnimation>
-  <div id="marquee" class="container-fluid px-3">
+  <div id="marquee" class="container-fluid px-0">
     <Marquee />
   </div>
 </template>
+
 <script>
 import Banner from "@/components/Banner.vue";
 import ArrowAnimation from "@/components/ArrowAnimation.vue";
