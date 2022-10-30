@@ -152,20 +152,21 @@ export default {
 
 .marquee-btn {
   transition: all 0.2s;
-  background-color: white;
+  background-color: black;
   border-radius: 2px;
-  border-color: black;
+  border-color: white;
   font-size: 23px;
   border-radius: 25px;
   padding-left: 80px;
   padding-right: 80px;
-  color: black;
+  color: white;
   font-weight: 500;
 }
 
 .marquee-btn:hover {
   background-color: #9191ec;
-  color: white;
+  border-color: #9191ec;
+  color: black;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 </style>
