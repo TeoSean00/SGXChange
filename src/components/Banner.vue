@@ -16,7 +16,7 @@ export default {
     return {
       typeValue: "",
       typeStatus: false,
-      displayTextArray: ["St. Gallen", "Madrid", "London"],
+      displayTextArray: ["St Gallen", "Madrid", "London"],
       typingSpeed: 100,
       erasingSpeed: 100,
       newTextDelay: 2000,
@@ -69,16 +69,17 @@ export default {
 <style scoped>
 .container-fluid {
   width: 100%;
-  height: 70vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(12, 12, 12);
+  background-color: #f5f5f5;
+  margin-top: 160px;
 }
 h1 {
   font-size: 6rem;
   font-weight: normal;
-  color: white;
+  color: rgb(0, 0, 0);
 }
 .typed-text {
   color: #6060db;
@@ -87,7 +88,7 @@ h1 {
 /* Cursor blinking CSS Starts... */
 .blinking-cursor {
   font-size: 6rem;
-  color: white;
+  color: rgb(0, 0, 0);
   -webkit-animation: 1s blink step-end infinite;
   -moz-animation: 1s blink step-end infinite;
   -ms-animation: 1s blink step-end infinite;
@@ -102,7 +103,7 @@ h1 {
     color: transparent;
   }
   50% {
-    color: white;
+    color: rgb(0, 0, 0);
   }
 }
 @-moz-keyframes blink {
@@ -113,7 +114,7 @@ h1 {
     color: transparent;
   }
   50% {
-    color: white;
+    color: rgb(0, 0, 0);
   }
 }
 @-webkit-keyframes blink {
@@ -124,7 +125,7 @@ h1 {
     color: transparent;
   }
   50% {
-    color: white;
+    color: rgb(0, 0, 0);
   }
 }
 @-ms-keyframes blink {
@@ -135,7 +136,7 @@ h1 {
     color: transparent;
   }
   50% {
-    color: white;
+    color: rgb(0, 0, 0);
   }
 }
 @-o-keyframes blink {
@@ -146,7 +147,7 @@ h1 {
     color: transparent;
   }
   50% {
-    color: white;
+    color: rgb(0, 0, 0);
   }
 }
 /* Cursor blinking CSS Ends... */
