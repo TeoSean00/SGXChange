@@ -156,7 +156,7 @@ export default {
   border-radius: 2px;
   border-color: white;
   font-size: 23px;
-  border-radius: 25px;
+  border-radius: 5px;
   padding-left: 80px;
   padding-right: 80px;
   color: white;

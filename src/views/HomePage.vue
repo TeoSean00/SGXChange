@@ -40,7 +40,7 @@
     </div>
   </div> -->
 
-  <div class="button-banner d-flex align-center justify-content-center">
+  <!-- <div class="button-banner d-flex align-center justify-content-center">
     <div class="d-flex justify-content-center align-items-center p-5">
       <router-link to="/ModuleMappingPage" class="btn btn-dark m-5 btn-lg"
         >Get help for module mapping</router-link
@@ -50,7 +50,7 @@
         >Browse Universities</a
       >
     </div>
-  </div>
+  </div> -->
   <ArrowAnimation></ArrowAnimation>
   <div id="marquee" class="container-fluid px-0">
     <Marquee />
@@ -101,7 +101,7 @@ export default {
   border-radius: 2px;
   border-color: black;
   font-size: 16px;
-  border-radius: 25px;
+  border-radius: 5px;
   padding-left: 80px;
   padding-right: 80px;
   color: black;
