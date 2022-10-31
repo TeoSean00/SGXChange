@@ -1,204 +1,256 @@
 <template>
-  <div class="container-fluid">
-    <div class="row mb-3">
-      <div class="col-1"></div>
-      <div class="col h2">University Name</div>
-      <div class="col-1"></div>
-    </div>
-    <div class="row mb-3">
-      <div class="col-1"></div>
-      <div class="col-4">
-        <div class="d-inline me-1">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-star-fill"
-            viewBox="0 0 16 16"
-          >
-            <path
-              d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-            />
-          </svg>
-          4.64
-        </div>
-        <a href="#" class="text-dark mx-1">90 Reviews</a>
-        <a href="#" class="text-dark mx-1">City∙Country</a>
-      </div>
-      <div class="col-4"></div>
-      <div class="col-2 text-end">
-        <span class="mx-1"
-          ><i class="bi bi-upload m-1"></i
-          ><a href="/" class="text-dark">Share</a></span
-        >
-        <span class="mx-1"
-          ><i class="bi bi-download m-1"></i
-          ><a href="/" class="text-dark"> Save</a></span
-        >
-      </div>
-      <div class="col-1"></div>
-    </div>
-    <div class="row mb-5">
-      <div class="col-1"></div>
-      <div class="col-6">
-        <img
-          src="../assets/440px-University_of_St._Gallen_EUR-HSG_Institute_Building.jpg"
-          class="w-100"
-          style=""
-          alt="uni-display"
-        />
-      </div>
-      <div class="col-2">
-        <img
-          src="../assets/440px-University_of_St._Gallen_Convention_and_Executive_Education_Center.jpg"
-          class="w-100 mb-2"
-          alt=""
-        />
-        <img
-          src="../assets/a29feeb0-0635-4dc0-a247-e77a0f254dbd.webp"
-          class="w-100"
-          alt=""
-        />
-      </div>
-      <div class="col-2">
-        <img
-          src="../assets/311ca332-dcb2-4b66-945c-ded8712a3543.webp"
-          class="w-100 mb-2"
-          alt=""
-        />
-        <img
-          src="../assets/HSG-SQUARE-2000x1125.jpeg"
-          class="w-100"
-          style="width: 18rem"
-          alt=""
-        />
-      </div>
-      <div class="col-1"></div>
-    </div>
-    <div class="row mb-3">
-      <div class="col-1"></div>
-      <div class="col">
-        <!-- Uni info , e.g past GPA -->
-        <span class="me-2"
-          ><i class="bi bi-book m-1"></i> Historical cGPA: 3.21</span
-        >
-        <!-- Academic window -->
-        <span class="mx-2"
-          ><i class="bi bi-calendar4-week m-1"></i>Academic Window: Sep'23 -
-          Dec'23</span
-        >
-        <!-- Climate  -->
-        <span class="mx-2"
-          ><i class="bi bi-thermometer-half m-1"></i>Climate: Cool</span
-        >
-      </div>
-      <div class="col-1"></div>
-    </div>
-    <!-- hr filler -->
-    <div class="row">
-      <div class="col-1"></div>
-      <div class="col">
-        <hr />
-      </div>
-      <div class="col-1"></div>
-    </div>
-    <div class="row">
-      <div class="col-1"></div>
-      <div class="col">
-        <ul style="list-style-type: none">
-          <!-- check if accomodation provided -->
-          <li class="my-4">
-            <i style="font-size: 2rem" class="bi bi-house-door me-4"></i
-            >Accommodation provided
-          </li>
-          <!-- distance -->
-          <li class="my-4">
-            <i style="font-size: 2rem" class="bi bi-airplane me-4"></i
-            >Proximity: ~3500km
-          </li>
-          <!-- Language spoken -->
-          <li class="my-4">
-            <i style="font-size: 2rem" class="bi bi-translate me-4"></i
-            >Language: English, Portugese, Spanish
-          </li>
-        </ul>
-      </div>
-      <div class="col-1"></div>
-    </div>
-    <div class="row">
-      <div class="col-1"></div>
-      <div class="col">
-        <hr />
-      </div>
-      <div class="col-1"></div>
-    </div>
-    <div class="row">
-      <div class="col-1"></div>
-      <div class="col">
-        <!-- module information -->
-        <div>
-          <GoogleMap></GoogleMap>
-        </div>
-        <h2 class="my-4">Module Information</h2>
-        <!-- one module each -->
-        <div class="card my-4" style="width: 30rem">
-          <div class="card-body">
-            <!-- module component -->
+  <!-- Suggested Uni Section -->
+  <!-- <div class="container-fluid mt-5">
 
-            <!-- module name -->
-            <h5 class="card-title mb-3">Big Data Architecture</h5>
-            <!-- basket type it fulfils -->
-            <h6 class="card-subtitle mb-2 text-muted">Fintech Basket</h6>
-            <!-- mod description -->
-            <p class="card-text">
-              this module teaches you about the in depth of technical analysis
-              and predictive modelling
-            </p>
-            <div class="d-flex justify-content-between">
-              <!-- add to fav -->
-              <a href="#" class="btn btn-primary btn-sm">Favourite</a>
-              <!-- link to mod info on uni page -->
-              <a href="#" class="card-link me-3">more info</a>
-            </div>
-          </div>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col">
+            <h2>Suggested universities</h2>
         </div>
-        <!-- next module -->
-        <div class="card my-4" style="width: 30rem">
-          <div class="card-body">
-            <!-- module component -->
+        <div class="col-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-1"></div>
+            <UniCardSmall class="col unicard" v-for="i in 4" :key="i" />
+        <div class="col-1"></div>
+    </div>
+</div> -->
+  <!-- All Uni list section -->
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
 
-            <!-- module name -->
-            <h5 class="card-title mb-3">Big Data Architecture</h5>
-            <!-- basket type it fulfils -->
-            <h6 class="card-subtitle mb-2 text-muted">Fintech Basket</h6>
-            <!-- mod description -->
-            <p class="card-text">
-              this module teaches you about the in depth of technical analysis
-              and predictive modelling
-            </p>
-            <div class="d-flex justify-content-between">
-              <!-- add to fav -->
-              <a href="#" class="btn btn-primary btn-sm">Favourite</a>
-              <!-- link to mod info on uni page -->
-              <a href="#" class="card-link me-3">more info</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-1"></div>
+  <div
+    class="container-fluid mt-5"
+    style="max-width: fit-content; margin-left: 8rem; margin-right: 8rem"
+  >
+    <!-- UniFilterBar -->
+    <a-menu
+      class="uni-filter-bar"
+      v-model:selectedKeys="current"
+      mode="horizontal"
+    >
+      <a-menu-item key="All"> All </a-menu-item>
+      <a-menu-item key="1"> Africa </a-menu-item>
+      <a-menu-item key="2"> Asia </a-menu-item>
+      <a-menu-item key="4"> Central America </a-menu-item>
+      <a-menu-item key="5"> Europe </a-menu-item>
+      <a-menu-item key="6"> North America </a-menu-item>
+      <a-menu-item key="8"> South America </a-menu-item>
+      <a-menu-item key="3"> The Caribbean </a-menu-item>
+      <a-menu-item key="7"> Oceania </a-menu-item>
+    </a-menu>
+
+    <br />
+    <div class="row">
+      <div class="col"><h2>Universities</h2></div>
+    </div>
+    <div class="d-flex flex-wrap">
+      <!-- put variables as props -->
+      <UniCardSmall
+        class="unicard"
+        v-for="(uni, index) in items.slice(row1start, row1end)"
+        :key="index"
+        :universityName="uni.name"
+        :gpaReq="uni.gpaReq"
+        :IgpaNinetyPercentile="uni.IgpaNinetyPercentile"
+        :IgpaTenPercentile="uni.IgpaTenPercentile"
+        :NoOfPlacesSem1="uni.NoOfPlacesSem1"
+        :NoOfPlacesSem2="uni.NoOfPlacesSem2"
+        :CountryId="uni.CountryId"
+        :RegionId="uni.RegionId"
+        :imgURL="uni.imgURL"
+      />
+
+      <!-- <div class="w-100"></div> -->
+      <!-- <UniCardSmall class="col unicard" v-for="uni in items.slice(row2start,row2end)" :key="uni"
+            :universityName="uni.name"
+            :gpaReq="uni.gpaReq"
+            :IgpaNinetyPercentile = "uni.IgpaNinetyPercentile"
+            :IgpaTenPercentile = "uni.IgpaTenPercentile"
+            :NoOfPlacesSem1 = "uni.NoOfPlacesSem1"
+            :NoOfPlacesSem2 = "uni.NoOfPlacesSem2"
+            :CountryId = "uni.CountryId"
+            :RegionId = "uni.RegionId"
+            :imgURL = "uni.imgURL"
+            /> -->
     </div>
   </div>
+  <br />
+  <br />
+  <br />
+  <br />
+  <!-- pagination -->
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item">
+        <a class="page-link" @click="togglePage">Previous</a>
+      </li>
+      <!-- this part should be v-for based on no. of items in data -->
+      <!-- they should be buttons that bind to v-model currentPage-->
+      <!-- paginated items should change as well , use array.slice(start,end)-->
+      <!-- create a new component for paginated items  -->
+      <li class="page-item">
+        <a class="page-link active" @click="togglePage">1</a>
+      </li>
+      <li class="page-item" v-for="li in lastPage" :key="li">
+        <a class="page-link" @click="togglePage">{{ li + 1 }}</a>
+      </li>
+      <!-- <li class="page-item"><a class="page-link active" @click="togglePage">1</a></li>
+    <li class="page-item"><a class="page-link" @click="togglePage">2</a></li>
+    <li class="page-item"><a class="page-link" @click="togglePage">3</a></li>
+    <li class="page-item"><a class="page-link" @click="togglePage">4</a></li> -->
+      <li class="page-item">
+        <a class="page-link" @click="togglePage">Next</a>
+      </li>
+    </ul>
+  </nav>
+  <br />
+  <br />
+  <br />
 </template>
 
 <script>
-import GoogleMap from "@/components/GoogleMap.vue";
-// console.log(import.meta.env.VITE_GOOGLE_MAP_API_KEY);
+import UniCardSmall from "@/components/UniCardSmall.vue";
+import { fireStore } from "@/service/Firebase/firebaseInit";
+import { collection, getDocs } from "firebase/firestore";
+import UniFilterBar from "../components/UniFilterBar.vue";
+import { defineComponent, ref } from "vue";
 
 export default {
-  name: "UniPage",
+  name: "UniversityPage",
+  data() {
+    return {
+      // items per page set to default
+      perPage: 8,
+      // this will be v-modelled to change according to what user clicks
+      currentPage: 1,
+      firstPage: 1,
+      lastPage: 0,
+      items: [],
+      // Doesnt work when I use options API
+      // current: "All",
+    };
+  },
+  setup() {
+    const current = ref(["All"]);
+    return {
+      current,
+    };
+  },
+
+  methods: {
+    pagination() {
+      this.lastPage = Math.ceil(this.items.length / this.perPage) - 1;
+      console.log(this.lastPage);
+    },
+    togglePage: function () {
+      if (event.target.text == "Previous") {
+        if (this.currentPage != 1) {
+          this.currentPage -= 1;
+        }
+      } else if (event.target.text == "Next") {
+        if (this.currentPage != this.lastPage + 1) {
+          this.currentPage += 1;
+        }
+
+        // console.log(this.currentPage)
+      } else {
+        this.currentPage = parseInt(event.target.text);
+      }
+
+      const pagelinks = document.getElementsByClassName("page-link");
+      // goes through the pagination buttons and removes all active classes
+      // also checks if currentPage == 1, then add disbaled class to previous btn
+      // also if currentPage == last, then add disabled class to next btn
+      for (const li of pagelinks) {
+        li.classList.remove("active");
+        li.classList.remove("disabled");
+
+        if (parseInt(li.text) === this.currentPage) {
+          console.log(li.text);
+          li.classList.add("active");
+        }
+        // if (li.text == 'Previous' && this.currentPage==this.firstPage){
+        //     li.classList.add('disabled')
+        // } else if (li.text == 'Next' && this.currentPage==this.lastPage){
+        //     li.classList.add('disabled')
+        // } else if (parseInt(li.text) == this.currentPage){
+        //     event.target.classList.add('active')
+        // }
+      }
+    },
+    async getAllUniversities() {
+      if (this.current == "All") {
+        const getAllUni = await getDocs(collection(fireStore, "Universities"));
+        getAllUni.forEach((doc) => {
+          let universityInfo = {};
+          // put key-value pairs
+          universityInfo["name"] = doc.data().HostUniversity;
+          universityInfo["gpaReq"] = doc.data().GPA;
+          // universityInfo["IgpaNinetyPercentile"] =
+          //   doc.data().IgpaNinetyPercentile;
+          // universityInfo["IgpaTenPercentile"] = doc.data().IgpaTenPercentile;
+          universityInfo["NoOfPlacesSem1"] = doc.data().NoOfPlacesSem1;
+          universityInfo["NoOfPlacesSem2"] = doc.data().NoOfPlacesSem2;
+          universityInfo["CountryId"] = doc.data().Country;
+          universityInfo["RegionId"] = doc.data().Region;
+          universityInfo["imgURL"] = doc.data().UniImageLink1;
+          this.items.push(universityInfo);
+          });
+        } else {
+        console.log(this.current);
+        const getAllUni = await getDocs(
+          collection(fireStore, "Universities"),
+          where("RegionId", "==", this.current)
+        );
+        getAllUni.forEach((doc) => {
+          let universityInfo = {};
+          // put key-value pairs
+          universityInfo["name"] = doc.data().UniversityName;
+          universityInfo["gpaReq"] = doc.data().GpaRequirement;
+          universityInfo["IgpaNinetyPercentile"] =
+            doc.data().IgpaNinetyPercentile;
+          universityInfo["IgpaTenPercentile"] = doc.data().IgpaTenPercentile;
+          universityInfo["NoOfPlacesSem1"] = doc.data().NoOfPlacesSem1;
+          universityInfo["NoOfPlacesSem2"] = doc.data().NoOfPlacesSem2;
+          universityInfo["CountryId"] = doc.data().CountryId;
+          universityInfo["RegionId"] = doc.data().RegionId;
+          universityInfo["imgURL"] = doc.data().img1;
+          this.items.push(universityInfo);
+        });
+      }
+    },
+  },
+  computed: {
+    rows() {
+      return this.items.length;
+    },
+    row1start() {
+      return (this.currentPage - 1) * this.perPage;
+    },
+    row1end() {
+      return this.row1start + this.perPage;
+    },
+    // row2start(){
+    //   return this.row1end
+    // },
+    // row2end() {
+    //   return this.row2start+ this.perPage/2
+    // },
+  },
   components: {
-    GoogleMap,
+    UniCardSmall,
+    UniFilterBar,
+  },
+  async mounted() {
+    await this.getAllUniversities();
+    this.pagination();
   },
 };
 </script>

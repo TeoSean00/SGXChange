@@ -1,16 +1,21 @@
 <!-- Pull the images from firestore and the name of the place -->
 <template>
   <div class="marquee">
-    <h5 class="marquee-header text-center mt-3">Where do you want to go?</h5>
-    <Vue3Marquee :pauseOnHover="true" :duration="60">
-      <div class="card" v-for="avatar in avatarArray" :key="avatar">
+    <h5 class="marquee-header text-center mt-3 pt-4">
+      Where do you want to go?
+    </h5>
+    <Vue3Marquee :pauseOnHover="true" :duration="110">
+      <div class="" v-for="uni in universities" :key="uni">
         <MarqueeCard
+          class="card"
           v-on:switch="hideBtn"
           v-on:switchOn="showBtn"
+          :universityName="uni.name"
+          :universityImg="uni.imgUrl"
         ></MarqueeCard>
       </div>
     </Vue3Marquee>
-    <div class="marquee-footer" :class="{ invisible: hover, visible: !hover }">
+    <div class="marquee-footer">
       <div class="text-center marquee-anywhere">
         <router-link to="/UniversityPage" id="seeUni">
           <button class="marquee-btn marquee-btn-hide">Take me anywhere</button>
@@ -20,7 +25,7 @@
       <div class="text-center marquee-seeAllUni marquee-btn-hide">
         <router-link to="/UniversityPage" id="seeUni">
           See All Universities
-          <a-space><arrow-right-outlined /></a-space>
+          <!-- <a-space><arrow-right-outlined /></a-space> -->
         </router-link>
       </div>
     </div>
@@ -32,6 +37,8 @@ import { reactive, defineComponent } from "vue";
 import { Vue3Marquee } from "vue3-marquee";
 import { ArrowRightOutlined } from "@ant-design/icons-vue";
 import MarqueeCard from "./MarqueeCard.vue";
+import { fireStore } from "@/service/Firebase/firebaseInit";
+import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 
 export default {
   name: "CardsPauseOnHover",
@@ -43,22 +50,24 @@ export default {
   data() {
     return {
       hover: false,
+      universities: [],
     };
   },
   setup() {
-    const avatarArray = reactive([]);
-
-    for (let i = 0; i < 10; i++) {
-      avatarArray.push(
-        `https://avatars.dicebear.com/api/avataaars/${Math.random()
-          .toString(36)
-          .substr(2, 6)}.svg`
-      );
-    }
-
-    return {
-      avatarArray,
-    };
+    // const avatarArray = reactive([]);
+    // for (let i = 0; i < 10; i++) {
+    //   avatarArray.push(
+    //     `https://avatars.dicebear.com/api/avataaars/${Math.random()
+    //       .toString(36)
+    //       .substr(2, 6)}.svg`
+    //   );
+    // }
+    // return {
+    //   avatarArray,
+    // };
+  },
+  mounted() {
+    this.getInfo();
   },
   methods: {
     hideBtn() {
@@ -70,6 +79,26 @@ export default {
       this.hover = false;
       // console.log(this.hover);
     },
+    async getInfo() {
+      const getUniversities = await getDocs(
+        collection(fireStore, "Universities")
+      );
+      getUniversities.forEach((doc) => {
+        let universityInfo = {};
+        // put key-value pairs
+        universityInfo["name"] = doc.data().HostUniversity;
+        // universityInfo['gpaReq'] = doc.data().GpaRequirement
+        // universityInfo['IgpaNinetyPercentile'] = doc.data().IgpaNinetyPercentile
+        // universityInfo['IgpaTenPercentile'] = doc.data().IgpaTenPercentile
+        // universityInfo['NoOfPlacesSem1'] = doc.data().NoOfPlacesSem1
+        // universityInfo['NoOfPlacesSem2'] = doc.data().NoOfPlacesSem2
+        // universityInfo['CountryId'] = doc.data().CountryId
+        // universityInfo['RegionId'] = doc.data().RegionId
+        universityInfo["imgUrl"] = doc.data().UniImageLink1;
+        console.log(universityInfo.imgURL);
+        this.universities.push(universityInfo);
+      });
+    },
   },
 };
 </script>
@@ -77,9 +106,8 @@ export default {
 <style scoped>
 .marquee {
   background-color: black;
-  border-radius: 10px;
-  margin-left: 10px;
-  margin-right: 10px;
+  /* border-radius: 1rem; */
+  border-color: black;
 }
 
 .marquee-header {
@@ -114,26 +142,30 @@ export default {
 
 #seeUni {
   color: white;
+  text-decoration: underline;
 }
 
 #seeUni:hover {
   text-decoration: none;
+  color: #9191ec;
 }
 
 .marquee-btn {
   transition: all 0.2s;
-  background-color: black;
+  background-color: white;
   border-radius: 2px;
-  border-color: white;
+  border-color: black;
   font-size: 23px;
   border-radius: 25px;
   padding-left: 80px;
   padding-right: 80px;
+  color: black;
+  font-weight: 500;
 }
 
 .marquee-btn:hover {
-  background: rgb(255, 255, 255);
-  color: black;
+  background-color: #9191ec;
+  color: white;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 </style>

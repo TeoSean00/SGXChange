@@ -1,26 +1,51 @@
 <template>
-    <div id="searchwrapper" class="search-wrapper bg-light">
-        <div class="input-holder">
-            <input v-model="searchItem" type="text" class="search-input" placeholder="Type to search" />
-            <button class="search-icon" v-on:click='searchToggle();'><span></span></button>
-        </div>
+  <div id="searchwrapper" class="search-wrapper bg-light">
+    <div class="input-holder">
+      <input
+        v-model="searchItem"
+        type="text"
+        class="search-input"
+        placeholder="Enter key to search"
+        v-on:keyup.enter="searchUni"
+      />
+      <button class="search-icon" v-on:click="searchToggle">
+        <span></span>
+      </button>
     </div>
+  </div>
 </template>
 <script>
-
 export default {
-    data() {
-        return {
-            searchItem: ""
-        };
+  data() {
+    return {
+      searchItem: "",
+    };
+  },
+  methods: {
+    searchToggle() {
+      var container = document.getElementById("searchwrapper");
+      container.classList.toggle("active");
+      this.searchItem = "";
     },
-    methods: {
-        searchToggle(){
-            var container = document.getElementById('searchwrapper')
-            container.classList.toggle('active')
-            this.searchItem = ""
+    searchUni() {
+      if (this.searchItem != "") {
+        if (this.$route.name != "UniversityPageSearch") {
+          console.log("path1");
+          this.$router.push({
+            path: "/UniversityPage/search",
+            query: { search: this.searchItem },
+          });
+        } else {
+          //I put catch because i dont know how to solve the error
+          console.log("path2");
+          this.$router.push({
+            path: "/UniversityPage/search",
+            query: { search: this.searchItem },
+          });
         }
+      }
     },
+  },
 };
 </script>
 <style scoped>
@@ -33,140 +58,143 @@ export default {
 } */
 
 .search-wrapper {
-    position: relative;
-    transform: translate(-50%, -50%);
-    top:50%;
-    left:50%;
-    height: auto;
+  position: relative;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  height: auto;
 }
-.search-wrapper.active {}
+.search-wrapper.active {
+}
 
 .search-wrapper .input-holder {
-    height: 70px;
-    width:70px;
-    overflow: hidden;
-    background: rgba(255,255,255,0);
-    border-radius:6px;
-    position: relative;
-    transition: all 0.3s ease-in-out;
+  height: 70px;
+  width: 70px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0);
+  border-radius: 6px;
+  position: relative;
+  transition: all 0.3s ease-in-out;
 }
 .search-wrapper.active .input-holder {
-    width:450px;
-    border-radius: 50px;
-    background: lightblue;
-    transition: all .5s cubic-bezier(0.000, 0.105, 0.035, 1.570);
+  width: 450px;
+  border-radius: 50px;
+  background: rgb(255, 255, 255);
+  transition: all 0.5s cubic-bezier(0, 0.105, 0.035, 1.57);
 }
 .search-wrapper .input-holder .search-input {
-    width:100%;
-    height: 50px;
-    padding:0px 70px 0 20px;
-    opacity: 0;
-    position: absolute;
-    top:0px;
-    left:0px;
-    background: transparent;
-    box-sizing: border-box;
-    border:none;
-    outline:none;
-    font-family:"Open Sans", Arial, Verdana;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 20px;
-    color:black;
-    transform: translate(0, 60px);
-    transition: all .3s cubic-bezier(0.000, 0.105, 0.035, 1.570);
-    transition-delay: 0.3s;
+  width: 100%;
+  height: 50px;
+  padding: 0px 70px 0 20px;
+  opacity: 0;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background: transparent;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  font-family: "Open Sans", Arial, Verdana;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  color: black;
+  transform: translate(0, 60px);
+  transition: all 0.3s cubic-bezier(0, 0.105, 0.035, 1.57);
+  transition-delay: 0.3s;
 }
 .search-wrapper.active .input-holder .search-input {
-    opacity: 1;
-    transform: translate(0, 10px);
+  opacity: 1;
+  transform: translate(0, 10px);
 }
 .search-wrapper .input-holder .search-icon {
-    width:70px;
-    height:70px;
-    border:none;
-    border-radius:6px;
-    background: rgb(247, 237, 237);
-    padding:0px;
-    outline:none;
-    position: relative;
-    z-index: 2;
-    float:right;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
+  width: 70px;
+  height: 70px;
+  border: none;
+  border-radius: 6px;
+  background: rgb(248, 249, 250);
+  padding: 0px;
+  outline: none;
+  position: relative;
+  z-index: 2;
+  float: right;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
 .search-wrapper.active .input-holder .search-icon {
-    width: 50px;
-    height:50px;
-    margin: 10px;
-    border-radius: 30px;
+  width: 50px;
+  height: 50px;
+  margin: 10px;
+  border-radius: 30px;
 }
 .search-wrapper .input-holder .search-icon span {
-    width:22px;
-    height:22px;
-    display: inline-block;
-    vertical-align: middle;
-    position:relative;
-    transform: rotate(45deg);
-    transition: all .4s cubic-bezier(0.650, -0.600, 0.240, 1.650);
+  width: 22px;
+  height: 22px;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  transform: rotate(45deg);
+  transition: all 0.4s cubic-bezier(0.65, -0.6, 0.24, 1.65);
 }
 .search-wrapper.active .input-holder .search-icon span {
-    transform: rotate(-45deg);
+  transform: rotate(-45deg);
 }
-.search-wrapper .input-holder .search-icon span::before, .search-wrapper .input-holder .search-icon span::after {
-    position: absolute;
-    content:'';
+.search-wrapper .input-holder .search-icon span::before,
+.search-wrapper .input-holder .search-icon span::after {
+  position: absolute;
+  content: "";
 }
 .search-wrapper .input-holder .search-icon span::before {
-    width: 4px;
-    height: 11px;
-    left: 9px;
-    top: 18px;
-    border-radius: 2px;
-    background: black;
+  width: 4px;
+  height: 11px;
+  left: 9px;
+  top: 18px;
+  border-radius: 2px;
+  background: black;
 }
 .search-wrapper .input-holder .search-icon span::after {
-    width: 20px;
-    height: 20px;
-    left: 0px;
-    top: 0px;
-    border-radius: 18px;
-    border: 2px solid black;
+  width: 20px;
+  height: 20px;
+  left: 0px;
+  top: 0px;
+  border-radius: 18px;
+  border: 2px solid black;
 }
 .search-wrapper .close {
-    position: absolute;
-    z-index: 1;
-    top:24px;
-    right:20px;
-    width:25px;
-    height:25px;
-    cursor: pointer;
-    transform: rotate(-180deg);
-    transition: all .3s cubic-bezier(0.285, -0.450, 0.935, 0.110);
-    transition-delay: 0.2s;
+  position: absolute;
+  z-index: 1;
+  top: 24px;
+  right: 20px;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  transform: rotate(-180deg);
+  transition: all 0.3s cubic-bezier(0.285, -0.45, 0.935, 0.11);
+  transition-delay: 0.2s;
 }
 .search-wrapper.active .close {
-    right:-50px;
-    transform: rotate(45deg);
-    transition: all .6s cubic-bezier(0.000, 0.105, 0.035, 1.570);
-    transition-delay: 0.5s;
+  right: -50px;
+  transform: rotate(45deg);
+  transition: all 0.6s cubic-bezier(0, 0.105, 0.035, 1.57);
+  transition-delay: 0.5s;
 }
-.search-wrapper .close::before, .search-wrapper .close::after {
-    position:absolute;
-    content:'';
-    background: black;
-    border-radius: 2px;
+.search-wrapper .close::before,
+.search-wrapper .close::after {
+  position: absolute;
+  content: "";
+  background: black;
+  border-radius: 2px;
 }
 .search-wrapper .close::before {
-    width: 5px;
-    height: 25px;
-    left: 10px;
-    top: 0px;
+  width: 5px;
+  height: 25px;
+  left: 10px;
+  top: 0px;
 }
 .search-wrapper .close::after {
-    width: 25px;
-    height: 5px;
-    left: 0px;
-    top: 10px;
+  width: 25px;
+  height: 5px;
+  left: 0px;
+  top: 10px;
 }
 </style>
