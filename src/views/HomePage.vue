@@ -7,11 +7,11 @@
     </div> -->
   <div class="container-fluid bannerHero">
     <div class="row">
-      <div class="col-6 text-center" align="center">
+      <div class="col-sm-6 col-12 text-center" align="center">
         <div class="row text-center" align="center">
           <Banner></Banner>
         </div>
-        <div class="row mx-auto text-center">
+        <!-- <div class="row mx-auto text-center">
           <div class="col-6" align="center">
             <router-link to="/ModuleMappingPage" id="seeUni">
               <button class="btn">Start Module Mapping</button>
@@ -22,35 +22,43 @@
               <button class="btn">Browse Universities</button>
             </router-link>
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="col-6" align="center">
         <BannerCarousel class="mt-5"></BannerCarousel>
       </div>
     </div>
   </div>
-  <!-- 
-  <br />
-  <br /> -->
-  <!-- <div class="container-fluid">
-    <h2 class="ms-4">Trending Universities</h2>
-    <hr />
-    <div class="row">
-      <div class="col-3"></div>
-    </div>
-  </div> -->
 
-  <!-- <div class="button-banner d-flex align-center justify-content-center">
-    <div class="d-flex justify-content-center align-items-center p-5">
-      <router-link to="/ModuleMappingPage" class="btn btn-dark m-5 btn-lg"
-        >Get help for module mapping</router-link
-      >
-      <span class="h3">or</span>
-      <a class="btn btn-light m-5 btn-lg" href="#marquee"
-        >Browse Universities</a
-      >
+  <ArrowAnimation></ArrowAnimation>
+  <!-- Add Parallax Scrolling here -->
+  <div class="container-fluid">
+    <!-- <img class="mx-auto d-block logo" src="../assets/WebsiteLogo.png" alt="" /> -->
+    <h5 class="text-center">WHAT MAKES US DIFFERENT</h5>
+    <div class="row">
+      <h1 class="text-center">Why SGXchange</h1>
     </div>
-  </div> -->
+
+    <div class="row">
+      <div class="col-6 text-center">
+        <img id="friends" src="../assets/friends.jpeg" alt="" />
+        <p></p>
+      </div>
+      <div class="col-6 text-center align-items-center">
+        <h5>Consolidated University information</h5>
+        <p>
+          As students ourselves, we understand how painful it can be to source
+          information with information scattered everywhere. SGXchange solves
+          that by providing a platform where information is consolidated.
+        </p>
+        <h5>Module Mapping</h5>
+        <p>
+          Module mapping is often a tedious mapping process. However, thanks to
+          SGXchange you can easily map your modules to exchange universities
+        </p>
+      </div>
+    </div>
+  </div>
   <ArrowAnimation></ArrowAnimation>
   <div id="marquee" class="container-fluid px-0">
     <Marquee />
@@ -82,9 +90,18 @@ export default {
 };
 </script>
 <style scoped>
+#friends {
+  width: 80%;
+  height: 80%;
+}
+
+.details {
+  display: flex;
+}
+
 .bannerHero {
-  /* height: 80vh; */
-  padding-bottom: 70px;
+  height: 80vh;
+
   background-color: #f5f5f5;
 }
 

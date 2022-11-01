@@ -1,11 +1,26 @@
 <template>
-  <div class="container-fluid">
-    <h1>
-      Explore University of <br />
-      <span class="typed-text">{{ typeValue }}</span>
-      <span class="blinking-cursor">|</span>
-      <span class="cursor" :class="{ typing: typeStatus }">&nbsp;</span>
-    </h1>
+  <div class="container">
+    <div class="row">
+      <h1>
+        Explore University of <br />
+        <span class="typed-text">{{ typeValue }}</span>
+        <span class="blinking-cursor">|</span>
+        <span class="cursor" :class="{ typing: typeStatus }">&nbsp;</span>
+      </h1>
+    </div>
+
+    <div class="row mx-auto text-center">
+      <div class="col-6" align="center">
+        <router-link to="/ModuleMappingPage" id="seeUni">
+          <button class="btn">Module Mapping</button>
+        </router-link>
+      </div>
+      <div class="col-6 text-center" align="center">
+        <router-link to="/UniversityPage" id="seeUni">
+          <button class="btn">Browse Universities</button>
+        </router-link>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -83,6 +98,27 @@ h1 {
 }
 .typed-text {
   color: #6060db;
+}
+
+.btn {
+  transition: all 0.2s;
+  background-color: #f5f5f5;
+  border-radius: 2px;
+  border-color: black;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 80px;
+  padding-right: 80px;
+  color: black;
+  font-weight: 500;
+  margin-top: 50px;
+}
+
+.btn:hover {
+  background-color: #9191ec;
+  border-color: #9191ec;
+  color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 /* Cursor blinking CSS Starts... */
