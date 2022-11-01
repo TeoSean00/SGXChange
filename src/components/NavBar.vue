@@ -151,3 +151,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+nav{
+  font-size: 1.25vw;
+}
+</style>

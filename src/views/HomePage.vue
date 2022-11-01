@@ -5,12 +5,10 @@
   <!-- <div id="carousel">
         <Carousel/>
     </div> -->
-  <div class="container-fluid bannerHero">
+  <div class="bannerHero container-fluid m-0">
     <div class="row">
-      <div class="col-sm-6 col-12 text-center" align="center">
-        <div class="row text-center" align="center">
+      <div class="col-md-6 col-12 text-center">
           <Banner></Banner>
-        </div>
         <!-- <div class="row mx-auto text-center">
           <div class="col-6" align="center">
             <router-link to="/ModuleMappingPage" id="seeUni">
@@ -24,15 +22,15 @@
           </div>
         </div> -->
       </div>
-      <div class="col-6" align="center">
-        <BannerCarousel class="mt-5"></BannerCarousel>
+      <div class="col-6 m-auto d-none d-md-block">
+        <BannerCarousel class=""></BannerCarousel>
       </div>
     </div>
   </div>
 
   <ArrowAnimation></ArrowAnimation>
   <!-- Add Parallax Scrolling here -->
-  <div class="container-fluid">
+  <div class="container-fluid textbox">
     <!-- <img class="mx-auto d-block logo" src="../assets/WebsiteLogo.png" alt="" /> -->
     <h5 class="text-center">WHAT MAKES US DIFFERENT</h5>
     <div class="row">
@@ -40,11 +38,11 @@
     </div>
 
     <div class="row">
-      <div class="col-6 text-center">
+      <div class="col-6 ">
         <img id="friends" src="../assets/friends.jpeg" alt="" />
         <p></p>
       </div>
-      <div class="col-6 text-center align-items-center">
+      <div class="col-6 text-left align-items-center">
         <h5>Consolidated University information</h5>
         <p>
           As students ourselves, we understand how painful it can be to source
@@ -90,9 +88,18 @@ export default {
 };
 </script>
 <style scoped>
+h1{
+  font-size: 4vw;
+}
+h5{
+  font-size:2vw
+}
+.textbox{
+  font-size: 1.5vw;
+}
 #friends {
-  width: 80%;
-  height: 80%;
+  width: 100%;
+  height: 100%;
 }
 
 .details {
@@ -100,7 +107,8 @@ export default {
 }
 
 .bannerHero {
-  height: 80vh;
+  width: 100%;
+  height: 80%;
 
   background-color: #f5f5f5;
 }

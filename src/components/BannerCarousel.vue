@@ -44,8 +44,8 @@ export default defineComponent({
 
 <style scoped>
 .carousel__item {
-  width: 400px;
-  height: 600px;
+
+  height: 100%;
 }
 .caroImg {
   object-fit: cover;

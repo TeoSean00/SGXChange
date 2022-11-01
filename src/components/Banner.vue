@@ -12,12 +12,12 @@
     <div class="row mx-auto text-center">
       <div class="col-6" align="center">
         <router-link to="/ModuleMappingPage" id="seeUni">
-          <button class="btn">Module Mapping</button>
+          <button class="button">Module Mapping</button>
         </router-link>
       </div>
       <div class="col-6 text-center" align="center">
         <router-link to="/UniversityPage" id="seeUni">
-          <button class="btn">Browse Universities</button>
+          <button class="button">Browse Universities</button>
         </router-link>
       </div>
     </div>
@@ -82,6 +82,35 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+@media (min-width: 0px) {
+  .button {
+  transition: all 0.2s;
+  background-color: #f5f5f5;
+  border-color: black;
+  font-size: 2vw;
+  border-radius: 5px;
+
+  color: black;
+  font-weight: 500;
+  margin-bottom: 50px;
+  height: 70%;
+}
+}
+@media (min-width: 992px) {
+  .button {
+  transition: all 0.2s;
+  background-color: #f5f5f5;
+  border-color: black;
+  font-size: 1.5vw;
+  border-radius: 5px;
+  padding-left: 70px;
+  padding-right: 70px;
+  color: black;
+  font-weight: 500;
+  margin-bottom: 50px;
+  height: 70%;
+}
+}
 .container-fluid {
   width: 100%;
   height: 100%;
@@ -92,7 +121,7 @@ export default {
   margin-top: 160px;
 }
 h1 {
-  font-size: 6rem;
+  font-size: 5vw;
   font-weight: normal;
   color: rgb(0, 0, 0);
 }
@@ -100,21 +129,8 @@ h1 {
   color: #6060db;
 }
 
-.btn {
-  transition: all 0.2s;
-  background-color: #f5f5f5;
-  border-radius: 2px;
-  border-color: black;
-  font-size: 16px;
-  border-radius: 5px;
-  padding-left: 80px;
-  padding-right: 80px;
-  color: black;
-  font-weight: 500;
-  margin-top: 50px;
-}
 
-.btn:hover {
+.button:hover {
   background-color: #9191ec;
   border-color: #9191ec;
   color: white;
@@ -123,7 +139,7 @@ h1 {
 
 /* Cursor blinking CSS Starts... */
 .blinking-cursor {
-  font-size: 6rem;
+  font-size: 5vw;
   color: rgb(0, 0, 0);
   -webkit-animation: 1s blink step-end infinite;
   -moz-animation: 1s blink step-end infinite;
