@@ -32,6 +32,32 @@
             <span class="label-input100">Password</span>
           </div>
 
+          <div
+            class="wrap-input100 validate-input"
+            data-validate="School is required"
+          >
+            <input class="input100" type="text" name="pass" v-model="school" placeholder=" " required/>
+            <span class="focus-input100"></span>
+            <span class="label-input100">School</span>
+          </div>
+
+          <div
+            class="wrap-input100 validate-input"
+            data-validate="First Degree is required"
+          >
+            <input class="input100" type="text" name="pass" v-model="firstDegree" placeholder=" " required/>
+            <span class="focus-input100"></span>
+            <span class="label-input100">First Degree</span>
+          </div>
+
+          <div
+            class="wrap-input100 validate-input"
+          >
+            <input class="input100" type="text" name="pass" v-model="secondDegree" placeholder=" "/>
+            <span class="focus-input100"></span>
+            <span class="label-input100">Second Degree</span>
+          </div>
+
           <div class="container-login100-form-btn">
             <button @click="register()" class="login100-form-btn">Login</button>
           </div>
@@ -51,7 +77,9 @@
 
 <script>
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-import { useRouter } from 'vue-router'
+import { useRouter } from 'vue-router';
+import {fireStore} from "@/service/Firebase/firebaseInit"
+import { collection, addDoc } from "firebase/firestore";
 import anime from "animejs/lib/anime.es.js";
 
 export default {
@@ -62,12 +90,34 @@ export default {
             password: '',
             router: useRouter(),
             current: null,
+            school: '',
+            firstDegree: '',
+            secondDegree: '',
         }
     },
     methods: {
         register(){
             createUserWithEmailAndPassword(getAuth(), this.email, this.password)
             .then((user) => {
+
+                //Adding to db
+                const dbRef = collection(fireStore, "UserProfiles");
+                const data = {
+                  UserName: this.email,
+                  FirstDegree: this.firstDegree,
+                  SecondDegree: this.secondDegree,
+                  School: this.school
+                };
+                addDoc(dbRef, data)
+                .then(docRef => {
+                    console.log("Document has been added successfully");
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+
+
+
                 alert('Your account has been successfully created')
                 console.log('successfully registered user is', user)
                 this.router.push('/ProfilePage')
@@ -129,7 +179,7 @@ export default {
         //     });
         // },
     }
-}   
+}
 
 </script>
 
@@ -334,7 +384,7 @@ input.input100 {
   height: 48px !important;
 }
 
-/* 
+/*
 .has-val {
   height: 48px !important;
 }
@@ -372,7 +422,7 @@ input.input100 {
   border-radius: 10px;
   background: #6675df;
   border-style: none;
-  
+
   font-size: 12px;
   color: #fff;
   line-height: 1.2;
