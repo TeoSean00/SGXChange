@@ -113,7 +113,7 @@ export default {
 .marquee-header {
   padding-top: 20px;
   padding-bottom: 0px;
-  font-size: 16px;
+  font-size: 1rem;
   color: white;
 }
 .card {
@@ -131,7 +131,7 @@ export default {
 
 .marquee-seeAllUni {
   margin-top: 15px;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .marquee-footer {

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container banner">
     <div class="row">
       <h1>
         Explore University of <br />
@@ -84,34 +84,34 @@ export default {
 <style scoped>
 @media (min-width: 0px) {
   .button {
-  transition: all 0.2s;
-  background-color: #f5f5f5;
-  border-color: black;
-  font-size: 2vw;
-  border-radius: 5px;
+    transition: all 0.2s;
+    background-color: #f5f5f5;
+    border-color: black;
+    font-size: 1rem;
+    border-radius: 5px;
 
-  color: black;
-  font-weight: 500;
-  margin-bottom: 50px;
-  height: 70%;
-}
+    color: black;
+    font-weight: 500;
+    margin-bottom: 50px;
+    height: 70%;
+  }
 }
 @media (min-width: 992px) {
   .button {
-  transition: all 0.2s;
-  background-color: #f5f5f5;
-  border-color: black;
-  font-size: 1.5vw;
-  border-radius: 5px;
-  padding-left: 70px;
-  padding-right: 70px;
-  color: black;
-  font-weight: 500;
-  margin-bottom: 50px;
-  height: 70%;
+    transition: all 0.2s;
+    background-color: #f5f5f5;
+    border-color: black;
+    font-size: 1rem;
+    border-radius: 5px;
+    padding-left: 70px;
+    padding-right: 70px;
+    color: black;
+    font-weight: 500;
+    margin-bottom: 50px;
+    height: 70%;
+  }
 }
-}
-.container-fluid {
+/* .container-fluid {
   width: 100%;
   height: 100%;
   display: flex;
@@ -119,16 +119,20 @@ export default {
   align-items: center;
   background-color: #f5f5f5;
   margin-top: 160px;
-}
+} */
+
+/* .banner {
+  height: 60vh;
+} */
+
 h1 {
-  font-size: 5vw;
+  font-size: 3.5rem;
   font-weight: normal;
   color: rgb(0, 0, 0);
 }
 .typed-text {
   color: #6060db;
 }
-
 
 .button:hover {
   background-color: #9191ec;
@@ -139,7 +143,7 @@ h1 {
 
 /* Cursor blinking CSS Starts... */
 .blinking-cursor {
-  font-size: 5vw;
+  font-size: 3.5rem;
   color: rgb(0, 0, 0);
   -webkit-animation: 1s blink step-end infinite;
   -moz-animation: 1s blink step-end infinite;

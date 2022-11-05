@@ -6,23 +6,11 @@
         <Carousel/>
     </div> -->
   <div class="bannerHero container-fluid m-0">
-    <div class="row">
+    <div class="row bannerHero align-items-center">
       <div class="col-md-6 col-12 text-center">
-          <Banner></Banner>
-        <!-- <div class="row mx-auto text-center">
-          <div class="col-6" align="center">
-            <router-link to="/ModuleMappingPage" id="seeUni">
-              <button class="btn">Start Module Mapping</button>
-            </router-link>
-          </div>
-          <div class="col-6 text-center" align="center">
-            <router-link to="/UniversityPage" id="seeUni">
-              <button class="btn">Browse Universities</button>
-            </router-link>
-          </div>
-        </div> -->
+        <Banner></Banner>
       </div>
-      <div class="col-6 m-auto d-none d-md-block">
+      <div class="col-6 m-auto d-none d-md-block bCarou">
         <BannerCarousel class=""></BannerCarousel>
       </div>
     </div>
@@ -38,7 +26,7 @@
     </div>
 
     <div class="row">
-      <div class="col-6 ">
+      <div class="col-6">
         <img id="friends" src="../assets/friends.jpeg" alt="" />
         <p></p>
       </div>
@@ -88,14 +76,15 @@ export default {
 };
 </script>
 <style scoped>
-h1{
-  font-size: 4vw;
+h1 {
+  font-size: 2.6rem;
 }
-h5{
-  font-size:2vw
+
+h2 {
+  font-size: 1.6rem;
 }
-.textbox{
-  font-size: 1.5vw;
+h5 {
+  font-size: 1.1rem;
 }
 #friends {
   width: 100%;
@@ -108,7 +97,7 @@ h5{
 
 .bannerHero {
   width: 100%;
-  height: 80%;
+  height: 80vh;
 
   background-color: #f5f5f5;
 }
@@ -125,7 +114,7 @@ h5{
   background-color: #f5f5f5;
   border-radius: 2px;
   border-color: black;
-  font-size: 16px;
+  font-size: 1rem;
   border-radius: 5px;
   padding-left: 80px;
   padding-right: 80px;
