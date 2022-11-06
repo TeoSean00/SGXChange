@@ -60,6 +60,7 @@ import { reactive } from "vue";
 import Marquee from "@/components/Marquee.vue";
 import BannerCarousel from "@/components/BannerCarousel.vue";
 
+
 export default {
   name: "HomePage",
   data() {

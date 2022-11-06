@@ -1,4 +1,5 @@
 <template>
+  <FavBtn :uniName="uniName"></FavBtn>
       <div class="container-fluid" style="max-width:fit-content;margin-left:8rem;margin-right:8rem;">
     <div class="row mb-3">
       <div class="col h2">{{ uniName }}</div>
@@ -263,6 +264,7 @@ import Module from "@/components/Module.vue"
 // console.log(import.meta.env.VITE_GOOGLE_MAP_API_KEY);
 import { fireStore } from "@/service/Firebase/firebaseInit"
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
+import FavBtn from "@/components/FavBtn.vue";
 
 export default {
   name: "UniPage",
@@ -281,11 +283,13 @@ export default {
       numSlots1: '',
       numSlots2: '',
       mods: [],
+
     }
   },
   components: {
     GoogleMap,
     Module,
+    FavBtn,
   },
   computed: {
     gpaReq() {
