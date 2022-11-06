@@ -1,11 +1,11 @@
 <template>
-    <div :class="{box: true, selected: select, unselected: !select}">
+    <div :class="{box: true, selected: select, unselected: !select}" v-on:click="selectModule">
       <h4 :class="{selected: select, unselected: !select}">{{ name }}</h4>
-      <span class="moduleCounter">
+      <!-- <span class="moduleCounter">
         <i class="fa-solid fa-minus" v-on:click="minusCount"></i>
         {{ moduleCount }}
         <i class="fa-solid fa-plus" v-on:click="addCount"></i>
-      </span>
+      </span> -->
     </div>
 
 </template>
@@ -23,25 +23,15 @@ export default {
   },
   methods: {
     selectModule(){
-      if(this.moduleCount > 0){
-        this.select = true
-      }
-      else{
-        this.select = false
-      }
-    },
-    addCount() {
-      this.moduleCount++
-      this.selectModule()
-      this.$emit('addBasket', this.name)
-    },
-    minusCount(){
-      if (this.moduleCount>0){
-        this.moduleCount--
-        this.selectModule()
+      if(this.select){
         this.$emit('removeBasket', this.name)
       }
-    }
+      else{
+        this.$emit('addBasket', this.name)
+      }
+      this.select = !this.select
+
+    },
   }
 };
 </script>
