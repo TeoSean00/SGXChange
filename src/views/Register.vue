@@ -36,7 +36,11 @@
             class="wrap-input100 validate-input"
             data-validate="School is required"
           >
-            <input class="input100" type="text" name="pass" v-model="school" placeholder=" " required/>
+            <!-- <input class="input100" type="text" name="pass" v-model="school" placeholder=" " required/> -->
+            <select class="input100" v-model="selectedUni" required>
+              <option value="default" selected>Select A University</option>
+              <option v-for="uni in allUniversities" :key="uni" :value="uni">{{ uni }}</option>
+            </select>
             <span class="focus-input100"></span>
             <span class="label-input100">School</span>
           </div>
@@ -45,7 +49,10 @@
             class="wrap-input100 validate-input"
             data-validate="First Degree is required"
           >
-            <input class="input100" type="text" name="pass" v-model="firstDegree" placeholder=" " required/>
+            <select class="input100" v-model="selectedFirstDegree" required>
+              <option value="default" selected>Select Your First Degree</option>
+              <option v-for="degree in degrees" :key="degree" :value="degree">{{ degree }}</option>
+            </select>
             <span class="focus-input100"></span>
             <span class="label-input100">First Degree</span>
           </div>
@@ -53,7 +60,12 @@
           <div
             class="wrap-input100 validate-input"
           >
-            <input class="input100" type="text" name="pass" v-model="secondDegree" placeholder=" "/>
+            <select class="input100" v-model="selectedSecondDegree">
+              <option value="default" selected>Select Your Second Degree</option>
+              <template v-for="degree in degrees" :key="degree">
+                <option v-if="degree != selectedFirstDegree" :value="degree">{{ degree }}</option>
+              </template>
+            </select>
             <span class="focus-input100"></span>
             <span class="label-input100">Second Degree</span>
           </div>
@@ -61,12 +73,12 @@
           <div class="container-login100-form-btn">
             <button @click="register()" class="login100-form-btn">Login</button>
           </div>
-          <p class="register">
+          <!-- <p class="register">
                 Don't have an account?
                 <div
                 ><router-link to="/RegisterPage">Register Here</router-link></div
                 >
-            </p>
+            </p> -->
         </div>
         <div class="login100-more"></div>
       </div>
@@ -79,7 +91,7 @@
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { useRouter } from 'vue-router';
 import {fireStore} from "@/service/Firebase/firebaseInit"
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs, query } from "firebase/firestore";
 import anime from "animejs/lib/anime.es.js";
 
 export default {
@@ -93,10 +105,40 @@ export default {
             school: '',
             firstDegree: '',
             secondDegree: '',
+            allUniversities: [],
+            selectedUni: 'default',
+            degrees: [],
+            selectedFirstDegree: 'default',
+            selectedSecondDegree: 'default',
         }
     },
+    mounted() {
+      this.getUniversities()
+      this.getDegree()
+    },
     methods: {
+        async getDegree() {
+              let q = query(collection(fireStore, "DegreeToBaskets"))
+              let getDegreeUni = await getDocs(q)
+              getDegreeUni.forEach((doc) => {
+                this.degrees.push(doc.id)
+              });
+              console.log(this.degrees)
+            },
+        async getUniversities(){
+          const getAllUni = await getDocs(collection(fireStore, "Universities"));
+          getAllUni.forEach((doc) => {
+            this.allUniversities.push(doc.data().HostUniversity)
+          });
+        },
         register(){
+          if(this.selectedUni == 'default'){
+            alert('Please Enter a University')
+          }
+          else if(this.selectedFirstDegree == 'default'){
+            alert('Please Enter a First Degree')
+          }
+          else{
             createUserWithEmailAndPassword(getAuth(), this.email, this.password)
             .then((user) => {
 
@@ -120,8 +162,6 @@ export default {
                     console.log(error);
                 })
 
-
-
                 alert('Your account has been successfully created')
                 console.log('successfully registered user is', user)
                 this.router.push('/ProfilePage')
@@ -130,6 +170,7 @@ export default {
                 console.log('error.code')
                 alert(error.message)
             })
+          }
         },
         // onEmail() {
         //     if (this.current)
@@ -321,6 +362,7 @@ export default {
   color: #555555;
   line-height: 1.2;
   padding: 0 26px;
+  border: 0px;
 }
 
 input.input100 {
