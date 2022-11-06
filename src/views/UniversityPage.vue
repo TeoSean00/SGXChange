@@ -1,55 +1,34 @@
 <template>
-  <!-- Suggested Uni Section -->
-  <!-- <div class="container-fluid mt-5">
-
-    <div class="row">
-        <div class="col-1"></div>
-        <div class="col">
-            <h2>Suggested universities</h2>
-        </div>
-        <div class="col-1"></div>
-    </div>
-    <div class="row">
-        <div class="col-1"></div>
-            <UniCardSmall class="col unicard" v-for="i in 4" :key="i" />
-        <div class="col-1"></div>
-    </div>
-</div> -->
   <!-- All Uni list section -->
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-
-  <div
-    class="container-fluid mt-5"
-    style="max-width: fit-content; margin-left: 8rem; margin-right: 8rem"
-  >
-    <!-- UniFilterBar -->
+  <div class="mt-4 container" style="margin-left: 8rem; margin-right: 8rem">
+    <div class="row">
+      <div class="col"><h2>Universities</h2></div>
+    </div>
     <a-menu
       class="uni-filter-bar"
       v-model:selectedKeys="current"
       mode="horizontal"
     >
-      <a-menu-item key="All"> All </a-menu-item>
+      <a-menu-item key="0"> All </a-menu-item>
       <a-menu-item key="1"> Africa </a-menu-item>
       <a-menu-item key="2"> Asia </a-menu-item>
-      <a-menu-item key="4"> Central America </a-menu-item>
-      <a-menu-item key="5"> Europe </a-menu-item>
-      <a-menu-item key="6"> North America </a-menu-item>
-      <a-menu-item key="8"> South America </a-menu-item>
-      <a-menu-item key="3"> The Caribbean </a-menu-item>
-      <a-menu-item key="7"> Oceania </a-menu-item>
+      <!-- <a-menu-item key="4"> Central America </a-menu-item> -->
+      <a-menu-item key="3"> Europe </a-menu-item>
+      <a-menu-item key="4"> North America </a-menu-item>
+      <a-menu-item key="6"> South America </a-menu-item>
+      <!-- <a-menu-item key="3"> The Caribbean </a-menu-item> -->
+      <a-menu-item key="5"> Oceania </a-menu-item>
     </a-menu>
+  </div>
+
+  <div
+    class="container-fluid mt-4"
+    style="max-width: fit-content; margin-left: 8rem; margin-right: 8rem"
+  >
+    <!-- UniFilterBar -->
 
     <br />
-    <div class="row">
-      <div class="col"><h2>Universities</h2></div>
-    </div>
+
     <div class="d-flex flex-wrap">
       <!-- put variables as props -->
       <UniCardSmall
@@ -133,12 +112,23 @@ export default {
       firstPage: 1,
       lastPage: 0,
       items: [],
-      // Doesnt work when I use options API
-      // current: "All",
+      value: "0",
+      regionId: {
+        0: "All",
+        1: "Africa",
+        2: "Asia",
+        // 3: "The Caribbean",
+        // 4: "Central America",
+        3: "Europe",
+        4: "North America",
+        5: "Oceania",
+        6: "South America",
+      },
+      getAllUni: [],
     };
   },
   setup() {
-    const current = ref(["All"]);
+    const current = ref(["0"]);
     return {
       current,
     };
@@ -158,8 +148,6 @@ export default {
         if (this.currentPage != this.lastPage + 1) {
           this.currentPage += 1;
         }
-
-        // console.log(this.currentPage)
       } else {
         this.currentPage = parseInt(event.target.text);
       }
@@ -186,11 +174,23 @@ export default {
       }
     },
     async getAllUniversities() {
-      if (this.current == "All") {
-        const getAllUni = await getDocs(collection(fireStore, "Universities"));
-        getAllUni.forEach((doc) => {
-          let universityInfo = {};
+      console.log("this ran");
+      this.getAllUni = await getDocs(collection(fireStore, "Universities"));
+      // console.log(this.getAllUni);
+    },
+
+    async getFilteredUniversities() {
+      console.log(this.current[0]);
+      console.log("Does this work");
+      this.items = [];
+      let region = this.regionId[this.current[0]];
+      console.log(region);
+      if (region == "All") {
+        console.log("fetching all");
+        this.getAllUni.forEach((doc) => {
           // put key-value pairs
+          let universityInfo = {};
+          console.log(doc.data().HostUniversity);
           universityInfo["name"] = doc.data().HostUniversity;
           universityInfo["gpaReq"] = doc.data().GPA;
           // universityInfo["IgpaNinetyPercentile"] =
@@ -202,27 +202,22 @@ export default {
           universityInfo["RegionId"] = doc.data().Region;
           universityInfo["imgURL"] = doc.data().UniImageLink1;
           this.items.push(universityInfo);
-          });
-        } else {
-        console.log(this.current);
-        const getAllUni = await getDocs(
-          collection(fireStore, "Universities"),
-          where("RegionId", "==", this.current)
-        );
-        getAllUni.forEach((doc) => {
+        });
+      } else {
+        this.getAllUni.forEach((doc) => {
           let universityInfo = {};
-          // put key-value pairs
-          universityInfo["name"] = doc.data().UniversityName;
-          universityInfo["gpaReq"] = doc.data().GpaRequirement;
-          universityInfo["IgpaNinetyPercentile"] =
-            doc.data().IgpaNinetyPercentile;
-          universityInfo["IgpaTenPercentile"] = doc.data().IgpaTenPercentile;
-          universityInfo["NoOfPlacesSem1"] = doc.data().NoOfPlacesSem1;
-          universityInfo["NoOfPlacesSem2"] = doc.data().NoOfPlacesSem2;
-          universityInfo["CountryId"] = doc.data().CountryId;
-          universityInfo["RegionId"] = doc.data().RegionId;
-          universityInfo["imgURL"] = doc.data().img1;
-          this.items.push(universityInfo);
+          if (doc.data().Region == region) {
+            console.log(doc.data().HostUniversity);
+            // put key-value pairs
+            universityInfo["name"] = doc.data().HostUniversity;
+            universityInfo["gpaReq"] = doc.data().GPA;
+            universityInfo["NoOfPlacesSem1"] = doc.data().NoOfPlacesSem1;
+            universityInfo["NoOfPlacesSem2"] = doc.data().NoOfPlacesSem2;
+            universityInfo["CountryId"] = doc.data().Country;
+            universityInfo["RegionId"] = doc.data().Region;
+            universityInfo["imgURL"] = doc.data().UniImageLink1;
+            this.items.push(universityInfo);
+          }
         });
       }
     },
@@ -244,12 +239,20 @@ export default {
     //   return this.row2start+ this.perPage/2
     // },
   },
+
+  watch: {
+    current() {
+      this.getFilteredUniversities();
+    },
+  },
+
   components: {
     UniCardSmall,
     UniFilterBar,
   },
   async mounted() {
     await this.getAllUniversities();
+    await this.getFilteredUniversities();
     this.pagination();
   },
 };
