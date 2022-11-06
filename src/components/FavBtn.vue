@@ -34,7 +34,6 @@ export default {
         async addToFav(){
             if (this.isLoggedIn){
                 const getUsers = await getDocs(collection(fireStore, "UserProfiles"));
-
                 getUsers.forEach(async (document) => {
                     if(document.data().Email == this.user){
                         const docRef = doc(fireStore, 'UserProfiles' ,document.id);
@@ -47,8 +46,6 @@ export default {
                         }
                     }
                 });
-
-
             }
             else{
                 alert('Log In First!')
