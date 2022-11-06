@@ -29,14 +29,14 @@
           </router-link>
         </li>
 
-        <li class="nav-item active d-flex">
+        <!-- <li class="nav-item active d-flex">
           <span
             style="cursor: pointer"
             v-on:click="scrollToAbout"
             class="nav-link"
             >About</span
           >
-        </li>
+        </li> -->
       </ul>
 
       <ul class="navbar-nav me-4">
@@ -151,3 +151,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+nav {
+  font-size: 1rem;
+}
+</style>

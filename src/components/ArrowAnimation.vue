@@ -20,7 +20,7 @@ methods: {
 <style>
 .arrow_container {
   position: relative;
-  height: 20vh;
+  height: 100px;
   display: flex;
   justify-content: center;
   text-align: center;
@@ -45,12 +45,12 @@ methods: {
   background: black;
 ;
 }
- 
+
 .chevron:before {
   left: 0;
   transform: skew(0deg, 30deg);
 }
- 
+
 .chevron:after {
   right: 0;
   width: 50%;
@@ -59,11 +59,11 @@ methods: {
 .chevron:first-child {
   animation: move 3s ease-out 1s infinite;
 }
- 
+
 .chevron:nth-child(2) {
   animation: move 3s ease-out 2s infinite;
 }
-@keyframes pulse { 
+@keyframes pulse {
 to {
     opacity: 1;
   }
@@ -71,7 +71,7 @@ to {
 @keyframes move {
   25% {
     opacity: 1;
- 
+
   }
   33% {
     opacity: 1;
