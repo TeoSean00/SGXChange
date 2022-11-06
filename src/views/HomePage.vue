@@ -31,6 +31,7 @@ import ArrowAnimation from "@/components/ArrowAnimation.vue";
 import { reactive } from "vue";
 import Marquee from "@/components/Marquee.vue";
 
+
 export default {
   name: "HomePage",
   data() {

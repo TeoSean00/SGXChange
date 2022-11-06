@@ -101,12 +101,16 @@ export default {
             .then((user) => {
 
                 //Adding to db
+
                 const dbRef = collection(fireStore, "UserProfiles");
                 const data = {
-                  UserName: this.email,
+                  UserName: this.email.split('@')[0],
+                  Email: this.email,
                   FirstDegree: this.firstDegree,
                   SecondDegree: this.secondDegree,
-                  School: this.school
+                  School: this.school,
+                  Favourites: [],
+                  Reviews: []
                 };
                 addDoc(dbRef, data)
                 .then(docRef => {
