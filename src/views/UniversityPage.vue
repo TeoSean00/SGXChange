@@ -1,6 +1,6 @@
 <template>
   <!-- All Uni list section -->
-  <div class="mt-4 container" style="margin-left: 8rem; margin-right: 8rem">
+  <div class="mt-4 container" style="margin-left: 4rem; margin-right: 4rem">
     <div class="row">
       <div class="col"><h2>Universities</h2></div>
     </div>
@@ -23,7 +23,7 @@
 
   <div
     class="container-fluid mt-4"
-    style="max-width: fit-content; margin-left: 8rem; margin-right: 8rem"
+    style="max-width: fit-content; margin-left: 4rem; margin-right: 4rem"
   >
     <!-- UniFilterBar -->
 
