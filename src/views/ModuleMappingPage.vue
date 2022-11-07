@@ -1,5 +1,4 @@
 <template>
-  Module Mapping Page
   <div class="container">
     <div :class="{formDisplay: form1}">
       <!-- Step one -->
@@ -53,10 +52,9 @@
       </div>
       <button class="btn btn-primary" v-on:click="submitData">Submit</button>
     </div>
-    <!-- Testing. Can delete later -->
     <div :class="{testingOutput: testDisplay}">
       <h4>Test Output</h4>
-      <div v-for="out in testOutput" :key="out">{{ out }}</div>
+      <div>{{ testOutput }}</div>
       <div class="d-flex flex-wrap">
         <UniCardSmall class="unicard" v-for="uni in uniOutput" :key="uni"
             :universityName="uni.name"
@@ -86,7 +84,7 @@ export default {
           universities: [],
           degrees: [],
           baskets: [],
-          selectedBaskets: {},
+          selectedBaskets: [],
           form1: false,
           form2: true,
           selectedUni: "default",
@@ -107,7 +105,6 @@ export default {
         getUniversities.forEach((doc) => {
           this.universities.push(doc.data().HostUniversity)
         });
-
     },
     methods: {
             async getDegree() {
@@ -156,17 +153,18 @@ export default {
                 }
             },
             addToBasket(basket){
-              if (basket in this.selectedBaskets){
-                this.selectedBaskets[basket] += 1
+
+              if (!(this.selectedBaskets.includes(basket))){
+                this.selectedBaskets.push(basket)
               }
-              else{
-                this.selectedBaskets[basket] = 1
-              }
+              console.log(this.selectedBaskets)
             },
             removeFromBasket(basket){
-              if (basket in this.selectedBaskets){
-                this.selectedBaskets[basket] -= 1
+              if (this.selectedBaskets.includes(basket)){
+                var index = this.selectedBaskets.indexOf(basket)
+                var x = this.selectedBaskets.splice(index, 1)
               }
+              console.log(this.selectedBaskets)
             },
             async submitData(){
               this.form1 = true
@@ -175,17 +173,18 @@ export default {
               this.testOutput = []
               var tempUni = []
               // Getting output universities
-              // console.log(this.selectedBaskets)
-              for(let basket in this.selectedBaskets){
+              for(let basket of this.selectedBaskets){
                 let q = doc(fireStore, "BasketToUniversities", basket)
                 let getUni = await getDoc(q)
                 if (tempUni.length == 0){
                   tempUni = getUni.data().Universities
                 }
+
                 else{
                   for( let uni of tempUni){
-                      if(!this.getUni.data().Universities.includes(uni)){
-                        tempUni.remove(bask)
+                      if(!getUni.data().Universities.includes(uni)){
+                        var index = tempUni.indexOf(uni)
+                        var x = tempUni.splice(index, 1)
                       }
                     }
                 }
@@ -195,7 +194,6 @@ export default {
                 let uniInfo = query(collection(fireStore, "Universities"), where("HostUniversity", "==", uni))
                 let getUniversities = await getDocs(uniInfo)
                 getUniversities.forEach((doc) =>{
-                  console.log(doc.data())
                   let universityInfo = {}
                   // put key-value pairs
                   universityInfo["name"] = doc.data().HostUniversity;
@@ -212,12 +210,9 @@ export default {
                 })
               }
               // End
-              for ( const [key, value] of Object.entries(this.selectedBaskets)){
-                if (value != 0){
-                  this.testOutput.push(`${key} : ${value}`)
-                }
+              for ( let basket of this.selectedBaskets){
+                this.testOutput.push(basket)
               }
-              // console.log(this.testOutput)
             }
         },
     }

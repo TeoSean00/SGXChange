@@ -1,5 +1,7 @@
 <template>
   <div class="container-fluid" style="max-width:fit-content;margin-left:8rem;margin-right:8rem;">
+  <FavBtn :uniName="uniName"></FavBtn>
+      <div class="container-fluid" style="max-width:fit-content;margin-left:8rem;margin-right:8rem;">
     <div class="row mb-3">
       <div class="col h2">{{ uniName }}</div>
     </div>
@@ -279,6 +281,10 @@ import Modal from '@/components/Modal.vue';
 const auth = getAuth();
 const user = auth.currentUser;
 
+import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
+import FavBtn from "@/components/FavBtn.vue";
+
+
 export default {
   name: "UniPage",
   data() {
@@ -316,6 +322,7 @@ export default {
     GoogleMap,
     Module,
     Modal
+    FavBtn,
   },
   computed: {
     gpaReq() {
