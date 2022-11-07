@@ -1,5 +1,8 @@
 <template>
   <div class="container-fluid" style="max-width:fit-content;margin-left:8rem;margin-right:8rem;">
+    <FavBtn :uniName="uniName"></FavBtn>
+  </div>
+  <div class="container-fluid" style="max-width:fit-content;margin-left:8rem;margin-right:8rem;">
     <div class="row mb-3">
       <div class="col h2">{{ uniName }}</div>
     </div>
@@ -110,7 +113,7 @@
           <p class="d-flex align-items-center gap-3">Semester 1: <b style="font-size:x-large">{{ numSlots1 }}</b></p>
           <p class="d-flex align-items-center gap-3">Semester 2: <b style="font-size:x-large">{{ numSlots2 }}</b></p>
         </div>
-
+  
       </div>
     </div>
     <div class="row">
@@ -151,8 +154,8 @@
       <div class="col">
         <!-- module information -->
         <!-- <div>
-                <GoogleMap :uniName="uniName"></GoogleMap>
-              </div> -->
+                  <GoogleMap :uniName="uniName"></GoogleMap>
+                </div> -->
         <h2 class="my-4">Module Information</h2>
         <span>University page > module info : <a :href="uniCourseUrl" target="_blank">{{ uniCourseUrl }}</a></span>
         <br>
@@ -164,12 +167,12 @@
               :popularity="mod.popularity" :sem="mod.sem"></Module>
           </div>
         </div>
-
+  
         <!-- one module each -->
         <div class="card my-4" style="width: 30rem">
           <div class="card-body">
             <!-- module component -->
-
+  
             <!-- module name -->
             <h5 class="card-title mb-3">Big Data Architecture</h5>
             <!-- basket type it fulfils -->
@@ -191,7 +194,7 @@
         <div class="card my-4" style="width: 30rem">
           <div class="card-body">
             <!-- module component -->
-
+  
             <!-- module name -->
             <h5 class="card-title mb-3">Big Data Architecture</h5>
             <!-- basket type it fulfils -->
@@ -222,11 +225,10 @@
                   <h4 class="mb-0">+</h4>
                 </button>
                 <!-- Dynamically opening and closing Modal based on actions performed and parent/child interactions-->
-                <Modal v-show="isModalOpen" @close="closeModal()" :uniNamePassed="uniName"
-                  @review-done="closeModal()" />
+                <Modal v-show="isModalOpen" @close="closeModal()" :uniNamePassed="uniName" @review-done="closeModal()" />
               </div>
             </div>
-
+  
             <!-- Dynamic display portion to be fixed, nd account for when after fb data loads -->
             <div v-show="isThereReviews && isReviewsLoaded" class="row d-flex">
               <div class='col-sm-12 col-md-6 col-lg-4 flex-grow-1 flex-shrink-1' v-for="(review, index) in reviews"
@@ -236,10 +238,10 @@
                     <div class="d-flex justify-content-between">
                       <h5 class="card-title mb-2">{{ review.userName }}</h5>
                       <!-- <div>
-                            Likes function kiv for now
-                            <i @click="addLike()" class="fa fa-thumbs-up text-muted" style="font-size:15px; margin-right:2px"></i>
-                            {{ review.likes }}
-                          </div> -->
+                              Likes function kiv for now
+                              <i @click="addLike()" class="fa fa-thumbs-up text-muted" style="font-size:15px; margin-right:2px"></i>
+                              {{ review.likes }}
+                            </div> -->
                     </div>
                     <h6 class="card-subtitle mb-2 text-muted">Reviewed University: {{ review.uniName }}</h6>
                     <p class="card-text">
@@ -275,6 +277,7 @@ import { fireStore } from "@/service/Firebase/firebaseInit"
 import { collection, collectionGroup, getDocs, query, where, orderBy} from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Modal from '@/components/Modal.vue';
+import FavBtn from "@/components/FavBtn.vue";
 
 const auth = getAuth();
 const user = auth.currentUser;
@@ -315,7 +318,8 @@ export default {
   components: {
     GoogleMap,
     Module,
-    Modal
+    Modal,
+    FavBtn
   },
   computed: {
     gpaReq() {
