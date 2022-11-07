@@ -1,5 +1,5 @@
 <template>
-    <!-- <h1>Create a new Account</h1>
+  <!-- <h1>Create a new Account</h1>
     <p><input type="text" placeholder="Email" v-model="email" /></p>
     <p><input type="password" placeholder="Password" v-model="password" /></p>
     <p><button @click="register">Submit</button></p>
@@ -7,7 +7,7 @@
     <router-link to="/SignInPage">Sign In</router-link>
     </p> -->
 
-    <div class="limiter">
+  <div class="limiter">
     <div class="container-login100">
       <div class="wrap-login100">
         <!-- remove validateform -->
@@ -18,7 +18,14 @@
             class="wrap-input100 validate-input"
             data-validate="Valid email is required: ex@abc.xyz"
           >
-            <input class="input100" type="text" name="email" v-model="email" placeholder=" " required />
+            <input
+              class="input100"
+              type="text"
+              name="email"
+              v-model="email"
+              placeholder=" "
+              required
+            />
             <span class="focus-input100"></span>
             <span class="label-input100">Email</span>
           </div>
@@ -27,7 +34,14 @@
             class="wrap-input100 validate-input"
             data-validate="Password is required"
           >
-            <input class="input100" type="password" name="pass" v-model="password" placeholder=" " required/>
+            <input
+              class="input100"
+              type="password"
+              name="pass"
+              v-model="password"
+              placeholder=" "
+              required
+            />
             <span class="focus-input100"></span>
             <span class="label-input100">Password</span>
           </div>
@@ -37,9 +51,15 @@
             data-validate="School is required"
           >
             <!-- <input class="input100" type="text" name="pass" v-model="school" placeholder=" " required/> -->
-            <select class="input100" v-model="selectedUni" required>
+            <select
+              class="input100 form-select bootstrap-select"
+              v-model="selectedUni"
+              required
+            >
               <option value="default" selected>Select A University</option>
-              <option v-for="uni in allUniversities" :key="uni" :value="uni">{{ uni }}</option>
+              <option v-for="uni in allUniversities" :key="uni" :value="uni">
+                {{ uni }}
+              </option>
             </select>
             <span class="focus-input100"></span>
             <span class="label-input100">School</span>
@@ -49,21 +69,30 @@
             class="wrap-input100 validate-input"
             data-validate="First Degree is required"
           >
-            <select class="input100" v-model="selectedFirstDegree" required>
+            <select
+              class="input100 form-select"
+              style="outline: none !important, border: none "
+              v-model="selectedFirstDegree"
+              required
+            >
               <option value="default" selected>Select Your First Degree</option>
-              <option v-for="degree in degrees" :key="degree" :value="degree">{{ degree }}</option>
+              <option v-for="degree in degrees" :key="degree" :value="degree">
+                {{ degree }}
+              </option>
             </select>
             <span class="focus-input100"></span>
             <span class="label-input100">First Degree</span>
           </div>
 
-          <div
-            class="wrap-input100 validate-input"
-          >
-            <select class="input100" v-model="selectedSecondDegree">
-              <option value="default" selected>Select Your Second Degree</option>
+          <div class="wrap-input100 validate-input">
+            <select class="input100 form-select" v-model="selectedSecondDegree">
+              <option value="default" selected>
+                Select Your Second Degree
+              </option>
               <template v-for="degree in degrees" :key="degree">
-                <option v-if="degree != selectedFirstDegree" :value="degree">{{ degree }}</option>
+                <option v-if="degree != selectedFirstDegree" :value="degree">
+                  {{ degree }}
+                </option>
               </template>
             </select>
             <span class="focus-input100"></span>
@@ -84,152 +113,151 @@
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-import { useRouter } from 'vue-router';
-import {fireStore} from "@/service/Firebase/firebaseInit"
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { useRouter } from "vue-router";
+import { fireStore } from "@/service/Firebase/firebaseInit";
 import { collection, addDoc, getDocs, query } from "firebase/firestore";
 import anime from "animejs/lib/anime.es.js";
 
 export default {
-    name: 'Register',
-    data() {
-        return {
-            email: '',
-            password: '',
-            router: useRouter(),
-            current: null,
-            school: '',
-            firstDegree: '',
-            secondDegree: '',
-            allUniversities: [],
-            selectedUni: 'default',
-            degrees: [],
-            selectedFirstDegree: 'default',
-            selectedSecondDegree: 'default',
-        }
+  name: "Register",
+  data() {
+    return {
+      email: "",
+      password: "",
+      router: useRouter(),
+      current: null,
+      school: "",
+      firstDegree: "",
+      secondDegree: "",
+      allUniversities: [],
+      selectedUni: "default",
+      degrees: [],
+      selectedFirstDegree: "default",
+      selectedSecondDegree: "default",
+    };
+  },
+  mounted() {
+    this.getUniversities();
+    this.getDegree();
+  },
+  methods: {
+    async getDegree() {
+      let q = query(collection(fireStore, "DegreeToBaskets"));
+      let getDegreeUni = await getDocs(q);
+      getDegreeUni.forEach((doc) => {
+        this.degrees.push(doc.id);
+      });
+      console.log(this.degrees);
     },
-    mounted() {
-      this.getUniversities()
-      this.getDegree()
+    async getUniversities() {
+      const getAllUni = await getDocs(collection(fireStore, "Universities"));
+      getAllUni.forEach((doc) => {
+        this.allUniversities.push(doc.data().HostUniversity);
+      });
     },
-    methods: {
-        async getDegree() {
-              let q = query(collection(fireStore, "DegreeToBaskets"))
-              let getDegreeUni = await getDocs(q)
-              getDegreeUni.forEach((doc) => {
-                this.degrees.push(doc.id)
+    register() {
+      if (this.selectedUni == "default") {
+        alert("Please Enter a University");
+      } else if (this.selectedFirstDegree == "default") {
+        alert("Please Enter a First Degree");
+      } else {
+        createUserWithEmailAndPassword(getAuth(), this.email, this.password)
+          .then((user) => {
+            //Adding to db
+
+            const dbRef = collection(fireStore, "UserProfiles");
+            const data = {
+              UserName: this.email.split("@")[0],
+              Email: this.email,
+              FirstDegree: this.firstDegree,
+              SecondDegree: this.secondDegree,
+              School: this.school,
+              Favourites: [],
+              Reviews: [],
+            };
+            addDoc(dbRef, data)
+              .then((docRef) => {
+                console.log("Document has been added successfully");
+              })
+              .catch((error) => {
+                console.log(error);
               });
-              console.log(this.degrees)
-            },
-        async getUniversities(){
-          const getAllUni = await getDocs(collection(fireStore, "Universities"));
-          getAllUni.forEach((doc) => {
-            this.allUniversities.push(doc.data().HostUniversity)
+
+            alert("Your account has been successfully created");
+            console.log("successfully registered user is", user);
+            this.router.push("/ProfilePage");
+          })
+          .catch((error) => {
+            console.log("error.code");
+            alert(error.message);
           });
-        },
-        register(){
-          if(this.selectedUni == 'default'){
-            alert('Please Enter a University')
-          }
-          else if(this.selectedFirstDegree == 'default'){
-            alert('Please Enter a First Degree')
-          }
-          else{
-            createUserWithEmailAndPassword(getAuth(), this.email, this.password)
-            .then((user) => {
-
-                //Adding to db
-
-                const dbRef = collection(fireStore, "UserProfiles");
-                const data = {
-                  UserName: this.email.split('@')[0],
-                  Email: this.email,
-                  FirstDegree: this.firstDegree,
-                  SecondDegree: this.secondDegree,
-                  School: this.school,
-                  Favourites: [],
-                  Reviews: []
-                };
-                addDoc(dbRef, data)
-                .then(docRef => {
-                    console.log("Document has been added successfully");
-                })
-                .catch(error => {
-                    console.log(error);
-                })
-
-                alert('Your account has been successfully created')
-                console.log('successfully registered user is', user)
-                this.router.push('/ProfilePage')
-            })
-            .catch((error) => {
-                console.log('error.code')
-                alert(error.message)
-            })
-          }
-        },
-        // onEmail() {
-        //     if (this.current)
-        //         this.current.pause();
-        //     this.current = anime({
-        //         targets: "path",
-        //         strokeDashoffset: {
-        //             value: 0,
-        //             duration: 700,
-        //             easing: "easeOutQuart",
-        //         },
-        //         strokeDasharray: {
-        //             value: "240 1386",
-        //             duration: 700,
-        //             easing: "easeOutQuart",
-        //         },
-        //     });
-        // },
-        // onPassword() {
-        //     if (this.current)
-        //         this.current.pause();
-        //     this.current = anime({
-        //         targets: "path",
-        //         strokeDashoffset: {
-        //             value: -336,
-        //             duration: 700,
-        //             easing: "easeOutQuart",
-        //         },
-        //         strokeDasharray: {
-        //             value: "240 1386",
-        //             duration: 700,
-        //             easing: "easeOutQuart",
-        //         },
-        //     });
-        // },
-        // onSubmit() {
-        //     if (this.current)
-        //         this.current.pause();
-        //     this.current = anime({
-        //         targets: "path",
-        //         strokeDashoffset: {
-        //             value: -730,
-        //             duration: 700,
-        //             easing: "easeOutQuart",
-        //         },
-        //         strokeDasharray: {
-        //             value: "530 1386",
-        //             duration: 700,
-        //             easing: "easeOutQuart",
-        //         },
-        //     });
-        // },
-    }
-}
-
+      }
+    },
+    // onEmail() {
+    //     if (this.current)
+    //         this.current.pause();
+    //     this.current = anime({
+    //         targets: "path",
+    //         strokeDashoffset: {
+    //             value: 0,
+    //             duration: 700,
+    //             easing: "easeOutQuart",
+    //         },
+    //         strokeDasharray: {
+    //             value: "240 1386",
+    //             duration: 700,
+    //             easing: "easeOutQuart",
+    //         },
+    //     });
+    // },
+    // onPassword() {
+    //     if (this.current)
+    //         this.current.pause();
+    //     this.current = anime({
+    //         targets: "path",
+    //         strokeDashoffset: {
+    //             value: -336,
+    //             duration: 700,
+    //             easing: "easeOutQuart",
+    //         },
+    //         strokeDasharray: {
+    //             value: "240 1386",
+    //             duration: 700,
+    //             easing: "easeOutQuart",
+    //         },
+    //     });
+    // },
+    // onSubmit() {
+    //     if (this.current)
+    //         this.current.pause();
+    //     this.current = anime({
+    //         targets: "path",
+    //         strokeDashoffset: {
+    //             value: -730,
+    //             duration: 700,
+    //             easing: "easeOutQuart",
+    //         },
+    //         strokeDasharray: {
+    //             value: "530 1386",
+    //             duration: 700,
+    //             easing: "easeOutQuart",
+    //         },
+    //     });
+    // },
+  },
+};
 </script>
 
 
 <style scoped>
+.bootstrap-select {
+  outline: none !important;
+}
+
 .limiter {
   width: 100%;
   margin: 0 auto;
@@ -274,7 +302,6 @@ export default {
   left: auto;
   z-index: 1;
   background-image: url("../assets/SMU_1.jpeg");
-
 }
 
 .sch-img {
@@ -358,6 +385,7 @@ export default {
   display: block;
   width: 100%;
   background: transparent;
+  /* border-color: transparent; */
   font-size: 18px;
   color: #555555;
   line-height: 1.2;
