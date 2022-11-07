@@ -1,37 +1,28 @@
 <template>
   <!-- Progress bar  -->
-  <div class="mt-2 mb-2" style="margin-left: 4rem; margin-right: 4rem">
+  <div class="mt-3 mb-3" style="margin-left: 4rem; margin-right: 4rem">
     <h2>Module Mapping</h2>
   </div>
-  <div class="mt-2 mb-2" style="margin-left: 4rem; margin-right: 4rem">
+  <div class="mt-3 mb-3" style="margin-left: 4rem; margin-right: 4rem">
     <a-steps :current="stage">
       <a-step @click="stageZero">
         <!-- <span slot="title">Finished</span> -->
         <template #title>User Details</template>
-        <template #description>
-          <span>Input University & Degree</span>
-        </template>
       </a-step>
       <a-step>
         <!-- <span slot="title">Finished</span> -->
         <template #title>Module Baskets</template>
-        <template #description>
-          <span>Select your baskets</span>
-        </template>
       </a-step>
       <a-step>
         <!-- <span slot="title">Finished</span> -->
         <template #title>Results</template>
-        <template #description>
-          <span>Matching Universities</span>
-        </template>
       </a-step>
     </a-steps>
   </div>
 
   <div class="container" style="margin-left: 4rem; margin-right: 4rem">
     <!-- FIRST FORM IF USER HAS NOT FILLED IT IN -->
-    <div v-if="stage == 0" :class="{ formDisplay: form1 }" novalidate>
+    <div v-if="stage == 0" :class="{ formDisplay: form1 }">
       <!-- Step one -->
       <!-- Select Uni -->
       <div class="mb-3">
@@ -45,7 +36,7 @@
           v-on:change="getDegree"
           required
         >
-          <option value="default" disabled>-Choose a School-</option>
+          <option value="default" disabled>Select University</option>
           <option v-for="uni in universities" :key="uni" :value="uni">
             {{ uni }}
           </option>
@@ -62,7 +53,7 @@
           v-model="selectedDegree"
           required
         >
-          <option value="default" selected>-Choose a Degree-</option>
+          <option value="default" selected>Select your degree</option>
           <option v-for="degree in degrees" :key="degree" :value="degree">
             {{ degree }}
           </option>
@@ -79,7 +70,7 @@
           id="secondDegreeInput"
           v-model="selectedSecondDegree"
         >
-          <option value="default" selected>-Optional-</option>
+          <option value="default" selected>Optional</option>
           <template v-for="degree in degrees" :key="degree">
             <option v-if="degree != selectedDegree" :value="degree">
               {{ degree }}
@@ -89,7 +80,7 @@
       </div>
       <button
         v-on:click="showForm(), stageOne()"
-        class="btn btn-primary float-end"
+        class="btn btn-primary float-end mt-1"
       >
         Next
       </button>
@@ -112,11 +103,11 @@
           v-on:removeBasket="removeFromBasket"
         />
       </div>
-      <button class="btn btn-primary float-start" v-on:click="stageZero()">
+      <button class="btn btn-primary float-start mt-1" v-on:click="stageZero()">
         Previous
       </button>
       <button
-        class="btn btn-primary float-end"
+        class="btn btn-primary float-end mt-1"
         v-on:click="submitData(), stageTwo()"
       >
         Submit
