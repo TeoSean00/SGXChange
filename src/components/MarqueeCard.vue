@@ -37,8 +37,9 @@ h6 {
 }
 
 .marquee-uni-image {
+  transition: all 0.4s;
   position: absolute;
-  border-radius: 25px;
+  /* border-radius: 25px; */
   object-fit: cover;
 }
 

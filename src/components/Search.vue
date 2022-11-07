@@ -95,7 +95,7 @@ export default {
   border: none;
   outline: none;
   font-family: "Open Sans", Arial, Verdana;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 400;
   line-height: 20px;
   color: black;
