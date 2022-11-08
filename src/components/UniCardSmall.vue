@@ -61,7 +61,7 @@ export default {
 <style scoped>
 .card-img-top {
     width: 100%;
-    height: 13vw;
+    height: 12rem;
     object-fit: cover;
 }
 </style>
