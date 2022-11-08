@@ -7,12 +7,21 @@
       <div class="col h2">{{ uniName }}</div>
       <div class="col text-end">
         <!-- sharing and saving to link to function / api -->
-        <span class="mx-1"><i class="bi bi-upload m-1"></i><a href="/" class="text-dark">Share</a></span>
-        <span class="mx-1"><i class="bi bi-download m-1"></i><a href="/" class="text-dark"> Save</a></span>
+        <!-- FACEBOOK -->
+        <span class="d-flex flex-row gap-4 justify-content-end">
+          <a class="bi bi-facebook fs-4" @click="fbs_click" target="_blank">
+          </a>
+          <!-- TWITTER -->
+          <a class="bi bi-twitter fs-4" @click="tbs_click"  target="_blank">
+          </a>
+          <!-- LINKEDIN -->
+          <a class="bi bi-linkedin fs-4" @click="lbs_click"  target="_blank">
+          </a>
+        </span>
       </div>
     </div>
     <div class="row mb-3">
-      <div class="col-4">
+      <div class="col-6">
         <div class="d-inline me-1">
           <i class="bi bi-star-fill"></i>
           <!-- to insert the review rating based on reviews system -->
@@ -23,7 +32,7 @@
         <a href="#" class="text-dark mx-1">90 Reviews</a>
         <a href="#" class="text-bold mx-1">{{region}}∙{{country}}</a>
       </div>
-      <div class="col-4"></div>
+      <div class="col-6"></div>
     </div>
     <div class="row mb-5">
       <div class="col-8">
@@ -494,7 +503,9 @@ export default {
       const languages = data[0]['languages']
       const currencies = data[0]['currencies']
       for (let key in languages){
-        this.languages.push(languages[key])
+        if (!this.languages.includes(languages[key])){
+          this.languages.push(languages[key])
+        }
       } for (let key in currencies){
         let currencyObj = currencies[key]
         this.currencies.push(currencyObj['name'],currencyObj['symbol'])
@@ -518,6 +529,22 @@ export default {
     deg2rad(deg) {
       return deg * (Math.PI/180)
     },    
+    // Sharing social links
+    fbs_click(){
+      var pageLink = window.location.href;
+      var pageTitle = String(document.title).replace('/\&/g', '%26')
+      window.open(`http://www.facebook.com/sharer.php?u=${pageLink}&quote=${pageTitle}`,'sharer','toolbar=0,status=0,width=626,height=436');return false;
+    },
+    tbs_click(){
+      var pageLink = window.location.href;
+      var pageTitle = String(document.title).replace('/\&/g', '%26')
+      window.open(`https://twitter.com/intent/tweet?text=${pageTitle}&url=${pageLink}`,'sharer','toolbar=0,status=0,width=626,height=436');return false;
+    },
+    lbs_click(){
+      var pageLink = window.location.href
+      var pageTitle = String(document.title).replace('/\&/g', '%26')
+      window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${pageLink}`,'sharer','toolbar=0,status=0,width=626,height=436');return false
+    },
     // Dynamically opens modal and calls upon modal component
     showModal() {
       console.log('modal opened from uniInfo')

@@ -35,7 +35,7 @@
         v-for="(uni, index) in items.slice(row1start, row1end)"
         :key="index"
         :universityName="uni.name"
-        :gpaReq="uni.gpaReq.toFixed(1)"
+        :gpaReq="uni.gpaReq"
         :IgpaNinetyPercentile="uni.IgpaNinetyPercentile"
         :IgpaTenPercentile="uni.IgpaTenPercentile"
         :NoOfPlacesSem1="uni.NoOfPlacesSem1"
@@ -205,7 +205,7 @@ export default {
     },
     async getAllUniversities() {
       console.log("this ran");
-      this.getAllUni = await getDocs(collection(fireStore, "Universities"));
+      this.getAllUni = await getDocs(collection(fireStore, "Universities2"));
       // console.log(this.getAllUni);
     },
 
