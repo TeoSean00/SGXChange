@@ -229,8 +229,7 @@
               </div>
             </div>
   
-            <!-- Dynamic display portion to be fixed, nd account for when after fb data loads -->
-            <div v-show="isThereReviews && isReviewsLoaded" class="row d-flex">
+            <div v-if="this.reviews.length>0 && this.isReviewsLoaded" class="row d-flex">
               <div class='col-sm-12 col-md-6 col-lg-4 flex-grow-1 flex-shrink-1' v-for="(review, index) in reviews"
                 :key="index">
                 <div class="card my-4">
@@ -256,10 +255,10 @@
                 </div>
               </div>
             </div>
-            <!-- Dynamic display portion to be fixed, nd account for when after fb data loads -->
-            <div v-show="!isThereReviews && isReviewsLoaded" class="row d-flex">
+            <div v-if="this.reviews.length==0 && this.isReviewsLoaded"
+            class="row d-flex mt-3 mb-4">
               <div class='col-sm-12 col-md-6 col-lg-4 flex-grow-1 flex-shrink-1'>
-                No reviews for this university yet, would you like to add one?
+                There are no reviews for {{uniName}} yet, would you like to be the first to add one {{name}}?
               </div>
             </div>
           </div>
@@ -312,7 +311,6 @@ export default {
       userName: '',
       isModalOpen: false,
       isReviewsLoaded: false,
-      isThereReviews: false,
     }
   },
   components: {
@@ -336,27 +334,7 @@ export default {
     this.checkForUser()
     // console.log(this.uniName)
   },
-  // mounted(){
-  //   // this.checkForReviews()
-  //   // console.log('reviews?', this.isThereReviews, 'reviews loaded?', this.isReviewsLoaded)
-  // },
-  // updated(){
-  //   this.checkForReviews()
-  // },
   methods: {
-    // checkForReviews(){
-    //   if(this.isReviewsLoaded){
-    //     if(this.reviews.length>0){
-    //       console.log('reviews loaded and no. of reviews are', this.reviews.length)
-    //       this.isThereReviews = true
-    //     }
-    //     else{
-    //       console.log('reviews loaded and no. of reviews are', this.reviews.length, '; no reviews for this uni')
-    //       this.isThereReviews = false
-    //     }
-    //   }
-    // },
-
     // Get Uni Info
     async getUniInfo() {
       let q = query(collection(fireStore, "Universities"), where("HostUniversity", "==", this.uniName))
@@ -452,8 +430,8 @@ export default {
         this.reviews.push(review)
         console.log(review, this.reviews)
       });
-      // this.isReviewsLoaded = true
-      // this.checkForReviews()
+      console.log(getUniReviews.docs.length)
+      this.isReviewsLoaded = true
     },
     
     // Dynamically opens modal and calls upon modal component
