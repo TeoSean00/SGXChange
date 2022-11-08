@@ -100,7 +100,7 @@
           </div>
 
           <div class="container-login100-form-btn">
-            <button @click="register()" class="login100-form-btn">Login</button>
+            <button @click="register()" class="login100-form-btn">Register</button>
           </div>
           <!-- <p class="register">
                 Don't have an account?
