@@ -1,5 +1,8 @@
 <template>
-    <button class="btn btn-primary" v-on:click="addToFav()">Favourite</button>
+    <button class="btn btn-outline-danger d-flex align-items-center p-2" v-on:click="addToFav()">
+        <i v-if="favourited" class="bi bi-heart-filled bg-danger fs-6 mx-1"></i>
+        <i v-else class="bi bi-heart fs-6 mx-1"></i>
+    Favourite</button>
 </template>
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
