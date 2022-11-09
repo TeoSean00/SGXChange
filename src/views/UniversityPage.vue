@@ -126,6 +126,10 @@ export default {
         6: "South America",
       },
       getAllUni: [],
+      // key will be uni full name, val will be baskets it can map to
+      uniToBaskets: {},
+      // key will be baskets, val will be specific modules in that basket mappable
+      basketToModules: {},
     };
   },
   setup() {
@@ -204,23 +208,17 @@ export default {
       }
     },
     async getAllUniversities() {
-      console.log("this ran");
       this.getAllUni = await getDocs(collection(fireStore, "Universities2"));
-      // console.log(this.getAllUni);
     },
 
     async getFilteredUniversities() {
-      console.log(this.current[0]);
-      console.log("Does this work");
       this.items = [];
       let region = this.regionId[this.current[0]];
       console.log(region);
       if (region == "All") {
-        console.log("fetching all");
         this.getAllUni.forEach((doc) => {
           // put key-value pairs
           let universityInfo = {};
-          console.log(doc.data().HostUniversity);
           universityInfo["name"] = doc.data().HostUniversity;
           universityInfo["gpaReq"] = doc.data().GPA;
           // universityInfo["IgpaNinetyPercentile"] =
@@ -234,12 +232,10 @@ export default {
           this.items.push(universityInfo);
         });
         this.pagination();
-        console.log('all countries pushed to this.items')
       } else {
           this.getAllUni.forEach((doc) => {
           let universityInfo = {};
           if (doc.data().Region == region) {
-            console.log(doc.data().HostUniversity);
             // put key-value pairs
             universityInfo["name"] = doc.data().HostUniversity;
             universityInfo["gpaReq"] = doc.data().GPA;
@@ -251,10 +247,46 @@ export default {
             this.items.push(universityInfo);
           }
         });
-        console.log('region countries pushed to this.items')
         this.pagination();
       }
     },
+    async getUniToBaskets(){
+      // loop through the BasketToUni collection, for each basket, if the uni value not in UniToBasket obj, create new key. Else push to UniToBasket[uni] which will be an array of baskets
+      var basketToUniversities = await getDocs(collection(fireStore, "BasketToUniversities"));
+      basketToUniversities.forEach((doc)=> {
+        let basketInfo = {}
+        // console.log(doc.data()['Universities'])
+        // console.log(doc.id)
+        let universities = doc.data()['Universities']
+        let basket = doc.id
+        for (let uni of universities){
+          if (uni in this.uniToBaskets){
+            this.uniToBaskets[uni].push(basket)
+          } else {
+            this.uniToBaskets[uni] = [basket]
+          }
+        }
+      })
+      // console.log(this.uniToBaskets)
+    },
+    async getBasketToModules(){
+      // loop through the BasketToUni collection, for each basket, if the uni value not in UniToBasket obj, create new key. Else push to UniToBasket[uni] which will be an array of baskets
+      var basketToModules = await getDocs(collection(fireStore, "BasketToModules"));
+      basketToModules.forEach((doc)=> {
+        let basketInfo = {}
+        // console.log(doc.data()['Universities'])
+        // console.log(doc.id)
+        let basket = doc.data()['Baskets']
+        let Modules = doc.data()['Modules']
+       
+        if (basket in this.basketToModules){
+          this.basketToModules[basket].push(Modules)
+        } else {
+          this.basketToModules[basket] = [Modules]
+        }
+      })
+      console.log(this.basketToModules)
+    }
   },
   computed: {
     rows() {
@@ -285,10 +317,10 @@ export default {
     UniFilterBar,
   },
   async mounted() {
+    await this.getUniToBaskets();
+    await this.getBasketToModules();
     await this.getAllUniversities();
     await this.getFilteredUniversities();
-    console.log(this.items.length,'length')
-    console.log(this.lastPage,'lastPage')
   },
 };
 </script>
