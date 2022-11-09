@@ -57,9 +57,14 @@
               required
             >
               <option value="default" selected>Select A University</option>
-              <option v-for="uni in allUniversities" :key="uni" :value="uni">
+              <template v-for="uni in allUniversities" :key="uni">
+                <option v-if="uni == 'Singapore Management University'" :value="uni">
                 {{ uni }}
-              </option>
+                </option>
+                <option v-else :value="uni" class="bg-light" disabled>
+                {{ uni }}
+                </option>
+              </template>
             </select>
             <span class="focus-input100"></span>
             <span class="label-input100">School</span>
@@ -130,7 +135,6 @@ export default {
       password: "",
       router: useRouter(),
       current: null,
-      school: "",
       firstDegree: "",
       secondDegree: "",
       allUniversities: [],
@@ -154,7 +158,7 @@ export default {
       console.log(this.degrees);
     },
     async getUniversities() {
-      const getAllUni = await getDocs(collection(fireStore, "Universities"));
+      const getAllUni = await getDocs(collection(fireStore, "Universities2"));
       getAllUni.forEach((doc) => {
         this.allUniversities.push(doc.data().HostUniversity);
       });
@@ -168,14 +172,13 @@ export default {
         createUserWithEmailAndPassword(getAuth(), this.email, this.password)
           .then((user) => {
             //Adding to db
-
             const dbRef = collection(fireStore, "UserProfiles");
             const data = {
               UserName: this.email.split("@")[0],
               Email: this.email,
-              FirstDegree: this.firstDegree,
-              SecondDegree: this.secondDegree,
-              School: this.school,
+              FirstDegree: this.selectedFirstDegree,
+              SecondDegree: this.selectedSecondDegree,
+              School: this.selectedUni,
               Favourites: [],
               Reviews: [],
             };

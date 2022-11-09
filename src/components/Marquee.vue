@@ -81,7 +81,7 @@ export default {
     },
     async getInfo() {
       const getUniversities = await getDocs(
-        collection(fireStore, "Universities")
+        collection(fireStore, "Universities2")
       );
       getUniversities.forEach((doc) => {
         let universityInfo = {};
