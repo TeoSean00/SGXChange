@@ -120,13 +120,11 @@
       </button>
     </div>
     <div :class="{ Output: testDisplay }">
-      <h4>Test Output</h4>
-      <div>{{ testOutput }}</div>
       <div class="d-flex flex-wrap">
         <UniCardSmall
           class="unicard"
-          v-for="uni in uniOutput"
-          :key="uni"
+          v-for="(uni, index) in uniOutput.slice(row1start, row1end)"
+          :key="index"
           :universityName="uni.name"
           :gpaReq="uni.gpaReq"
           :IgpaNinetyPercentile="uni.IgpaNinetyPercentile"
@@ -138,6 +136,34 @@
           :imgURL="uni.imgURL"
         />
       </div>
+      <!-- PAGINATION -->
+      <div class="row">
+        <div class="col">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+              <li class="page-item">
+                <a class="page-link" @click="togglePage">Previous</a>
+              </li>
+              <!-- this part should be v-for based on no. of items in data -->
+              <!-- they should be buttons that bind to v-model currentPage-->
+              <!-- paginated items should change as well , use array.slice(start,end)-->
+              <!-- create a new component for paginated items  -->
+              <li class="page-item">
+                <a class="page-link active" @click="togglePage">1</a>
+              </li>
+              <template v-if="lastPage>1">
+                <li class="page-item" v-for="num in lastPage-1" :key="num">
+                  <a class="page-link" @click="togglePage">{{ num+1 }}</a>
+                </li>
+              </template>
+              <li class="page-item">
+                <a class="page-link" @click="togglePage">Next</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <!-- PAGINATION END -->
     </div>
   </div>
 </template>
@@ -168,11 +194,27 @@ export default {
       selectedUni: "default",
       selectedDegree: "default",
       selectedSecondDegree: "default",
-      testOutput: [],
       testDisplay: true,
       uniOutput: [],
       stage: 0,
+      // items per page set to default
+      perPage: 8,
+      // this will be v-modelled to change according to what user clicks
+      currentPage: 1,
+      firstPage: 1,
+      lastPage: 0,
     };
+  },
+  computed:{
+    rows() {
+      return this.uniOutput.length;
+    },
+    row1start() {
+      return (this.currentPage - 1) * this.perPage;
+    },
+    row1end() {
+      return this.row1start + this.perPage;
+    },
   },
   components: {
     ModuleCard,
@@ -191,6 +233,75 @@ export default {
     });
   },
   methods: {
+    pagination() {
+      const pagelinks = document.getElementsByClassName("page-link");
+
+      this.lastPage = Math.ceil(this.uniOutput.length / this.perPage);
+      this.currentPage = 1
+      // if filtering reduces the pages to 1, disable previous and next
+      if (this.lastPage == 1){
+        for (const li of pagelinks) {
+          if (li.text == 'Previous'){
+              li.classList.add('disabled')
+          } else if (li.text == 'Next'){
+              li.classList.add('disabled')
+          } else if (parseInt(li.text) == this.currentPage){
+              li.classList.add('active')
+          }
+      }}
+      // if filtering does not reduce the page to 1, disable previous only
+      else {
+        for (const li of pagelinks) {
+          if (li.text == 'Previous'){
+              li.classList.add('disabled')
+          } else if (li.text == 'Next'){
+              li.classList.remove('disabled')
+          } else if (parseInt(li.text) == this.currentPage){
+              li.classList.add('active')
+          }
+      }
+      }
+    },
+    togglePage: function () {
+      // moves to next pg or previous pg based on button clicked
+      if (event.target.text == "Previous") {
+        if (this.currentPage != 1) {
+          this.currentPage -= 1;
+        }
+      } else if (event.target.text == "Next") {
+        if (this.currentPage != this.lastPage + 1) {
+          this.currentPage += 1;
+        }
+      } else {
+        this.currentPage = parseInt(event.target.text);
+      }
+      const pagelinks = document.getElementsByClassName("page-link");
+
+      // toggles active and disabled buttons
+
+      // goes through the pagination buttons and removes all active classes
+      // also checks if currentPage == 1, then add disbaled class to previous btn
+      // also if currentPage == last, then add disabled class to next btn
+
+      for (const li of pagelinks) {
+        li.classList.remove("active");
+        li.classList.remove("disabled");
+
+        if (parseInt(li.text) === this.currentPage) {
+          console.log(li.text);
+          li.classList.add("active");
+        }
+        if (li.text == 'Previous' && this.currentPage==this.firstPage){
+            li.classList.add('disabled')
+        } else if (li.text == 'Next' && this.currentPage==this.lastPage){
+            li.classList.add('disabled')
+        } else if (parseInt(li.text) == this.currentPage){
+            event.target.classList.add('active')
+        }
+      }
+    },
+
+
     checkForUser(){
       onAuthStateChanged(getAuth(), async (user) => {
           if(user) {
@@ -300,7 +411,6 @@ export default {
         this.form1 = true;
         this.form2 = true;
         this.testDisplay = false;
-        this.testOutput = [];
         var tempUni = [];
         // Getting output universities
         for (let basket of this.selectedBaskets) {
@@ -340,10 +450,8 @@ export default {
             this.uniOutput.push(universityInfo);
           });
         }
+        this.pagination()
         // End
-        for (let basket of this.selectedBaskets) {
-          this.testOutput.push(basket);
-        }
 
       }
     },
