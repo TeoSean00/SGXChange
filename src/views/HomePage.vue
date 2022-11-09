@@ -7,45 +7,50 @@
     </div> -->
   <div class="bannerHero container-fluid m-0">
     <div class="row bannerHero align-items-center">
-      <div class="col-md-6 col-12 text-center">
+      <div class="col-lg-6 col-12 text-center p-5">
         <Banner></Banner>
       </div>
-      <div class="col-6 m-auto d-none d-md-block bCarou">
+      <div class="col-lg-6 m-auto d-none d-lg-block bCarou p-5">
         <BannerCarousel class=""></BannerCarousel>
       </div>
     </div>
   </div>
-
   <ArrowAnimation></ArrowAnimation>
   <!-- Add Parallax Scrolling here -->
   <div class="container-fluid textbox">
     <!-- <img class="mx-auto d-block logo" src="../assets/WebsiteLogo.png" alt="" /> -->
-    <h5 class="text-center">WHAT MAKES US DIFFERENT</h5>
-    <div class="row">
-      <h1 class="text-center">Why SGXchange</h1>
-    </div>
-
-    <div class="row">
-      <div class="col-6">
-        <img id="friends" src="../assets/friends.jpeg" alt="" />
-        <p></p>
+    <div class="row ">
+      <div class="col-lg-6 d-lg-block d-none">
+        <img id="friends" src="../assets/friends.jpeg" alt="" class="float-end" />
       </div>
-      <div class="col-6 text-left align-items-center">
-        <h5>Consolidated University information</h5>
-        <p>
-          As students ourselves, we understand how painful it can be to source
-          information with information scattered everywhere. SGXchange solves
-          that by providing a platform where information is consolidated.
-        </p>
-        <h5>Module Mapping</h5>
-        <p>
-          Module mapping is often a tedious mapping process. However, thanks to
-          SGXchange you can easily map your modules to exchange universities
-        </p>
+      <div class="col-lg-6 col-12 d-flex align-items-center text-center px-5">
+        <div class="row">
+          <div class="col">
+            <div class="row my-5">
+              <h5 style="color:#9191ec;">WHAT MAKES US DIFFERENT</h5>
+              <h1>Why SGXchange</h1>
+            </div>
+            <div class="row my-5 text-start">
+              <h4>Consolidated University information</h4>
+              <p class="fs-6">
+                As students ourselves, we understand how painful it can be to source
+                information with information scattered everywhere. SGXchange solves
+                that by providing a platform where information is consolidated.
+              </p>
+            </div>
+            <div class="row my-5 text-start">
+              <h4>Module Mapping</h4>
+              <p class="fs-6">
+                Module mapping is often a tedious mapping process. However, thanks to
+                SGXchange you can easily map your modules to exchange universities
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <ArrowAnimation></ArrowAnimation>
+  <div><p class="d-flex align-items-center justify-content-center fw-bold" style="font-size:3rem;height:40vh;text-align: center;">Where do you want to go?</p></div>
   <div id="marquee" class="container-fluid px-0">
     <Marquee />
   </div>

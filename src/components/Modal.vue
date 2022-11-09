@@ -11,9 +11,9 @@
         </header>
   
         <section class="modal-body">
-            <div class="form-floating" style="width: 100%; height: 100%">
-                <textarea v-model="userReview" style="width: 100%; height: 100%" class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-                <label for="floatingTextarea">Each user is limited to only 1 review per university</label>
+            <div class="form-floating" style="width: 50%; height: 50%">
+                <textarea v-model="userReview" style="width: 100%; height: 100%" class="form-control" placeholder="Leave a review here" id="floatingTextarea"></textarea>
+                <label for="floatingTextarea">You may only leave one review!</label>
             </div>
          </section>
   
@@ -42,41 +42,29 @@
 
 .modal-backdrop {
   position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .modal {
-  background: #FFFFFF;
-  box-shadow: 2px 2px 20px 1px;
-  overflow-x: auto;
   display: flex;
   flex-direction: column;
-}
-
-.modal-header, .modal-footer {
-  padding: 15px;
-  display: flex;
+  min-width:100vw;
+  height:100vh;
+  justify-content:center;
+  position: absolute;
+  top: 25%;
+  left: 25%;
 }
 
 .modal-header {
   position: relative;
-  border-bottom: 1px solid #eeeeee;
-  color: #4AAE9B;
-  justify-content: space-between;
-  font-weight: bold;
-}
-
-.modal-footer {
-  border-top: 1px solid #eeeeee;
-  flex-direction: column;
-  justify-content: flex-end;
+  top: 1rem;
+  color: #ffffff;
+  font-weight:bolder;
+  font-size:x-large;
+  width:50%;
+  border-bottom: none;
 }
 
 .modal-body {
@@ -87,22 +75,26 @@
 .btn-modal-close {
   position: absolute;
   top: 0;
-  right: 0;
+  left: 103%;
   border: none;
-  font-size: 20px;
+  font-size: 2rem;
   padding: 10px;
   cursor: pointer;
   font-weight: bold;
-  color: #4AAE9B;
+  color: #ffffff;
   background: transparent;
 }
 
 .btn-modal-green {
   color: white;
-  background: #4AAE9B;
-  border: 1px solid #4AAE9B;
-  border-radius: 2px;
-  margin-top: 10px;
+  position: absolute;
+  top: 50%;
+  left: 39%;
+  background: #323030;
+  border: none;
+  border-radius: 0.3rem;
+  padding:0.5rem;
+  margin-top: 1rem;
 }
 </style>
 
@@ -184,6 +176,7 @@
                  + "\n\n" + "Thank you " + this.currentUserName + "!"
                 alert(text)
                 this.reviewDone()
+                location.reload()
             })
             .catch(error => {
                 alert('An error has occurred, please check the console for instructions')

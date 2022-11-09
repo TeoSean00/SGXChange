@@ -1,9 +1,11 @@
 <template>
-    <div class="arrow_container">
+  <br>
+    <div class="arrow_container mt-4">
       <div class="chevron"></div>
       <div class="chevron"></div>
       <div class="chevron"></div>
     </div>
+  <br>
 </template>
 <script>
 export default {

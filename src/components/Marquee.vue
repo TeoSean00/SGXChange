@@ -1,9 +1,9 @@
 <!-- Pull the images from firestore and the name of the place -->
 <template>
-  <div class="marquee">
-    <h5 class="marquee-header text-center mt-3 pt-4">
+  <div class="marquee pt-4">
+    <!-- <h5 class="marquee-header text-center mt-3 pt-4">
       Where do you want to go?
-    </h5>
+    </h5> -->
     <Vue3Marquee :pauseOnHover="true" :duration="110">
       <div class="" v-for="uni in universities" :key="uni">
         <MarqueeCard
@@ -16,7 +16,7 @@
       </div>
     </Vue3Marquee>
     <div class="marquee-footer">
-      <div class="text-center marquee-anywhere">
+      <div class="text-center marquee-anywhere mt-5">
         <router-link to="/UniversityPage" id="seeUni">
           <button class="marquee-btn marquee-btn-hide">Take me anywhere</button>
         </router-link>
@@ -81,7 +81,7 @@ export default {
     },
     async getInfo() {
       const getUniversities = await getDocs(
-        collection(fireStore, "Universities")
+        collection(fireStore, "Universities2")
       );
       getUniversities.forEach((doc) => {
         let universityInfo = {};

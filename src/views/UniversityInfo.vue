@@ -11,47 +11,61 @@
   >
     <div class="row mb-3">
       <div class="col h2">{{ uniName }}</div>
+      <div class="col text-end">
+        <!-- sharing and saving to link to function / api -->
+        <!-- FACEBOOK -->
+        <span class="d-flex flex-row gap-4 justify-content-end">
+          <a class="bi bi-facebook fs-4" @click="fbs_click" target="_blank">
+          </a>
+          <!-- TWITTER -->
+          <a class="bi bi-twitter fs-4" @click="tbs_click"  target="_blank">
+          </a>
+          <!-- LINKEDIN -->
+          <a class="bi bi-linkedin fs-4" @click="lbs_click"  target="_blank">
+          </a>
+        </span>
+      </div>
     </div>
     <div class="row mb-3">
-      <div class="col-4">
+      <div class="col-6">
         <div class="d-inline me-1">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-star-fill"
-            viewBox="0 0 16 16"
-          >
-            <path
-              d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-            />
-          </svg>
+          <i class="bi bi-star-fill"></i>
+          <!-- to insert the review rating based on reviews system -->
           4.64
         </div>
+        
+        <!-- sean how to insert count of reviews here according to uni -->
         <a href="#" class="text-dark mx-1">90 Reviews</a>
-        <a href="#" class="text-dark mx-1">City∙Country</a>
+        <a href="#" class="text-bold mx-1">{{region}}∙{{country}}</a>
       </div>
-      <div class="col-4"></div>
-      <div class="col-2 text-end">
-        <span class="mx-1"
-          ><i class="bi bi-upload m-1"></i
-          ><a href="/" class="text-dark">Share</a></span
-        >
-        <span class="mx-1"
-          ><i class="bi bi-download m-1"></i
-          ><a href="/" class="text-dark"> Save</a></span
-        >
-      </div>
+      <div class="col-6"></div>
     </div>
     <div class="row mb-5">
-      <div class="col-6">
-        <img
-          src="../assets/440px-University_of_St._Gallen_EUR-HSG_Institute_Building.jpg"
-          class="w-100"
-          style=""
-          alt="uni-display"
-        />
+      <div class="col-8">
+        <div id="carouselExampleIndicators" class="carousel slide" style="width:640px;height:460px;" data-bs-ride="true">
+          <div class="carousel-indicators">
+            <button type="button" v-for="img,idx of uniImgArr" data-bs-target="#carouselExampleIndicators" :data-bs-slide-to="idx" class="active" aria-current="true" :aria-label="'Slide '+idx"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active" v-for="img of uniImgArr">
+              <img :src="img" class="d-block w-100" style="width:640px;height:460px;" alt="...">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+      <div class="col-4">
+      </div>
+      <!-- <div class="col-6">
+        <img src="../assets/440px-University_of_St._Gallen_EUR-HSG_Institute_Building.jpg" class="w-100" style=""
+          alt="uni-display" />
       </div>
       <div class="col-2">
         <img
@@ -66,18 +80,9 @@
         />
       </div>
       <div class="col-2">
-        <img
-          src="../assets/311ca332-dcb2-4b66-945c-ded8712a3543.webp"
-          class="w-100 mb-2"
-          alt=""
-        />
-        <img
-          src="../assets/HSG-SQUARE-2000x1125.jpeg"
-          class="w-100"
-          style="width: 18rem"
-          alt=""
-        />
-      </div>
+        <img src="../assets/311ca332-dcb2-4b66-945c-ded8712a3543.webp" class="w-100 mb-2" alt="" />
+        <img src="../assets/HSG-SQUARE-2000x1125.jpeg" class="w-100" style="width: 18rem" alt="" />
+      </div> -->
     </div>
     <!-- test -->
     <div class="row">
@@ -175,13 +180,17 @@
           </li>
           <!-- distance -->
           <li class="my-4">
-            <i style="font-size: 2rem" class="bi bi-airplane me-4"></i
-            >Proximity: ~3500km
+            <i style="font-size: 2rem" class="bi bi-airplane me-4"></i>Proximity: ~{{this.dist}}km
           </li>
           <!-- Language spoken -->
           <li class="my-4">
-            <i style="font-size: 2rem" class="bi bi-translate me-4"></i
-            >Language: English, Portugese, Spanish
+            <i style="font-size: 2rem" class="bi bi-translate me-4"></i>Language: <span v-for="lang in languages.slice(0,-1)">{{lang+', '}}</span>
+            <span>{{languages.slice(-1)[0]}}</span>
+          </li>
+          <!-- Currency used -->
+          <li class="my-4">
+            <i style="font-size: 2rem" class="bi bi-currency-exchange me-4"></i>Currencies: <span v-for="curr in currencies.slice(0,-1)">{{curr+' '}}</span>
+            <span>{{currencies.slice(-1)[0]}}</span>
           </li>
           <!-- Website Url -->
           <li class="my-4">
@@ -307,14 +316,10 @@
                 />
               </div>
             </div>
-
-            <!-- Dynamic display portion to be fixed, nd account for when after fb data loads -->
-            <div v-show="isThereReviews && isReviewsLoaded" class="row d-flex">
-              <div
-                class="col-sm-12 col-md-6 col-lg-4 flex-grow-1 flex-shrink-1"
-                v-for="(review, index) in reviews"
-                :key="index"
-              >
+  
+            <div v-if="this.reviews.length>0 && this.isReviewsLoaded" class="row d-flex">
+              <div class='col-sm-12 col-md-6 col-lg-4 flex-grow-1 flex-shrink-1' v-for="(review, index) in reviews"
+                :key="index">
                 <div class="card my-4">
                   <div class="card-body">
                     <div class="d-flex justify-content-between">
@@ -344,12 +349,10 @@
                 </div>
               </div>
             </div>
-            <!-- Dynamic display portion to be fixed, nd account for when after fb data loads -->
-            <div v-show="!isThereReviews && isReviewsLoaded" class="row d-flex">
-              <div
-                class="col-sm-12 col-md-6 col-lg-4 flex-grow-1 flex-shrink-1"
-              >
-                No reviews for this university yet, would you like to add one?
+            <div v-if="this.reviews.length==0 && this.isReviewsLoaded"
+            class="row d-flex mt-3 mb-4">
+              <div class='col-sm-12 col-md-6 col-lg-4 flex-grow-1 flex-shrink-1'>
+                There are no reviews for {{uniName}} yet, would you like to be the first to add one {{name}}?
               </div>
             </div>
           </div>
@@ -387,20 +390,27 @@ export default {
   data() {
     return {
       // We not using the igpa format anymore liao btw elton
-      igpaTen: "",
-      igpaNinety: "",
-      uniName: "",
-      academicCalendar: "",
-      gpaReq: "",
-      uniDesc: "",
-      uniUrl: "",
-      uniIcon: "",
-      uniDesc: "",
-      hasAccom: "",
-      uniCourseUrl: "",
-      uniRanking: "",
-      numSlots1: "",
-      numSlots2: "",
+      country: '',
+      region: '',
+      languages: ['English'],
+      currencies:[],
+      uniLat: '',
+      uniLng: '',
+      igpaTen: '',
+      igpaNinety: '',
+      uniName: '',
+      academicCalendar: '',
+      gpaReq: '',
+      uniDesc: '',
+      uniImgArr: [],
+      uniUrl: '',
+      uniIcon: '',
+      uniDesc: '',
+      hasAccom: '',
+      uniCourseUrl: '',
+      uniRanking: '',
+      numSlots1: '',
+      numSlots2: '',
       mods: [],
       name: "",
       uniLat: 0,
@@ -414,7 +424,7 @@ export default {
       userName: "",
       isModalOpen: false,
       isReviewsLoaded: false,
-      isThereReviews: false,
+      // isThereReviews: false,
       places: [],
       nearbyLocation: [],
     };
@@ -426,11 +436,8 @@ export default {
     FavBtn,
   },
   computed: {
-    gpaReq() {
-      if (this.gpaReq == null) {
-        return "NA";
-      }
-      return this.gpaReq;
+    dist(){
+      return this.getDistanceFromLatLonInKm(1.2963569034140912, 103.8500945527462,this.uniLat,this.uniLng)
     },
   },
   created() {
@@ -523,31 +530,30 @@ export default {
         console.log(err);
       }
     },
-
     // Get Uni Info
     async getUniInfo() {
-      let q = query(
-        collection(fireStore, "Universities2"),
-        where("HostUniversity", "==", this.uniName)
-      );
-      let getDegreeUni = await getDocs(q);
+      let q = query(collection(fireStore, "Universities2"), where("HostUniversity", "==", this.uniName))
+      let getDegreeUni = await getDocs(q)
       getDegreeUni.forEach((doc) => {
         // console.log(doc.data())
-        // Academic Cal (Remove temp because breaks code)
-        // var tempCal = doc.data().AcademicCalendar.split('\n')
-        // for (let item of tempCal){
-        //   item = item.split(':')
-        //   this.academicCalendar += `<span style="font-weight:bold;">${item[0]} : </span>` + item[1].replace('/n', '') + "<br><br>"
-        // }
-        //Longtitude and Langtitude of the University
         this.uniLat = doc.data().UniLatitude;
         this.uniLong = doc.data().UniLongtitude;
-        console.log(this.uniLat);
-        console.log(this.uniLong);
+        var tempCal = doc.data().AcademicCalendar.split('/n')
+        for (let item of tempCal.slice(0,-1)){
+          item = item.split(':')
+          this.academicCalendar += `<span style="font-weight:bold;">${item[0]} : </span>` + item[1].replace('/n', '') + "<br><br>"
+        }
+        // region
+        this.region = doc.data().Region
+        // country
+        this.country = doc.data().Country
+        console.log(this.country,'country')
         // Gpa
-        this.gpaReq = doc.data()["GPA"];
-        // Uni Icon URL
-        this.uniIcon = doc.data().Icon;
+        if (doc.data()['GPA'] == null){
+          this.gpaReq = 'NA'
+        } else{
+          this.gpaReq = doc.data()['GPA'].toFixed(1)
+        }
         // Uni Desc
         this.uniDesc = doc.data().UniDescription;
         // Uni Url
@@ -555,19 +561,31 @@ export default {
         // Uni Name
         this.uniName = doc.data().HostUniversity;
         // // Uni Accom boolean
-        // this.hasAccom = doc.data().Accommodation
+        this.hasAccom = doc.data().Accommodation
+        // Uni images 
+        for (let i=1;i<8;i++){
+          let key = `UniImageLink${i}`
+          var val = doc.data()[key]
+          console.log(val)
+          if (val!=null && val.trim()!=null && val!="'"){
+            this.uniImgArr.push(doc.data()[key])
+          }
+        }
+        // Uni exchange spots
+        this.numSlots1 = doc.data().NoOfPlacesSem1
+        this.numSlots2 = doc.data().NoOfPlacesSem2
+        // Uni coords
+        this.uniLat, this.uniLng = doc.data().UniLatitude, doc.data().UniLongitude
+        // // igpa info
+        this.igpaTen = doc.data().iGpaTen
+        this.igpaNinety = doc.data().iGpaNinety
+        // Uni Nearby Attractions
+        this.getNearbyAttr();
         // // Uni course url
         // this.uniCourseUrl = doc.data().CourseCatalogLink
         // // World Ranking
         // this.uniRanking = doc.data().WorldRanking
-        // Uni exchange spots
-        this.numSlots1 = doc.data().NoOfPlacesSem1;
-        this.numSlots2 = doc.data().NoOfPlacesSem2;
-        this.getNearbyAttr();
-        // // igpa info
-        // this.igpaTen = doc.data().IgpaTenPercentile
-        // this.igpaNinety = doc.data().IgpaNinetyPercentile
-        // console.log(this.numSlots1)
+        this.getLangauageCurrencyFromCountry()
       });
     },
 
@@ -579,19 +597,17 @@ export default {
       );
       let getModuleUni = await getDocs(q);
       getModuleUni.forEach((doc) => {
-        let mod = {};
-        mod["year"] = doc.data().AY;
-        mod["desc"] = doc.data().Description;
-        mod["difficulty"] = doc.data().Difficulty;
-        mod["faculty"] = doc.data().Faculty;
-        mod["url"] = doc.data().LinkToCourseOutline;
-        mod["id"] = doc.data().ModuleId;
-        mod["name"] = doc.data().ModuleName;
-        mod["popularity"] = doc.data().Popularity;
-        mod["sem"] = doc.data().Semester;
-        // console.log(mod);
-        this.mods.push(mod);
-        // console.log(1);
+        let mod = {}
+        mod['year'] = doc.data().AY
+        mod['desc'] = doc.data().Description
+        mod['difficulty'] = doc.data().Difficulty
+        mod['faculty'] = doc.data().Faculty
+        mod['url'] = doc.data().LinkToCourseOutline
+        mod['id'] = doc.data().ModuleId
+        mod['name'] = doc.data().ModuleName
+        mod['popularity'] = doc.data().Popularity
+        mod['sem'] = doc.data().Semester
+        this.mods.push(mod)
       });
     },
 
@@ -613,28 +629,81 @@ export default {
 
     // Pulls review data from firebase and auto populates review section specific to each uniInfo page
     async getReviewInfo() {
-      const name = this.uniName;
-      const review = `${name} Reviews`;
-      // console.log("uniname and its review collection is", name, review);
+      const name = this.uniName
+      const review = `${name} Reviews`
+      // console.log('uniname and its review collection is', name, review)
 
       let q = query(collectionGroup(fireStore, review));
       let getUniReviews = await getDocs(q);
       getUniReviews.forEach((doc) => {
-        // console.log(`${name} review info is`, doc.data());
-        let review = {};
-        review["email"] = doc.data().Email;
-        review["likes"] = doc.data().Likes;
-        review["info"] = doc.data().ReviewInfo;
-        review["uniName"] = doc.data().UniName;
-        review["userName"] = doc.data().UserName;
-        review["currentTime"] = doc.data().currentTime;
-        this.reviews.push(review);
-        // console.log(review, this.reviews);
+        // console.log(`${name} review info is`, doc.data())
+        let review = {}
+        review['email'] = doc.data().Email
+        review['likes'] = doc.data().Likes
+        review['info'] = doc.data().ReviewInfo
+        review['uniName'] = doc.data().UniName
+        review['userName'] = doc.data().UserName
+        review['currentTime'] = doc.data().currentTime
+        this.reviews.push(review)
+        // console.log(review, this.reviews)
       });
-      // this.isReviewsLoaded = true
-      // this.checkForReviews()
+      console.log(getUniReviews.docs.length)
+      this.isReviewsLoaded = true
     },
+    async getLangauageCurrencyFromCountry(){
+      // console.log('country is: ',this.country)
+      const response = await fetch(
+        `https://restcountries.com/v3.1/name/${this.country}?fields=capital,currencies,languages`
+      )
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json()
+      const languages = data[0]['languages']
+      const currencies = data[0]['currencies']
+      for (let key in languages){
+        if (!this.languages.includes(languages[key])){
+          this.languages.push(languages[key])
+        }
+      } for (let key in currencies){
+        let currencyObj = currencies[key]
+        this.currencies.push(currencyObj['name'],currencyObj['symbol'])
+      }
 
+    },
+    // used to calculate the proximity of destination university from Singapore
+    getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+      var R = 6371; // Radius of the earth in km
+      var dLat = this.deg2rad(lat2-lat1);  // deg2rad below
+      var dLon = this.deg2rad(lon2-lon1); 
+      var a = 
+        Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) * 
+        Math.sin(dLon/2) * Math.sin(dLon/2)
+        ; 
+      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+      var d = R * c; // Distance in km
+      return Math.floor(d/100)*100;
+    },
+    deg2rad(deg) {
+      return deg * (Math.PI/180)
+    },    
+    // Sharing social links
+    fbs_click(){
+      var pageLink = window.location.href;
+      var pageTitle = String(document.title).replace('/\&/g', '%26')
+      window.open(`http://www.facebook.com/sharer.php?u=${pageLink}&quote=${pageTitle}`,'sharer','toolbar=0,status=0,width=626,height=436');return false;
+    },
+    tbs_click(){
+      var pageLink = window.location.href;
+      var pageTitle = String(document.title).replace('/\&/g', '%26')
+      window.open(`https://twitter.com/intent/tweet?text=${pageTitle}&url=${pageLink}`,'sharer','toolbar=0,status=0,width=626,height=436');return false;
+    },
+    lbs_click(){
+      var pageLink = window.location.href
+      var pageTitle = String(document.title).replace('/\&/g', '%26')
+      window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${pageLink}`,'sharer','toolbar=0,status=0,width=626,height=436');return false
+    },
     // Dynamically opens modal and calls upon modal component
     showModal() {
       console.log("modal opened from uniInfo");

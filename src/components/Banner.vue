@@ -12,12 +12,12 @@
     <div class="row mx-auto text-center">
       <div class="col-6" align="center">
         <router-link to="/ModuleMappingPage" id="seeUni">
-          <button class="button">Module Mapping</button>
+          <button class="button btn-sm">Module Mapping</button>
         </router-link>
       </div>
       <div class="col-6 text-center" align="center">
         <router-link to="/UniversityPage" id="seeUni">
-          <button class="button">Browse Universities</button>
+          <button class="button btn-sm">Browse Universities</button>
         </router-link>
       </div>
     </div>
@@ -103,8 +103,8 @@ export default {
     border-color: black;
     font-size: 1rem;
     border-radius: 5px;
-    padding-left: 70px;
-    padding-right: 70px;
+    padding-left: 20px;
+    padding-right: 20px;
     color: black;
     font-weight: 500;
     margin-bottom: 50px;
@@ -138,7 +138,7 @@ h1 {
   background-color: #9191ec;
   border-color: #9191ec;
   color: white;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
 }
 
 /* Cursor blinking CSS Starts... */

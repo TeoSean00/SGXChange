@@ -1,6 +1,6 @@
 <template>
   <router-link
-    to="/"
+    :to="`/universityInfo/` + universityName"
     @mouseover="(hover = true), $emit('switch')"
     @mouseout="(hover = false), $emit('switchOn')"
   >
@@ -33,7 +33,7 @@ export default {
 
 <style scoped>
 h6 {
-  font-weight: bold;
+  font-weight:400;
 }
 
 .marquee-uni-image {
@@ -46,7 +46,7 @@ h6 {
 .marquee-uni-name {
   position: relative;
   color: white;
-  font-size: xx-large;
+  font-size: x-large;
 }
 
 .unfade {
