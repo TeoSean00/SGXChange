@@ -7,6 +7,7 @@ import Antd from "ant-design-vue";
 import "ant-design-vue/dist/antd.css";
 import VueGoogleMaps from "@fawmi/vue-google-maps";
 import anime from "animejs/lib/anime.es.js";
+import { Loader } from "@googlemaps/js-api-loader";
 
 import "@fontsource/montserrat/100.css";
 import "@fontsource/montserrat/200.css";

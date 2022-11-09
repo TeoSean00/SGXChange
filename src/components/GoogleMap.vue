@@ -2,7 +2,7 @@
   <GMapMap
     class="gMap"
     :center="center"
-    :zoom="15"
+    :zoom="14"
     map-type-id="roadmap"
     :options="{
       zoomControl: true,
@@ -18,26 +18,69 @@
       v-for="(m, index) in markers"
       :position="m.position"
       :clickable="true"
-      @click="openInfoWindow(marker.id)"
     />
+    <GMapMarker
+      :key="index"
+      v-for="(m, index) in extras"
+      :position="m.position"
+      :icon="{
+        url: nearbyIcon[index],
+        scaledSize: { width: 25, height: 25 },
+      }"
+      :clickable="true"
+    />
+    <!-- https://www.nicepng.com/png/detail/37-373764_javascript-adding-a-custom-map-marker-icon-to.png -->
   </GMapMap>
 </template>
 <script>
 export default {
+  props: ["lati", "long", "extras", "nearbyIcon"],
   data() {
-    return {
-      center: { lat: 1.296568, lng: 103.852119 },
-      markers: [
+    return {};
+  },
+  mounted() {
+    console.log("Center is below");
+    console.log(this.center);
+    // this.center = { lat: this.lati, lng: this.long };
+    // (this.markers = [
+    //   {
+    //     position: {
+    //       lat: this.lati,
+    //       lng: this.long,
+    //     },
+    //   },
+    // ]),
+    // console.log(this.center);
+    console.log(this.markers);
+  },
+
+  computed: {
+    center() {
+      return { lat: this.lati, lng: this.long };
+    },
+    markers() {
+      return [
         {
           position: {
-            lat: 1.296568,
-            lng: 103.852119,
+            lat: this.lati,
+            lng: this.long,
           },
         },
-      ],
-    };
+      ];
+    },
+    // extras() {
+    //   return [
+    //     {
+    //       position: {
+    //         lat: 31.3066,
+    //         lng: 121.494,
+    //       },
+    //     },
+    //   ];
+    // },
   },
 };
+// console.log(this.lat);
 </script>
 
 <style scoped>
