@@ -23,7 +23,10 @@
       :key="index"
       v-for="(m, index) in extras"
       :position="m.position"
-      :icon="'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'"
+      :icon="{
+        url: nearbyIcon[index],
+        scaledSize: { width: 25, height: 25 },
+      }"
       :clickable="true"
     />
     <!-- https://www.nicepng.com/png/detail/37-373764_javascript-adding-a-custom-map-marker-icon-to.png -->
@@ -31,7 +34,7 @@
 </template>
 <script>
 export default {
-  props: ["lati", "long", "extras"],
+  props: ["lati", "long", "extras", "nearbyIcon"],
   data() {
     return {};
   },
