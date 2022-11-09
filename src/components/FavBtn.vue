@@ -7,7 +7,7 @@
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {fireStore} from "@/service/Firebase/firebaseInit"
-import { collection, getDocs, where, query, arrayUnion, setDoc, doc, updateDoc } from "firebase/firestore";
+import { collection, getDocs, doc, updateDoc } from "firebase/firestore";
 
 export default {
     name: 'FavBtn',

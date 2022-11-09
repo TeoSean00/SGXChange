@@ -1,6 +1,6 @@
 <template>
   <router-link
-    to="/"
+    :to="`/universityInfo/` + universityName"
     @mouseover="(hover = true), $emit('switch')"
     @mouseout="(hover = false), $emit('switchOn')"
   >
