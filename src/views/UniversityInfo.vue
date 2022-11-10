@@ -1,13 +1,12 @@
 <template>
   <div
     class="container-fluid"
-    style="max-width: fit-content; margin-left: 8rem; margin-right: 8rem"
+    style="max-width: fit-content;"
   >
-    <FavBtn :uniName="uniName"></FavBtn>
   </div>
   <div
-    class="container-fluid"
-    style="max-width: fit-content; margin-left: 8rem; margin-right: 8rem"
+    class="container-fluid px-5"
+    style="max-width: fit-content;"
   >
     <div class="row mb-3">
       <div class="col h2">{{ uniName }}</div>
@@ -22,6 +21,7 @@
           <!-- LINKEDIN -->
           <a class="bi bi-linkedin fs-4" @click="lbs_click" target="_blank">
           </a>
+          <FavBtn :uniName="uniName"></FavBtn>
         </span>
       </div>
     </div>
@@ -37,36 +37,59 @@
         <a href="#" class="text-dark mx-1">90 Reviews</a>
         <a href="#" class="text-bold mx-1">{{ region }}∙{{ country }}</a>
       </div>
-      <div class="col-6"></div>
+      <div class="col-6">
+
+      </div>
     </div>
     <div class="row mb-5">
-      <div class="col-8">
+      <div class="col">
         <div
           id="carouselExampleIndicators"
-          class="carousel slide"
-          style="width: 640px; height: 460px"
+          class="carousel slide w-100"
           data-bs-ride="true"
         >
           <div class="carousel-indicators">
-            <button
-              type="button"
-              v-for="(img, idx) of uniImgArr"
-              data-bs-target="#carouselExampleIndicators"
-              :data-bs-slide-to="idx"
-              class="active"
-              aria-current="true"
-              :aria-label="'Slide ' + idx"
-            ></button>
+            <template
+            v-for="(img, idx) of uniImgArr"
+            :key="idx">
+              <button v-if="idx == 1"
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                :data-bs-slide-to="idx"
+                class="active"
+                aria-current="true"
+                :aria-label="'Slide ' + idx"
+              ></button>
+              <button v-else
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                :data-bs-slide-to="idx"
+                class=""
+                aria-current="true"
+                :aria-label="'Slide ' + idx"
+              ></button>
+            </template>
           </div>
           <div class="carousel-inner">
-            <div class="carousel-item active" v-for="img of uniImgArr">
-              <img
-                :src="img"
-                class="d-block w-100"
-                style="width: 640px; height: 460px"
-                alt="..."
-              />
-            </div>
+            <template v-for="(img, idx) of uniImgArr" :key="idx">
+
+              <div v-if="idx == 1" class="carousel-item active" >
+                <img
+                  :src="img"
+                  class="d-block w-100"
+                  style="width: 80vw; height: 80vh; object-fit: cover;"
+                  alt="..."
+                />
+              </div>
+              <div v-else class="carousel-item " >
+                <img
+                  :src="img"
+                  class="d-block w-100"
+                  style="width: 80vw; height: 80vh; object-fit: cover;"
+                  alt="..."
+                />
+              </div>
+            </template>
           </div>
           <button
             class="carousel-control-prev"
@@ -88,7 +111,7 @@
           </button>
         </div>
       </div>
-      <div class="col-4"></div>
+
       <!-- <div class="col-6">
         <img src="../assets/440px-University_of_St._Gallen_EUR-HSG_Institute_Building.jpg" class="w-100" style=""
           alt="uni-display" />
@@ -213,7 +236,7 @@
           <li class="my-4">
             <i style="font-size: 2rem" class="bi bi-translate me-4"></i
             >Language:
-            <span v-for="lang in languages.slice(0, -1)">{{
+            <span v-for="lang in languages.slice(0, -1)" :key="lang">{{
               lang + ", "
             }}</span>
             <span>{{ languages.slice(-1)[0] }}</span>
@@ -222,7 +245,7 @@
           <li class="my-4">
             <i style="font-size: 2rem" class="bi bi-currency-exchange me-4"></i
             >Currencies:
-            <span v-for="curr in currencies.slice(0, -1)">{{
+            <span v-for="curr in currencies.slice(0, -1)" :key="curr">{{
               curr + " "
             }}</span>
             <span>{{ currencies.slice(-1)[0] }}</span>
@@ -284,7 +307,7 @@
         </div>
 
         <!-- one module each -->
-        <div class="card my-4" style="width: 30rem">
+        <div class="card my-4" style="width: 100%">
           <div class="card-body">
             <!-- module component -->
 
@@ -306,7 +329,7 @@
           </div>
         </div>
         <!-- next module -->
-        <div class="card my-4" style="width: 30rem">
+        <div class="card my-4" style="width: 100%">
           <div class="card-body">
             <!-- module component -->
 
@@ -617,6 +640,7 @@ export default {
         // // Uni Accom boolean
         this.hasAccom = doc.data().Accommodation;
         // Uni images
+
         for (let i = 1; i < 8; i++) {
           let key = `UniImageLink${i}`;
           var val = doc.data()[key];

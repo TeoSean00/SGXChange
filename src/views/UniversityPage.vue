@@ -1,11 +1,11 @@
 <template>
   <!-- All Uni list section -->
   <div class="container-fluid mt-4 mx-2 d-flex flex-column"
-    style="margin-left: 4rem; margin-right: 4rem">
-    <div class="row">
+    style="">
+    <div class="row mx-5">
       <div class="col"><h2>Universities</h2></div>
     </div>
-    <div class="row">
+    <div class="row mx-4">
       <div class="col">
         <a-menu
           class="uni-filter-bar"
@@ -156,7 +156,7 @@ export default {
               li.classList.add('active')
           }
       }}
-      // if filtering does not reduce the page to 1, disable previous only 
+      // if filtering does not reduce the page to 1, disable previous only
       else {
         for (const li of pagelinks) {
           if (li.text == 'Previous'){
@@ -278,7 +278,7 @@ export default {
         // console.log(doc.id)
         let basket = doc.data()['Baskets']
         let Modules = doc.data()['Modules']
-       
+
         if (basket in this.basketToModules){
           this.basketToModules[basket].push(Modules)
         } else {

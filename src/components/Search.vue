@@ -64,8 +64,6 @@ export default {
   left: 50%;
   height: auto;
 }
-.search-wrapper.active {
-}
 
 .search-wrapper .input-holder {
   height: 70px;
