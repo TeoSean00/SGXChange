@@ -1,10 +1,13 @@
 <!-- Pull the images from firestore and the name of the place -->
 <template>
-  <div class="marquee">
-    <!-- <h5 class="marquee-header text-center mt-3">Featured</h5> -->
-    <Vue3Marquee :pauseOnHover="true" :duration="60">
+  <div class="marquee pt-4">
+    <!-- <h5 class="marquee-header text-center mt-3 pt-4">
+      Where do you want to go?
+    </h5> -->
+    <Vue3Marquee :pauseOnHover="true" :duration="110">
       <div class="" v-for="uni in universities" :key="uni">
-        <MarqueeCard class="card"
+        <MarqueeCard
+          class="card"
           v-on:switch="hideBtn"
           v-on:switchOn="showBtn"
           :universityName="uni.name"
@@ -13,7 +16,7 @@
       </div>
     </Vue3Marquee>
     <div class="marquee-footer">
-      <div class="text-center marquee-anywhere">
+      <div class="text-center marquee-anywhere mt-5">
         <router-link to="/UniversityPage" id="seeUni">
           <button class="marquee-btn marquee-btn-hide">Take me anywhere</button>
         </router-link>
@@ -34,7 +37,7 @@ import { reactive, defineComponent } from "vue";
 import { Vue3Marquee } from "vue3-marquee";
 import { ArrowRightOutlined } from "@ant-design/icons-vue";
 import MarqueeCard from "./MarqueeCard.vue";
-import {fireStore} from "@/service/Firebase/firebaseInit"
+import { fireStore } from "@/service/Firebase/firebaseInit";
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 
 export default {
@@ -52,7 +55,6 @@ export default {
   },
   setup() {
     // const avatarArray = reactive([]);
-
     // for (let i = 0; i < 10; i++) {
     //   avatarArray.push(
     //     `https://avatars.dicebear.com/api/avataaars/${Math.random()
@@ -60,13 +62,12 @@ export default {
     //       .substr(2, 6)}.svg`
     //   );
     // }
-
     // return {
     //   avatarArray,
     // };
   },
-  mounted(){
-    this.getInfo()
+  mounted() {
+    this.getInfo();
   },
   methods: {
     hideBtn() {
@@ -79,11 +80,13 @@ export default {
       // console.log(this.hover);
     },
     async getInfo() {
-      const getUniversities = await getDocs(collection(fireStore, "Universities"));
+      const getUniversities = await getDocs(
+        collection(fireStore, "Universities2")
+      );
       getUniversities.forEach((doc) => {
-        let universityInfo = {}
+        let universityInfo = {};
         // put key-value pairs
-        universityInfo['name'] = doc.data().HostUniversity
+        universityInfo["name"] = doc.data().HostUniversity;
         // universityInfo['gpaReq'] = doc.data().GpaRequirement
         // universityInfo['IgpaNinetyPercentile'] = doc.data().IgpaNinetyPercentile
         // universityInfo['IgpaTenPercentile'] = doc.data().IgpaTenPercentile
@@ -91,11 +94,11 @@ export default {
         // universityInfo['NoOfPlacesSem2'] = doc.data().NoOfPlacesSem2
         // universityInfo['CountryId'] = doc.data().CountryId
         // universityInfo['RegionId'] = doc.data().RegionId
-        universityInfo['imgUrl'] = doc.data().UniImageLink1
-        console.log(universityInfo.imgURL)
-        this.universities.push(universityInfo)
-    });
-    }
+        universityInfo["imgUrl"] = doc.data().UniImageLink1;
+        console.log(universityInfo.imgURL);
+        this.universities.push(universityInfo);
+      });
+    },
   },
 };
 </script>
@@ -103,14 +106,14 @@ export default {
 <style scoped>
 .marquee {
   background-color: black;
-  border-radius: 1rem;
+  /* border-radius: 1rem; */
   border-color: black;
 }
 
 .marquee-header {
   padding-top: 20px;
   padding-bottom: 0px;
-  font-size: 16px;
+  font-size: 1rem;
   color: white;
 }
 .card {
@@ -128,7 +131,7 @@ export default {
 
 .marquee-seeAllUni {
   margin-top: 15px;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .marquee-footer {
@@ -144,25 +147,26 @@ export default {
 
 #seeUni:hover {
   text-decoration: none;
-  color:#9191ec;
+  color: #9191ec;
 }
 
 .marquee-btn {
   transition: all 0.2s;
-  background-color: white;
+  background-color: black;
   border-radius: 2px;
-  border-color: black;
+  border-color: white;
   font-size: 23px;
-  border-radius: 25px;
+  border-radius: 5px;
   padding-left: 80px;
   padding-right: 80px;
-  color: black;
-  font-weight:500;
+  color: white;
+  font-weight: 500;
 }
 
 .marquee-btn:hover {
   background-color: #9191ec;
-  color:white;
+  border-color: #9191ec;
+  color: black;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 </style>

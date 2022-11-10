@@ -1,5 +1,5 @@
 <template>
-  <div id="searchwrapper" class="search-wrapper bg-light">
+  <div id="searchwrapper" class="search-wrapper bg-light ">
     <div class="input-holder">
       <input
         v-model="searchItem"
@@ -64,8 +64,6 @@ export default {
   left: 50%;
   height: auto;
 }
-.search-wrapper.active {
-}
 
 .search-wrapper .input-holder {
   height: 70px;
@@ -95,7 +93,7 @@ export default {
   border: none;
   outline: none;
   font-family: "Open Sans", Arial, Verdana;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 400;
   line-height: 20px;
   color: black;

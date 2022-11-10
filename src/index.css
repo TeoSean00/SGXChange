@@ -1,6 +1,9 @@
 html {
   scroll-behavior: smooth;
 }
+body{
+  overflow-x:hidden;
+}
 .unicard {
   border: 0;
   background-color: white;
