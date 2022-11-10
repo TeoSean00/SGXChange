@@ -1,169 +1,171 @@
 <template>
-  <!-- Progress bar  -->
-  <div class="mt-3 mb-3" style="margin-left: 4rem; margin-right: 4rem">
-    <h2>Module Mapping</h2>
-  </div>
-  <div class="mt-3 mb-3" style="margin-left: 4rem; margin-right: 4rem">
-    <a-steps :current="stage">
-      <a-step>
-        <!-- <span slot="title">Finished</span> -->
-        <template #title>User Details</template>
-      </a-step>
-      <a-step>
-        <!-- <span slot="title">Finished</span> -->
-        <template #title>Module Baskets</template>
-      </a-step>
-      <a-step>
-        <!-- <span slot="title">Finished</span> -->
-        <template #title>Results</template>
-      </a-step>
-    </a-steps>
-  </div>
+  <div class="container">
+    <!-- Progress bar  -->
+    <div class="mt-3 mb-3" style="">
+      <h2>Module Mapping</h2>
+    </div>
+    <div class="mt-3 mb-3" style="">
+      <a-steps :current="stage">
+        <a-step>
+          <!-- <span slot="title">Finished</span> -->
+          <template #title>User Details</template>
+        </a-step>
+        <a-step>
+          <!-- <span slot="title">Finished</span> -->
+          <template #title>Module Baskets</template>
+        </a-step>
+        <a-step>
+          <!-- <span slot="title">Finished</span> -->
+          <template #title>Results</template>
+        </a-step>
+      </a-steps>
+    </div>
 
-  <div class="container" style="margin-left: 4rem; margin-right: 4rem">
-    <!-- FIRST FORM IF USER HAS NOT FILLED IT IN -->
-    <div v-if="stage == 0" :class="{ formDisplay: form1 }">
-      <!-- Step one -->
-      <!-- Select Uni -->
-      <div class="mb-3">
-        <label for="uniInput" class="form-label question"
-          >Which university are you from?</label
-        >
-        <select
-          class="form-control"
-          id="uniInput"
-          v-model="selectedUni"
-          v-on:change="getDegree"
-          required
-        >
-          <option value="default">Select University</option>
-          <template v-for="uni in universities" :key="uni">
-            <option v-if="uni == 'Singapore Management University'" :value="uni">
-            {{ uni }}
-            </option>
-            <option v-else :value="uni" class="bg-light" disabled>
-            {{ uni }}
-            </option>
-          </template>
+    <div class="container" style="">
+      <!-- FIRST FORM IF USER HAS NOT FILLED IT IN -->
+      <div v-if="stage == 0" :class="{ formDisplay: form1 }">
+        <!-- Step one -->
+        <!-- Select Uni -->
+        <div class="mb-3">
+          <label for="uniInput" class="form-label question"
+            >Which university are you from?</label
+          >
+          <select
+            class="form-control"
+            id="uniInput"
+            v-model="selectedUni"
+            v-on:change="getDegree"
+            required
+          >
+            <option value="default">Select University</option>
+            <template v-for="uni in universities" :key="uni">
+              <option v-if="uni == 'Singapore Management University'" :value="uni">
+              {{ uni }}
+              </option>
+              <option v-else :value="uni" class="bg-light" disabled>
+              {{ uni }}
+              </option>
+            </template>
 
-        </select>
-      </div>
-      <!-- Select FIrst Degree -->
-      <div class="mb-3">
-        <label for="degreeInput" class="form-label question"
-          >Which Degree are you taking?</label
-        >
-        <select
-          class="form-control"
-          id="degreeInput"
-          v-model="selectedDegree"
-          required
-        >
-          <option value="default" selected>Select your degree</option>
-          <option v-for="degree in degrees" :key="degree" :value="degree">
-            {{ degree }}
-          </option>
-        </select>
-      </div>
-
-      <!-- Select Second Degree -->
-      <div class="mb-3">
-        <label for="secondDegreeInput" class="form-label question"
-          >Do you have a second Degree?</label
-        >
-        <select
-          class="form-control"
-          id="secondDegreeInput"
-          v-model="selectedSecondDegree"
-        >
-          <option value="default" selected>Optional</option>
-          <template v-for="degree in degrees" :key="degree">
-            <option v-if="degree != selectedDegree" :value="degree">
+          </select>
+        </div>
+        <!-- Select FIrst Degree -->
+        <div class="mb-3">
+          <label for="degreeInput" class="form-label question"
+            >Which Degree are you taking?</label
+          >
+          <select
+            class="form-control"
+            id="degreeInput"
+            v-model="selectedDegree"
+            required
+          >
+            <option value="default" selected>Select your degree</option>
+            <option v-for="degree in degrees" :key="degree" :value="degree">
               {{ degree }}
             </option>
-          </template>
-        </select>
-      </div>
-      <button
-        v-on:click="showForm()"
-        class="btn btn-primary float-end mt-1"
-      >
-        Next
-      </button>
-    </div>
-
-    <!-- Step two -->
-    <div
-      v-if="stage == 1"
-      :class="{ formDisplay: form2 }"
-      class="pt-4"
-      id="form2"
-    >
-      <h3>Choose your baskets</h3>
-      <div class="displayModules">
-        <ModuleCard
-          v-for="basket in baskets"
-          :key="basket"
-          :name="basket"
-          v-on:addBasket="addToBasket"
-          v-on:removeBasket="removeFromBasket"
-        />
-      </div>
-      <button class="btn btn-primary float-start mt-1" v-on:click="stageZero()">
-        Previous
-      </button>
-      <button
-        class="btn btn-primary float-end mt-1"
-        v-on:click="submitData()"
-      >
-        Submit
-      </button>
-    </div>
-    <div :class="{ Output: testDisplay }">
-      <div class="d-flex flex-wrap">
-        <UniCardSmall
-          class="unicard"
-          v-for="(uni, index) in uniOutput.slice(row1start, row1end)"
-          :key="index"
-          :universityName="uni.name"
-          :gpaReq="uni.gpaReq"
-          :IgpaNinetyPercentile="uni.IgpaNinetyPercentile"
-          :IgpaTenPercentile="uni.IgpaTenPercentile"
-          :NoOfPlacesSem1="uni.NoOfPlacesSem1"
-          :NoOfPlacesSem2="uni.NoOfPlacesSem2"
-          :CountryId="uni.CountryId"
-          :RegionId="uni.RegionId"
-          :imgURL="uni.imgURL"
-        />
-      </div>
-      <!-- PAGINATION -->
-      <div class="row">
-        <div class="col">
-          <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-              <li class="page-item">
-                <a class="page-link" @click="togglePage">Previous</a>
-              </li>
-              <!-- this part should be v-for based on no. of items in data -->
-              <!-- they should be buttons that bind to v-model currentPage-->
-              <!-- paginated items should change as well , use array.slice(start,end)-->
-              <!-- create a new component for paginated items  -->
-              <li class="page-item">
-                <a class="page-link active" @click="togglePage">1</a>
-              </li>
-              <template v-if="lastPage>1">
-                <li class="page-item" v-for="num in lastPage-1" :key="num">
-                  <a class="page-link" @click="togglePage">{{ num+1 }}</a>
-                </li>
-              </template>
-              <li class="page-item">
-                <a class="page-link" @click="togglePage">Next</a>
-              </li>
-            </ul>
-          </nav>
+          </select>
         </div>
+
+        <!-- Select Second Degree -->
+        <div class="mb-3">
+          <label for="secondDegreeInput" class="form-label question"
+            >Do you have a second Degree?</label
+          >
+          <select
+            class="form-control"
+            id="secondDegreeInput"
+            v-model="selectedSecondDegree"
+          >
+            <option value="default" selected>Optional</option>
+            <template v-for="degree in degrees" :key="degree">
+              <option v-if="degree != selectedDegree" :value="degree">
+                {{ degree }}
+              </option>
+            </template>
+          </select>
+        </div>
+        <button
+          v-on:click="showForm()"
+          class="btn btn-primary float-end mt-1"
+        >
+          Next
+        </button>
       </div>
-      <!-- PAGINATION END -->
+
+      <!-- Step two -->
+      <div
+        v-if="stage == 1"
+        :class="{ formDisplay: form2 }"
+        class="pt-4"
+        id="form2"
+      >
+        <h3>Choose your baskets</h3>
+        <div class="displayModules">
+          <ModuleCard
+            v-for="basket in baskets"
+            :key="basket"
+            :name="basket"
+            v-on:addBasket="addToBasket"
+            v-on:removeBasket="removeFromBasket"
+          />
+        </div>
+        <button class="btn btn-primary float-start mt-1" v-on:click="stageZero()">
+          Previous
+        </button>
+        <button
+          class="btn btn-primary float-end mt-1"
+          v-on:click="submitData()"
+        >
+          Submit
+        </button>
+      </div>
+      <div :class="{ Output: testDisplay }">
+        <div class="d-flex flex-wrap">
+          <UniCardSmall
+            class="unicard"
+            v-for="(uni, index) in uniOutput.slice(row1start, row1end)"
+            :key="index"
+            :universityName="uni.name"
+            :gpaReq="uni.gpaReq"
+            :IgpaNinetyPercentile="uni.IgpaNinetyPercentile"
+            :IgpaTenPercentile="uni.IgpaTenPercentile"
+            :NoOfPlacesSem1="uni.NoOfPlacesSem1"
+            :NoOfPlacesSem2="uni.NoOfPlacesSem2"
+            :CountryId="uni.CountryId"
+            :RegionId="uni.RegionId"
+            :imgURL="uni.imgURL"
+          />
+        </div>
+        <!-- PAGINATION -->
+        <div class="row">
+          <div class="col">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-center">
+                <li class="page-item">
+                  <a class="page-link" @click="togglePage">Previous</a>
+                </li>
+                <!-- this part should be v-for based on no. of items in data -->
+                <!-- they should be buttons that bind to v-model currentPage-->
+                <!-- paginated items should change as well , use array.slice(start,end)-->
+                <!-- create a new component for paginated items  -->
+                <li class="page-item">
+                  <a class="page-link active" @click="togglePage">1</a>
+                </li>
+                <template v-if="lastPage>1">
+                  <li class="page-item" v-for="num in lastPage-1" :key="num">
+                    <a class="page-link" @click="togglePage">{{ num+1 }}</a>
+                  </li>
+                </template>
+                <li class="page-item">
+                  <a class="page-link" @click="togglePage">Next</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <!-- PAGINATION END -->
+      </div>
     </div>
   </div>
 </template>

@@ -1,7 +1,8 @@
 <template>
 
   <nav class="navbar navbar-expand-md navbar-light bg-light">
-    <router-link to="/" class="navbar-brand">
+
+    <router-link to="/" class="navbar-brand d-none d-sm-block">
       <img
         src="../assets/WebsiteLogo.png"
         class="m-1"
@@ -9,8 +10,7 @@
         alt=""
       />
     </router-link>
-    <div class="d-md-none ">
-      <div class="search-wrapper bg-light active" style="width: ">
+      <div class="search-wrapper bg-light active d-md-none" style="width: ">
         <div class="input-holder">
           <input
             v-model="searchItem"
@@ -23,11 +23,11 @@
             <span></span>
           </button>
         </div>
-      </div>
     </div>
     <button id="navBtn" @click="closeNav()" class="navbar-toggler float-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-3 me-auto align-items-center-md align-items-baseline justify-content-between">
         <li class="nav-item active d-flex align-middle" >
@@ -47,11 +47,11 @@
         </li>
       </ul>
 
-      <ul class="navbar-nav ms-3 justify-content-between">
+      <ul class="navbar-nav ms-3">
         <li class="nav-item active mt-0 d-none d-md-block">
           <Search/>
         </li>
-        <li class="nav-item active d-flex justify-content-center">
+        <li class="nav-item active d-md-flex justify-content-md-center align-items-baseline">
           <router-link to="/RegisterPage" class="nav-link m-auto">
             Register
           </router-link>
@@ -59,18 +59,18 @@
 
         <li
           v-if="isLoggedIn"
-          class="nav-item active d-flex justify-content-center"
+          class="nav-item active d-md-flex justify-content-center"
           style="margin: auto"
         >
           Hello, {{ finalName }}
         </li>
-        <li v-else class="nav-item active d-flex justify-content-center">
+        <li v-else class="nav-item active d-md-flex justify-content-center">
           <router-link to="/SigninPage" class="nav-link m-auto">
             Sign In
           </router-link>
         </li>
 
-        <li v-if="isLoggedIn" class="nav-item active d-flex justify-content-center">
+        <li v-if="isLoggedIn" class="nav-item active d-md-flex justify-content-center">
           <button
             style="border: none; background: none; margin: auto"
             @click="signUserOut"
@@ -80,12 +80,12 @@
         </li>
         <li
           v-else
-          class="nav-item active d-flex justify-content-center"
+          class="nav-item active d-md-flex justify-content-center"
 
           style="display: none"
         ></li>
 
-        <li class="nav-item active d-flex justify-content-center">
+        <li class="nav-item active d-md-flex justify-content-center">
           <router-link to="/ProfilePage" class="nav-link m-auto">
             <i class="bi bi-person-circle" style="font-size: 1.5rem"></i>
           </router-link>
@@ -141,6 +141,25 @@ export default {
         });
     },
 
+    searchUni() {
+      if (this.searchItem != "") {
+        if (this.$route.name != "UniversityPageSearch") {
+          console.log("path1");
+          this.$router.push({
+            path: "/UniversityPage/search",
+            query: { search: this.searchItem },
+          });
+        } else {
+          //I put catch because i dont know how to solve the error
+          console.log("path2");
+          this.$router.push({
+            path: "/UniversityPage/search",
+            query: { search: this.searchItem },
+          });
+        }
+      }
+    },
+
     checkIfLoggeddIn() {
       onAuthStateChanged(getAuth(), (user) => {
         if (user) {
@@ -184,14 +203,9 @@ nav {
 }
 
 .search-wrapper {
-  position: relative;
-  transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%;
-  height: auto;
+
 }
-.search-wrapper.active {
-}
+
 
 .search-wrapper .input-holder {
   height: 70px;
@@ -203,7 +217,6 @@ nav {
 
 }
 .search-wrapper.active .input-holder {
-  margin-top: 50px;
   width: 300px;
   border-radius: 50px;
   background: rgb(255, 255, 255);
