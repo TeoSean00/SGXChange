@@ -124,7 +124,7 @@
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "vue-router";
 import { fireStore } from "@/service/Firebase/firebaseInit";
-import { collection, addDoc, getDocs, query, setDoc, Doc } from "firebase/firestore";
+import { collection, addDoc, getDocs, query, setDoc, doc } from "firebase/firestore";
 import anime from "animejs/lib/anime.es.js";
 
 export default {
@@ -165,7 +165,7 @@ export default {
       });
     },
 
-    register() {
+    async register() {
       if (this.selectedUni == "default") {
         alert("Please Enter a University");
       } else if (this.selectedFirstDegree == "default") {
@@ -173,9 +173,8 @@ export default {
       } else {
         createUserWithEmailAndPassword(getAuth(), this.email, this.password)
           .then((user) => {
-            //Adding to db
-            const dbRef = collection(fireStore, "UserProfiles");
-            const data = {
+            //Adding user info as a document to the user collection in firebasd
+            setDoc(doc(fireStore, "UserProfiles", this.email), {
               UserName: this.email.split("@")[0],
               Email: this.email,
               FirstDegree: this.selectedFirstDegree,
@@ -183,16 +182,16 @@ export default {
               School: this.selectedUni,
               Favourites: [],
               Reviews: [],
-            };
-            addDoc(dbRef, data)
-              .then((docRef) => {
-                console.log("Document has been added successfully");
+            })
+              .then(() => {
+                console.log("User document has been added successfully");
               })
               .catch((error) => {
                 console.log(error);
               });
 
-            alert("Your account has been successfully created");
+            let shavedName = this.email.split("@")[0]
+            alert(`Hi ${shavedName}, your account has been successfully created!`);
             console.log("successfully registered user is", user);
             this.router.push("/ProfilePage");
           })
@@ -255,6 +254,25 @@ export default {
     // },
   },
 };
+
+// Initial adding of user document code
+// const dbRef = collection(fireStore, "UserProfiles");
+// const data = {
+//   UserName: this.email.split("@")[0],
+//   Email: this.email,
+//   FirstDegree: this.selectedFirstDegree,
+//   SecondDegree: this.selectedSecondDegree,
+//   School: this.selectedUni,
+//   Favourites: [],
+//   Reviews: [],
+// };
+// addDoc(dbRef, data)
+//   .then((docRef) => {
+//     console.log("Document has been added successfully");
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//   });
 </script>
 
 
