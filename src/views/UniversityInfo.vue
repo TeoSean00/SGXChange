@@ -77,7 +77,7 @@
                 <img
                   :src="img"
                   class="d-block w-100"
-                  style="width: 80vw; height: 80vh; object-fit: cover;"
+                  style="width: 450px; height: 600px; object-fit: cover;"
                   alt="..."
                 />
               </div>
@@ -85,7 +85,7 @@
                 <img
                   :src="img"
                   class="d-block w-100"
-                  style="width: 80vw; height: 80vh; object-fit: cover;"
+                  style="width: 450px; height: 600px; object-fit: cover;"
                   alt="..."
                 />
               </div>
@@ -370,9 +370,9 @@
                       <h4 class="mb-0">+</h4>
                     </button>
                     <!-- Dynamically opening and closing Modal based on actions performed and parent/child interactions-->
-                    <Modal v-show="isModalOpen" 
-                    @close="closeModal()" 
-                    :uniNamePassed="uniName" 
+                    <Modal v-show="isModalOpen"
+                    @close="closeModal()"
+                    :uniNamePassed="uniName"
                     @review-done="closeModal()"
                     />
                   </h5>

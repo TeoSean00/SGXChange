@@ -1,8 +1,11 @@
 <template>
-    <button class="btn btn-outline-danger d-flex align-items-center p-2" v-on:click="addToFav()">
-        <i v-if="favourited" class="bi bi-heart-filled bg-danger fs-6 mx-1"></i>
-        <i v-else class="bi bi-heart fs-6 mx-1"></i>
+    <button v-if="favourited == true" class="btn btn-outline-danger bg-danger text-white d-flex align-items-center p-2" v-on:click="addToFav()">
+        <i  class="bi bi-heart fs-6 mx-1"></i>
     Favourite</button>
+    <button v-else class="btn btn-outline-danger d-flex align-items-center p-2" v-on:click="addToFav()">
+        <i class="bi bi-heart fs-6 mx-1"></i>
+    Favourite</button>
+
 </template>
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -16,7 +19,8 @@ export default {
         return{
             isLoggedIn: false,
             user: '',
-            userId:''
+            userId:'',
+            favourited: false,
         }
     },
     computed:{
@@ -27,10 +31,20 @@ export default {
     },
     methods: {
         checkForUser(){
-            onAuthStateChanged(getAuth(), (user) => {
+            onAuthStateChanged(getAuth(), async (user) => {
                 if(user) {
                     this.user = user.auth.currentUser.email
                     this.isLoggedIn = true
+                    const getUsers = await getDocs(collection(fireStore, "UserProfiles"));
+                    getUsers.forEach(async (document) => {
+                    if(document.data().Email == this.user){
+                        const docRef = doc(fireStore, 'UserProfiles' ,document.id);
+                        var temp = document.data().Favourites
+                        if(temp.includes(this.uniName)){
+                            this.favourited = true
+                        }
+                    }
+                });
                 }
             })
         },
@@ -47,10 +61,16 @@ export default {
                             await updateDoc(docRef, {
                                 Favourites: temp
                             });
+                            this.favourited = true
                             alert(`Thank you for adding ${university} to your favourites!`)
                         }
                         else{
-                            alert(`${university} is already in your favourites list!`)
+                            temp.splice(temp.indexOf(this.uniName))
+                            await updateDoc(docRef, {
+                                Favourites: temp
+                            });
+                            this.favourited = false
+                            alert(`Removed ${university} from your favourites list!`)
                         }
                     }
                 });
