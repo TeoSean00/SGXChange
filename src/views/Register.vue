@@ -190,7 +190,12 @@ export default {
                 console.log(error);
               });
 
-            let shavedName = this.email.split("@")[0]
+            const name1 = this.email.split("@")[0]
+            const firstLetter = name1.charAt(0)
+            const firstLetterCap = firstLetter.toUpperCase()
+            const remainingLetters = name1.slice(1)
+            let shavedName = firstLetterCap + remainingLetters
+
             alert(`Hi ${shavedName}, your account has been successfully created!`);
             console.log("successfully registered user is", user);
             this.router.push("/ProfilePage");

@@ -77,7 +77,13 @@ export default {
     signIn() {
       signInWithEmailAndPassword(getAuth(), this.email, this.password)
         .then((user) => {
-          alert("you have successfully signed in");
+          const name1 = this.email.split("@")[0]
+          const firstLetter = name1.charAt(0)
+          const firstLetterCap = firstLetter.toUpperCase()
+          const remainingLetters = name1.slice(1)
+          let shavedName = firstLetterCap + remainingLetters
+          
+          alert(`Hi ${shavedName}, you have successfully signed in!`);
           console.log("successfully logged in user is", user);
           this.router.push("/ProfilePage");
         })
