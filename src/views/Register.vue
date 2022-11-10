@@ -191,8 +191,7 @@ export default {
         this.allUniversities.push(doc.data().HostUniversity);
       });
     },
-
-    async register() {
+    register() {
       if (this.selectedUni == "default") {
         alert("Please Enter a University");
       } else if (this.selectedFirstDegree == "default") {
@@ -201,7 +200,7 @@ export default {
         createUserWithEmailAndPassword(getAuth(), this.email, this.password)
           .then((user) => {
             //Adding user info as a document to the user collection in firebasd
-            setDoc(doc(fireStore, "UserProfiles", this.email), {
+              setDoc(doc(fireStore, "UserProfiles", this.email), {
               UserName: this.email.split("@")[0],
               Email: this.email,
               FirstDegree: this.selectedFirstDegree,

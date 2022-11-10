@@ -172,7 +172,7 @@
                 currentTime: this.currentUserTime
             })
             .then(() => {
-                let text = "Your review has been successfully added, please refresh the page to see your review."
+                let text = "Your review has been successfully added, the page will now be automatically refreshed!"
                  + "\n\n" + "Thank you " + this.currentUserName + "!"
                 alert(text)
                 this.reviewDone()
