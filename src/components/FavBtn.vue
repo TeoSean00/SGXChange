@@ -36,6 +36,7 @@ export default {
         },
         async addToFav(){
             if (this.isLoggedIn){
+                let university  = this.uniName
                 const getUsers = await getDocs(collection(fireStore, "UserProfiles"));
                 getUsers.forEach(async (document) => {
                     if(document.data().Email == this.user){
@@ -46,6 +47,10 @@ export default {
                             await updateDoc(docRef, {
                                 Favourites: temp
                             });
+                            alert(`Thank you for adding ${university} to your favourites!`)
+                        }
+                        else{
+                            alert(`${university} is already in your favourites list!`)
                         }
                     }
                 });

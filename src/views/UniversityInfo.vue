@@ -34,7 +34,7 @@
         </div>
 
         <!-- sean how to insert count of reviews here according to uni -->
-        <a href="#" class="text-dark mx-1">90 Reviews</a>
+        <a href="#" class="text-dark mx-1">{{this.reviews.length}} Reviews</a>
         <a href="#" class="text-bold mx-1">{{ region }}∙{{ country }}</a>
       </div>
       <div class="col-6">
@@ -358,21 +358,25 @@
                 <h2 class="mb-0">Reviews</h2>
               </div>
               <div class="col d-flex align-items-center justify-content-end">
-                <h5 class="text-muted mb-0 me-2">Add a review</h5>
-                <button
-                  @click="showModal()"
-                  type="button"
-                  class="btn btn-light py-0 px-2 border-2"
-                >
-                  <h4 class="mb-0">+</h4>
-                </button>
-                <!-- Dynamically opening and closing Modal based on actions performed and parent/child interactions-->
-                <Modal
-                  v-show="isModalOpen"
-                  @close="closeModal()"
-                  :uniNamePassed="uniName"
-                  @review-done="closeModal()"
-                />
+                <div v-if="!isLoggedIn">
+                  <h5>
+                    You must be signed in to leave a review!
+                    <router-link to="/SigninPage">sign in</router-link>
+                  </h5>
+                </div>
+                <div v-else>
+                  <h5 class="text-muted mb-0 me-2">Add a review
+                    <button @click="showModal()" type="button" class="btn btn-light py-0 px-2 border-2">
+                      <h4 class="mb-0">+</h4>
+                    </button>
+                    <!-- Dynamically opening and closing Modal based on actions performed and parent/child interactions-->
+                    <Modal v-show="isModalOpen" 
+                    @close="closeModal()" 
+                    :uniNamePassed="uniName" 
+                    @review-done="closeModal()"
+                    />
+                  </h5>
+                </div>
               </div>
             </div>
 
@@ -494,7 +498,7 @@ export default {
       userName: "",
       isModalOpen: false,
       isReviewsLoaded: false,
-      // isThereReviews: false,
+      currentUserLeftReview: false,
       places: [],
       nearbyLocation: [],
       nearbyIcon: [],
@@ -523,30 +527,10 @@ export default {
     this.getModuleInfo();
     this.checkForUser();
   },
+  mounted() {
 
-  mounted() {},
-
-  // mounted(){
-  //   // this.checkForReviews()
-  //   // console.log('reviews?', this.isThereReviews, 'reviews loaded?', this.isReviewsLoaded)
-  // },
-  // updated(){
-  //   this.checkForReviews()
-  // },
+  },
   methods: {
-    // checkForReviews(){
-    //   if(this.isReviewsLoaded){
-    //     if(this.reviews.length>0){
-    //       console.log('reviews loaded and no. of reviews are', this.reviews.length)
-    //       this.isThereReviews = true
-    //     }
-    //     else{
-    //       console.log('reviews loaded and no. of reviews are', this.reviews.length, '; no reviews for this uni')
-    //       this.isThereReviews = false
-    //     }
-    //   }
-    // },
-
     //Fetch nearby places on pageload using PlacesAPI
     async getNearbyAttr() {
       const proxyURL = "https://peaceful-sierra-78205.herokuapp.com/";
@@ -692,7 +676,7 @@ export default {
     },
 
     // Check for current logged in user or if there isnt one
-    checkForUser() {
+    async checkForUser() {
       onAuthStateChanged(getAuth(), (user) => {
         if (user) {
           this.isLoggedIn = true;
@@ -703,6 +687,7 @@ export default {
           const firstLetterCap = firstLetter.toUpperCase();
           const remainingLetters = name.slice(1);
           this.name = firstLetterCap + remainingLetters;
+          this.email = user.email
         }
       });
     },
@@ -711,13 +696,13 @@ export default {
     async getReviewInfo() {
       const name = this.uniName;
       const review = `${name} Reviews`;
-      // console.log('uniname and its review collection is', name, review)
 
       let q = query(collectionGroup(fireStore, review));
       let getUniReviews = await getDocs(q);
       getUniReviews.forEach((doc) => {
-        // console.log(`${name} review info is`, doc.data())
+        let currentUserEmail = this.email
         let review = {};
+
         review["email"] = doc.data().Email;
         review["likes"] = doc.data().Likes;
         review["info"] = doc.data().ReviewInfo;
@@ -725,11 +710,16 @@ export default {
         review["userName"] = doc.data().UserName;
         review["currentTime"] = doc.data().currentTime;
         this.reviews.push(review);
-        // console.log(review, this.reviews)
+
+        if (currentUserEmail == doc.data().Email){
+          this.currentUserLeftReview = true
+          console.log('current user has left review before')
+        }
       });
       console.log(getUniReviews.docs.length);
       this.isReviewsLoaded = true;
     },
+
     async getLangauageCurrencyFromCountry() {
       // console.log('country is: ',this.country)
       const response = await fetch(
@@ -802,6 +792,10 @@ export default {
     },
     // Dynamically opens modal and calls upon modal component
     showModal() {
+      if(this.currentUserLeftReview){
+        alert("Hi " + this.name + ", each user can only leave 1 review per university page."
+        + "\n\n" + "Take note that adding another will replace your existing review!")
+      }
       console.log("modal opened from uniInfo");
       this.isModalOpen = true;
     },
