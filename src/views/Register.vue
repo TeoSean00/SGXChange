@@ -56,18 +56,25 @@
               v-model="selectedUni"
               required
             >
-              <option value="default" selected>Select A University</option>
+              <option value="default" selected></option>
               <template v-for="uni in allUniversities" :key="uni">
-                <option v-if="uni == 'Singapore Management University'" :value="uni">
-                {{ uni }}
+                <option
+                  v-if="uni == 'Singapore Management University'"
+                  :value="uni"
+                >
+                  {{ uni }}
                 </option>
                 <option v-else :value="uni" class="bg-light" disabled>
-                {{ uni }}
+                  {{ uni }}
                 </option>
               </template>
             </select>
             <span class="focus-input100"></span>
-            <span class="label-input100">School</span>
+
+            <span v-if="selectedUni == 'default'" class="selectLabelInput100"
+              >Select School</span
+            >
+            <span v-else class="label-input100">School</span>
           </div>
 
           <div
@@ -80,20 +87,24 @@
               v-model="selectedFirstDegree"
               required
             >
-              <option value="default" selected>Select Your First Degree</option>
+              <option value="default" selected></option>
               <option v-for="degree in degrees" :key="degree" :value="degree">
                 {{ degree }}
               </option>
             </select>
             <span class="focus-input100"></span>
-            <span class="label-input100">First Degree</span>
+
+            <span
+              v-if="selectedFirstDegree == 'default'"
+              class="selectLabelInput100"
+              >Select Your Degree</span
+            >
+            <span v-else class="label-input100">First Degree</span>
           </div>
 
           <div class="wrap-input100 validate-input">
             <select class="input100 form-select" v-model="selectedSecondDegree">
-              <option value="default" selected>
-                Select Your Second Degree
-              </option>
+              <option value="default" selected></option>
               <template v-for="degree in degrees" :key="degree">
                 <option v-if="degree != selectedFirstDegree" :value="degree">
                   {{ degree }}
@@ -101,11 +112,18 @@
               </template>
             </select>
             <span class="focus-input100"></span>
-            <span class="label-input100">Second Degree</span>
+            <span
+              v-if="selectedSecondDegree == 'default'"
+              class="selectLabelInput100"
+              >Select Your Second Degree (Optional)</span
+            >
+            <span v-else class="label-input100">Second Degree</span>
           </div>
 
           <div class="container-login100-form-btn">
-            <button @click="register()" class="login100-form-btn">Register</button>
+            <button @click="register()" class="login100-form-btn">
+              Register
+            </button>
           </div>
           <!-- <p class="register">
                 Don't have an account?
@@ -124,8 +142,16 @@
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "vue-router";
 import { fireStore } from "@/service/Firebase/firebaseInit";
-import { collection, addDoc, getDocs, query, setDoc, doc } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  setDoc,
+  doc,
+} from "firebase/firestore";
 import anime from "animejs/lib/anime.es.js";
+// import app from "../service/Firebase/firebaseInit";
 
 export default {
   name: "Register",
@@ -142,6 +168,7 @@ export default {
       degrees: [],
       selectedFirstDegree: "default",
       selectedSecondDegree: "default",
+      selectLableClass: ".select-label-input100",
     };
   },
   mounted() {
@@ -189,13 +216,15 @@ export default {
                 console.log(error);
               });
 
-            const name1 = this.email.split("@")[0]
-            const firstLetter = name1.charAt(0)
-            const firstLetterCap = firstLetter.toUpperCase()
-            const remainingLetters = name1.slice(1)
-            let shavedName = firstLetterCap + remainingLetters
+            const name1 = this.email.split("@")[0];
+            const firstLetter = name1.charAt(0);
+            const firstLetterCap = firstLetter.toUpperCase();
+            const remainingLetters = name1.slice(1);
+            let shavedName = firstLetterCap + remainingLetters;
 
-            alert(`Hi ${shavedName}, your account has been successfully created!`);
+            alert(
+              `Hi ${shavedName}, your account has been successfully created!`
+            );
             console.log("successfully registered user is", user);
             this.router.push("/ProfilePage");
           })
@@ -357,7 +386,7 @@ export default {
   min-height: 100vh;
   display: block;
   background-color: #f7f7f7;
-  padding: 173px 55px 55px 55px;
+  padding: 100px 55px 55px 25px;
 }
 
 .login100-form-title {
@@ -387,6 +416,25 @@ export default {
   border: 1px solid #e6e6e6;
   border-radius: 10px;
   margin-bottom: 10px;
+}
+
+.selectLabelInput100 {
+  font-size: 18px;
+  color: #999999;
+  line-height: 1.2;
+
+  display: block;
+  position: absolute;
+  pointer-events: none;
+  width: 100%;
+  padding-left: 24px;
+  left: 0;
+  top: 30px;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
 }
 
 .label-input100 {
