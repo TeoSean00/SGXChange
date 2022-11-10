@@ -202,9 +202,7 @@ nav {
   margin-right: 10px;
 }
 
-.search-wrapper {
 
-}
 
 
 .search-wrapper .input-holder {
