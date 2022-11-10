@@ -124,7 +124,7 @@
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "vue-router";
 import { fireStore } from "@/service/Firebase/firebaseInit";
-import { collection, addDoc, getDocs, query } from "firebase/firestore";
+import { collection, addDoc, getDocs, query, setDoc, Doc } from "firebase/firestore";
 import anime from "animejs/lib/anime.es.js";
 
 export default {
@@ -157,12 +157,14 @@ export default {
       });
       console.log(this.degrees);
     },
+
     async getUniversities() {
       const getAllUni = await getDocs(collection(fireStore, "Universities2"));
       getAllUni.forEach((doc) => {
         this.allUniversities.push(doc.data().HostUniversity);
       });
     },
+
     register() {
       if (this.selectedUni == "default") {
         alert("Please Enter a University");
