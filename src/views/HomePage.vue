@@ -7,10 +7,10 @@
     </div> -->
   <div class="bannerHero container-fluid m-0">
     <div class="row bannerHero align-items-center">
-      <div class="col-lg-6 col-12 text-center p-5">
+      <div class="col-md-6 col-12 text-center p-5">
         <Banner></Banner>
       </div>
-      <div class="col-lg-6 m-auto d-none d-lg-block bCarou p-5">
+      <div class="col-md-6 m-auto d-none d-md-block bCarou p-5">
         <BannerCarousel class=""></BannerCarousel>
       </div>
     </div>

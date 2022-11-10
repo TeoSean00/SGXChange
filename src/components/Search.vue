@@ -1,5 +1,5 @@
 <template>
-  <div id="searchwrapper" class="search-wrapper bg-light">
+  <div id="searchwrapper" class="search-wrapper bg-light ">
     <div class="input-holder">
       <input
         v-model="searchItem"
