@@ -1,22 +1,20 @@
 <template>
-  <br>
-    <div class="arrow_container mt-4">
-      <div class="chevron"></div>
-      <div class="chevron"></div>
-      <div class="chevron"></div>
-    </div>
-  <br>
+  <br />
+  <div class="arrow_container">
+    <div class="chevron"></div>
+    <div class="chevron"></div>
+    <div class="chevron"></div>
+  </div>
+  <br />
 </template>
 <script>
 export default {
-name: "ArrowAnimation",
-data: () => {
-    return {
-    };
-},
-props: {},
-methods: {
-},
+  name: "ArrowAnimation",
+  data: () => {
+    return {};
+  },
+  props: {},
+  methods: {},
 };
 </script>
 <style>
@@ -39,13 +37,12 @@ methods: {
 }
 .chevron:before,
 .chevron:after {
-  content: ' ';
+  content: " ";
   position: absolute;
   top: 0;
   height: 100%;
   width: 51%;
   background: black;
-;
 }
 
 .chevron:before {
@@ -66,14 +63,13 @@ methods: {
   animation: move 3s ease-out 2s infinite;
 }
 @keyframes pulse {
-to {
+  to {
     opacity: 1;
   }
 }
 @keyframes move {
   25% {
     opacity: 1;
-
   }
   33% {
     opacity: 1;
