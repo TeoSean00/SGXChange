@@ -1,6 +1,13 @@
 <template>
-  <div class="container-fluid" style="max-width: fit-content"></div>
-  <div class="container-fluid px-5" style="max-width: fit-content">
+  <div
+    class="container-fluid"
+    style="max-width: fit-content;"
+  >
+  </div>
+  <div
+    class="container-fluid px-5"
+    style="max-width: fit-content;"
+  >
     <div class="row mb-3">
       <div class="col h2">{{ uniName }}</div>
       <div class="col text-end">
@@ -25,14 +32,14 @@
           <!-- to insert the review rating based on reviews system -->
           4.64
         </div>
-        <!-- sean how to insert count of reviews here according to uni -->
-        <!-- <div class="text-dark mx-1">{{this.reviews.length}}</div> -->
 
-        <a href="#" class="text-dark mx-1">{{ this.reviews.length }} Reviews</a>
-        <!-- <div class="text-bold mx-1">{{ region }}∙{{ country }}</div> -->
+        <!-- sean how to insert count of reviews here according to uni -->
+        <a href="#" class="text-dark mx-1">{{this.reviews.length}} Reviews</a>
         <a href="#" class="text-bold mx-1">{{ region }}∙{{ country }}</a>
       </div>
-      <div class="col-6"></div>
+      <div class="col-6">
+
+      </div>
     </div>
     <div class="row mb-5">
       <div class="col">
@@ -42,9 +49,10 @@
           data-bs-ride="true"
         >
           <div class="carousel-indicators">
-            <template v-for="(img, idx) of uniImgArr" :key="idx">
-              <button
-                v-if="idx == 1"
+            <template
+            v-for="(img, idx) of uniImgArr"
+            :key="idx">
+              <button v-if="idx == 1"
                 type="button"
                 data-bs-target="#carouselExampleIndicators"
                 :data-bs-slide-to="idx"
@@ -52,8 +60,7 @@
                 aria-current="true"
                 :aria-label="'Slide ' + idx"
               ></button>
-              <button
-                v-else
+              <button v-else
                 type="button"
                 data-bs-target="#carouselExampleIndicators"
                 :data-bs-slide-to="idx"
@@ -65,7 +72,8 @@
           </div>
           <div class="carousel-inner">
             <template v-for="(img, idx) of uniImgArr" :key="idx">
-              <div v-if="idx == 1" class="carousel-item active">
+
+              <div v-if="idx == 1" class="carousel-item active" >
                 <img
                   :src="img"
                   class="d-block w-100"
@@ -73,7 +81,7 @@
                   alt="..."
                 />
               </div>
-              <div v-else class="carousel-item">
+              <div v-else class="carousel-item " >
                 <img
                   :src="img"
                   class="d-block w-100"
@@ -169,7 +177,7 @@
       </div>
     </div>
     <!-- climate -->
-    <!-- <div class="row">
+    <div class="row">
       <div class="col">
         <hr />
       </div>
@@ -179,7 +187,7 @@
         <i class="bi bi-thermometer-half m-1"></i>
         <span style="font-size: large"><b>Climate : </b> Cool</span>
       </div>
-    </div> -->
+    </div>
     <!-- hr filler -->
     <div class="row">
       <div class="col">
@@ -257,54 +265,30 @@
     </div>
     <div class="row">
       <div class="col">
-        <!-- GOOGLEMAP MAP API -->
-        <div>
-          <GoogleMap
-            :lati="uniLat"
-            :long="uniLong"
-            :extras="nearbyLocation"
-            :nearbyName="nearbyName"
-          ></GoogleMap>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
         <hr />
       </div>
     </div>
     <div class="row">
       <div class="col">
         <!-- module information -->
+        <!-- GOOGLEMAP MAP API -->
+        <div>
+          <GoogleMap
+            :lati="uniLat"
+            :long="uniLong"
+            :extras="nearbyLocation"
+            :nearbyIcon="nearbyIcon"
+          ></GoogleMap>
+        </div>
         <h2 class="my-4">Module Information</h2>
         <span
           >University page > module info :
           <a :href="uniCourseUrl" target="_blank">{{ uniCourseUrl }}</a></span
         >
         <br />
-        <!-- Module component -->
-        <div class="container-fluid">
-          <div class="row gap-3">
-            <Module
-              class="d-flex flex-wrap"
-              v-for="(mod, index) in mods"
-              :key="index"
-              :year="mod.year"
-              :desc="mod.desc"
-              :difficulty="mod.difficulty"
-              :faculty="mod.faculty"
-              :url="mod.url"
-              :id="mod.id"
-              :name="mod.name"
-              :popularity="mod.popularity"
-              :sem="mod.sem"
-            ></Module>
-          </div>
-        </div>
-
         <!-- one module each -->
         <div class="row">
-          <div v-for="(modObj,idx) in this.moduleObjs" :key="idx" class=" col-xl-3 col-lg-4 col-md-5 card m-2">
+          <div v-for="(modObj,idx) in this.moduleObjs" class=" col-xl-3 col-lg-4 col-md-5 card m-2">
             <div class="card-body">
               <!-- module component -->
               <!-- module name -->
@@ -326,85 +310,85 @@
             </div>
           </div>
         </div>
-        <!-- Review component -->
-        <div class="container-fluid px-0 mx-0 mt-5">
-          <div class="row mb-0">
-            <div class="col d-flex align-items-center mx-0">
-              <h2 class="mb-0">Reviews</h2>
-            </div>
-            <div class="col d-flex align-items-center justify-content-end">
-              <div v-if="!isLoggedIn">
-                <h5>
-                  You must be signed in to leave a review!
-                  <router-link to="/SigninPage">sign in</router-link>
-                </h5>
+          <!-- Review component -->
+          <div class="container-fluid px-4 mt-5">
+            <div class="row mb-0">
+              <div class="col d-flex align-items-center">
+                <h2 class="mb-0">Reviews</h2>
               </div>
-              <div v-else>
-                <h5 class="text-muted mb-0 me-2">Add a review
-                  <button @click="showModal()" type="button" class="btn btn-light py-0 px-2 border-2">
-                    <h4 class="mb-0">+</h4>
-                  </button>
-                  <!-- Dynamically opening and closing Modal based on actions performed and parent/child interactions-->
-                  <Modal v-show="isModalOpen"
-                  @close="closeModal()"
-                  :uniNamePassed="uniName"
-                  @review-done="closeModal()"
-                  />
-                </h5>
+              <div class="col d-flex align-items-center justify-content-end">
+                <div v-if="!isLoggedIn">
+                  <h5>
+                    You must be signed in to leave a review!
+                    <router-link to="/SigninPage">sign in</router-link>
+                  </h5>
+                </div>
+                <div v-else>
+                  <h5 class="text-muted mb-0 me-2">Add a review
+                    <button @click="showModal()" type="button" class="btn btn-light py-0 px-2 border-2">
+                      <h4 class="mb-0">+</h4>
+                    </button>
+                    <!-- Dynamically opening and closing Modal based on actions performed and parent/child interactions-->
+                    <Modal v-show="isModalOpen"
+                    @close="closeModal()"
+                    :uniNamePassed="uniName"
+                    @review-done="closeModal()"
+                    />
+                  </h5>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div
-            v-if="this.reviews.length > 0 && this.isReviewsLoaded"
-            class="row d-flex"
-          >
             <div
-              class="col-sm-12 col-md-6 col-lg-4 "
-              v-for="(review, index) in reviews"
-              :key="index"
+              v-if="this.reviews.length > 0 && this.isReviewsLoaded"
+              class="row d-flex"
             >
-              <div class="card my-4">
-                <div class="card-body">
-                  <div class="d-flex justify-content-between">
-                    <h5 class="card-title mb-2">{{ review.userName }}</h5>
-                    <!-- <div>
-                            Likes function kiv for now
-                            <i @click="addLike()" class="fa fa-thumbs-up text-muted" style="font-size:15px; margin-right:2px"></i>
-                            {{ review.likes }}
-                          </div> -->
-                  </div>
-                  <h6 class="card-subtitle mb-2 text-muted">
-                    Reviewed University: {{ review.uniName }}
-                  </h6>
-                  <p class="card-text">
-                    {{ review.info }}
-                  </p>
-                  <div class="d-flex justify-content-between">
-                    <p class="card-text mb-0">
-                      <small class="text-muted">{{
-                        review.currentTime
-                      }}</small>
+              <div
+                class="col-sm-12 col-md-6 col-lg-4 flex-grow-1 flex-shrink-1"
+                v-for="(review, index) in reviews"
+                :key="index"
+              >
+                <div class="card my-4">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                      <h5 class="card-title mb-2">{{ review.userName }}</h5>
+                      <!-- <div>
+                              Likes function kiv for now
+                              <i @click="addLike()" class="fa fa-thumbs-up text-muted" style="font-size:15px; margin-right:2px"></i>
+                              {{ review.likes }}
+                            </div> -->
+                    </div>
+                    <h6 class="card-subtitle mb-2 text-muted">
+                      Reviewed University: {{ review.uniName }}
+                    </h6>
+                    <p class="card-text">
+                      {{ review.info }}
                     </p>
-                    <!-- More info function to be done if theres time -->
-                    <a href="#" class="card-link me-3 mb-0">more info</a>
+                    <div class="d-flex justify-content-between">
+                      <p class="card-text mb-0">
+                        <small class="text-muted">{{
+                          review.currentTime
+                        }}</small>
+                      </p>
+                      <!-- More info function to be done if theres time -->
+                      <a href="#" class="card-link me-3 mb-0">more info</a>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div
-            v-if="this.reviews.length == 0 && this.isReviewsLoaded"
-            class="row d-flex mt-3 mb-4"
-          >
             <div
-              class="col-sm-12 col-md-6 col-lg-4 flex-grow-1 flex-shrink-1"
+              v-if="this.reviews.length == 0 && this.isReviewsLoaded"
+              class="row d-flex mt-3 mb-4"
             >
-              There are no reviews for {{ uniName }} yet, would you like to be
-              the first to add one {{ name }}?
+              <div
+                class="col-sm-12 col-md-6 col-lg-4 flex-grow-1 flex-shrink-1"
+              >
+                There are no reviews for {{ uniName }} yet, would you like to be
+                the first to add one {{ name }}?
+              </div>
             </div>
           </div>
-        </div>
       </div>
     </div>
   </div>
@@ -459,7 +443,6 @@ export default {
       uniRanking: "",
       numSlots1: "",
       numSlots2: "",
-      mods: [],
       name: "",
       uniLat: 0,
       uniLong: 0,
@@ -475,7 +458,7 @@ export default {
       currentUserLeftReview: false,
       places: [],
       nearbyLocation: [],
-      nearbyName: [],
+      nearbyIcon: [],
       baskets: [],
       moduleObjs: [],
     };
@@ -506,7 +489,9 @@ export default {
     this.checkForUser();
     this.addModInfo();
   },
-  mounted() {},
+  mounted() {
+
+  },
   methods: {
     //Fetch nearby places on pageload using PlacesAPI
     async getNearbyAttr() {
@@ -526,75 +511,38 @@ export default {
           type: "tourist_attraction",
           key: import.meta.env.VITE_GOOGLE_MAP_API_KEY,
         },
-        headers: {},
+        headers: {
+        },
       };
       console.log(this.places);
       try {
         const response = await axios.request(config);
         // console.log(response.data.results);
         this.places = response.data.results;
-        if (this.places.length > 6) {
-          for (let i = 0; i < 6; i++) {
-            if (this.places[i].rating) {
-              this.nearbyLocation.push({
-                id: i,
-                name: this.places[i].name,
-                icon: this.places[i].icon,
-                address: this.places[i].vicinity,
-                rating: this.places[i].rating,
-                position: {
-                  lat: this.places[i].geometry.location.lat,
-                  lng: this.places[i].geometry.location.lng,
-                },
-              });
-            } else {
-              this.nearbyLocation.push({
-                id: i,
-                name: this.places[i].name,
-                icon: this.places[i].icon,
-                address: this.places[i].vicinity,
-                rating: "NA",
-                position: {
-                  lat: this.places[i].geometry.location.lat,
-                  lng: this.places[i].geometry.location.lng,
-                },
-              });
-            }
-            this.nearbyName.push(this.places[i].name);
+        if (this.places.length > 10) {
+          for (let i = 0; i < 10; i++) {
+            this.nearbyIcon.push(this.places[i].icon);
+            this.nearbyLocation.push({
+              position: {
+                lat: this.places[i].geometry.location.lat,
+                lng: this.places[i].geometry.location.lng,
+              },
+            });
           }
         } else {
           for (let i = 0; i < this.places.length; i++) {
-            this.nearbyName.push(this.places[i].name);
-            if (this.places[i].rating) {
-              this.nearbyLocation.push({
-                id: i,
-                name: this.places[i].name,
-                icon: this.places[i].icon,
-                address: this.places[i].vicinity,
-                rating: this.places[i].rating,
-                position: {
-                  lat: this.places[i].geometry.location.lat,
-                  lng: this.places[i].geometry.location.lng,
-                },
-              });
-            } else {
-              this.nearbyLocation.push({
-                id: i,
-                name: this.places[i].name,
-                icon: this.places[i].icon,
-                address: this.places[i].vicinity,
-                rating: "NA",
-                position: {
-                  lat: this.places[i].geometry.location.lat,
-                  lng: this.places[i].geometry.location.lng,
-                },
-              });
-            }
+            this.nearbyIcon.push(this.places[i].icon);
+            this.nearbyLocation.push({
+              position: {
+                lat: this.places[i].geometry.location.lat,
+                lng: this.places[i].geometry.location.lng,
+              },
+            });
           }
         }
-        console.log("Places is below");
+
         console.log(this.places);
-        console.log(this.nearbyName);
+        console.log(this.nearbyIcon);
       } catch (err) {
         console.log(err);
       }
@@ -678,7 +626,7 @@ export default {
         for (let uni of universities){
           if (uni == this.uniName){
             this.baskets.push(basket)
-          }
+          } 
         }
       })
       // console.log(this.uniToBaskets)
@@ -705,7 +653,7 @@ export default {
     },
     async addModInfo(){
       var moduleToInfo =  await getDocs(collection(fireStore,"ModuleToInfo"))
-
+            
       moduleToInfo.forEach((doc)=>{
         let modName = doc.data()['Module Name']
         let modInfo = doc.data()['Module Info']
@@ -717,27 +665,6 @@ export default {
         }
       })
       console.log(this.moduleObjs)
-    },
-    // Get Mod Info
-    async getModuleInfo() {
-      let q = query(
-        collection(fireStore, "Modules"),
-        where("UniversityName", "==", this.uniName)
-      );
-      let getModuleUni = await getDocs(q);
-      getModuleUni.forEach((doc) => {
-        let mod = {};
-        mod["year"] = doc.data().AY;
-        mod["desc"] = doc.data().Description;
-        mod["difficulty"] = doc.data().Difficulty;
-        mod["faculty"] = doc.data().Faculty;
-        mod["url"] = doc.data().LinkToCourseOutline;
-        mod["id"] = doc.data().ModuleId;
-        mod["name"] = doc.data().ModuleName;
-        mod["popularity"] = doc.data().Popularity;
-        mod["sem"] = doc.data().Semester;
-        this.mods.push(mod);
-      });
     },
 
     // Check for current logged in user or if there isnt one
@@ -752,7 +679,7 @@ export default {
           const firstLetterCap = firstLetter.toUpperCase();
           const remainingLetters = name.slice(1);
           this.name = firstLetterCap + remainingLetters;
-          this.email = user.email;
+          this.email = user.email
         }
       });
     },
@@ -765,7 +692,7 @@ export default {
       let q = query(collectionGroup(fireStore, review));
       let getUniReviews = await getDocs(q);
       getUniReviews.forEach((doc) => {
-        let currentUserEmail = this.email;
+        let currentUserEmail = this.email
         let review = {};
 
         review["email"] = doc.data().Email;
@@ -776,9 +703,9 @@ export default {
         review["currentTime"] = doc.data().currentTime;
         this.reviews.push(review);
 
-        if (currentUserEmail == doc.data().Email) {
-          this.currentUserLeftReview = true;
-          console.log("current user has left review before");
+        if (currentUserEmail == doc.data().Email){
+          this.currentUserLeftReview = true
+          console.log('current user has left review before')
         }
       });
       console.log(getUniReviews.docs.length);
@@ -857,14 +784,9 @@ export default {
     },
     // Dynamically opens modal and calls upon modal component
     showModal() {
-      if (this.currentUserLeftReview) {
-        alert(
-          "Hi " +
-            this.name +
-            ", each user can only leave 1 review per university page." +
-            "\n\n" +
-            "Take note that adding another will replace your existing review!"
-        );
+      if(this.currentUserLeftReview){
+        alert("Hi " + this.name + ", each user can only leave 1 review per university page."
+        + "\n\n" + "Take note that adding another will replace your existing review!")
       }
       console.log("modal opened from uniInfo");
       this.isModalOpen = true;
