@@ -2,12 +2,11 @@ import { createApp } from "vue";
 import App from "./App.vue";
 
 import router from "./router/index";
-// import "ant-design-vue";
 import Antd from "ant-design-vue";
 import "ant-design-vue/dist/antd.css";
 import VueGoogleMaps from "@fawmi/vue-google-maps";
-import anime from "animejs/lib/anime.es.js";
-import { Loader } from "@googlemaps/js-api-loader";
+// import anime from "animejs/lib/anime.es.js";
+// import { Loader } from "@googlemaps/js-api-loader";
 
 import "@fontsource/montserrat/100.css";
 import "@fontsource/montserrat/200.css";
@@ -22,8 +21,7 @@ import "@fontsource/montserrat/900.css";
 import "vue3-marquee/dist/style.css";
 import "./index.css";
 
-const app = createApp(App).use(router).use(Antd).use(anime);
-
+const app = createApp(App).use(router).use(Antd);
 app.use(VueGoogleMaps, {
   load: {
     key: import.meta.env.VITE_GOOGLE_MAP_API_KEY,
