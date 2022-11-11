@@ -655,8 +655,8 @@ export default {
         const response = await axios.request(config);
         // console.log(response.data.results);
         this.places = response.data.results;
-        if (this.places.length > 6) {
-          for (let i = 0; i < 6; i++) {
+        if (this.places.length > 10) {
+          for (let i = 0; i < 10; i++) {
             if (this.places[i].rating) {
               this.nearbyLocation.push({
                 id: i,

@@ -2,9 +2,19 @@
   <div class="container mapbox overflow-auto">
     <div class="row">
       <div class="col-4 navigation-panel overflow-auto">
-        <h4>{{ uniName }} Map</h4>
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span>{{ uniName }} Map</span>
+          <button
+            type="button"
+            class="btn attractionButton float-end"
+            @click="resetCenter()"
+          >
+            Reset
+          </button>
+        </h4>
         <hr />
         <h5>Nearby Attractions</h5>
+
         <div :key="index" v-for="(m, index) in extras" class="mx-0">
           <!-- Nearby Attraction Cards -->
           <div
@@ -208,6 +218,10 @@ export default {
     reCenter(lat, lng) {
       this.latitude = lat;
       this.longtitude = lng;
+    },
+    resetCenter() {
+      this.latitude = this.lati;
+      this.longtitude = this.long;
     },
   },
 };
