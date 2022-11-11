@@ -398,7 +398,6 @@
 
 <script>
 import GoogleMap from "@/components/GoogleMap.vue";
-import Module from "@/components/Module.vue";
 // console.log(import.meta.env.VITE_GOOGLE_MAP_API_KEY);
 import { fireStore } from "@/service/Firebase/firebaseInit";
 import {
@@ -465,7 +464,6 @@ export default {
   },
   components: {
     GoogleMap,
-    Module,
     Modal,
     FavBtn,
   },
