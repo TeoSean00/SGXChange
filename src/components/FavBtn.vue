@@ -1,10 +1,10 @@
 <template>
-    <button v-if="favourited == true" class="btn btn-outline-danger bg-danger text-white d-flex align-items-center p-2" v-on:click="addToFav()">
-        <i  class="bi bi-heart fs-6 mx-1"></i>
-    Favourite</button>
-    <button v-else class="btn btn-outline-danger d-flex align-items-center p-2" v-on:click="addToFav()">
-        <i class="bi bi-heart fs-6 mx-1"></i>
-    Favourite</button>
+    <button v-if="favourited == true" class="btn btn-outline-danger d-flex align-items-center p-2" v-on:click="addToFav()">
+    Favourite <i class="fa fa-heart px-1" style="color:red"></i>
+</button>
+    <button v-else class="btn btn-outline-black  d-flex align-items-center p-2" v-on:click="addToFav()" style="border: 1px solid black">
+    Favourite <i class="fa fa-heart-o px-1" style="color:black"></i>
+</button>
 
 </template>
 <script>
