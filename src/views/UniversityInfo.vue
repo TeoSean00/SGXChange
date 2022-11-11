@@ -1,6 +1,6 @@
 <template>
   <div
-    class="container-fluid"
+    class="container-fluid mt-4"
     style="max-width: fit-content;"
   >
   </div>
@@ -42,7 +42,7 @@
       </div>
     </div>
     <div class="row mb-5">
-      <div class="col">
+      <div class="col col-sm-10 col-md-8">
         <div
           id="carouselExampleIndicators"
           class="carousel slide w-100"
@@ -291,20 +291,44 @@
           <div class="row gap-3">
             <Module
               class="d-flex flex-wrap"
-              v-for="(mod, index) in mods"
+              v-for="(mod, index) in mods.slice(moduleStart, moduleEnd)"
               :key="index"
-              :year="mod.year"
-              :desc="mod.desc"
-              :difficulty="mod.difficulty"
-              :faculty="mod.faculty"
-              :url="mod.url"
-              :id="mod.id"
-              :name="mod.name"
-              :popularity="mod.popularity"
-              :sem="mod.sem"
+              :basket="mod.basket"
+              :desc="mod.moduleInfo"
+              :mod = "mod.module"
             ></Module>
           </div>
         </div>
+
+
+        <!-- Pagination Modules -->
+        <div class="row">
+          <div class="col">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-center">
+                <li class="page-item">
+                  <a class="page-link moduleLink reviewLinks" @click="modulesTogglePage">Previous</a>
+                </li>
+                <!-- this part should be v-for based on no. of items in data -->
+                <!-- they should be buttons that bind to v-model reviewCurrentPage-->
+                <!-- paginated items should change as well , use array.slice(start,end)-->
+                <!-- create a new component for paginated items  -->
+                <li class="page-item">
+                  <a class="page-link moduleLink reviewLinks active" @click="modulesTogglePage">1</a>
+                </li>
+                <template v-if="modulesLastPage>1">
+                  <li class="page-item" v-for="num in modulesLastPage-1" :key="num">
+                    <a class="page-link moduleLink reviewLinks" @click="modulesTogglePage">{{ num+1 }}</a>
+                  </li>
+                </template>
+                <li class="page-item">
+                  <a class="page-link moduleLink reviewLinks" @click="modulesTogglePage">Next</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+
 
         <!-- one module each -->
         <div class="card my-4" style="width: 100%">
@@ -324,7 +348,7 @@
               <!-- add to fav -->
               <a href="#" class="btn btn-primary btn-sm">Favourite</a>
               <!-- link to mod info on uni page -->
-              <a href="#" class="card-link me-3">more info</a>
+              <!-- <a href="#" class="card-link me-3">more info</a> -->
             </div>
           </div>
         </div>
@@ -346,10 +370,11 @@
               <!-- add to fav -->
               <a href="#" class="btn btn-primary btn-sm">Favourite</a>
               <!-- link to mod info on uni page -->
-              <a href="#" class="card-link me-3">more info</a>
+              <!-- <a href="#" class="card-link me-3">more info</a> -->
             </div>
           </div>
         </div>
+
         <div>
           <!-- Review component -->
           <div class="container-fluid px-4 mt-5">
@@ -385,8 +410,8 @@
               class="row d-flex"
             >
               <div
-                class="col-sm-12 col-md-6 col-lg-4 flex-grow-1 flex-shrink-1"
-                v-for="(review, index) in reviews"
+                class="col-12 col-md-6"
+                v-for="(review, index) in reviews.slice(reviewStart, reviewEnd)"
                 :key="index"
               >
                 <div class="card my-4">
@@ -412,12 +437,48 @@
                         }}</small>
                       </p>
                       <!-- More info function to be done if theres time -->
-                      <a href="#" class="card-link me-3 mb-0">more info</a>
+                      <!-- <a href="#" class="card-link me-3 mb-0">more info</a> -->
                     </div>
                   </div>
                 </div>
               </div>
+
+              <!-- Pagination Reviews -->
+              <div class="row">
+                <div class="col">
+                  <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                      <li class="page-item">
+                        <a class="page-link reviewLinks" @click="reviewTogglePage">Previous</a>
+                      </li>
+                      <!-- this part should be v-for based on no. of items in data -->
+                      <!-- they should be buttons that bind to v-model reviewCurrentPage-->
+                      <!-- paginated items should change as well , use array.slice(start,end)-->
+                      <!-- create a new component for paginated items  -->
+                      <li class="page-item">
+                        <a class="page-link reviewLinks active" @click="reviewTogglePage">1</a>
+                      </li>
+                      <template v-if="reviewLastPage>1">
+                        <li class="page-item" v-for="num in reviewLastPage-1" :key="num">
+                          <a class="page-link reviewLinks" @click="reviewTogglePage">{{ num+1 }}</a>
+                        </li>
+                      </template>
+                      <li class="page-item">
+                        <a class="page-link reviewLinks" @click="reviewTogglePage">Next</a>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+
+
+
+
+
+
+
             </div>
+
             <div
               v-if="this.reviews.length == 0 && this.isReviewsLoaded"
               class="row d-flex mt-3 mb-4"
@@ -502,6 +563,18 @@ export default {
       places: [],
       nearbyLocation: [],
       nearbyIcon: [],
+      // items per page set to default
+      reviewsPerPage: 2,
+      // this will be v-modelled to change according to what user clicks
+      reviewCurrentPage: 1,
+      reviewFirstPage: 1,
+      reviewLastPage: 0,
+      // items per page set to default
+      modulePerPage: 4,
+      // this will be v-modelled to change according to what user clicks
+      modulesCurrentPage: 1,
+      modulesFirstPage: 1,
+      modulesLastPage: 0,
     };
   },
   components: {
@@ -519,6 +592,18 @@ export default {
         this.uniLng
       );
     },
+    moduleStart() {
+      return (this.modulesCurrentPage - 1) * this.modulePerPage;
+    },
+    moduleEnd() {
+      return this.moduleStart + this.modulePerPage;
+    },
+    reviewStart() {
+      return (this.reviewCurrentPage - 1) * this.reviewsPerPage;
+    },
+    reviewEnd() {
+      return this.reviewStart + this.reviewsPerPage;
+    },
   },
   created() {
     this.uniName = this.$route.params.name;
@@ -526,17 +611,159 @@ export default {
     this.getReviewInfo();
     this.getModuleInfo();
     this.checkForUser();
-  },
-  mounted() {
 
   },
+  mounted() {
+  },
   methods: {
+    // Pagination for modules
+    modulesPagination() {
+      const pagelinks = document.getElementsByClassName("moduleLink");
+
+      this.modulesLastPage = Math.ceil(this.mods.length / this.modulePerPage);
+      this.modulesCurrentPage = 1
+      // if filtering reduces the pages to 1, disable previous and next
+      if (this.lastPage == 1){
+        for (const li of pagelinks) {
+          if (li.text == 'Previous'){
+              li.classList.add('disabled')
+          } else if (li.text == 'Next'){
+              li.classList.add('disabled')
+          } else if (parseInt(li.text) == this.currentPage){
+              li.classList.add('active')
+          }
+      }}
+      // if filtering does not reduce the page to 1, disable previous only
+      else {
+        for (const li of pagelinks) {
+          if (li.text == 'Previous'){
+              li.classList.add('disabled')
+          } else if (li.text == 'Next'){
+              li.classList.remove('disabled')
+          } else if (parseInt(li.text) == this.currentPage){
+              li.classList.add('active')
+          }
+      }
+      }
+    },
+    modulesTogglePage: function () {
+      // moves to next pg or previous pg based on button clicked
+      if (event.target.text == "Previous") {
+        if (this.modulesCurrentPage != 1) {
+          this.modulesCurrentPage -= 1;
+        }
+      } else if (event.target.text == "Next") {
+        if (this.modulesCurrentPage != this.modulesLastPage + 1) {
+          this.modulesCurrentPage += 1;
+        }
+      } else {
+        this.modulesCurrentPage = parseInt(event.target.text);
+      }
+      const pagelinks = document.getElementsByClassName("moduleLink");
+
+      // toggles active and disabled buttons
+
+      // goes through the pagination buttons and removes all active classes
+      // also checks if modulesCurrentPage == 1, then add disbaled class to previous btn
+      // also if modulesCurrentPage == last, then add disabled class to next btn
+
+      for (const li of pagelinks) {
+        li.classList.remove("active");
+        li.classList.remove("disabled");
+
+        if (parseInt(li.text) === this.modulesCurrentPage) {
+          console.log(li.text);
+          li.classList.add("active");
+        }
+        if (li.text == 'Previous' && this.modulesCurrentPage==this.modulesFirstPage){
+            li.classList.add('disabled')
+        } else if (li.text == 'Next' && this.modulesCurrentPage==this.modulesLastPage){
+            li.classList.add('disabled')
+        } else if (parseInt(li.text) == this.modulesCurrentPage){
+            event.target.classList.add('active')
+        }
+      }
+    },
+
+
+    // Pagination for reviews
+    reviewPagination() {
+      const pagelinks = document.getElementsByClassName("reviewLinks");
+
+      this.reviewLastPage = Math.ceil(this.reviews.length / this.reviewsPerPage);
+      console.log(this.reviewLastPage)
+      this.reviewCurrentPage = 1
+      // if filtering reduces the pages to 1, disable previous and next
+      if (this.reviewLastPage == 1){
+        for (const li of pagelinks) {
+          if (li.text == 'Previous'){
+              li.classList.add('disabled')
+          } else if (li.text == 'Next'){
+              li.classList.add('disabled')
+          } else if (parseInt(li.text) == this.reviewCurrentPage){
+              li.classList.add('active')
+          }
+      }}
+      // if filtering does not reduce the page to 1, disable previous only
+      else {
+        for (const li of pagelinks) {
+          if (li.text == 'Previous'){
+              li.classList.add('disabled')
+          } else if (li.text == 'Next'){
+              li.classList.remove('disabled')
+          } else if (parseInt(li.text) == this.reviewCurrentPage){
+              li.classList.add('active')
+          }
+      }
+      }
+    },
+    reviewTogglePage: function () {
+      // moves to next pg or previous pg based on button clicked
+      if (event.target.text == "Previous") {
+        if (this.reviewCurrentPage != 1) {
+          this.reviewCurrentPage -= 1;
+        }
+      } else if (event.target.text == "Next") {
+        if (this.reviewCurrentPage != this.reviewLastPage + 1) {
+          this.reviewCurrentPage += 1;
+        }
+      } else {
+        this.reviewCurrentPage = parseInt(event.target.text);
+      }
+      const pagelinks = document.getElementsByClassName("reviewLinks");
+
+      // toggles active and disabled buttons
+
+      // goes through the reviewPagination buttons and removes all active classes
+      // also checks if reviewCurrentPage == 1, then add disbaled class to previous btn
+      // also if reviewCurrentPage == last, then add disabled class to next btn
+
+      for (const li of pagelinks) {
+        li.classList.remove("active");
+        li.classList.remove("disabled");
+
+        if (parseInt(li.text) === this.reviewCurrentPage) {
+          console.log(li.text);
+          li.classList.add("active");
+        }
+        if (li.text == 'Previous' && this.reviewCurrentPage==this.reviewFirstPage){
+            li.classList.add('disabled')
+        } else if (li.text == 'Next' && this.reviewCurrentPage==this.reviewLastPage){
+            li.classList.add('disabled')
+        } else if (parseInt(li.text) == this.reviewCurrentPage){
+            event.target.classList.add('active')
+        }
+      }
+    },
+
+
+
+
+
     //Fetch nearby places on pageload using PlacesAPI
     async getNearbyAttr() {
       const proxyURL = "https://peaceful-sierra-78205.herokuapp.com/";
       var strLocation = this.uniLat + "," + this.uniLong;
-      console.log("strLocation is below");
-      console.log(strLocation);
       let config = {
         method: "get",
         url:
@@ -552,7 +779,6 @@ export default {
         headers: {
         },
       };
-      console.log(this.places);
       try {
         const response = await axios.request(config);
         // console.log(response.data.results);
@@ -578,9 +804,6 @@ export default {
             });
           }
         }
-
-        console.log(this.places);
-        console.log(this.nearbyIcon);
       } catch (err) {
         console.log(err);
       }
@@ -608,7 +831,6 @@ export default {
         this.region = doc.data().Region;
         // country
         this.country = doc.data().Country;
-        console.log(this.country, "country");
         // Gpa
         if (doc.data()["GPA"] == null) {
           this.gpaReq = "NA";
@@ -654,26 +876,72 @@ export default {
     },
 
     // Get Mod Info
-    async getModuleInfo() {
+    async getModuleInfo(){
+      var baskets = []
       let q = query(
-        collection(fireStore, "Modules"),
-        where("UniversityName", "==", this.uniName)
+        collection(fireStore, "BasketToUniversities")
       );
-      let getModuleUni = await getDocs(q);
-      getModuleUni.forEach((doc) => {
-        let mod = {};
-        mod["year"] = doc.data().AY;
-        mod["desc"] = doc.data().Description;
-        mod["difficulty"] = doc.data().Difficulty;
-        mod["faculty"] = doc.data().Faculty;
-        mod["url"] = doc.data().LinkToCourseOutline;
-        mod["id"] = doc.data().ModuleId;
-        mod["name"] = doc.data().ModuleName;
-        mod["popularity"] = doc.data().Popularity;
-        mod["sem"] = doc.data().Semester;
-        this.mods.push(mod);
+      let getBaskets = await getDocs(q);
+      getBaskets.forEach((doc) => {
+        var uniList = doc.data().Universities
+        if (uniList.includes(this.uniName)){
+          baskets.push(doc.id)
+        }
       });
+      var modules = []
+      let e = query(
+        collection(fireStore, "BasketToModules")
+      );
+      let getModule = await getDocs(e);
+      let t = query(
+        collection(fireStore, "ModuleToInfo")
+      );
+      let getInfo = await getDocs(t);
+      for (let item of baskets){
+        getModule.forEach((doc) => {
+          if(item == doc.data().Baskets){
+            var infoTemp = ''
+            getInfo.forEach((info) => {
+              if(doc.data().Modules == info.data()['Module Name']){
+                infoTemp = info.data()['Module Info']
+              }
+            });
+            let temp = {
+              basket: item,
+              module: doc.data().Modules,
+              moduleInfo: infoTemp
+            }
+            modules.push(temp)
+          }
+        });
+      }
+      for ( let mod of modules){
+        this.mods.push(mod)
+      }
+
+      this.modulesPagination()
     },
+    // async getModuleInfo() {
+    //   let q = query(
+    //     collection(fireStore, "Modules"),
+    //     where("UniversityName", "==", this.uniName)
+    //   );
+    //   let getModuleUni = await getDocs(q);
+    //   getModuleUni.forEach((doc) => {
+    //     let mod = {};
+    //     mod["year"] = doc.data().AY;
+    //     mod["desc"] = doc.data().Description;
+    //     mod["difficulty"] = doc.data().Difficulty;
+    //     mod["faculty"] = doc.data().Faculty;
+    //     mod["url"] = doc.data().LinkToCourseOutline;
+    //     mod["id"] = doc.data().ModuleId;
+    //     mod["name"] = doc.data().ModuleName;
+    //     mod["popularity"] = doc.data().Popularity;
+    //     mod["sem"] = doc.data().Semester;
+    //     this.mods.push(mod);
+    //   });
+    //   this.modulesPagination()
+    // },
 
     // Check for current logged in user or if there isnt one
     async checkForUser() {
@@ -718,6 +986,7 @@ export default {
       });
       console.log(getUniReviews.docs.length);
       this.isReviewsLoaded = true;
+      this.reviewPagination()
     },
 
     async getLangauageCurrencyFromCountry() {

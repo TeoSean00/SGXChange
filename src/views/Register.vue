@@ -57,11 +57,11 @@
               required
             >
               <option value="default" selected>Select A University</option>
+              <option value="Singapore Management University">
+                Singapore Management University
+              </option>
               <template v-for="uni in allUniversities" :key="uni">
-                <option v-if="uni == 'Singapore Management University'" :value="uni">
-                {{ uni }}
-                </option>
-                <option v-else :value="uni" class="bg-light" disabled>
+                <option v-if="uni != 'Singapore Management University'" :value="uni" disabled>
                 {{ uni }}
                 </option>
               </template>
