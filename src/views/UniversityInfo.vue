@@ -304,6 +304,7 @@
             :long="uniLong"
             :extras="nearbyLocation"
             :nearbyName="nearbyName"
+            :uniName = "uniName"
           ></GoogleMap>
         </div>
         <!-- modules -->
