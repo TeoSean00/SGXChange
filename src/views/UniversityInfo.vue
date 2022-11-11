@@ -321,7 +321,7 @@
                   {{modObj['desc']}}
               </div>
               <div class="d-flex justify-content-between">
-                <a data-bs-toggle="collapse" role="button" :data-bs-target="`#mod${idx}`" aria-expanded="false">
+                <a class="text-muted" data-bs-toggle="collapse" role="button" :data-bs-target="`#mod${idx}`" aria-expanded="false">
                   <u>click to expand</u>
                 </a>
                 <!-- add to fav -->

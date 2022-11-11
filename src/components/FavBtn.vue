@@ -1,9 +1,9 @@
 <template>
-    <button v-if="favourited == true" class="btn btn-outline-danger d-flex align-items-center p-2" v-on:click="addToFav()">
-    Favourite <i class="fa fa-heart px-1" style="color:red"></i>
+    <button v-if="favourited == true" class="btn btn-danger text-white d-flex align-items-center p-2" v-on:click="addToFav()">
+    Added <i class="fa fa-heart px-1" style="color:white"></i>
 </button>
-    <button v-else class="btn btn-outline-black  d-flex align-items-center p-2" v-on:click="addToFav()" style="border: 1px solid black">
-    Favourite <i class="fa fa-heart-o px-1" style="color:black"></i>
+    <button v-else class="btn btn-outline-danger d-flex align-items-center p-2 text-danger" v-on:click="addToFav()" id="fav">
+    <span id="favText">Favourite<i class="fa fa-heart-o px-1"></i></span>
 </button>
 
 </template>
@@ -21,6 +21,7 @@ export default {
             user: '',
             userId:'',
             favourited: false,
+            onHover: false,
         }
     },
     computed:{
@@ -82,3 +83,9 @@ export default {
     }
 }
 </script>
+<style scoped>
+#fav:hover > span, #fav:hover > span > i {
+    color: white;
+    outline: white;
+}
+</style>
