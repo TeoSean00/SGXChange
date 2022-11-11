@@ -1,13 +1,6 @@
 <template>
-  <div
-    class="container-fluid"
-    style="max-width: fit-content;"
-  >
-  </div>
-  <div
-    class="container-fluid px-5"
-    style="max-width: fit-content;"
-  >
+  <div class="container-fluid" style="max-width: fit-content"></div>
+  <div class="container-fluid px-5" style="max-width: fit-content">
     <div class="row mb-3">
       <div class="col h2">{{ uniName }}</div>
       <div class="col text-end">
@@ -32,14 +25,14 @@
           <!-- to insert the review rating based on reviews system -->
           4.64
         </div>
-
         <!-- sean how to insert count of reviews here according to uni -->
-        <a href="#" class="text-dark mx-1">{{this.reviews.length}} Reviews</a>
+        <!-- <div class="text-dark mx-1">{{this.reviews.length}}</div> -->
+
+        <a href="#" class="text-dark mx-1">{{ this.reviews.length }} Reviews</a>
+        <!-- <div class="text-bold mx-1">{{ region }}∙{{ country }}</div> -->
         <a href="#" class="text-bold mx-1">{{ region }}∙{{ country }}</a>
       </div>
-      <div class="col-6">
-
-      </div>
+      <div class="col-6"></div>
     </div>
     <div class="row mb-5">
       <div class="col">
@@ -49,10 +42,9 @@
           data-bs-ride="true"
         >
           <div class="carousel-indicators">
-            <template
-            v-for="(img, idx) of uniImgArr"
-            :key="idx">
-              <button v-if="idx == 1"
+            <template v-for="(img, idx) of uniImgArr" :key="idx">
+              <button
+                v-if="idx == 1"
                 type="button"
                 data-bs-target="#carouselExampleIndicators"
                 :data-bs-slide-to="idx"
@@ -60,7 +52,8 @@
                 aria-current="true"
                 :aria-label="'Slide ' + idx"
               ></button>
-              <button v-else
+              <button
+                v-else
                 type="button"
                 data-bs-target="#carouselExampleIndicators"
                 :data-bs-slide-to="idx"
@@ -72,8 +65,7 @@
           </div>
           <div class="carousel-inner">
             <template v-for="(img, idx) of uniImgArr" :key="idx">
-
-              <div v-if="idx == 1" class="carousel-item active" >
+              <div v-if="idx == 1" class="carousel-item active">
                 <img
                   :src="img"
                   class="d-block w-100"
@@ -81,7 +73,7 @@
                   alt="..."
                 />
               </div>
-              <div v-else class="carousel-item " >
+              <div v-else class="carousel-item">
                 <img
                   :src="img"
                   class="d-block w-100"
@@ -177,7 +169,7 @@
       </div>
     </div>
     <!-- climate -->
-    <div class="row">
+    <!-- <div class="row">
       <div class="col">
         <hr />
       </div>
@@ -187,7 +179,7 @@
         <i class="bi bi-thermometer-half m-1"></i>
         <span style="font-size: large"><b>Climate : </b> Cool</span>
       </div>
-    </div>
+    </div> -->
     <!-- hr filler -->
     <div class="row">
       <div class="col">
@@ -265,21 +257,25 @@
     </div>
     <div class="row">
       <div class="col">
-        <hr />
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <!-- module information -->
         <!-- GOOGLEMAP MAP API -->
         <div>
           <GoogleMap
             :lati="uniLat"
             :long="uniLong"
             :extras="nearbyLocation"
-            :nearbyIcon="nearbyIcon"
+            :nearbyName="nearbyName"
           ></GoogleMap>
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <hr />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <!-- module information -->
         <h2 class="my-4">Module Information</h2>
         <span
           >University page > module info :
@@ -479,7 +475,7 @@ export default {
       currentUserLeftReview: false,
       places: [],
       nearbyLocation: [],
-      nearbyIcon: [],
+      nearbyName: [],
       baskets: [],
       moduleObjs: [],
     };
@@ -510,9 +506,7 @@ export default {
     this.checkForUser();
     this.addModInfo();
   },
-  mounted() {
-
-  },
+  mounted() {},
   methods: {
     //Fetch nearby places on pageload using PlacesAPI
     async getNearbyAttr() {
@@ -532,38 +526,75 @@ export default {
           type: "tourist_attraction",
           key: import.meta.env.VITE_GOOGLE_MAP_API_KEY,
         },
-        headers: {
-        },
+        headers: {},
       };
       console.log(this.places);
       try {
         const response = await axios.request(config);
         // console.log(response.data.results);
         this.places = response.data.results;
-        if (this.places.length > 10) {
-          for (let i = 0; i < 10; i++) {
-            this.nearbyIcon.push(this.places[i].icon);
-            this.nearbyLocation.push({
-              position: {
-                lat: this.places[i].geometry.location.lat,
-                lng: this.places[i].geometry.location.lng,
-              },
-            });
+        if (this.places.length > 6) {
+          for (let i = 0; i < 6; i++) {
+            if (this.places[i].rating) {
+              this.nearbyLocation.push({
+                id: i,
+                name: this.places[i].name,
+                icon: this.places[i].icon,
+                address: this.places[i].vicinity,
+                rating: this.places[i].rating,
+                position: {
+                  lat: this.places[i].geometry.location.lat,
+                  lng: this.places[i].geometry.location.lng,
+                },
+              });
+            } else {
+              this.nearbyLocation.push({
+                id: i,
+                name: this.places[i].name,
+                icon: this.places[i].icon,
+                address: this.places[i].vicinity,
+                rating: "NA",
+                position: {
+                  lat: this.places[i].geometry.location.lat,
+                  lng: this.places[i].geometry.location.lng,
+                },
+              });
+            }
+            this.nearbyName.push(this.places[i].name);
           }
         } else {
           for (let i = 0; i < this.places.length; i++) {
-            this.nearbyIcon.push(this.places[i].icon);
-            this.nearbyLocation.push({
-              position: {
-                lat: this.places[i].geometry.location.lat,
-                lng: this.places[i].geometry.location.lng,
-              },
-            });
+            this.nearbyName.push(this.places[i].name);
+            if (this.places[i].rating) {
+              this.nearbyLocation.push({
+                id: i,
+                name: this.places[i].name,
+                icon: this.places[i].icon,
+                address: this.places[i].vicinity,
+                rating: this.places[i].rating,
+                position: {
+                  lat: this.places[i].geometry.location.lat,
+                  lng: this.places[i].geometry.location.lng,
+                },
+              });
+            } else {
+              this.nearbyLocation.push({
+                id: i,
+                name: this.places[i].name,
+                icon: this.places[i].icon,
+                address: this.places[i].vicinity,
+                rating: "NA",
+                position: {
+                  lat: this.places[i].geometry.location.lat,
+                  lng: this.places[i].geometry.location.lng,
+                },
+              });
+            }
           }
         }
-
+        console.log("Places is below");
         console.log(this.places);
-        console.log(this.nearbyIcon);
+        console.log(this.nearbyName);
       } catch (err) {
         console.log(err);
       }
@@ -721,7 +752,7 @@ export default {
           const firstLetterCap = firstLetter.toUpperCase();
           const remainingLetters = name.slice(1);
           this.name = firstLetterCap + remainingLetters;
-          this.email = user.email
+          this.email = user.email;
         }
       });
     },
@@ -734,7 +765,7 @@ export default {
       let q = query(collectionGroup(fireStore, review));
       let getUniReviews = await getDocs(q);
       getUniReviews.forEach((doc) => {
-        let currentUserEmail = this.email
+        let currentUserEmail = this.email;
         let review = {};
 
         review["email"] = doc.data().Email;
@@ -745,9 +776,9 @@ export default {
         review["currentTime"] = doc.data().currentTime;
         this.reviews.push(review);
 
-        if (currentUserEmail == doc.data().Email){
-          this.currentUserLeftReview = true
-          console.log('current user has left review before')
+        if (currentUserEmail == doc.data().Email) {
+          this.currentUserLeftReview = true;
+          console.log("current user has left review before");
         }
       });
       console.log(getUniReviews.docs.length);
@@ -826,9 +857,14 @@ export default {
     },
     // Dynamically opens modal and calls upon modal component
     showModal() {
-      if(this.currentUserLeftReview){
-        alert("Hi " + this.name + ", each user can only leave 1 review per university page."
-        + "\n\n" + "Take note that adding another will replace your existing review!")
+      if (this.currentUserLeftReview) {
+        alert(
+          "Hi " +
+            this.name +
+            ", each user can only leave 1 review per university page." +
+            "\n\n" +
+            "Take note that adding another will replace your existing review!"
+        );
       }
       console.log("modal opened from uniInfo");
       this.isModalOpen = true;

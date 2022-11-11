@@ -305,7 +305,6 @@ export default {
 //   });
 </script>
 
-
 <style scoped>
 .bootstrap-select {
   outline: none !important;
