@@ -17,7 +17,12 @@
     </Vue3Marquee>
     <div class="marquee-footer">
       <div class="text-center marquee-anywhere mt-5">
-        <router-link to="/UniversityPage" id="seeUni">
+        <router-link
+          :to="
+            `/universityInfo/` +
+            universityNames[getRandomInt(universityNames.length)]
+          "
+        >
           <button class="marquee-btn marquee-btn-hide">Take me anywhere</button>
         </router-link>
       </div>
@@ -51,25 +56,17 @@ export default {
     return {
       hover: false,
       universities: [],
+      universityNames: [],
     };
-  },
-  setup() {
-    // const avatarArray = reactive([]);
-    // for (let i = 0; i < 10; i++) {
-    //   avatarArray.push(
-    //     `https://avatars.dicebear.com/api/avataaars/${Math.random()
-    //       .toString(36)
-    //       .substr(2, 6)}.svg`
-    //   );
-    // }
-    // return {
-    //   avatarArray,
-    // };
   },
   mounted() {
     this.getInfo();
   },
   methods: {
+    getRandomInt(max) {
+      return Math.floor(Math.random() * max);
+    },
+
     hideBtn() {
       // console.log("hello");
       this.hover = true;
@@ -95,8 +92,9 @@ export default {
         // universityInfo['CountryId'] = doc.data().CountryId
         // universityInfo['RegionId'] = doc.data().RegionId
         universityInfo["imgUrl"] = doc.data().UniImageLink1;
-        console.log(universityInfo.imgURL);
+        // console.log(universityInfo.imgURL);
         this.universities.push(universityInfo);
+        this.universityNames.push(doc.data().HostUniversity);
       });
     },
   },
@@ -142,12 +140,12 @@ export default {
 
 #seeUni {
   color: white;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 #seeUni:hover {
   text-decoration: none;
-  color: #9191ec;
+  color: #40a9ff;
 }
 
 .marquee-btn {
@@ -164,8 +162,8 @@ export default {
 }
 
 .marquee-btn:hover {
-  background-color: #9191ec;
-  border-color: #9191ec;
+  background-color: #40a9ff;
+  border-color: #40a9ff;
   color: black;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
