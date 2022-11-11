@@ -308,7 +308,7 @@
 
         <!-- one module each -->
         <div class="row">
-          <div v-for="(modObj,idx) in this.moduleObjs" class=" col-xl-3 col-lg-4 col-md-5 card m-2">
+          <div v-for="(modObj,idx) in this.moduleObjs" :key="idx" class=" col-xl-3 col-lg-4 col-md-5 card m-2">
             <div class="card-body">
               <!-- module component -->
               <!-- module name -->
@@ -330,85 +330,85 @@
             </div>
           </div>
         </div>
-          <!-- Review component -->
-          <div class="container-fluid px-4 mt-5">
-            <div class="row mb-0">
-              <div class="col d-flex align-items-center">
-                <h2 class="mb-0">Reviews</h2>
+        <!-- Review component -->
+        <div class="container-fluid px-0 mx-0 mt-5">
+          <div class="row mb-0">
+            <div class="col d-flex align-items-center mx-0">
+              <h2 class="mb-0">Reviews</h2>
+            </div>
+            <div class="col d-flex align-items-center justify-content-end">
+              <div v-if="!isLoggedIn">
+                <h5>
+                  You must be signed in to leave a review!
+                  <router-link to="/SigninPage">sign in</router-link>
+                </h5>
               </div>
-              <div class="col d-flex align-items-center justify-content-end">
-                <div v-if="!isLoggedIn">
-                  <h5>
-                    You must be signed in to leave a review!
-                    <router-link to="/SigninPage">sign in</router-link>
-                  </h5>
-                </div>
-                <div v-else>
-                  <h5 class="text-muted mb-0 me-2">Add a review
-                    <button @click="showModal()" type="button" class="btn btn-light py-0 px-2 border-2">
-                      <h4 class="mb-0">+</h4>
-                    </button>
-                    <!-- Dynamically opening and closing Modal based on actions performed and parent/child interactions-->
-                    <Modal v-show="isModalOpen"
-                    @close="closeModal()"
-                    :uniNamePassed="uniName"
-                    @review-done="closeModal()"
-                    />
-                  </h5>
-                </div>
+              <div v-else>
+                <h5 class="text-muted mb-0 me-2">Add a review
+                  <button @click="showModal()" type="button" class="btn btn-light py-0 px-2 border-2">
+                    <h4 class="mb-0">+</h4>
+                  </button>
+                  <!-- Dynamically opening and closing Modal based on actions performed and parent/child interactions-->
+                  <Modal v-show="isModalOpen"
+                  @close="closeModal()"
+                  :uniNamePassed="uniName"
+                  @review-done="closeModal()"
+                  />
+                </h5>
               </div>
             </div>
+          </div>
 
+          <div
+            v-if="this.reviews.length > 0 && this.isReviewsLoaded"
+            class="row d-flex"
+          >
             <div
-              v-if="this.reviews.length > 0 && this.isReviewsLoaded"
-              class="row d-flex"
+              class="col-sm-12 col-md-6 col-lg-4 "
+              v-for="(review, index) in reviews"
+              :key="index"
             >
-              <div
-                class="col-sm-12 col-md-6 col-lg-4 flex-grow-1 flex-shrink-1"
-                v-for="(review, index) in reviews"
-                :key="index"
-              >
-                <div class="card my-4">
-                  <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                      <h5 class="card-title mb-2">{{ review.userName }}</h5>
-                      <!-- <div>
-                              Likes function kiv for now
-                              <i @click="addLike()" class="fa fa-thumbs-up text-muted" style="font-size:15px; margin-right:2px"></i>
-                              {{ review.likes }}
-                            </div> -->
-                    </div>
-                    <h6 class="card-subtitle mb-2 text-muted">
-                      Reviewed University: {{ review.uniName }}
-                    </h6>
-                    <p class="card-text">
-                      {{ review.info }}
+              <div class="card my-4">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h5 class="card-title mb-2">{{ review.userName }}</h5>
+                    <!-- <div>
+                            Likes function kiv for now
+                            <i @click="addLike()" class="fa fa-thumbs-up text-muted" style="font-size:15px; margin-right:2px"></i>
+                            {{ review.likes }}
+                          </div> -->
+                  </div>
+                  <h6 class="card-subtitle mb-2 text-muted">
+                    Reviewed University: {{ review.uniName }}
+                  </h6>
+                  <p class="card-text">
+                    {{ review.info }}
+                  </p>
+                  <div class="d-flex justify-content-between">
+                    <p class="card-text mb-0">
+                      <small class="text-muted">{{
+                        review.currentTime
+                      }}</small>
                     </p>
-                    <div class="d-flex justify-content-between">
-                      <p class="card-text mb-0">
-                        <small class="text-muted">{{
-                          review.currentTime
-                        }}</small>
-                      </p>
-                      <!-- More info function to be done if theres time -->
-                      <a href="#" class="card-link me-3 mb-0">more info</a>
-                    </div>
+                    <!-- More info function to be done if theres time -->
+                    <a href="#" class="card-link me-3 mb-0">more info</a>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
+          <div
+            v-if="this.reviews.length == 0 && this.isReviewsLoaded"
+            class="row d-flex mt-3 mb-4"
+          >
             <div
-              v-if="this.reviews.length == 0 && this.isReviewsLoaded"
-              class="row d-flex mt-3 mb-4"
+              class="col-sm-12 col-md-6 col-lg-4 flex-grow-1 flex-shrink-1"
             >
-              <div
-                class="col-sm-12 col-md-6 col-lg-4 flex-grow-1 flex-shrink-1"
-              >
-                There are no reviews for {{ uniName }} yet, would you like to be
-                the first to add one {{ name }}?
-              </div>
+              There are no reviews for {{ uniName }} yet, would you like to be
+              the first to add one {{ name }}?
             </div>
           </div>
+        </div>
       </div>
     </div>
   </div>
@@ -647,7 +647,7 @@ export default {
         for (let uni of universities){
           if (uni == this.uniName){
             this.baskets.push(basket)
-          } 
+          }
         }
       })
       // console.log(this.uniToBaskets)
@@ -674,7 +674,7 @@ export default {
     },
     async addModInfo(){
       var moduleToInfo =  await getDocs(collection(fireStore,"ModuleToInfo"))
-            
+
       moduleToInfo.forEach((doc)=>{
         let modName = doc.data()['Module Name']
         let modInfo = doc.data()['Module Info']
