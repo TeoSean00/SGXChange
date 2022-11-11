@@ -1,11 +1,8 @@
 <template 
 >
-  <div
-    class="container-fluid px-5 py-3"
-    style="max-width: fit-content;"
-  >
-  <!-- top header -->
-  <!-- <nav class="navbar navbar-expand-lg bg-light" id="contentNavbar">
+  <div class="container-fluid px-5 py-3" style="max-width: fit-content">
+    <!-- top header -->
+    <!-- <nav class="navbar navbar-expand-lg bg-light" id="contentNavbar">
   <div class="container-fluid">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -61,12 +58,10 @@
         </div>
 
         <!-- sean how to insert count of reviews here according to uni -->
-        <a href="#" class="text-dark mx-1">{{this.reviews.length}} Reviews</a>
+        <a href="#" class="text-dark mx-1">{{ this.reviews.length }} Reviews</a>
         <a href="#" class="text-dark mx-1">{{ region }}∙{{ country }}</a>
       </div>
-      <div class="col-6">
-
-      </div>
+      <div class="col-6"></div>
     </div>
     <!-- carousel -->
     <div class="row mb-5">
@@ -77,10 +72,9 @@
           data-bs-ride="true"
         >
           <div class="carousel-indicators">
-            <template
-            v-for="(img, idx) of uniImgArr"
-            :key="idx">
-              <button v-if="idx == 1"
+            <template v-for="(img, idx) of uniImgArr" :key="idx">
+              <button
+                v-if="idx == 1"
                 type="button"
                 data-bs-target="#carouselExampleIndicators"
                 :data-bs-slide-to="idx"
@@ -88,7 +82,8 @@
                 aria-current="true"
                 :aria-label="'Slide ' + idx"
               ></button>
-              <button v-else
+              <button
+                v-else
                 type="button"
                 data-bs-target="#carouselExampleIndicators"
                 :data-bs-slide-to="idx"
@@ -100,20 +95,19 @@
           </div>
           <div class="carousel-inner">
             <template v-for="(img, idx) of uniImgArr" :key="idx">
-
-              <div v-if="idx == 1" class="carousel-item active" >
+              <div v-if="idx == 1" class="carousel-item active">
                 <img
                   :src="img"
                   class="d-block w-100"
-                  style="width: 450px; height: 600px; object-fit: cover;"
+                  style="width: 450px; height: 600px; object-fit: cover"
                   alt="..."
                 />
               </div>
-              <div v-else class="carousel-item " >
+              <div v-else class="carousel-item">
                 <img
                   :src="img"
                   class="d-block w-100"
-                  style="width: 450px; height: 600px; object-fit: cover;"
+                  style="width: 450px; height: 600px; object-fit: cover"
                   alt="..."
                 />
               </div>
@@ -309,7 +303,7 @@
             :lati="uniLat"
             :long="uniLong"
             :extras="nearbyLocation"
-            :nearbyIcon="nearbyIcon"
+            :nearbyName="nearbyName"
           ></GoogleMap>
         </div>
         <!-- modules -->
@@ -321,20 +315,32 @@
         <br />
         <!-- one module each -->
         <div class="row">
-          <div v-for="(modObj,idx) in this.moduleObjs" class=" col-xl-3 col-lg-4 col-md-5 card m-2">
+          <div
+            :key="idx"
+            v-for="(modObj, idx) in this.moduleObjs"
+            class="col-xl-3 col-lg-4 col-md-5 card m-2"
+          >
             <div class="card-body">
               <!-- module component -->
               <!-- module name -->
-              <h5 class="card-title mb-3">{{modObj['module']}}</h5>
+              <h5 class="card-title mb-3">{{ modObj["module"] }}</h5>
               <!-- basket type it fulfils -->
-              <h6 class="card-subtitle mb-2 text-primary">{{modObj['basket']}}</h6>
+              <h6 class="card-subtitle mb-2 text-primary">
+                {{ modObj["basket"] }}
+              </h6>
               <!-- show more button -->
               <!-- mod description -->
               <div class="collapse card-text p-1 mb-3" :id="`mod${idx}`">
-                  {{modObj['desc']}}
+                {{ modObj["desc"] }}
               </div>
               <div class="d-flex justify-content-between">
-                <a class="text-muted" data-bs-toggle="collapse" role="button" :data-bs-target="`#mod${idx}`" aria-expanded="false">
+                <a
+                  class="text-muted"
+                  data-bs-toggle="collapse"
+                  role="button"
+                  :data-bs-target="`#mod${idx}`"
+                  aria-expanded="false"
+                >
                   <u>click to expand</u>
                 </a>
                 <!-- add to fav -->
@@ -343,99 +349,125 @@
             </div>
           </div>
         </div>
-          <!-- Review component -->
-          <div class="container-fluid px-4 mt-5" id="reviews">
-            <div class="row mb-0">
-              <div class="col d-flex align-items-center">
-                <h2 class="mb-0">Reviews</h2>
+        <!-- Review component -->
+        <div class="container-fluid px-4 mt-5" id="reviews">
+          <div class="row mb-0">
+            <div class="col d-flex align-items-center">
+              <h2 class="mb-0">Reviews</h2>
+            </div>
+            <div class="col d-flex align-items-center justify-content-end">
+              <div v-if="!isLoggedIn">
+                <h5>
+                  You must be signed in to leave a review!
+                  <router-link to="/SigninPage">sign in</router-link>
+                </h5>
               </div>
-              <div class="col d-flex align-items-center justify-content-end">
-                <div v-if="!isLoggedIn">
-                  <h5>
-                    You must be signed in to leave a review!
-                    <router-link to="/SigninPage">sign in</router-link>
-                  </h5>
-                </div>
-                <div v-else>
-                  <h5 class="text-muted mb-0 me-2">Add a review
-                    <button @click="showModal()" type="button" class="btn btn-light py-0 px-2 border-2">
-                      <h4 class="mb-0">+</h4>
-                    </button>
-                    <!-- Dynamically opening and closing Modal based on actions performed and parent/child interactions-->
-                    <Modal v-show="isModalOpen"
+              <div v-else>
+                <h5 class="text-muted mb-0 me-2">
+                  Add a review
+                  <button
+                    @click="showModal()"
+                    type="button"
+                    class="btn btn-light py-0 px-2 border-2"
+                  >
+                    <h4 class="mb-0">+</h4>
+                  </button>
+                  <!-- Dynamically opening and closing Modal based on actions performed and parent/child interactions-->
+                  <Modal
+                    v-show="isModalOpen"
                     @close="closeModal()"
                     :uniNamePassed="uniName"
                     @review-done="closeModal()"
-                    />
-                  </h5>
-                </div>
+                  />
+                </h5>
               </div>
             </div>
+          </div>
 
+          <div
+            v-if="this.reviews.length > 0 && this.isReviewsLoaded"
+            class="row d-flex"
+          >
             <div
-              v-if="this.reviews.length > 0 && this.isReviewsLoaded"
-              class="row d-flex"
+              class="col-sm-12 col-md-6 col-lg-4 flex-grow-1 flex-shrink-1"
+              v-for="(review, index) in reviews"
+              :key="index"
             >
-              <div
-                class="col-sm-12 col-md-6 col-lg-4 flex-grow-1 flex-shrink-1"
-                v-for="(review, index) in reviews"
-                :key="index"
-              >
-                <div class="card my-4">
-                  <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                      <h5 class="card-title mb-2">{{ review.userName }}</h5>
-                      <!-- <div>
+              <div class="card my-4">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h5 class="card-title mb-2">{{ review.userName }}</h5>
+                    <!-- <div>
                               Likes function kiv for now
                               <i @click="addLike()" class="fa fa-thumbs-up text-muted" style="font-size:15px; margin-right:2px"></i>
                               {{ review.likes }}
                             </div> -->
-                    </div>
-                    <h6 class="card-subtitle mb-2 text-muted">
-                      Reviewed University: {{ review.uniName }}
-                    </h6>
-                    <p class="card-text">
-                      {{ review.info }}
+                  </div>
+                  <h6 class="card-subtitle mb-2 text-muted">
+                    Reviewed University: {{ review.uniName }}
+                  </h6>
+                  <p class="card-text">
+                    {{ review.info }}
+                  </p>
+                  <div class="d-flex justify-content-between">
+                    <p class="card-text mb-0">
+                      <small class="text-muted">{{ review.currentTime }}</small>
                     </p>
-                    <div class="d-flex justify-content-between">
-                      <p class="card-text mb-0">
-                        <small class="text-muted">{{
-                          review.currentTime
-                        }}</small>
-                      </p>
-                      <!-- More info function to be done if theres time -->
-                      <a href="#" class="card-link me-3 mb-0">more info</a>
-                    </div>
+                    <!-- More info function to be done if theres time -->
+                    <a href="#" class="card-link me-3 mb-0">more info</a>
                   </div>
                 </div>
               </div>
             </div>
-            <div
-              v-if="this.reviews.length == 0 && this.isReviewsLoaded"
-              class="row d-flex mt-3 mb-4"
-            >
-              <div
-                class="col-sm-12 col-md-6 col-lg-4 flex-grow-1 flex-shrink-1"
-              >
-                There are no reviews for {{ uniName }} yet, would you like to be
-                the first to add one {{ name }}?
-              </div>
+          </div>
+          <div
+            v-if="this.reviews.length == 0 && this.isReviewsLoaded"
+            class="row d-flex mt-3 mb-4"
+          >
+            <div class="col-sm-12 col-md-6 col-lg-4 flex-grow-1 flex-shrink-1">
+              There are no reviews for {{ uniName }} yet, would you like to be
+              the first to add one {{ name }}?
             </div>
           </div>
+        </div>
       </div>
     </div>
   </div>
   <footer class="bg-white">
     <div class="container py-5">
       <div class="row py-4">
-        <div class="col-lg-4 col-md-6 mb-4 mb-lg-0"><img src="img/logo.png" alt="" width="180" class="mb-3">
-          <p class="font-italic text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+        <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+          <img src="img/logo.png" alt="" width="180" class="mb-3" />
+          <p class="font-italic text-muted">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+            eiusmod tempor incididunt.
+          </p>
           <ul class="list-inline mt-4">
-            <li class="list-inline-item"><a href="#" target="_blank" title="twitter"><i class="fa fa-twitter"></i></a></li>
-            <li class="list-inline-item"><a href="#" target="_blank" title="facebook"><i class="fa fa-facebook"></i></a></li>
-            <li class="list-inline-item"><a href="#" target="_blank" title="instagram"><i class="fa fa-instagram"></i></a></li>
-            <li class="list-inline-item"><a href="#" target="_blank" title="pinterest"><i class="fa fa-pinterest"></i></a></li>
-            <li class="list-inline-item"><a href="#" target="_blank" title="vimeo"><i class="fa fa-vimeo"></i></a></li>
+            <li class="list-inline-item">
+              <a href="#" target="_blank" title="twitter"
+                ><i class="fa fa-twitter"></i
+              ></a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#" target="_blank" title="facebook"
+                ><i class="fa fa-facebook"></i
+              ></a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#" target="_blank" title="instagram"
+                ><i class="fa fa-instagram"></i
+              ></a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#" target="_blank" title="pinterest"
+                ><i class="fa fa-pinterest"></i
+              ></a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#" target="_blank" title="vimeo"
+                ><i class="fa fa-vimeo"></i
+              ></a>
+            </li>
           </ul>
         </div>
         <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
@@ -453,17 +485,29 @@
             <li class="mb-2"><a href="#" class="text-muted">Login</a></li>
             <li class="mb-2"><a href="#" class="text-muted">Register</a></li>
             <li class="mb-2"><a href="#" class="text-muted">Wishlist</a></li>
-            <li class="mb-2"><a href="#" class="text-muted">Our Products</a></li>
+            <li class="mb-2">
+              <a href="#" class="text-muted">Our Products</a>
+            </li>
           </ul>
         </div>
         <div class="col-lg-4 col-md-6 mb-lg-0">
           <h6 class="text-uppercase font-weight-bold mb-4">Newsletter</h6>
-          <p class="text-muted mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. At itaque temporibus.</p>
+          <p class="text-muted mb-4">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. At itaque
+            temporibus.
+          </p>
           <div class="p-1 rounded border">
             <div class="input-group">
-              <input type="email" placeholder="Enter your email address" aria-describedby="button-addon1" class="form-control border-0 shadow-0">
+              <input
+                type="email"
+                placeholder="Enter your email address"
+                aria-describedby="button-addon1"
+                class="form-control border-0 shadow-0"
+              />
               <div class="input-group-append">
-                <button id="button-addon1" type="submit" class="btn btn-link"><i class="fa fa-paper-plane"></i></button>
+                <button id="button-addon1" type="submit" class="btn btn-link">
+                  <i class="fa fa-paper-plane"></i>
+                </button>
               </div>
             </div>
           </div>
@@ -474,7 +518,9 @@
     <!-- Copyrights -->
     <div class="bg-light py-4">
       <div class="container text-center">
-        <p class="text-muted mb-0 py-2">© 2019 Bootstrapious All rights reserved.</p>
+        <p class="text-muted mb-0 py-2">
+          © 2022 SGXchange All rights reserved.
+        </p>
       </div>
     </div>
   </footer>
@@ -544,7 +590,7 @@ export default {
       currentUserLeftReview: false,
       places: [],
       nearbyLocation: [],
-      nearbyIcon: [],
+      nearbyName: [],
       baskets: [],
       moduleObjs: [],
     };
@@ -563,9 +609,9 @@ export default {
         this.uniLng
       );
     },
-    yOffset(){
-      return window.pageYoffset
-    }
+    yOffset() {
+      return window.pageYoffset;
+    },
   },
   created() {
     this.uniName = this.$route.params.name;
@@ -577,10 +623,10 @@ export default {
     this.addModInfo();
   },
   mounted() {
-    document.addEventListener('scroll',console.log(1))
+    document.addEventListener("scroll", console.log(1));
   },
-  unmounted(){
-    document.removeEventListener('scroll',console.log(1))
+  unmounted() {
+    document.removeEventListener("scroll", console.log(1));
   },
   methods: {
     //Fetch nearby places on pageload using PlacesAPI
@@ -601,38 +647,75 @@ export default {
           type: "tourist_attraction",
           key: import.meta.env.VITE_GOOGLE_MAP_API_KEY,
         },
-        headers: {
-        },
+        headers: {},
       };
       console.log(this.places);
       try {
         const response = await axios.request(config);
         // console.log(response.data.results);
         this.places = response.data.results;
-        if (this.places.length > 10) {
-          for (let i = 0; i < 10; i++) {
-            this.nearbyIcon.push(this.places[i].icon);
-            this.nearbyLocation.push({
-              position: {
-                lat: this.places[i].geometry.location.lat,
-                lng: this.places[i].geometry.location.lng,
-              },
-            });
+        if (this.places.length > 6) {
+          for (let i = 0; i < 6; i++) {
+            if (this.places[i].rating) {
+              this.nearbyLocation.push({
+                id: i,
+                name: this.places[i].name,
+                icon: this.places[i].icon,
+                address: this.places[i].vicinity,
+                rating: this.places[i].rating,
+                position: {
+                  lat: this.places[i].geometry.location.lat,
+                  lng: this.places[i].geometry.location.lng,
+                },
+              });
+            } else {
+              this.nearbyLocation.push({
+                id: i,
+                name: this.places[i].name,
+                icon: this.places[i].icon,
+                address: this.places[i].vicinity,
+                rating: "NA",
+                position: {
+                  lat: this.places[i].geometry.location.lat,
+                  lng: this.places[i].geometry.location.lng,
+                },
+              });
+            }
+            this.nearbyName.push(this.places[i].name);
           }
         } else {
           for (let i = 0; i < this.places.length; i++) {
-            this.nearbyIcon.push(this.places[i].icon);
-            this.nearbyLocation.push({
-              position: {
-                lat: this.places[i].geometry.location.lat,
-                lng: this.places[i].geometry.location.lng,
-              },
-            });
+            this.nearbyName.push(this.places[i].name);
+            if (this.places[i].rating) {
+              this.nearbyLocation.push({
+                id: i,
+                name: this.places[i].name,
+                icon: this.places[i].icon,
+                address: this.places[i].vicinity,
+                rating: this.places[i].rating,
+                position: {
+                  lat: this.places[i].geometry.location.lat,
+                  lng: this.places[i].geometry.location.lng,
+                },
+              });
+            } else {
+              this.nearbyLocation.push({
+                id: i,
+                name: this.places[i].name,
+                icon: this.places[i].icon,
+                address: this.places[i].vicinity,
+                rating: "NA",
+                position: {
+                  lat: this.places[i].geometry.location.lat,
+                  lng: this.places[i].geometry.location.lng,
+                },
+              });
+            }
           }
         }
-
+        console.log("Places is below");
         console.log(this.places);
-        console.log(this.nearbyIcon);
+        console.log(this.nearbyName);
       } catch (err) {
         console.log(err);
       }
@@ -704,57 +787,61 @@ export default {
         this.getLangauageCurrencyFromCountry();
       });
     },
-    async getBaskets(){
+    async getBaskets() {
       // loop through the BasketToUni collection, for each basket, if the uni value not in UniToBasket obj, create new key. Else push to UniToBasket[uni] which will be an array of baskets
-      var basketToUniversities = await getDocs(collection(fireStore, "BasketToUniversities"));
-      basketToUniversities.forEach((doc)=> {
-        let basketInfo = {}
+      var basketToUniversities = await getDocs(
+        collection(fireStore, "BasketToUniversities")
+      );
+      basketToUniversities.forEach((doc) => {
+        let basketInfo = {};
         // console.log(doc.data()['Universities'])
         // console.log(doc.id)
-        let universities = doc.data()['Universities']
-        let basket = doc.id
-        for (let uni of universities){
-          if (uni == this.uniName){
-            this.baskets.push(basket)
-          } 
+        let universities = doc.data()["Universities"];
+        let basket = doc.id;
+        for (let uni of universities) {
+          if (uni == this.uniName) {
+            this.baskets.push(basket);
+          }
         }
-      })
+      });
       // console.log(this.uniToBaskets)
     },
-    async getBasketToModules(){
+    async getBasketToModules() {
       // loop through the BasketToUni collection, for each basket, if the uni value not in UniToBasket obj, create new key. Else push to UniToBasket[uni] which will be an array of baskets
-      var basketToModules = await getDocs(collection(fireStore, "BasketToModules"));
-      basketToModules.forEach((doc)=> {
+      var basketToModules = await getDocs(
+        collection(fireStore, "BasketToModules")
+      );
+      basketToModules.forEach((doc) => {
         // console.log(doc.data()['Universities'])
         // console.log(doc.id)
-        let basket = doc.data()['Baskets']
-        let module = doc.data()['Modules']
+        let basket = doc.data()["Baskets"];
+        let module = doc.data()["Modules"];
 
-        for (let bkt of this.baskets){
-          let obj = {}
-          if (bkt == basket){
-            obj['basket'] = basket
-            obj['module'] = module
-            this.moduleObjs.push(obj)
+        for (let bkt of this.baskets) {
+          let obj = {};
+          if (bkt == basket) {
+            obj["basket"] = basket;
+            obj["module"] = module;
+            this.moduleObjs.push(obj);
           }
         }
-      })
+      });
       // console.log(this.moduleObjs)
     },
-    async addModInfo(){
-      var moduleToInfo =  await getDocs(collection(fireStore,"ModuleToInfo"))
-            
-      moduleToInfo.forEach((doc)=>{
-        let modName = doc.data()['Module Name']
-        let modInfo = doc.data()['Module Info']
+    async addModInfo() {
+      var moduleToInfo = await getDocs(collection(fireStore, "ModuleToInfo"));
 
-        for (let mod of this.moduleObjs){
-          if (mod['module'] === modName){
-            mod['desc'] = modInfo
+      moduleToInfo.forEach((doc) => {
+        let modName = doc.data()["Module Name"];
+        let modInfo = doc.data()["Module Info"];
+
+        for (let mod of this.moduleObjs) {
+          if (mod["module"] === modName) {
+            mod["desc"] = modInfo;
           }
         }
-      })
-      console.log(this.moduleObjs)
+      });
+      console.log(this.moduleObjs);
     },
 
     // Check for current logged in user or if there isnt one
@@ -769,7 +856,7 @@ export default {
           const firstLetterCap = firstLetter.toUpperCase();
           const remainingLetters = name.slice(1);
           this.name = firstLetterCap + remainingLetters;
-          this.email = user.email
+          this.email = user.email;
         }
       });
     },
@@ -782,7 +869,7 @@ export default {
       let q = query(collectionGroup(fireStore, review));
       let getUniReviews = await getDocs(q);
       getUniReviews.forEach((doc) => {
-        let currentUserEmail = this.email
+        let currentUserEmail = this.email;
         let review = {};
 
         review["email"] = doc.data().Email;
@@ -793,9 +880,9 @@ export default {
         review["currentTime"] = doc.data().currentTime;
         this.reviews.push(review);
 
-        if (currentUserEmail == doc.data().Email){
-          this.currentUserLeftReview = true
-          console.log('current user has left review before')
+        if (currentUserEmail == doc.data().Email) {
+          this.currentUserLeftReview = true;
+          console.log("current user has left review before");
         }
       });
       console.log(getUniReviews.docs.length);
@@ -874,9 +961,14 @@ export default {
     },
     // Dynamically opens modal and calls upon modal component
     showModal() {
-      if(this.currentUserLeftReview){
-        alert("Hi " + this.name + ", each user can only leave 1 review per university page."
-        + "\n\n" + "Take note that adding another will replace your existing review!")
+      if (this.currentUserLeftReview) {
+        alert(
+          "Hi " +
+            this.name +
+            ", each user can only leave 1 review per university page." +
+            "\n\n" +
+            "Take note that adding another will replace your existing review!"
+        );
       }
       console.log("modal opened from uniInfo");
       this.isModalOpen = true;
@@ -888,8 +980,8 @@ export default {
       this.isModalOpen = false;
     },
     toggleContentNavbar() {
-        console.log(window.yOffset)
-    }
+      console.log(window.yOffset);
+    },
   },
 };
 </script>
