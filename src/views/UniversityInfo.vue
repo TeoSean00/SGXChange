@@ -42,7 +42,7 @@
       </div>
     </div>
     <div class="row mb-5">
-      <div class="col col-sm-10 col-md-8">
+      <div class="col col-sm-10 col-md-10">
         <div
           id="carouselExampleIndicators"
           class="carousel slide w-100"
@@ -77,7 +77,7 @@
                 <img
                   :src="img"
                   class="d-block w-100"
-                  style="width: 450px; height: 600px; object-fit: cover;"
+                  style="width: 550px; height: 500px; object-fit: cover;"
                   alt="..."
                 />
               </div>
@@ -85,7 +85,7 @@
                 <img
                   :src="img"
                   class="d-block w-100"
-                  style="width: 450px; height: 600px; object-fit: cover;"
+                  style="width: 550px; height: 500px; object-fit: cover;"
                   alt="..."
                 />
               </div>
