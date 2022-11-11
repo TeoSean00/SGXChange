@@ -69,7 +69,7 @@
                 <img
                   :src="img"
                   class="d-block w-100"
-                  style="width: 80vw; height: 80vh; object-fit: cover"
+                  style="width: 450px; height: 600px; object-fit: cover;"
                   alt="..."
                 />
               </div>
@@ -77,7 +77,7 @@
                 <img
                   :src="img"
                   class="d-block w-100"
-                  style="width: 80vw; height: 80vh; object-fit: cover"
+                  style="width: 450px; height: 600px; object-fit: cover;"
                   alt="..."
                 />
               </div>
@@ -303,50 +303,29 @@
         </div>
 
         <!-- one module each -->
-        <div class="card my-4" style="width: 100%">
-          <div class="card-body">
-            <!-- module component -->
-
-            <!-- module name -->
-            <h5 class="card-title mb-3">Big Data Architecture</h5>
-            <!-- basket type it fulfils -->
-            <h6 class="card-subtitle mb-2 text-muted">Fintech Basket</h6>
-            <!-- mod description -->
-            <p class="card-text">
-              this module teaches you about the in depth of technical analysis
-              and predictive modelling
-            </p>
-            <div class="d-flex justify-content-between">
-              <!-- add to fav -->
-              <a href="#" class="btn btn-primary btn-sm">Favourite</a>
-              <!-- link to mod info on uni page -->
-              <a href="#" class="card-link me-3">more info</a>
+        <div class="row">
+          <div v-for="(modObj,idx) in this.moduleObjs" class=" col-xl-3 col-lg-4 col-md-5 card m-2">
+            <div class="card-body">
+              <!-- module component -->
+              <!-- module name -->
+              <h5 class="card-title mb-3">{{modObj['module']}}</h5>
+              <!-- basket type it fulfils -->
+              <h6 class="card-subtitle mb-2 text-primary">{{modObj['basket']}}</h6>
+              <!-- show more button -->
+              <!-- mod description -->
+              <div class="collapse card-text p-1 mb-3" :id="`mod${idx}`">
+                  {{modObj['desc']}}
+              </div>
+              <div class="d-flex justify-content-between">
+                <a data-bs-toggle="collapse" role="button" :data-bs-target="`#mod${idx}`" aria-expanded="false">
+                  <u>click to expand</u>
+                </a>
+                <!-- add to fav -->
+                <a href="#" class="btn btn-primary btn-sm">Favourite</a>
+              </div>
             </div>
           </div>
         </div>
-        <!-- next module -->
-        <div class="card my-4" style="width: 100%">
-          <div class="card-body">
-            <!-- module component -->
-
-            <!-- module name -->
-            <h5 class="card-title mb-3">Big Data Architecture</h5>
-            <!-- basket type it fulfils -->
-            <h6 class="card-subtitle mb-2 text-muted">Fintech Basket</h6>
-            <!-- mod description -->
-            <p class="card-text">
-              this module teaches you about the in depth of technical analysis
-              and predictive modelling
-            </p>
-            <div class="d-flex justify-content-between">
-              <!-- add to fav -->
-              <a href="#" class="btn btn-primary btn-sm">Favourite</a>
-              <!-- link to mod info on uni page -->
-              <a href="#" class="card-link me-3">more info</a>
-            </div>
-          </div>
-        </div>
-        <div>
           <!-- Review component -->
           <div class="container-fluid px-4 mt-5">
             <div class="row mb-0">
@@ -371,11 +350,10 @@
                       <h4 class="mb-0">+</h4>
                     </button>
                     <!-- Dynamically opening and closing Modal based on actions performed and parent/child interactions-->
-                    <Modal
-                      v-show="isModalOpen"
-                      @close="closeModal()"
-                      :uniNamePassed="uniName"
-                      @review-done="closeModal()"
+                    <Modal v-show="isModalOpen"
+                    @close="closeModal()"
+                    :uniNamePassed="uniName"
+                    @review-done="closeModal()"
                     />
                   </h5>
                 </div>
@@ -432,7 +410,6 @@
               </div>
             </div>
           </div>
-        </div>
       </div>
     </div>
   </div>
@@ -504,6 +481,8 @@ export default {
       places: [],
       nearbyLocation: [],
       nearbyName: [],
+      baskets: [],
+      moduleObjs: [],
     };
   },
   components: {
@@ -524,10 +503,13 @@ export default {
   },
   created() {
     this.uniName = this.$route.params.name;
+    this.getBaskets();
     this.getUniInfo();
+    this.getBasketToModules();
     this.getReviewInfo();
     this.getModuleInfo();
     this.checkForUser();
+    this.addModInfo();
   },
   mounted() {},
   methods: {
@@ -647,10 +629,10 @@ export default {
         this.country = doc.data().Country;
         console.log(this.country, "country");
         // Gpa
-        if (doc.data()["GPA"] == null) {
+        if (doc.data()["gpaReq"] == null) {
           this.gpaReq = "NA";
         } else {
-          this.gpaReq = doc.data()["GPA"].toFixed(1);
+          this.gpaReq = doc.data()["gpaReq"].toFixed(1);
         }
         // Uni Desc
         this.uniDesc = doc.data().UniDescription;
@@ -689,7 +671,58 @@ export default {
         this.getLangauageCurrencyFromCountry();
       });
     },
+    async getBaskets(){
+      // loop through the BasketToUni collection, for each basket, if the uni value not in UniToBasket obj, create new key. Else push to UniToBasket[uni] which will be an array of baskets
+      var basketToUniversities = await getDocs(collection(fireStore, "BasketToUniversities"));
+      basketToUniversities.forEach((doc)=> {
+        let basketInfo = {}
+        // console.log(doc.data()['Universities'])
+        // console.log(doc.id)
+        let universities = doc.data()['Universities']
+        let basket = doc.id
+        for (let uni of universities){
+          if (uni == this.uniName){
+            this.baskets.push(basket)
+          } 
+        }
+      })
+      // console.log(this.uniToBaskets)
+    },
+    async getBasketToModules(){
+      // loop through the BasketToUni collection, for each basket, if the uni value not in UniToBasket obj, create new key. Else push to UniToBasket[uni] which will be an array of baskets
+      var basketToModules = await getDocs(collection(fireStore, "BasketToModules"));
+      basketToModules.forEach((doc)=> {
+        // console.log(doc.data()['Universities'])
+        // console.log(doc.id)
+        let basket = doc.data()['Baskets']
+        let module = doc.data()['Modules']
 
+        for (let bkt of this.baskets){
+          let obj = {}
+          if (bkt == basket){
+            obj['basket'] = basket
+            obj['module'] = module
+            this.moduleObjs.push(obj)
+          }
+        }
+      })
+      // console.log(this.moduleObjs)
+    },
+    async addModInfo(){
+      var moduleToInfo =  await getDocs(collection(fireStore,"ModuleToInfo"))
+            
+      moduleToInfo.forEach((doc)=>{
+        let modName = doc.data()['Module Name']
+        let modInfo = doc.data()['Module Info']
+
+        for (let mod of this.moduleObjs){
+          if (mod['module'] === modName){
+            mod['desc'] = modInfo
+          }
+        }
+      })
+      console.log(this.moduleObjs)
+    },
     // Get Mod Info
     async getModuleInfo() {
       let q = query(

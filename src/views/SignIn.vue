@@ -25,9 +25,9 @@
           </div>
 
           <div class="flex-sb-m w-full p-t-3 p-b-32">
-            <div>
+            <!-- <div>
               <a href="#" class="txt1"> Forgot Password? </a>
-            </div>
+            </div> -->
           </div>
           <div class="container-login100-form-btn">
             <button @click="signIn()" class="login100-form-btn">Login</button>
@@ -77,12 +77,12 @@ export default {
     signIn() {
       signInWithEmailAndPassword(getAuth(), this.email, this.password)
         .then((user) => {
-          const name1 = this.email.split("@")[0]
-          const firstLetter = name1.charAt(0)
-          const firstLetterCap = firstLetter.toUpperCase()
-          const remainingLetters = name1.slice(1)
-          let shavedName = firstLetterCap + remainingLetters
-          
+          const name1 = this.email.split("@")[0];
+          const firstLetter = name1.charAt(0);
+          const firstLetterCap = firstLetter.toUpperCase();
+          const remainingLetters = name1.slice(1);
+          let shavedName = firstLetterCap + remainingLetters;
+
           alert(`Hi ${shavedName}, you have successfully signed in!`);
           console.log("successfully logged in user is", user);
           this.router.push("/ProfilePage");
@@ -192,7 +192,6 @@ export default {
   left: auto;
   z-index: 1;
   background-image: url("../assets/SMU_1.jpeg");
-
 }
 
 .sch-img {
@@ -221,7 +220,7 @@ export default {
   min-height: 100vh;
   display: block;
   background-color: #f7f7f7;
-  padding: 173px 55px 55px 55px;
+  padding: 100px 55px 55px 25px;
 }
 
 .login100-form-title {
@@ -368,6 +367,7 @@ input.input100 {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding-top: 22px;
 }
 
 .login100-form-btn {
@@ -478,5 +478,4 @@ input {
   border: 0;
   outline: none !important;
 }
-
 </style>
