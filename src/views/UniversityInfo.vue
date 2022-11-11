@@ -438,7 +438,8 @@
     <div class="container py-5">
       <div class="row py-4">
         <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-          <img src="img/logo.png" alt="" width="180" class="mb-3" />
+          <!-- THIS CODE BREAKS EVERYTHING PLS CHECK BEFORE PUSH TO MAIN do NPM RUN BUILD -->
+          <!-- <img src="img/logo.png" alt="" width="180" class="mb-3" /> -->
           <p class="font-italic text-muted">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
             eiusmod tempor incididunt.
