@@ -1,13 +1,39 @@
-<template>
+<template 
+>
   <div
-    class="container-fluid"
+    class="container-fluid px-5 py-3"
     style="max-width: fit-content;"
   >
+  <!-- top header -->
+  <!-- <nav class="navbar navbar-expand-lg bg-light" id="contentNavbar">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#gpa">gpa</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#description">description</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#general">general</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#map">map</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#modules">modules</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#reviews">reviews</a>
+        </li>
+      </ul>
+    </div>
   </div>
-  <div
-    class="container-fluid px-5"
-    style="max-width: fit-content;"
-  >
+</nav> -->
     <div class="row mb-3">
       <div class="col h2">{{ uniName }}</div>
       <div class="col text-end">
@@ -25,6 +51,7 @@
         </span>
       </div>
     </div>
+    <!-- ratings -->
     <div class="row mb-3">
       <div class="col-6">
         <div class="d-inline me-1">
@@ -35,12 +62,13 @@
 
         <!-- sean how to insert count of reviews here according to uni -->
         <a href="#" class="text-dark mx-1">{{this.reviews.length}} Reviews</a>
-        <a href="#" class="text-bold mx-1">{{ region }}∙{{ country }}</a>
+        <a href="#" class="text-dark mx-1">{{ region }}∙{{ country }}</a>
       </div>
       <div class="col-6">
 
       </div>
     </div>
+    <!-- carousel -->
     <div class="row mb-5">
       <div class="col">
         <div
@@ -133,14 +161,14 @@
         <img src="../assets/HSG-SQUARE-2000x1125.jpeg" class="w-100" style="width: 18rem" alt="" />
       </div> -->
     </div>
-    <!-- test -->
-    <div class="row">
+    <!-- gap -->
+    <div class="row" id="activeNavbar">
       <div class="col">
         <hr />
       </div>
     </div>
     <!-- GPA info -->
-    <div class="row">
+    <div class="row" id="gpa">
       <div class="col d-flex gap-3 pt-3">
         <i class="bi bi-book m-1"></i>
         <b style="font-size: large">Gpa Info </b>
@@ -194,14 +222,15 @@
         <hr />
       </div>
     </div>
-    <div class="row">
+    <!-- description -->
+    <div class="row" id="description">
       <div class="col py-3">
         <h4>Description</h4>
         <p>{{ uniDesc }}</p>
       </div>
     </div>
     <div class="row">
-      <div class="col">
+      <div class="col ps-5 pt-2">
         <h5>No. of Slots</h5>
         <div class="ps-3 py-2">
           <p class="d-flex align-items-center gap-3">
@@ -213,12 +242,14 @@
         </div>
       </div>
     </div>
+    <!-- gap -->
     <div class="row">
       <div class="col">
         <hr />
       </div>
     </div>
-    <div class="row">
+    <!-- general info -->
+    <div class="row" id="general">
       <div class="col">
         <h4>General Info</h4>
         <ul style="list-style-type: none">
@@ -263,6 +294,7 @@
         </ul>
       </div>
     </div>
+    <!-- gap -->
     <div class="row">
       <div class="col">
         <hr />
@@ -272,7 +304,7 @@
       <div class="col">
         <!-- module information -->
         <!-- GOOGLEMAP MAP API -->
-        <div>
+        <div id="map">
           <GoogleMap
             :lati="uniLat"
             :long="uniLong"
@@ -280,7 +312,8 @@
             :nearbyIcon="nearbyIcon"
           ></GoogleMap>
         </div>
-        <h2 class="my-4">Module Information</h2>
+        <!-- modules -->
+        <h2 class="my-4" id="modules">Module Information</h2>
         <span
           >University page > module info :
           <a :href="uniCourseUrl" target="_blank">{{ uniCourseUrl }}</a></span
@@ -311,7 +344,7 @@
           </div>
         </div>
           <!-- Review component -->
-          <div class="container-fluid px-4 mt-5">
+          <div class="container-fluid px-4 mt-5" id="reviews">
             <div class="row mb-0">
               <div class="col d-flex align-items-center">
                 <h2 class="mb-0">Reviews</h2>
@@ -392,6 +425,60 @@
       </div>
     </div>
   </div>
+  <footer class="bg-white">
+    <div class="container py-5">
+      <div class="row py-4">
+        <div class="col-lg-4 col-md-6 mb-4 mb-lg-0"><img src="img/logo.png" alt="" width="180" class="mb-3">
+          <p class="font-italic text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+          <ul class="list-inline mt-4">
+            <li class="list-inline-item"><a href="#" target="_blank" title="twitter"><i class="fa fa-twitter"></i></a></li>
+            <li class="list-inline-item"><a href="#" target="_blank" title="facebook"><i class="fa fa-facebook"></i></a></li>
+            <li class="list-inline-item"><a href="#" target="_blank" title="instagram"><i class="fa fa-instagram"></i></a></li>
+            <li class="list-inline-item"><a href="#" target="_blank" title="pinterest"><i class="fa fa-pinterest"></i></a></li>
+            <li class="list-inline-item"><a href="#" target="_blank" title="vimeo"><i class="fa fa-vimeo"></i></a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+          <h6 class="text-uppercase font-weight-bold mb-4">Shop</h6>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2"><a href="#" class="text-muted">For Women</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">For Men</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">Stores</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">Our Blog</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+          <h6 class="text-uppercase font-weight-bold mb-4">Company</h6>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2"><a href="#" class="text-muted">Login</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">Register</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">Wishlist</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">Our Products</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-lg-0">
+          <h6 class="text-uppercase font-weight-bold mb-4">Newsletter</h6>
+          <p class="text-muted mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. At itaque temporibus.</p>
+          <div class="p-1 rounded border">
+            <div class="input-group">
+              <input type="email" placeholder="Enter your email address" aria-describedby="button-addon1" class="form-control border-0 shadow-0">
+              <div class="input-group-append">
+                <button id="button-addon1" type="submit" class="btn btn-link"><i class="fa fa-paper-plane"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Copyrights -->
+    <div class="bg-light py-4">
+      <div class="container text-center">
+        <p class="text-muted mb-0 py-2">© 2019 Bootstrapious All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <!-- End -->
 
   <!-- <div>{{ places }}</div> -->
 </template>
@@ -476,6 +563,9 @@ export default {
         this.uniLng
       );
     },
+    yOffset(){
+      return window.pageYoffset
+    }
   },
   created() {
     this.uniName = this.$route.params.name;
@@ -483,12 +573,14 @@ export default {
     this.getUniInfo();
     this.getBasketToModules();
     this.getReviewInfo();
-    this.getModuleInfo();
     this.checkForUser();
     this.addModInfo();
   },
   mounted() {
-
+    document.addEventListener('scroll',console.log(1))
+  },
+  unmounted(){
+    document.removeEventListener('scroll',console.log(1))
   },
   methods: {
     //Fetch nearby places on pageload using PlacesAPI
@@ -795,6 +887,9 @@ export default {
       console.log("modal closed from uniInfo");
       this.isModalOpen = false;
     },
+    toggleContentNavbar() {
+        console.log(window.yOffset)
+    }
   },
 };
 </script>
