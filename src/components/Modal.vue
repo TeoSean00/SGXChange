@@ -171,16 +171,35 @@
                 UserName: this.currentUserName,
                 currentTime: this.currentUserTime
             })
-            .then(() => {
-                let text = "Your review has been successfully added, the page will now be automatically refreshed!"
-                 + "\n\n" + "Thank you " + this.currentUserName + "!"
-                alert(text)
-                this.reviewDone()
-                location.reload()
+
+              .then(async () => {
+                console.log('review has been added to UNI collection!')
+                let userEmail = this.currentUserEmail
+                await setDoc(doc(fireStore, `UserProfiles/${userEmail}/userReviews`, testUni), {
+                    Email: this.currentUserEmail,
+                    Likes: likes,
+                    ReviewInfo: this.userReview,
+                    UniName: testUni,
+                    UserName: this.currentUserName,
+                    currentTime: this.currentUserTime
+                })
+                  .then(() => {
+                      console.log('review has been added to USER collection')
+                      let text = "Your review has been successfully added, the page will now be automatically refreshed!"
+                      + "\n\n" + "Thank you " + this.currentUserName + "!"
+                      alert(text)
+                      this.reviewDone()
+                      location.reload()
+                  })
+                  .catch(error => {
+                  alert('An error has occurred, please check the console for instructions')
+                  console.log(error.message, '|| adding of review to USER review collection error')
+                  })
+
             })
             .catch(error => {
                 alert('An error has occurred, please check the console for instructions')
-                console.log(error.message)
+                console.log(error.message, '|| adding of review to UNI review collection error')
             })
         }
     },

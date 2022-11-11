@@ -389,7 +389,7 @@
                 v-for="(review, index) in reviews"
                 :key="index"
               >
-                <div class="card my-4">
+                <div class="card my-4" :id="review.uniName">
                   <div class="card-body">
                     <div class="d-flex justify-content-between">
                       <h5 class="card-title mb-2">{{ review.userName }}</h5>

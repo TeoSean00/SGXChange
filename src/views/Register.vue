@@ -223,10 +223,11 @@ export default {
             let shavedName = firstLetterCap + remainingLetters;
 
             alert(
-              `Hi ${shavedName}, your account has been successfully created!`
+              `Hi ${shavedName}, your account has been successfully created! Please wait as we re-direct you to your profile page!`
             );
             console.log("successfully registered user is", user);
-            this.router.push("/ProfilePage");
+            setTimeout( () => this.router.push("/ProfilePage"), 2000);
+            // this.router.push("/ProfilePage");
           })
           .catch((error) => {
             console.log("error.code");
