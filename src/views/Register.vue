@@ -52,7 +52,7 @@
           >
             <!-- <input class="input100" type="text" name="pass" v-model="school" placeholder=" " required/> -->
             <select
-              class="input100 form-select bootstrap-select"
+              class="input100    bootstrap-select"
               v-model="selectedUni"
               required
             >
@@ -61,10 +61,7 @@
                 Singapore Management University
               </option>
               <template v-for="uni in allUniversities" :key="uni">
-                <option v-if="uni == 'Singapore Management University'" :value="uni">
-                {{ uni }}
-                </option>
-                <option v-else :value="uni" class="bg-light" disabled>
+                <option v-if="uni != 'Singapore Management University'" :value="uni" disabled>
                 {{ uni }}
                 </option>
               </template>
@@ -82,7 +79,7 @@
             data-validate="First Degree is required"
           >
             <select
-              class="input100 form-select"
+              class="input100   "
               style="outline: none !important, border: none "
               v-model="selectedFirstDegree"
               required
@@ -103,7 +100,7 @@
           </div>
 
           <div class="wrap-input100 validate-input">
-            <select class="input100 form-select" v-model="selectedSecondDegree">
+            <select class="input100   " v-model="selectedSecondDegree">
               <option value="default" selected></option>
               <template v-for="degree in degrees" :key="degree">
                 <option v-if="degree != selectedFirstDegree" :value="degree">
