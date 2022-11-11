@@ -1,12 +1,106 @@
 <template>
   Profile Page
-  <h1 v-if="isLoggedIn">Welcome to SGXchange, {{ name }}</h1>
+<div v-if="isLoggedIn">
+    <div class="container-fluid">
+        <div class="row">
+            <h1>Welcome to SGXchange, {{ name }}</h1>
+        </div>
+
+        <div class="row mt-5">
+            <h3 class="mb-2">Your Details:</h3>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">School:</h5>
+                        <h5 class="card-text" style="font-weight:normal">{{ userDetails.School }}</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">First Degree:</h5>
+                        <h5 class="card-text" style="font-weight:normal">{{ userDetails.FirstDegree }}</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Second Degree:</h5>
+                        <h5 style="font-weight:normal">{{ userDetails.SecondDegree }}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <h3 class="mb-2">Your Favourites:</h3>
+            <div class="row">
+                <div v-for="(fav, index) in userFavDetails" :key="index">
+                    <div class="col">
+                        <div class="card">
+                            <img class="card-img-top" style="width: 100%; height: 12rem; object-fit: cover;"
+                            :src="fav.UniImageLink1" alt="">
+                            <div class="card-body">
+                                <h6 style="height:2.5rem;color:black;display:flex;align-items: center;"> {{ fav.HostUniversity }} </h6>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item uniitem">Country: {{ fav.Country }}</li>
+                                    <li class="list-group-item uniitem">Region: {{ fav.Region }}</li>
+                                    <li class="list-group-item uniitem">
+                                        Minimum gpa: {{ fav.gpaReq }}
+                                    </li>
+                                </ul>
+                                <div class="pull-right">
+                                    <router-link :to="`/universityInfo/` + fav.HostUniversity">
+                                        Go to university
+                                    </router-link>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <h3 class="mb-2">Your Reviews:</h3>
+            <div v-for="(review, index) in userReviewDetails" :key="index">
+                <div class="col">
+                    <div class="card my-3">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h5 class="card-title mb-2">{{ review.UniName }}</h5>
+                                <div>
+                                    <!-- @click="addLike()"  -->
+                                    <i class="fa fa-thumbs-up text-muted" style="font-size:15px; margin-right:2px"></i>
+                                    {{ review.Likes }}
+                                </div>
+                            </div>
+                            <h6 class="card-text" style="font-weight: normal">
+                                {{ review.ReviewInfo }}
+                            </h6>
+                            <div class="d-flex justify-content-between">
+                                <p class="card-text mb-0">
+                                    <small class="text-muted">{{
+                                            review.currentTime
+                                    }}</small>
+                                </p>
+                                <router-link :to="`/universityInfo/` + review.UniName">Go to university</router-link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
   <div v-else style="text-align: center; justify-content: space-between">
     <h2>
       You need to be signed in to access the profile page, would you like to
       sign in?
     </h2>
-
     <div>
       <h4>
         Have an account?
@@ -47,13 +141,16 @@ export default {
             info: '',
             likes: 0,
             userName: '',
-            isModalOpen: false
+            isModalOpen: false,
+            userDetails: {},
+            userReviewDetails: [],
+            userFavDetails: [],
         }
       },
-    
+
     methods: {
         async checkForUser() {
-            onAuthStateChanged(getAuth(), (user) => {
+            onAuthStateChanged(getAuth(), async (user) => {
                 if (user) {
                     this.isLoggedIn = true
                     console.log('logged in user is', user)
@@ -64,43 +161,73 @@ export default {
                     const remainingLetters = name.slice(1)
                     this.name = firstLetterCap + remainingLetters
                     this.email = user.email
+                    console.log('email retrieved', this.email)
+
+                    // To query user details based on unique email
+                    let q = query(
+                        collection(fireStore, "UserProfiles")
+                    );
+                    let userInfo = await getDocs(q);
+                    userInfo.forEach((doc) => {
+                        let tempEmail = doc.data().Email
+                        if(tempEmail == this.email){
+                            this.userDetails = doc.data()
+                        }
+                    })
+                    console.log('user details retrieved and saved', this.userDetails)
+
+                    // To get nested user review collection with unique user email
+                    let targetEmail = this.email
+                    let userReviewCollection = `UserProfiles/${targetEmail}/userReviews`
+                    let q2 = query(
+                        collection(fireStore, userReviewCollection)
+                    );
+                    let userReviewInfo = await getDocs(q2);
+                    userReviewInfo.forEach((doc) => {
+                        this.userReviewDetails.push(doc.data())
+                    })
+                    console.log(this.userReviewDetails)
+
+                    // To get uni details for the favourited unis
+                    console.log('favourites', this.userDetails.Favourites)
+                    let favourites = this.userDetails.Favourites
+                    for(let fav of favourites){
+                        console.log(fav)
+                        let q3 = query(
+                        collection(fireStore, 'Universities2')
+                        );
+                        let userFavInfo = await getDocs(q3);
+                        userFavInfo.forEach((doc) => {
+                            if(fav == doc.id){
+                                this.userFavDetails.push(doc.data())
+                            }
+                        })
+                    }
+                    console.log('userFavDetails is', this.userFavDetails)
                 }
             })
         },
         // Getting current logged in user info
         // async getUserInfo() {
-        //     console.log(this.email)
+        //     console.log('email retrieved', this.email)
         //     let q = query(
-        //         collection(fireStore, "UserProfiles"),
-        //         where("documentId", "==", this.email)
+        //         collection(fireStore, "UserProfiles")
         //     );
         //     let userInfo = await getDocs(q);
-        //     console.log(userInfo)
+        //     userInfo.forEach((doc) => {
+        //         let tempEmail = doc.data().Email
+        //         if(tempEmail == this.email){
+        //             this.userDetails = doc.data()
+        //         }
+        //     })
+        //     console.log(this.userDetails)
         // },
     },
     mounted() {
-        this.checkForUser()
         // this.getUserInfo()
     },
-    addReview() {
-      console.log("add review start");
-    },
-    like() {
-      console.log("like start");
-    },
-    showModal() {
-      console.log("modal opened");
-      this.isModalOpen = true;
-    },
-    closeModal() {
-      console.log("modal closed");
-      this.isModalOpen = false;
-    },
-  mounted() {
-    this.checkForUser();
-  },
-  created() {
-    this.getReviewInfo();
-  },
+    created() {
+        // this.checkForUser()
+    }
 };
 </script>

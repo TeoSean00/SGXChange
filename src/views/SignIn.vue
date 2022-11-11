@@ -83,9 +83,9 @@ export default {
           const remainingLetters = name1.slice(1);
           let shavedName = firstLetterCap + remainingLetters;
 
-          alert(`Hi ${shavedName}, you have successfully signed in!`);
+          alert(`Hi ${shavedName}, you have successfully signed in! Please wait as we re-direct you to your profile page!`);
           console.log("successfully logged in user is", user);
-          this.router.push("/ProfilePage");
+          setTimeout( () => this.router.push("/ProfilePage"), 2000);
         })
         .catch((error) => {
           console.log("error.code");

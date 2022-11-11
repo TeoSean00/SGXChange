@@ -1,6 +1,39 @@
-<template>
-  <div class="container-fluid" style="max-width: fit-content"></div>
-  <div class="container-fluid px-5" style="max-width: fit-content">
+<template 
+>
+  <div
+    class="container-fluid px-5 py-3"
+    style="max-width: fit-content;"
+  >
+  <!-- top header -->
+  <!-- <nav class="navbar navbar-expand-lg bg-light" id="contentNavbar">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#gpa">gpa</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#description">description</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#general">general</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#map">map</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#modules">modules</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#reviews">reviews</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav> -->
     <div class="row mb-3">
       <div class="col h2">{{ uniName }}</div>
       <div class="col text-end">
@@ -18,6 +51,7 @@
         </span>
       </div>
     </div>
+    <!-- ratings -->
     <div class="row mb-3">
       <div class="col-6">
         <div class="d-inline me-1">
@@ -25,15 +59,16 @@
           <!-- to insert the review rating based on reviews system -->
           4.64
         </div>
-        <!-- sean how to insert count of reviews here according to uni -->
-        <!-- <div class="text-dark mx-1">{{this.reviews.length}}</div> -->
 
-        <a href="#" class="text-dark mx-1">{{ this.reviews.length }} Reviews</a>
-        <!-- <div class="text-bold mx-1">{{ region }}∙{{ country }}</div> -->
-        <a href="#" class="text-bold mx-1">{{ region }}∙{{ country }}</a>
+        <!-- sean how to insert count of reviews here according to uni -->
+        <a href="#" class="text-dark mx-1">{{this.reviews.length}} Reviews</a>
+        <a href="#" class="text-dark mx-1">{{ region }}∙{{ country }}</a>
       </div>
-      <div class="col-6"></div>
+      <div class="col-6">
+
+      </div>
     </div>
+    <!-- carousel -->
     <div class="row mb-5">
       <div class="col">
         <div
@@ -42,9 +77,10 @@
           data-bs-ride="true"
         >
           <div class="carousel-indicators">
-            <template v-for="(img, idx) of uniImgArr" :key="idx">
-              <button
-                v-if="idx == 1"
+            <template
+            v-for="(img, idx) of uniImgArr"
+            :key="idx">
+              <button v-if="idx == 1"
                 type="button"
                 data-bs-target="#carouselExampleIndicators"
                 :data-bs-slide-to="idx"
@@ -52,8 +88,7 @@
                 aria-current="true"
                 :aria-label="'Slide ' + idx"
               ></button>
-              <button
-                v-else
+              <button v-else
                 type="button"
                 data-bs-target="#carouselExampleIndicators"
                 :data-bs-slide-to="idx"
@@ -65,7 +100,8 @@
           </div>
           <div class="carousel-inner">
             <template v-for="(img, idx) of uniImgArr" :key="idx">
-              <div v-if="idx == 1" class="carousel-item active">
+
+              <div v-if="idx == 1" class="carousel-item active" >
                 <img
                   :src="img"
                   class="d-block w-100"
@@ -73,7 +109,7 @@
                   alt="..."
                 />
               </div>
-              <div v-else class="carousel-item">
+              <div v-else class="carousel-item " >
                 <img
                   :src="img"
                   class="d-block w-100"
@@ -125,14 +161,14 @@
         <img src="../assets/HSG-SQUARE-2000x1125.jpeg" class="w-100" style="width: 18rem" alt="" />
       </div> -->
     </div>
-    <!-- test -->
-    <div class="row">
+    <!-- gap -->
+    <div class="row" id="activeNavbar">
       <div class="col">
         <hr />
       </div>
     </div>
     <!-- GPA info -->
-    <div class="row">
+    <div class="row" id="gpa">
       <div class="col d-flex gap-3 pt-3">
         <i class="bi bi-book m-1"></i>
         <b style="font-size: large">Gpa Info </b>
@@ -169,7 +205,7 @@
       </div>
     </div>
     <!-- climate -->
-    <!-- <div class="row">
+    <div class="row">
       <div class="col">
         <hr />
       </div>
@@ -179,21 +215,22 @@
         <i class="bi bi-thermometer-half m-1"></i>
         <span style="font-size: large"><b>Climate : </b> Cool</span>
       </div>
-    </div> -->
+    </div>
     <!-- hr filler -->
     <div class="row">
       <div class="col">
         <hr />
       </div>
     </div>
-    <div class="row">
+    <!-- description -->
+    <div class="row" id="description">
       <div class="col py-3">
         <h4>Description</h4>
         <p>{{ uniDesc }}</p>
       </div>
     </div>
     <div class="row">
-      <div class="col">
+      <div class="col ps-5 pt-2">
         <h5>No. of Slots</h5>
         <div class="ps-3 py-2">
           <p class="d-flex align-items-center gap-3">
@@ -205,12 +242,14 @@
         </div>
       </div>
     </div>
+    <!-- gap -->
     <div class="row">
       <div class="col">
         <hr />
       </div>
     </div>
-    <div class="row">
+    <!-- general info -->
+    <div class="row" id="general">
       <div class="col">
         <h4>General Info</h4>
         <ul style="list-style-type: none">
@@ -255,19 +294,7 @@
         </ul>
       </div>
     </div>
-    <div class="row">
-      <div class="col">
-        <!-- GOOGLEMAP MAP API -->
-        <div>
-          <GoogleMap
-            :lati="uniLat"
-            :long="uniLong"
-            :extras="nearbyLocation"
-            :nearbyName="nearbyName"
-          ></GoogleMap>
-        </div>
-      </div>
-    </div>
+    <!-- gap -->
     <div class="row">
       <div class="col">
         <hr />
@@ -276,32 +303,22 @@
     <div class="row">
       <div class="col">
         <!-- module information -->
-        <h2 class="my-4">Module Information</h2>
+        <!-- GOOGLEMAP MAP API -->
+        <div id="map">
+          <GoogleMap
+            :lati="uniLat"
+            :long="uniLong"
+            :extras="nearbyLocation"
+            :nearbyIcon="nearbyIcon"
+          ></GoogleMap>
+        </div>
+        <!-- modules -->
+        <h2 class="my-4" id="modules">Module Information</h2>
         <span
           >University page > module info :
           <a :href="uniCourseUrl" target="_blank">{{ uniCourseUrl }}</a></span
         >
         <br />
-        <!-- Module component -->
-        <div class="container-fluid">
-          <div class="row gap-3">
-            <Module
-              class="d-flex flex-wrap"
-              v-for="(mod, index) in mods"
-              :key="index"
-              :year="mod.year"
-              :desc="mod.desc"
-              :difficulty="mod.difficulty"
-              :faculty="mod.faculty"
-              :url="mod.url"
-              :id="mod.id"
-              :name="mod.name"
-              :popularity="mod.popularity"
-              :sem="mod.sem"
-            ></Module>
-          </div>
-        </div>
-
         <!-- one module each -->
         <div class="row">
           <div v-for="(modObj,idx) in this.moduleObjs" class=" col-xl-3 col-lg-4 col-md-5 card m-2">
@@ -317,7 +334,7 @@
                   {{modObj['desc']}}
               </div>
               <div class="d-flex justify-content-between">
-                <a data-bs-toggle="collapse" role="button" :data-bs-target="`#mod${idx}`" aria-expanded="false">
+                <a class="text-muted" data-bs-toggle="collapse" role="button" :data-bs-target="`#mod${idx}`" aria-expanded="false">
                   <u>click to expand</u>
                 </a>
                 <!-- add to fav -->
@@ -327,7 +344,7 @@
           </div>
         </div>
           <!-- Review component -->
-          <div class="container-fluid px-4 mt-5">
+          <div class="container-fluid px-4 mt-5" id="reviews">
             <div class="row mb-0">
               <div class="col d-flex align-items-center">
                 <h2 class="mb-0">Reviews</h2>
@@ -340,13 +357,8 @@
                   </h5>
                 </div>
                 <div v-else>
-                  <h5 class="text-muted mb-0 me-2">
-                    Add a review
-                    <button
-                      @click="showModal()"
-                      type="button"
-                      class="btn btn-light py-0 px-2 border-2"
-                    >
+                  <h5 class="text-muted mb-0 me-2">Add a review
+                    <button @click="showModal()" type="button" class="btn btn-light py-0 px-2 border-2">
                       <h4 class="mb-0">+</h4>
                     </button>
                     <!-- Dynamically opening and closing Modal based on actions performed and parent/child interactions-->
@@ -413,13 +425,66 @@
       </div>
     </div>
   </div>
+  <footer class="bg-white">
+    <div class="container py-5">
+      <div class="row py-4">
+        <div class="col-lg-4 col-md-6 mb-4 mb-lg-0"><img src="img/logo.png" alt="" width="180" class="mb-3">
+          <p class="font-italic text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+          <ul class="list-inline mt-4">
+            <li class="list-inline-item"><a href="#" target="_blank" title="twitter"><i class="fa fa-twitter"></i></a></li>
+            <li class="list-inline-item"><a href="#" target="_blank" title="facebook"><i class="fa fa-facebook"></i></a></li>
+            <li class="list-inline-item"><a href="#" target="_blank" title="instagram"><i class="fa fa-instagram"></i></a></li>
+            <li class="list-inline-item"><a href="#" target="_blank" title="pinterest"><i class="fa fa-pinterest"></i></a></li>
+            <li class="list-inline-item"><a href="#" target="_blank" title="vimeo"><i class="fa fa-vimeo"></i></a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+          <h6 class="text-uppercase font-weight-bold mb-4">Shop</h6>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2"><a href="#" class="text-muted">For Women</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">For Men</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">Stores</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">Our Blog</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+          <h6 class="text-uppercase font-weight-bold mb-4">Company</h6>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2"><a href="#" class="text-muted">Login</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">Register</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">Wishlist</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">Our Products</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-lg-0">
+          <h6 class="text-uppercase font-weight-bold mb-4">Newsletter</h6>
+          <p class="text-muted mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. At itaque temporibus.</p>
+          <div class="p-1 rounded border">
+            <div class="input-group">
+              <input type="email" placeholder="Enter your email address" aria-describedby="button-addon1" class="form-control border-0 shadow-0">
+              <div class="input-group-append">
+                <button id="button-addon1" type="submit" class="btn btn-link"><i class="fa fa-paper-plane"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Copyrights -->
+    <div class="bg-light py-4">
+      <div class="container text-center">
+        <p class="text-muted mb-0 py-2">© 2019 Bootstrapious All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <!-- End -->
 
   <!-- <div>{{ places }}</div> -->
 </template>
 
 <script>
 import GoogleMap from "@/components/GoogleMap.vue";
-import Module from "@/components/Module.vue";
 // console.log(import.meta.env.VITE_GOOGLE_MAP_API_KEY);
 import { fireStore } from "@/service/Firebase/firebaseInit";
 import {
@@ -464,7 +529,6 @@ export default {
       uniRanking: "",
       numSlots1: "",
       numSlots2: "",
-      mods: [],
       name: "",
       uniLat: 0,
       uniLong: 0,
@@ -480,14 +544,13 @@ export default {
       currentUserLeftReview: false,
       places: [],
       nearbyLocation: [],
-      nearbyName: [],
+      nearbyIcon: [],
       baskets: [],
       moduleObjs: [],
     };
   },
   components: {
     GoogleMap,
-    Module,
     Modal,
     FavBtn,
   },
@@ -500,6 +563,9 @@ export default {
         this.uniLng
       );
     },
+    yOffset(){
+      return window.pageYoffset
+    }
   },
   created() {
     this.uniName = this.$route.params.name;
@@ -507,11 +573,15 @@ export default {
     this.getUniInfo();
     this.getBasketToModules();
     this.getReviewInfo();
-    this.getModuleInfo();
     this.checkForUser();
     this.addModInfo();
   },
-  mounted() {},
+  mounted() {
+    document.addEventListener('scroll',console.log(1))
+  },
+  unmounted(){
+    document.removeEventListener('scroll',console.log(1))
+  },
   methods: {
     //Fetch nearby places on pageload using PlacesAPI
     async getNearbyAttr() {
@@ -531,75 +601,38 @@ export default {
           type: "tourist_attraction",
           key: import.meta.env.VITE_GOOGLE_MAP_API_KEY,
         },
-        headers: {},
+        headers: {
+        },
       };
       console.log(this.places);
       try {
         const response = await axios.request(config);
         // console.log(response.data.results);
         this.places = response.data.results;
-        if (this.places.length > 6) {
-          for (let i = 0; i < 6; i++) {
-            if (this.places[i].rating) {
-              this.nearbyLocation.push({
-                id: i,
-                name: this.places[i].name,
-                icon: this.places[i].icon,
-                address: this.places[i].vicinity,
-                rating: this.places[i].rating,
-                position: {
-                  lat: this.places[i].geometry.location.lat,
-                  lng: this.places[i].geometry.location.lng,
-                },
-              });
-            } else {
-              this.nearbyLocation.push({
-                id: i,
-                name: this.places[i].name,
-                icon: this.places[i].icon,
-                address: this.places[i].vicinity,
-                rating: "NA",
-                position: {
-                  lat: this.places[i].geometry.location.lat,
-                  lng: this.places[i].geometry.location.lng,
-                },
-              });
-            }
-            this.nearbyName.push(this.places[i].name);
+        if (this.places.length > 10) {
+          for (let i = 0; i < 10; i++) {
+            this.nearbyIcon.push(this.places[i].icon);
+            this.nearbyLocation.push({
+              position: {
+                lat: this.places[i].geometry.location.lat,
+                lng: this.places[i].geometry.location.lng,
+              },
+            });
           }
         } else {
           for (let i = 0; i < this.places.length; i++) {
-            this.nearbyName.push(this.places[i].name);
-            if (this.places[i].rating) {
-              this.nearbyLocation.push({
-                id: i,
-                name: this.places[i].name,
-                icon: this.places[i].icon,
-                address: this.places[i].vicinity,
-                rating: this.places[i].rating,
-                position: {
-                  lat: this.places[i].geometry.location.lat,
-                  lng: this.places[i].geometry.location.lng,
-                },
-              });
-            } else {
-              this.nearbyLocation.push({
-                id: i,
-                name: this.places[i].name,
-                icon: this.places[i].icon,
-                address: this.places[i].vicinity,
-                rating: "NA",
-                position: {
-                  lat: this.places[i].geometry.location.lat,
-                  lng: this.places[i].geometry.location.lng,
-                },
-              });
-            }
+            this.nearbyIcon.push(this.places[i].icon);
+            this.nearbyLocation.push({
+              position: {
+                lat: this.places[i].geometry.location.lat,
+                lng: this.places[i].geometry.location.lng,
+              },
+            });
           }
         }
-        console.log("Places is below");
+
         console.log(this.places);
-        console.log(this.nearbyName);
+        console.log(this.nearbyIcon);
       } catch (err) {
         console.log(err);
       }
@@ -723,27 +756,6 @@ export default {
       })
       console.log(this.moduleObjs)
     },
-    // Get Mod Info
-    async getModuleInfo() {
-      let q = query(
-        collection(fireStore, "Modules"),
-        where("UniversityName", "==", this.uniName)
-      );
-      let getModuleUni = await getDocs(q);
-      getModuleUni.forEach((doc) => {
-        let mod = {};
-        mod["year"] = doc.data().AY;
-        mod["desc"] = doc.data().Description;
-        mod["difficulty"] = doc.data().Difficulty;
-        mod["faculty"] = doc.data().Faculty;
-        mod["url"] = doc.data().LinkToCourseOutline;
-        mod["id"] = doc.data().ModuleId;
-        mod["name"] = doc.data().ModuleName;
-        mod["popularity"] = doc.data().Popularity;
-        mod["sem"] = doc.data().Semester;
-        this.mods.push(mod);
-      });
-    },
 
     // Check for current logged in user or if there isnt one
     async checkForUser() {
@@ -757,7 +769,7 @@ export default {
           const firstLetterCap = firstLetter.toUpperCase();
           const remainingLetters = name.slice(1);
           this.name = firstLetterCap + remainingLetters;
-          this.email = user.email;
+          this.email = user.email
         }
       });
     },
@@ -770,7 +782,7 @@ export default {
       let q = query(collectionGroup(fireStore, review));
       let getUniReviews = await getDocs(q);
       getUniReviews.forEach((doc) => {
-        let currentUserEmail = this.email;
+        let currentUserEmail = this.email
         let review = {};
 
         review["email"] = doc.data().Email;
@@ -781,9 +793,9 @@ export default {
         review["currentTime"] = doc.data().currentTime;
         this.reviews.push(review);
 
-        if (currentUserEmail == doc.data().Email) {
-          this.currentUserLeftReview = true;
-          console.log("current user has left review before");
+        if (currentUserEmail == doc.data().Email){
+          this.currentUserLeftReview = true
+          console.log('current user has left review before')
         }
       });
       console.log(getUniReviews.docs.length);
@@ -862,14 +874,9 @@ export default {
     },
     // Dynamically opens modal and calls upon modal component
     showModal() {
-      if (this.currentUserLeftReview) {
-        alert(
-          "Hi " +
-            this.name +
-            ", each user can only leave 1 review per university page." +
-            "\n\n" +
-            "Take note that adding another will replace your existing review!"
-        );
+      if(this.currentUserLeftReview){
+        alert("Hi " + this.name + ", each user can only leave 1 review per university page."
+        + "\n\n" + "Take note that adding another will replace your existing review!")
       }
       console.log("modal opened from uniInfo");
       this.isModalOpen = true;
@@ -880,6 +887,9 @@ export default {
       console.log("modal closed from uniInfo");
       this.isModalOpen = false;
     },
+    toggleContentNavbar() {
+        console.log(window.yOffset)
+    }
   },
 };
 </script>

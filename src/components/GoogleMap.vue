@@ -41,31 +41,30 @@
     </GMapMarker>
     <!-- https://www.nicepng.com/png/detail/37-373764_javascript-adding-a-custom-map-marker-icon-to.png -->
   </GMapMap>
-  <div class="row">
-    <div :key="index" v-for="(m, index) in extras">
+  <h4 class="py-2">Attractions</h4>
+  <div class="d-flex flex-wrap">
+    <div :key="index" v-for="(m, index) in extras" class=" px-3">
       <!-- Nearby Attraction Cards -->
-      <div class="col">
         <div
-          class="card"
-          style="max-width: 18rem"
+          class="rounded-pill bg-primary text-white px-4"
+          style=" cursor: pointer; font-size: 15px; background-color: ;"
           @click="
             openMarker(m.id);
             reCenter(m.position.lat, m.position.lng);
           "
         >
-          <div class="card-body">
-            <h5 class="card-title">{{ m.id + 1 }}. {{ m.name }}</h5>
-            <p class="card-text">
-              Rating: {{ m.rating }}
+          <div class="text-left">
+            <span class="" style=" white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ m.name }}</span>
+            <p class="" style="font-size: 10px;">
+              {{ m.rating }}
               <i v-if="m.rating != 'NA'" class="bi bi-star-fill"></i>
             </p>
           </div>
-        </div>
       </div>
     </div>
   </div>
 </template>
-<!-- 
+<!--
   <p class="card-text">Address: {{ m.address }}</p>
   {{ nearbyName[index] }}
   :icon="{
