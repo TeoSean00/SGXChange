@@ -43,7 +43,7 @@
             <div class="row">
                 <div v-if="userFavDetails.length > 0">
                     <div v-for="(fav, index) in userFavDetails" :key="index">
-                        <div class="col">
+                        <div class="col mb-3">
                             <div class="card">
                                 <img class="card-img-top" style="width: 100%; height: 12rem; object-fit: cover;"
                                 :src="fav.UniImageLink1" alt="">
@@ -85,7 +85,7 @@
                                 <div class="d-flex justify-content-between">
                                     <h5 class="card-title mb-2">{{ review.UniName }}</h5>
                                     <div>
-                                        <i class="fa fa-thumbs-up text-muted" style="font-size:15px; margin-right:2px"></i>
+                                        <i class="fa fa-thumbs-up text-muted" style="font-size:15px; margin-right:px"></i>
                                         {{ review.Likes }}
                                     </div>
                                 </div>
@@ -98,7 +98,7 @@
                                                 review.currentTime
                                         }}</small>
                                     </p>
-                                    <router-link :to="`/universityInfo/` + review.UniName">Go to university</router-link>
+                                    <router-link :to="`/universityInfo/` + review.UniName">Go to review</router-link>
                                 </div>
                             </div>
                         </div>
@@ -137,16 +137,12 @@
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useRouter } from 'vue-router';
 import { fireStore } from "@/service/Firebase/firebaseInit"
-import { collection, collectionGroup, getDocs, orderBy, query, where, documentId } from "firebase/firestore";
+import { collection, getDocs, query, Firestore } from "firebase/firestore";
 import Modal from '../components/Modal.vue';
 
 const auth = getAuth();
 const user = auth.currentUser;
 var router = useRouter();
-
-// Implement add and delete review function, have delete button if current user auth matches with any review email but if no time nvm for delete
-// Implement the like ability and update db too if have time
-// Settle design and responsiveness of it
 
 export default {
     name: 'Profile',

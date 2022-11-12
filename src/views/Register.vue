@@ -1,12 +1,4 @@
 <template>
-  <!-- <h1>Create a new Account</h1>
-    <p><input type="text" placeholder="Email" v-model="email" /></p>
-    <p><input type="password" placeholder="Password" v-model="password" /></p>
-    <p><button @click="register">Submit</button></p>
-    <p>Have an account?
-    <router-link to="/SignInPage">Sign In</router-link>
-    </p> -->
-
   <div class="limiter">
     <div class="container-login100">
       <div class="wrap-login100">
@@ -126,12 +118,6 @@
               Register
             </button>
           </div>
-          <!-- <p class="register">
-                Don't have an account?
-                <div
-                ><router-link to="/RegisterPage">Register Here</router-link></div
-                >
-            </p> -->
         </div>
         <div class="login100-more"></div>
       </div>
@@ -140,7 +126,7 @@
 </template>
 
 <script>
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "vue-router";
 import { fireStore } from "@/service/Firebase/firebaseInit";
 import {
@@ -170,6 +156,7 @@ export default {
       selectedFirstDegree: "default",
       selectedSecondDegree: "default",
       selectLableClass: ".select-label-input100",
+      name: ''
     };
   },
   mounted() {
@@ -224,7 +211,7 @@ export default {
             let shavedName = firstLetterCap + remainingLetters;
 
             alert(
-              `Hi ${shavedName}, your account has been successfully created! Please wait as we re-direct you to your profile page!`
+              `Hi ${shavedName}, your account has been successfully created! Please wait as we log you in and re-direct you to your profile page!`
             );
             console.log("successfully registered user is", user);
             setTimeout( () => this.router.push("/ProfilePage"), 2000);
