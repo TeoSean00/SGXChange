@@ -390,7 +390,7 @@
             class="row d-flex"
           >
             <div
-              class="col-sm-12 col-md-6 col-lg-4 flex-grow-1 flex-shrink-1"
+              class="col-sm-12 col-md-6 col-lg-4 "
               v-for="(review, index) in reviews"
               :key="index"
             >
@@ -399,10 +399,10 @@
                   <div class="d-flex justify-content-between">
                     <h5 class="card-title mb-2">{{ review.userName }}</h5>
                     <!-- <div>
-                              Likes function kiv for now
-                              <i @click="addLike()" class="fa fa-thumbs-up text-muted" style="font-size:15px; margin-right:2px"></i>
-                              {{ review.likes }}
-                            </div> -->
+                            Likes function kiv for now
+                            <i @click="addLike()" class="fa fa-thumbs-up text-muted" style="font-size:15px; margin-right:2px"></i>
+                            {{ review.likes }}
+                          </div> -->
                   </div>
                   <h6 class="card-subtitle mb-2 text-muted">
                     Reviewed University: {{ review.uniName }}
@@ -412,7 +412,9 @@
                   </p>
                   <div class="d-flex justify-content-between">
                     <p class="card-text mb-0">
-                      <small class="text-muted">{{ review.currentTime }}</small>
+                      <small class="text-muted">{{
+                        review.currentTime
+                      }}</small>
                     </p>
                     <!-- More info function to be done if theres time -->
                     <a href="#" class="card-link me-3 mb-0">more info</a>
@@ -425,7 +427,9 @@
             v-if="this.reviews.length == 0 && this.isReviewsLoaded"
             class="row d-flex mt-3 mb-4"
           >
-            <div class="col-sm-12 col-md-6 col-lg-4 flex-grow-1 flex-shrink-1">
+            <div
+              class="col-sm-12 col-md-6 col-lg-4 flex-grow-1 flex-shrink-1"
+            >
               There are no reviews for {{ uniName }} yet, would you like to be
               the first to add one {{ name }}?
             </div>
@@ -434,6 +438,8 @@
       </div>
     </div>
   </div>
+
+  <!-- <div>{{ places }}</div> -->
 </template>
 
 <script>
