@@ -39,14 +39,16 @@
           >
             <option value="default">Select University</option>
             <template v-for="uni in universities" :key="uni">
-              <option v-if="uni == 'Singapore Management University'" :value="uni">
-              {{ uni }}
+              <option
+                v-if="uni == 'Singapore Management University'"
+                :value="uni"
+              >
+                {{ uni }}
               </option>
               <option v-else :value="uni" class="bg-light" disabled>
-              {{ uni }}
+                {{ uni }}
               </option>
             </template>
-
           </select>
         </div>
         <!-- Select FIrst Degree -->
@@ -85,10 +87,7 @@
             </template>
           </select>
         </div>
-        <button
-          v-on:click="showForm()"
-          class="btn btn-primary float-end mt-1"
-        >
+        <button v-on:click="showForm()" class="btn btn-color float-end mt-1">
           Next
         </button>
       </div>
@@ -110,13 +109,10 @@
             v-on:removeBasket="removeFromBasket"
           />
         </div>
-        <button class="btn btn-primary float-start mt-1" v-on:click="stageZero()">
+        <button class="btn btn-color float-start mt-1" v-on:click="stageZero()">
           Previous
         </button>
-        <button
-          class="btn btn-primary float-end mt-1"
-          v-on:click="submitData()"
-        >
+        <button class="btn btn-color float-end mt-1" v-on:click="submitData()">
           Submit
         </button>
       </div>
@@ -152,9 +148,9 @@
                 <li class="page-item">
                   <a class="page-link active" @click="togglePage">1</a>
                 </li>
-                <template v-if="lastPage>1">
-                  <li class="page-item" v-for="num in lastPage-1" :key="num">
-                    <a class="page-link" @click="togglePage">{{ num+1 }}</a>
+                <template v-if="lastPage > 1">
+                  <li class="page-item" v-for="num in lastPage - 1" :key="num">
+                    <a class="page-link" @click="togglePage">{{ num + 1 }}</a>
                   </li>
                 </template>
                 <li class="page-item">
@@ -207,7 +203,7 @@ export default {
       lastPage: 0,
     };
   },
-  computed:{
+  computed: {
     rows() {
       return this.uniOutput.length;
     },
@@ -223,8 +219,8 @@ export default {
     UniCardSmall,
   },
   async mounted() {
-    this.checkForUser()
-    this.getDegree()
+    this.checkForUser();
+    this.getDegree();
 
     const getUniversities = await getDocs(
       collection(fireStore, "Universities2")
@@ -239,29 +235,30 @@ export default {
       const pagelinks = document.getElementsByClassName("page-link");
 
       this.lastPage = Math.ceil(this.uniOutput.length / this.perPage);
-      this.currentPage = 1
+      this.currentPage = 1;
       // if filtering reduces the pages to 1, disable previous and next
-      if (this.lastPage == 1){
+      if (this.lastPage == 1) {
         for (const li of pagelinks) {
-          if (li.text == 'Previous'){
-              li.classList.add('disabled')
-          } else if (li.text == 'Next'){
-              li.classList.add('disabled')
-          } else if (parseInt(li.text) == this.currentPage){
-              li.classList.add('active')
+          if (li.text == "Previous") {
+            li.classList.add("disabled");
+          } else if (li.text == "Next") {
+            li.classList.add("disabled");
+          } else if (parseInt(li.text) == this.currentPage) {
+            li.classList.add("active");
           }
-      }}
+        }
+      }
       // if filtering does not reduce the page to 1, disable previous only
       else {
         for (const li of pagelinks) {
-          if (li.text == 'Previous'){
-              li.classList.add('disabled')
-          } else if (li.text == 'Next'){
-              li.classList.remove('disabled')
-          } else if (parseInt(li.text) == this.currentPage){
-              li.classList.add('active')
+          if (li.text == "Previous") {
+            li.classList.add("disabled");
+          } else if (li.text == "Next") {
+            li.classList.remove("disabled");
+          } else if (parseInt(li.text) == this.currentPage) {
+            li.classList.add("active");
           }
-      }
+        }
       }
     },
     togglePage: function () {
@@ -293,41 +290,40 @@ export default {
           console.log(li.text);
           li.classList.add("active");
         }
-        if (li.text == 'Previous' && this.currentPage==this.firstPage){
-            li.classList.add('disabled')
-        } else if (li.text == 'Next' && this.currentPage==this.lastPage){
-            li.classList.add('disabled')
-        } else if (parseInt(li.text) == this.currentPage){
-            event.target.classList.add('active')
+        if (li.text == "Previous" && this.currentPage == this.firstPage) {
+          li.classList.add("disabled");
+        } else if (li.text == "Next" && this.currentPage == this.lastPage) {
+          li.classList.add("disabled");
+        } else if (parseInt(li.text) == this.currentPage) {
+          event.target.classList.add("active");
         }
       }
     },
 
-
-    checkForUser(){
+    checkForUser() {
       onAuthStateChanged(getAuth(), async (user) => {
-          if(user) {
-              var user = user.auth.currentUser.email
-              const getUsers = await getDocs(collection(fireStore, "UserProfiles"));
-              getUsers.forEach(async (document) => {
-                  if(document.data().Email == user){
-                      const docRef = doc(fireStore, 'UserProfiles' ,document.id);
-                      var school = document.data().School
-                      var firstDegree = document.data().FirstDegree
-                      var secondDegree = document.data().SecondDegree
-                      if (school != ''){
-                        this.selectedUni = school
-                      }
-                      if (firstDegree != ''){
-                        this.selectedDegree = firstDegree
-                      }
-                      if (school != ''){
-                        this.selectedSecondDegree = secondDegree
-                      }
-                  }
-              });
+        if (user) {
+          var user = user.auth.currentUser.email;
+          const getUsers = await getDocs(collection(fireStore, "UserProfiles"));
+          getUsers.forEach(async (document) => {
+            if (document.data().Email == user) {
+              const docRef = doc(fireStore, "UserProfiles", document.id);
+              var school = document.data().School;
+              var firstDegree = document.data().FirstDegree;
+              var secondDegree = document.data().SecondDegree;
+              if (school != "") {
+                this.selectedUni = school;
+              }
+              if (firstDegree != "") {
+                this.selectedDegree = firstDegree;
+              }
+              if (school != "") {
+                this.selectedSecondDegree = secondDegree;
+              }
             }
-      })
+          });
+        }
+      });
     },
     async getDegree() {
       this.degrees = [];
@@ -358,14 +354,12 @@ export default {
       this.form2 = false;
 
       var tempDegrees = [];
-      if (this.selectedUni == 'default'){
-        alert('Please Select a University!')
-      }
-      else if (this.selectedDegree == 'default'){
-        alert('Please Select a Degree!')
-      }
-      else{
-        this.stageOne()
+      if (this.selectedUni == "default") {
+        alert("Please Select a University!");
+      } else if (this.selectedDegree == "default") {
+        alert("Please Select a Degree!");
+      } else {
+        this.stageOne();
         tempDegrees.push(this.selectedDegree);
         if (this.selectedSecondDegree != "default") {
           tempDegrees.push(this.selectedSecondDegree);
@@ -380,7 +374,6 @@ export default {
             }
           }
         }
-
       }
     },
     addToBasket(basket) {
@@ -405,11 +398,10 @@ export default {
     },
 
     async submitData() {
-      if(this.selectedBaskets.length == 0){
-        alert('Please select at least one basket!')
-      }
-      else{
-        this.stageTwo()
+      if (this.selectedBaskets.length == 0) {
+        alert("Please select at least one basket!");
+      } else {
+        this.stageTwo();
         this.form1 = true;
         this.form2 = true;
         this.testDisplay = false;
@@ -452,15 +444,18 @@ export default {
             this.uniOutput.push(universityInfo);
           });
         }
-        this.pagination()
+        this.pagination();
         // End
-
       }
     },
   },
 };
 </script>
 <style scoped>
+.btn-color {
+  background-color: #1890ff;
+  color: white;
+}
 .formDisplay {
   display: none;
 }

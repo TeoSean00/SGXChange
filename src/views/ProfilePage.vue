@@ -37,7 +37,7 @@
         <div class="row mt-5">
             <h3 class="mb-2">Your Favourites:</h3>
             <div class="row">
-                <div v-for="(fav, index) in userFavDetails">
+                <div v-for="(fav, index) in userFavDetails" :key="index">
                     <div class="col">
                         <div class="card">
                             <img class="card-img-top" style="width: 100%; height: 12rem; object-fit: cover;"
@@ -65,7 +65,7 @@
 
         <div class="row mt-5">
             <h3 class="mb-2">Your Reviews:</h3>
-            <div v-for="(review, index) in userReviewDetails">
+            <div v-for="(review, index) in userReviewDetails" :key="index">
                 <div class="col">
                     <div class="card my-3">
                         <div class="card-body">
@@ -147,7 +147,7 @@ export default {
             userFavDetails: [],
         }
       },
-    
+
     methods: {
         async checkForUser() {
             onAuthStateChanged(getAuth(), async (user) => {
@@ -227,7 +227,7 @@ export default {
         // this.getUserInfo()
     },
     created() {
-        this.checkForUser()
+        // this.checkForUser()
     }
 };
 </script>

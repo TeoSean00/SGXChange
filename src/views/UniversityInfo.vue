@@ -1,5 +1,36 @@
-<template>
-  <div class="container-fluid px-5" style="max-width: fit-content">
+<template 
+>
+  <div class="container-fluid px-5 py-3" style="max-width: fit-content">
+    <!-- top header -->
+    <!-- <nav class="navbar navbar-expand-lg bg-light" id="contentNavbar">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#gpa">gpa</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#description">description</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#general">general</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#map">map</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#modules">modules</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#reviews">reviews</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav> -->
     <div class="row mb-3">
       <div class="col h2">{{ uniName }}</div>
       <div class="col text-end">
@@ -17,6 +48,7 @@
         </span>
       </div>
     </div>
+    <!-- ratings -->
     <div class="row mb-3">
       <div class="col-6">
         <div class="d-inline me-1">
@@ -24,15 +56,14 @@
           <!-- to insert the review rating based on reviews system -->
           4.64
         </div>
-        <!-- sean how to insert count of reviews here according to uni -->
-        <!-- <div class="text-dark mx-1">{{this.reviews.length}}</div> -->
 
+        <!-- sean how to insert count of reviews here according to uni -->
         <a href="#" class="text-dark mx-1">{{ this.reviews.length }} Reviews</a>
-        <!-- <div class="text-bold mx-1">{{ region }}∙{{ country }}</div> -->
-        <a href="#" class="text-bold mx-1">{{ region }}∙{{ country }}</a>
+        <a href="#" class="text-dark mx-1">{{ region }}∙{{ country }}</a>
       </div>
       <div class="col-6"></div>
     </div>
+    <!-- carousel -->
     <div class="row mb-5">
       <div class="col">
         <div
@@ -68,7 +99,7 @@
                 <img
                   :src="img"
                   class="d-block w-100"
-                  style="width: 450px; height: 600px; object-fit: cover;"
+                  style="width: 450px; height: 600px; object-fit: cover"
                   alt="..."
                 />
               </div>
@@ -76,7 +107,7 @@
                 <img
                   :src="img"
                   class="d-block w-100"
-                  style="width: 450px; height: 600px; object-fit: cover;"
+                  style="width: 450px; height: 600px; object-fit: cover"
                   alt="..."
                 />
               </div>
@@ -124,14 +155,14 @@
         <img src="../assets/HSG-SQUARE-2000x1125.jpeg" class="w-100" style="width: 18rem" alt="" />
       </div> -->
     </div>
-    <!-- test -->
-    <div class="row">
+    <!-- gap -->
+    <div class="row" id="activeNavbar">
       <div class="col">
         <hr />
       </div>
     </div>
     <!-- GPA info -->
-    <div class="row">
+    <div class="row" id="gpa">
       <div class="col d-flex gap-3 pt-3">
         <i class="bi bi-book m-1"></i>
         <b style="font-size: large">Gpa Info </b>
@@ -168,7 +199,7 @@
       </div>
     </div>
     <!-- climate -->
-    <!-- <div class="row">
+    <div class="row">
       <div class="col">
         <hr />
       </div>
@@ -178,21 +209,22 @@
         <i class="bi bi-thermometer-half m-1"></i>
         <span style="font-size: large"><b>Climate : </b> Cool</span>
       </div>
-    </div> -->
+    </div>
     <!-- hr filler -->
     <div class="row">
       <div class="col">
         <hr />
       </div>
     </div>
-    <div class="row">
+    <!-- description -->
+    <div class="row" id="description">
       <div class="col py-3">
         <h4>Description</h4>
         <p>{{ uniDesc }}</p>
       </div>
     </div>
     <div class="row">
-      <div class="col">
+      <div class="col ps-5 pt-2">
         <h5>No. of Slots</h5>
         <div class="ps-3 py-2">
           <p class="d-flex align-items-center gap-3">
@@ -204,12 +236,14 @@
         </div>
       </div>
     </div>
+    <!-- gap -->
     <div class="row">
       <div class="col">
         <hr />
       </div>
     </div>
-    <div class="row">
+    <!-- general info -->
+    <div class="row" id="general">
       <div class="col">
         <h4>General Info</h4>
         <ul style="list-style-type: none">
@@ -254,19 +288,7 @@
         </ul>
       </div>
     </div>
-    <div class="row">
-      <div class="col">
-        <!-- GOOGLEMAP MAP API -->
-        <div>
-          <GoogleMap
-            :lati="uniLat"
-            :long="uniLong"
-            :extras="nearbyLocation"
-            :nearbyName="nearbyName"
-          ></GoogleMap>
-        </div>
-      </div>
-    </div>
+    <!-- gap -->
     <div class="row">
       <div class="col">
         <hr />
@@ -275,48 +297,51 @@
     <div class="row">
       <div class="col">
         <!-- module information -->
-        <h2 class="my-4">Module Information</h2>
+        <!-- GOOGLEMAP MAP API -->
+        <div id="map">
+          <GoogleMap
+            :lati="uniLat"
+            :long="uniLong"
+            :extras="nearbyLocation"
+            :nearbyName="nearbyName"
+            :uniName = "uniName"
+          ></GoogleMap>
+        </div>
+        <!-- modules -->
+        <h2 class="my-4" id="modules">Module Information</h2>
         <span
           >University page > module info :
           <a :href="uniCourseUrl" target="_blank">{{ uniCourseUrl }}</a></span
         >
         <br />
-        <!-- Module component -->
-        <div class="container-fluid">
-          <div class="row gap-3">
-            <Module
-              class="d-flex flex-wrap"
-              v-for="(mod, index) in mods"
-              :key="index"
-              :year="mod.year"
-              :desc="mod.desc"
-              :difficulty="mod.difficulty"
-              :faculty="mod.faculty"
-              :url="mod.url"
-              :id="mod.id"
-              :name="mod.name"
-              :popularity="mod.popularity"
-              :sem="mod.sem"
-            ></Module>
-          </div>
-        </div>
-
         <!-- one module each -->
         <div class="row">
-          <div v-for="(modObj,idx) in this.moduleObjs" :key="idx" class=" col-xl-3 col-lg-4 col-md-5 card m-2">
+          <div
+            :key="idx"
+            v-for="(modObj, idx) in this.moduleObjs"
+            class="col-xl-3 col-lg-4 col-md-5 card m-2"
+          >
             <div class="card-body">
               <!-- module component -->
               <!-- module name -->
-              <h5 class="card-title mb-3">{{modObj['module']}}</h5>
+              <h5 class="card-title mb-3">{{ modObj["module"] }}</h5>
               <!-- basket type it fulfils -->
-              <h6 class="card-subtitle mb-2 text-primary">{{modObj['basket']}}</h6>
+              <h6 class="card-subtitle mb-2 text-primary">
+                {{ modObj["basket"] }}
+              </h6>
               <!-- show more button -->
               <!-- mod description -->
               <div class="collapse card-text p-1 mb-3" :id="`mod${idx}`">
-                  {{modObj['desc']}}
+                {{ modObj["desc"] }}
               </div>
               <div class="d-flex justify-content-between">
-                <a data-bs-toggle="collapse" role="button" :data-bs-target="`#mod${idx}`" aria-expanded="false">
+                <a
+                  class="text-muted"
+                  data-bs-toggle="collapse"
+                  role="button"
+                  :data-bs-target="`#mod${idx}`"
+                  aria-expanded="false"
+                >
                   <u>click to expand</u>
                 </a>
                 <!-- add to fav -->
@@ -326,9 +351,9 @@
           </div>
         </div>
         <!-- Review component -->
-        <div class="container-fluid px-0 mx-0 mt-5">
+        <div class="container-fluid px-4 mt-5" id="reviews">
           <div class="row mb-0">
-            <div class="col d-flex align-items-center mx-0">
+            <div class="col d-flex align-items-center">
               <h2 class="mb-0">Reviews</h2>
             </div>
             <div class="col d-flex align-items-center justify-content-end">
@@ -339,81 +364,86 @@
                 </h5>
               </div>
               <div v-else>
-                <h5 class="text-muted mb-0 me-2">Add a review
-                  <button @click="showModal()" type="button" class="btn btn-light py-0 px-2 border-2">
+                <h5 class="text-muted mb-0 me-2">
+                  Add a review
+                  <button
+                    @click="showModal()"
+                    type="button"
+                    class="btn btn-light py-0 px-2 border-2"
+                  >
                     <h4 class="mb-0">+</h4>
                   </button>
                   <!-- Dynamically opening and closing Modal based on actions performed and parent/child interactions-->
-                  <Modal v-show="isModalOpen"
-                  @close="closeModal()"
-                  :uniNamePassed="uniName"
-                  @review-done="closeModal()"
+                  <Modal
+                    v-show="isModalOpen"
+                    @close="closeModal()"
+                    :uniNamePassed="uniName"
+                    @review-done="closeModal()"
                   />
                 </h5>
               </div>
             </div>
           </div>
 
+          <div
+            v-if="this.reviews.length > 0 && this.isReviewsLoaded"
+            class="row d-flex"
+          >
             <div
-              v-if="this.reviews.length > 0 && this.isReviewsLoaded"
-              class="row d-flex"
+              class="col-sm-12 col-md-6 col-lg-4 "
+              v-for="(review, index) in reviews"
+              :key="index"
             >
-              <div
-                class="col-sm-12 col-md-6 col-lg-4 flex-grow-1 flex-shrink-1"
-                v-for="(review, index) in reviews"
-                :key="index"
-              >
-                <div class="card my-4" :id="review.uniName">
-                  <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                      <h5 class="card-title mb-2">{{ review.userName }}</h5>
-                      <!-- <div>
-                              Likes function kiv for now
-                              <i @click="addLike()" class="fa fa-thumbs-up text-muted" style="font-size:15px; margin-right:2px"></i>
-                              {{ review.likes }}
-                            </div> -->
-                    </div>
-                    <h6 class="card-subtitle mb-2 text-muted">
-                      Reviewed University: {{ review.uniName }}
-                    </h6>
-                    <p class="card-text">
-                      {{ review.info }}
+              <div class="card my-4">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h5 class="card-title mb-2">{{ review.userName }}</h5>
+                    <!-- <div>
+                            Likes function kiv for now
+                            <i @click="addLike()" class="fa fa-thumbs-up text-muted" style="font-size:15px; margin-right:2px"></i>
+                            {{ review.likes }}
+                          </div> -->
+                  </div>
+                  <h6 class="card-subtitle mb-2 text-muted">
+                    Reviewed University: {{ review.uniName }}
+                  </h6>
+                  <p class="card-text">
+                    {{ review.info }}
+                  </p>
+                  <div class="d-flex justify-content-between">
+                    <p class="card-text mb-0">
+                      <small class="text-muted">{{
+                        review.currentTime
+                      }}</small>
                     </p>
-                    <div class="d-flex justify-content-between">
-                      <p class="card-text mb-0">
-                        <small class="text-muted">{{
-                          review.currentTime
-                        }}</small>
-                      </p>
-                      <!-- More info function to be done if theres time -->
-                      <a href="#" class="card-link me-3 mb-0">more info</a>
-                    </div>
+                    <!-- More info function to be done if theres time -->
+                    <a href="#" class="card-link me-3 mb-0">more info</a>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
+          <div
+            v-if="this.reviews.length == 0 && this.isReviewsLoaded"
+            class="row d-flex mt-3 mb-4"
+          >
             <div
-              v-if="this.reviews.length == 0 && this.isReviewsLoaded"
-              class="row d-flex mt-3 mb-4"
+              class="col-sm-12 col-md-6 col-lg-4 flex-grow-1 flex-shrink-1"
             >
-              <div
-                class="col-sm-12 col-md-6 col-lg-4 flex-grow-1 flex-shrink-1"
-              >
-                There are no reviews for {{ uniName }} yet, would you like to be
-                the first to add one {{ name }}?
-              </div>
+              There are no reviews for {{ uniName }} yet, would you like to be
+              the first to add one {{ name }}?
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
   <!-- <div>{{ places }}</div> -->
 </template>
 
 <script>
 import GoogleMap from "@/components/GoogleMap.vue";
-import Module from "@/components/Module.vue";
 // console.log(import.meta.env.VITE_GOOGLE_MAP_API_KEY);
 import { fireStore } from "@/service/Firebase/firebaseInit";
 import {
@@ -458,7 +488,6 @@ export default {
       uniRanking: "",
       numSlots1: "",
       numSlots2: "",
-      mods: [],
       name: "",
       uniLat: 0,
       uniLong: 0,
@@ -481,7 +510,6 @@ export default {
   },
   components: {
     GoogleMap,
-    Module,
     Modal,
     FavBtn,
   },
@@ -494,6 +522,9 @@ export default {
         this.uniLng
       );
     },
+    yOffset() {
+      return window.pageYoffset;
+    },
   },
   created() {
     this.uniName = this.$route.params.name;
@@ -501,11 +532,15 @@ export default {
     this.getUniInfo();
     this.getBasketToModules();
     this.getReviewInfo();
-    this.getModuleInfo();
     this.checkForUser();
     this.addModInfo();
   },
-  mounted() {},
+  mounted() {
+    document.addEventListener("scroll", console.log(1));
+  },
+  unmounted() {
+    document.removeEventListener("scroll", console.log(1));
+  },
   methods: {
     //Fetch nearby places on pageload using PlacesAPI
     async getNearbyAttr() {
@@ -532,8 +567,8 @@ export default {
         const response = await axios.request(config);
         // console.log(response.data.results);
         this.places = response.data.results;
-        if (this.places.length > 6) {
-          for (let i = 0; i < 6; i++) {
+        if (this.places.length > 10) {
+          for (let i = 0; i < 10; i++) {
             if (this.places[i].rating) {
               this.nearbyLocation.push({
                 id: i,
@@ -665,78 +700,61 @@ export default {
         this.getLangauageCurrencyFromCountry();
       });
     },
-    async getBaskets(){
+    async getBaskets() {
       // loop through the BasketToUni collection, for each basket, if the uni value not in UniToBasket obj, create new key. Else push to UniToBasket[uni] which will be an array of baskets
-      var basketToUniversities = await getDocs(collection(fireStore, "BasketToUniversities"));
-      basketToUniversities.forEach((doc)=> {
-        let basketInfo = {}
+      var basketToUniversities = await getDocs(
+        collection(fireStore, "BasketToUniversities")
+      );
+      basketToUniversities.forEach((doc) => {
+        let basketInfo = {};
         // console.log(doc.data()['Universities'])
         // console.log(doc.id)
-        let universities = doc.data()['Universities']
-        let basket = doc.id
-        for (let uni of universities){
-          if (uni == this.uniName){
-            this.baskets.push(basket)
+        let universities = doc.data()["Universities"];
+        let basket = doc.id;
+        for (let uni of universities) {
+          if (uni == this.uniName) {
+            this.baskets.push(basket);
           }
         }
-      })
+      });
       // console.log(this.uniToBaskets)
     },
-    async getBasketToModules(){
+    async getBasketToModules() {
       // loop through the BasketToUni collection, for each basket, if the uni value not in UniToBasket obj, create new key. Else push to UniToBasket[uni] which will be an array of baskets
-      var basketToModules = await getDocs(collection(fireStore, "BasketToModules"));
-      basketToModules.forEach((doc)=> {
+      var basketToModules = await getDocs(
+        collection(fireStore, "BasketToModules")
+      );
+      basketToModules.forEach((doc) => {
         // console.log(doc.data()['Universities'])
         // console.log(doc.id)
-        let basket = doc.data()['Baskets']
-        let module = doc.data()['Modules']
+        let basket = doc.data()["Baskets"];
+        let module = doc.data()["Modules"];
 
-        for (let bkt of this.baskets){
-          let obj = {}
-          if (bkt == basket){
-            obj['basket'] = basket
-            obj['module'] = module
-            this.moduleObjs.push(obj)
+        for (let bkt of this.baskets) {
+          let obj = {};
+          if (bkt == basket) {
+            obj["basket"] = basket;
+            obj["module"] = module;
+            this.moduleObjs.push(obj);
           }
         }
-      })
+      });
       // console.log(this.moduleObjs)
     },
-    async addModInfo(){
-      var moduleToInfo =  await getDocs(collection(fireStore,"ModuleToInfo"))
+    async addModInfo() {
+      var moduleToInfo = await getDocs(collection(fireStore, "ModuleToInfo"));
 
-      moduleToInfo.forEach((doc)=>{
-        let modName = doc.data()['Module Name']
-        let modInfo = doc.data()['Module Info']
+      moduleToInfo.forEach((doc) => {
+        let modName = doc.data()["Module Name"];
+        let modInfo = doc.data()["Module Info"];
 
-        for (let mod of this.moduleObjs){
-          if (mod['module'] === modName){
-            mod['desc'] = modInfo
+        for (let mod of this.moduleObjs) {
+          if (mod["module"] === modName) {
+            mod["desc"] = modInfo;
           }
         }
-      })
-      console.log(this.moduleObjs)
-    },
-    // Get Mod Info
-    async getModuleInfo() {
-      let q = query(
-        collection(fireStore, "Modules"),
-        where("UniversityName", "==", this.uniName)
-      );
-      let getModuleUni = await getDocs(q);
-      getModuleUni.forEach((doc) => {
-        let mod = {};
-        mod["year"] = doc.data().AY;
-        mod["desc"] = doc.data().Description;
-        mod["difficulty"] = doc.data().Difficulty;
-        mod["faculty"] = doc.data().Faculty;
-        mod["url"] = doc.data().LinkToCourseOutline;
-        mod["id"] = doc.data().ModuleId;
-        mod["name"] = doc.data().ModuleName;
-        mod["popularity"] = doc.data().Popularity;
-        mod["sem"] = doc.data().Semester;
-        this.mods.push(mod);
       });
+      console.log(this.moduleObjs);
     },
 
     // Check for current logged in user or if there isnt one
@@ -823,37 +841,6 @@ export default {
     deg2rad(deg) {
       return deg * (Math.PI / 180);
     },
-    // Sharing social links
-    fbs_click() {
-      var pageLink = window.location.href;
-      var pageTitle = String(document.title).replace("/&/g", "%26");
-      window.open(
-        `http://www.facebook.com/sharer.php?u=${pageLink}&quote=${pageTitle}`,
-        "sharer",
-        "toolbar=0,status=0,width=626,height=436"
-      );
-      return false;
-    },
-    tbs_click() {
-      var pageLink = window.location.href;
-      var pageTitle = String(document.title).replace("/&/g", "%26");
-      window.open(
-        `https://twitter.com/intent/tweet?text=${pageTitle}&url=${pageLink}`,
-        "sharer",
-        "toolbar=0,status=0,width=626,height=436"
-      );
-      return false;
-    },
-    lbs_click() {
-      var pageLink = window.location.href;
-      var pageTitle = String(document.title).replace("/&/g", "%26");
-      window.open(
-        `https://www.linkedin.com/sharing/share-offsite/?url=${pageLink}`,
-        "sharer",
-        "toolbar=0,status=0,width=626,height=436"
-      );
-      return false;
-    },
     // Dynamically opens modal and calls upon modal component
     showModal() {
       if (this.currentUserLeftReview) {
@@ -873,6 +860,9 @@ export default {
     closeModal() {
       console.log("modal closed from uniInfo");
       this.isModalOpen = false;
+    },
+    toggleContentNavbar() {
+      console.log(window.yOffset);
     },
   },
 };
