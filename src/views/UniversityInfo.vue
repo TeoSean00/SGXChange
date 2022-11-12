@@ -398,11 +398,6 @@
                 <div class="card-body">
                   <div class="d-flex justify-content-between">
                     <h5 class="card-title mb-2">{{ review.userName }}</h5>
-                    <!-- <div>
-                            Likes function kiv for now
-                            <i @click="addLike()" class="fa fa-thumbs-up text-muted" style="font-size:15px; margin-right:2px"></i>
-                            {{ review.likes }}
-                          </div> -->
                   </div>
                   <h6 class="card-subtitle mb-2 text-muted">
                     Reviewed University: {{ review.uniName }}
@@ -466,7 +461,6 @@ export default {
   name: "UniPage",
   data() {
     return {
-      // We not using the igpa format anymore liao btw elton
       country: "",
       region: "",
       languages: ["English"],
