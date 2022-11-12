@@ -351,9 +351,9 @@
           </div>
         </div>
         <!-- Review component -->
-        <div class="container-fluid px-4 mt-5" id="reviews">
+        <div class="container-fluid mt-5" id="reviews">
           <div class="row mb-0">
-            <div class="col d-flex align-items-center">
+            <div class="col p-0">
               <h2 class="mb-0">Reviews</h2>
             </div>
             <div class="col d-flex align-items-center justify-content-end">
@@ -390,7 +390,7 @@
             class="row d-flex"
           >
             <div
-              class="col-sm-12 col-md-6 col-lg-4 "
+              class="col-sm-12 col-md-6 col-lg-4 p-0"
               v-for="(review, index) in reviews"
               :key="index"
             >
