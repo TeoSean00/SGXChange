@@ -133,8 +133,7 @@ export default {
 };
 </script>
 <style scoped>
-.custom-card {
-}
+
 
 .card-img-top {
   width: 100%;
