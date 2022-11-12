@@ -47,14 +47,6 @@
 
 
   <About></About>
-  <!-- <h1>Sign in with your Account</h1>
-  <p><input type="text" placeholder="Email" v-model="email" /></p>
-  <p><input type="password" placeholder="Password" v-model="password" /></p>
-  <p><button @click="signIn">Submit</button></p>
-  <p>
-    Don't have an account?
-    <router-link to="/RegisterPage">Register Here</router-link>
-  </p> -->
 </template>
 
 <script>

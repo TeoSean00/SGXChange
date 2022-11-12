@@ -210,24 +210,4 @@
     props: ['uniNamePassed']
   };
 
-// Other way to add document to nested collection but w random document id
-// const dbRef = collection(fireStore, `Universities2/${testUni}/${collectionToBeAdded}`)
-// const dataAdded = {
-//     Email: this.currentUserEmail,
-//     Likes: likes,
-//     ReviewInfo: this.userReview,
-//     UniName: testUni,
-//     UserName: this.currentUserName,
-//     currentTime: this.currentUserTime
-// }
-// let email1 = this.currentUserEmail
-// addDoc(dbRef, dataAdded)
-//     .then(docRef => {
-//         alert('Your review has been successfully added, thank you!')
-//         this.close()
-//     })
-//     .catch(error => {
-//         console.log(error.message)
-//     })
-
 </script>
