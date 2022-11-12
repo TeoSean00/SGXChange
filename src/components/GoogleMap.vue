@@ -1,7 +1,7 @@
 <template>
   <div class="container mapbox overflow-auto">
     <div class="row">
-      <div class="col-4 navigation-panel overflow-auto">
+      <div class="col-12 col-md-4 navigation-panel overflow-auto" style="height:300px">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
           <span>{{ uniName }} Map</span>
           <button
@@ -29,9 +29,8 @@
               <span
                 class=""
                 style="
-                  white-space: nowrap;
-                  overflow: hidden;
-                  text-overflow: ellipsis;
+
+
                 "
                 >{{ m.id + 1 }}. {{ m.name }}</span
               >
@@ -43,7 +42,7 @@
           </div>
         </div>
       </div>
-      <div class="col-8">
+      <div class="col-12 col-md-8 order-0">
         <GMapMap
           class="gMap"
           :center="center"
@@ -230,24 +229,28 @@ export default {
 <style scoped>
 .attractionButton {
   background-color: #e6f7ff;
+  width: 100%;
+  margin: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .navigation-panel {
-  position: absolute;
+  position: relative;
   /* overflow-y: scroll; */
-  top: 8px;
-  left: 8px;
+
 }
 
 .mapbox {
-  height: 30vh;
+  height: 60vh;
   position: relative;
 }
 .gMap {
-  width: 65%;
+  width: 100%;
   height: 100%;
-  position: absolute;
-  top: 8px;
-  right: 16px;
+  min-height: 300px;
+  position: relative;
+
 }
 </style>

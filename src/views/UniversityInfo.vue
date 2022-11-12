@@ -1,4 +1,4 @@
-<template 
+<template
 >
   <div class="container-fluid px-5 py-3" style="max-width: fit-content">
     <!-- top header -->
