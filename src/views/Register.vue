@@ -52,26 +52,30 @@
           >
             <!-- <input class="input100" type="text" name="pass" v-model="school" placeholder=" " required/> -->
             <select
-              class="input100    bootstrap-select"
+              class="input100 bootstrap-select"
               v-model="selectedUni"
               required
             >
-              <option value="default" selected>Select A University</option>
+              <option value="default" selected></option>
               <option value="Singapore Management University">
                 Singapore Management University
               </option>
               <template v-for="uni in allUniversities" :key="uni">
-                <option v-if="uni != 'Singapore Management University'" :value="uni" disabled>
-                {{ uni }}
+                <option
+                  v-if="uni != 'Singapore Management University'"
+                  :value="uni"
+                  disabled
+                >
+                  {{ uni }}
                 </option>
               </template>
             </select>
             <span class="focus-input100"></span>
 
             <span v-if="selectedUni == 'default'" class="selectLabelInput100"
-              >Select School</span
+              >Select University</span
             >
-            <span v-else class="label-input100">School</span>
+            <span v-else class="label-input100">University</span>
           </div>
 
           <div
@@ -79,7 +83,7 @@
             data-validate="First Degree is required"
           >
             <select
-              class="input100   "
+              class="input100"
               style="outline: none !important, border: none "
               v-model="selectedFirstDegree"
               required
@@ -100,7 +104,7 @@
           </div>
 
           <div class="wrap-input100 validate-input">
-            <select class="input100   " v-model="selectedSecondDegree">
+            <select class="input100" v-model="selectedSecondDegree">
               <option value="default" selected></option>
               <template v-for="degree in degrees" :key="degree">
                 <option v-if="degree != selectedFirstDegree" :value="degree">
@@ -197,7 +201,7 @@ export default {
         createUserWithEmailAndPassword(getAuth(), this.email, this.password)
           .then((user) => {
             //Adding user info as a document to the user collection in firebasd
-              setDoc(doc(fireStore, "UserProfiles", this.email), {
+            setDoc(doc(fireStore, "UserProfiles", this.email), {
               UserName: this.email.split("@")[0],
               Email: this.email,
               FirstDegree: this.selectedFirstDegree,
@@ -375,7 +379,7 @@ export default {
   height: 100%;
   top: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0);
 }
 
 .login100-form {
@@ -483,7 +487,7 @@ input.input100 {
   top: -1px;
   left: -1px;
   pointer-events: none;
-  border: 1px solid #6675df;
+  border: 1px solid #096dd9;
   border-radius: 10px;
 
   visibility: hidden;
@@ -566,7 +570,7 @@ input.input100 {
   width: 100%;
   height: 50px;
   border-radius: 10px;
-  background: #6675df;
+  background: #096dd9;
   border-style: none;
 
   font-size: 12px;
@@ -582,7 +586,7 @@ input.input100 {
 }
 
 .login100-form-btn:hover {
-  background: #333333;
+  background: #40a9ff;
 }
 
 /*------------------------------------------------------------------

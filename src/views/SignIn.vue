@@ -36,7 +36,7 @@
           <p class="register">
                 Don't have an account?
                 <div
-                ><router-link to="/RegisterPage">Register Here</router-link></div
+                ><router-link to="/RegisterPage" style="color: #597ef7;">Register Here</router-link></div
                 >
             </p>
         </div>
@@ -299,7 +299,7 @@ input.input100 {
   top: -1px;
   left: -1px;
   pointer-events: none;
-  border: 1px solid #6675df;
+  border: 1px solid #096dd9;
   border-radius: 10px;
 
   visibility: hidden;
@@ -382,7 +382,7 @@ input.input100 {
   width: 100%;
   height: 50px;
   border-radius: 10px;
-  background: #6675df;
+  background: #096dd9;
   border-style: none;
 
   font-size: 12px;
@@ -398,7 +398,7 @@ input.input100 {
 }
 
 .login100-form-btn:hover {
-  background: #333333;
+  background: #40a9ff;
 }
 
 /*------------------------------------------------------------------

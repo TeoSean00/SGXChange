@@ -26,7 +26,7 @@ export default {
     };
   },
   mounted() {
-    console.log(this.universityImg);
+    // console.log(this.universityImg);
   },
 };
 </script>
