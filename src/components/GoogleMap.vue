@@ -243,13 +243,13 @@ export default {
 }
 
 .mapbox {
-  height: 60vh;
+  height: 40vh;
   position: relative;
 }
 .gMap {
   width: 100%;
   height: 100%;
-  min-height: 300px;
+  min-height: 30vh;
   position: relative;
 
 }
