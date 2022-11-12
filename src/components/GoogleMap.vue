@@ -70,7 +70,7 @@
             :key="index"
             v-for="(m, index) in extras"
             :position="m.position"
-            :icon="'http://maps.google.com/mapfiles/marker_yellow.png'"
+            :icon="'https://maps.google.com/mapfiles/marker_yellow.png'"
             :clickable="true"
             @click="openMarker(m.id)"
             @closeclick="openMarker(null)"

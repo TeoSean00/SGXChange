@@ -1,36 +1,6 @@
 <template
 >
   <div class="container-fluid px-5 py-3" style="max-width: fit-content">
-    <!-- top header -->
-    <!-- <nav class="navbar navbar-expand-lg bg-light" id="contentNavbar">
-  <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="#gpa">gpa</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#description">description</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#general">general</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#map">map</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#modules">modules</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#reviews">reviews</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav> -->
     <div class="row mb-3">
       <div class="col h2">{{ uniName }}</div>
       <div class="col text-end">
@@ -296,7 +266,6 @@
     </div>
     <div class="row">
       <div class="col">
-        <!-- module information -->
         <!-- GOOGLEMAP MAP API -->
         <div id="map">
           <GoogleMap
@@ -309,11 +278,7 @@
         </div>
         <!-- modules -->
         <h2 class="my-4" id="modules">Module Information</h2>
-        <span
-          >University page > module info :
-          <a :href="uniCourseUrl" target="_blank">{{ uniCourseUrl }}</a></span
-        >
-        <br />
+        
         <!-- one module each -->
         <div class="row">
           <div
