@@ -1,7 +1,6 @@
 <template>
   <!-- All Uni list section -->
-  <div class="container-fluid mt-4 mx-2 d-flex flex-column"
-    style="">
+  <div class="container-fluid mt-4 mx-2 d-flex flex-column" style="">
     <div class="row mx-5">
       <div class="col"><h2>Universities</h2></div>
     </div>
@@ -24,7 +23,7 @@
         </a-menu>
       </div>
     </div>
-    <br>
+    <br />
 
     <!-- UniFilterBar -->
 
@@ -78,9 +77,9 @@
           <li class="page-item">
             <a class="page-link active" @click="togglePage">1</a>
           </li>
-          <template v-if="lastPage>1">
-            <li class="page-item" v-for="num in lastPage-1" :key="num">
-              <a class="page-link" @click="togglePage">{{ num+1 }}</a>
+          <template v-if="lastPage > 1">
+            <li class="page-item" v-for="num in lastPage - 1" :key="num">
+              <a class="page-link" @click="togglePage">{{ num + 1 }}</a>
             </li>
           </template>
           <li class="page-item">
@@ -144,29 +143,30 @@ export default {
       const pagelinks = document.getElementsByClassName("page-link");
 
       this.lastPage = Math.ceil(this.items.length / this.perPage);
-      this.currentPage = 1
+      this.currentPage = 1;
       // if filtering reduces the pages to 1, disable previous and next
-      if (this.lastPage == 1){
+      if (this.lastPage == 1) {
         for (const li of pagelinks) {
-          if (li.text == 'Previous'){
-              li.classList.add('disabled')
-          } else if (li.text == 'Next'){
-              li.classList.add('disabled')
-          } else if (parseInt(li.text) == this.currentPage){
-              li.classList.add('active')
+          if (li.text == "Previous") {
+            li.classList.add("disabled");
+          } else if (li.text == "Next") {
+            li.classList.add("disabled");
+          } else if (parseInt(li.text) == this.currentPage) {
+            li.classList.add("active");
           }
-      }}
+        }
+      }
       // if filtering does not reduce the page to 1, disable previous only
       else {
         for (const li of pagelinks) {
-          if (li.text == 'Previous'){
-              li.classList.add('disabled')
-          } else if (li.text == 'Next'){
-              li.classList.remove('disabled')
-          } else if (parseInt(li.text) == this.currentPage){
-              li.classList.add('active')
+          if (li.text == "Previous") {
+            li.classList.add("disabled");
+          } else if (li.text == "Next") {
+            li.classList.remove("disabled");
+          } else if (parseInt(li.text) == this.currentPage) {
+            li.classList.add("active");
           }
-      }
+        }
       }
     },
     togglePage: function () {
@@ -198,12 +198,12 @@ export default {
           console.log(li.text);
           li.classList.add("active");
         }
-        if (li.text == 'Previous' && this.currentPage==this.firstPage){
-            li.classList.add('disabled')
-        } else if (li.text == 'Next' && this.currentPage==this.lastPage){
-            li.classList.add('disabled')
-        } else if (parseInt(li.text) == this.currentPage){
-            event.target.classList.add('active')
+        if (li.text == "Previous" && this.currentPage == this.firstPage) {
+          li.classList.add("disabled");
+        } else if (li.text == "Next" && this.currentPage == this.lastPage) {
+          li.classList.add("disabled");
+        } else if (parseInt(li.text) == this.currentPage) {
+          event.target.classList.add("active");
         }
       }
     },
@@ -220,7 +220,7 @@ export default {
           // put key-value pairs
           let universityInfo = {};
           universityInfo["name"] = doc.data().HostUniversity;
-          universityInfo["gpaReq"] = doc.data().GPA;
+          universityInfo["gpaReq"] = doc.data().gpaReq;
           // universityInfo["IgpaNinetyPercentile"] =
           //   doc.data().IgpaNinetyPercentile;
           // universityInfo["IgpaTenPercentile"] = doc.data().IgpaTenPercentile;
@@ -233,7 +233,7 @@ export default {
         });
         this.pagination();
       } else {
-          this.getAllUni.forEach((doc) => {
+        this.getAllUni.forEach((doc) => {
           let universityInfo = {};
           if (doc.data().Region == region) {
             // put key-value pairs
@@ -250,43 +250,47 @@ export default {
         this.pagination();
       }
     },
-    async getUniToBaskets(){
+    async getUniToBaskets() {
       // loop through the BasketToUni collection, for each basket, if the uni value not in UniToBasket obj, create new key. Else push to UniToBasket[uni] which will be an array of baskets
-      var basketToUniversities = await getDocs(collection(fireStore, "BasketToUniversities"));
-      basketToUniversities.forEach((doc)=> {
-        let basketInfo = {}
+      var basketToUniversities = await getDocs(
+        collection(fireStore, "BasketToUniversities")
+      );
+      basketToUniversities.forEach((doc) => {
+        let basketInfo = {};
         // console.log(doc.data()['Universities'])
         // console.log(doc.id)
-        let universities = doc.data()['Universities']
-        let basket = doc.id
-        for (let uni of universities){
-          if (uni in this.uniToBaskets){
-            this.uniToBaskets[uni].push(basket)
+        let universities = doc.data()["Universities"];
+        let basket = doc.id;
+        for (let uni of universities) {
+          if (uni in this.uniToBaskets) {
+            this.uniToBaskets[uni].push(basket);
           } else {
-            this.uniToBaskets[uni] = [basket]
+            this.uniToBaskets[uni] = [basket];
           }
         }
-      })
+      });
       // console.log(this.uniToBaskets)
     },
-    async getBasketToModules(){
+    async getBasketToModules() {
       // loop through the BasketToUni collection, for each basket, if the uni value not in UniToBasket obj, create new key. Else push to UniToBasket[uni] which will be an array of baskets
-      var basketToModules = await getDocs(collection(fireStore, "BasketToModules"));
-      basketToModules.forEach((doc)=> {
-        let basketInfo = {}
+      var basketToModules = await getDocs(
+        collection(fireStore, "BasketToModules")
+      );
+      basketToModules.forEach((doc) => {
+        let basketInfo = {};
         // console.log(doc.data()['Universities'])
         // console.log(doc.id)
-        let basket = doc.data()['Baskets']
-        let Modules = doc.data()['Modules']
+        let basket = doc.data()["Baskets"];
+        let Modules = doc.data()["Modules"];
 
-        if (basket in this.basketToModules){
-          this.basketToModules[basket].push(Modules)
+        if (basket in this.basketToModules) {
+          this.basketToModules[basket].push(Modules);
         } else {
-          this.basketToModules[basket] = [Modules]
+          this.basketToModules[basket] = [Modules];
         }
-      })
-      console.log(this.basketToModules)
-    }
+      });
+      console.log(this.basketToModules);
+    },
   },
   computed: {
     rows() {

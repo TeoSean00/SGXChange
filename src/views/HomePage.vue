@@ -69,7 +69,7 @@
   <div>
     <p
       class="d-flex align-items-center justify-content-center fw-bold"
-      style="font-size: 3rem; height: 40vh; text-align: center"
+      style="font-size: 3rem; height: 20vh; text-align: center"
     >
       Where do you want to go?
     </p>
