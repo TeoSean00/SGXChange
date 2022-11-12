@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container mappingPage">
     <!-- Progress bar  -->
     <div class="mt-3 mb-3" style="">
       <h2>Module Mapping</h2>
@@ -452,6 +452,11 @@ export default {
 };
 </script>
 <style scoped>
+.mappingPage {
+  /* justify-content: start; */
+  min-height: 60vh;
+}
+
 .btn-color {
   background-color: #1890ff;
   color: white;
