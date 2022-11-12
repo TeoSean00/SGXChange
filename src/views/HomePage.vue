@@ -41,7 +41,7 @@
         <div class="row">
           <div class="col">
             <div class="row">
-              <h5 style="color: #9191ec">WHAT MAKES US DIFFERENT</h5>
+              <h5 class="aboutUs">WHAT MAKES US DIFFERENT</h5>
               <h1>Why SGXchange</h1>
             </div>
             <div class="row my-5 text-start">
@@ -117,9 +117,12 @@ h5 {
   object-fit: contain !important;
 }
 
-.details {
-  display: flex;
+.aboutUs {
+  color: #096dd9;
 }
+/* .details {
+  display: flex;
+} */
 
 .bannerHero {
   width: 100%;
@@ -131,11 +134,11 @@ h5 {
 #carousel {
   position: relative;
 }
-.button-banner {
+/* .button-banner {
   height: 75vh;
-}
+} */
 
-.btn {
+/* .btn {
   transition: all 0.2s;
   background-color: #f5f5f5;
   border-radius: 2px;
@@ -154,7 +157,7 @@ h5 {
   border-color: #9191ec;
   color: white;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-}
+} */
 
 #bannerImg {
   height: 70vh;

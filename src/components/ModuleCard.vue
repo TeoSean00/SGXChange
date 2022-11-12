@@ -52,10 +52,10 @@ export default {
 }
 
 .unselected {
-  background-color: lightblue;
+  background-color: #e6f7ff;
 }
 .selected {
-  background-color: rgb(64, 64, 234);
+  background-color: #096dd9;
   color: white;
 }
 </style>

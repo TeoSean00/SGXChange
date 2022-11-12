@@ -29,3 +29,5 @@ body{
 body {
   font-family: "Montserrat", sans-serif;
 }
+
+svg { vertical-align: baseline; }
