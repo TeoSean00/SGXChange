@@ -390,7 +390,7 @@
             class="row d-flex"
           >
             <div
-              class="col-sm-12 col-md-6 col-lg-4 p-0"
+              class="col-sm-12 col-md-6 col-lg-4 p-2"
               v-for="(review, index) in reviews"
               :key="index"
             >
