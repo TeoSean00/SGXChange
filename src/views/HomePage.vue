@@ -119,7 +119,7 @@
           <p class="text-muted mb-0">
             As students ourselves, we understand how painful it is to
             <br />collate information with it being scattered everywhere.<br />
-            Thus, with SGXchange your one-stop portal information is
+            Thus, with SGXchange your one-stop portal information <br />is
             consolidated and easily accessible.
           </p>
 
