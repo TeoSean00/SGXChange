@@ -158,6 +158,7 @@
           <div v-if="signupError != ''" class="alert alert-danger p-2 my-3">
             {{ signupError }}
           </div>
+
         </div>
         <div class="login100-more"></div>
       </div>
@@ -227,7 +228,8 @@ export default {
       }
       if (this.selectedFirstDegree == "default") {
         this.invalidDegree = "Please Select a Degree";
-      } else {
+      }
+      else{
         this.invalidDegree = "";
       }
       if (
@@ -324,8 +326,6 @@ export default {
 
 .login100-more {
   width: calc(100% - 560px);
-  height: 110vh;
-  /* object-fit: cover; */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -333,6 +333,7 @@ export default {
   top: 0px;
   left: auto;
   z-index: 1;
+  height: 110vh;
   background-image: url("../assets/SMU_1.jpeg");
 }
 
