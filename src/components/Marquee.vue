@@ -20,7 +20,7 @@
             universityNames[getRandomInt(universityNames.length)]
           "
         >
-          <button class="marquee-btn marquee-btn-hide">Take me anywhere</button>
+          <a class="marquee-btn marquee-btn-hide">Take me anywhere</a>
         </router-link>
       </div>
       <div class="text-center marquee-seeAllUni marquee-btn-hide">
@@ -134,12 +134,13 @@ export default {
 .marquee-btn {
   transition: all 0.2s;
   background-color: black;
-  border-radius: 2px;
-  border-color: white;
+  border: 1px solid white;
   font-size: 23px;
   border-radius: 5px;
   padding-left: 80px;
   padding-right: 80px;
+  padding-top: 7px;
+  padding-bottom: 7px;
   color: white;
   font-weight: 500;
 }

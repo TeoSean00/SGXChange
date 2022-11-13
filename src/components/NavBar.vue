@@ -47,17 +47,17 @@
           gap-3
         "
       >
-        <li class="nav-item active d-flex align-middle">
+        <li class="nav-item d-flex align-middle">
           <router-link to="/" class="nav-link"> Home </router-link>
         </li>
 
-        <li class="nav-item active d-flex">
+        <li class="nav-item d-flex">
           <router-link to="/UniversityPage" class="nav-link">
             Universities
           </router-link>
         </li>
 
-        <li class="nav-item active d-flex">
+        <li class="nav-item d-flex">
           <router-link to="/ModuleMappingPage" class="nav-link">
             Module Mapping
           </router-link>
@@ -65,13 +65,12 @@
       </ul>
 
       <ul class="navbar-nav ms-3">
-        <li class="nav-item active mt-0 d-none d-md-block">
+        <li class="nav-item mt-0 d-none d-lg-block">
           <Search />
         </li>
         <li v-if="!isLoggedIn"
           class="
             nav-item
-            active
             d-md-flex
             justify-content-md-center
             align-items-baseline
@@ -84,12 +83,12 @@
 
         <li
           v-if="isLoggedIn"
-          class="nav-item active d-md-flex justify-content-center blue mx-2"
+          class="nav-item d-md-flex justify-content-center blue mx-2"
           style="margin: auto;"
         >
           Hello, {{ finalName }} !
         </li>
-        <li v-else class="nav-item active d-md-flex justify-content-center">
+        <li v-else class="nav-item d-md-flex justify-content-center">
           <router-link to="/SigninPage" class="nav-link m-auto">
             Sign In
           </router-link>
@@ -97,7 +96,7 @@
 
         <li
           v-if="isLoggedIn"
-          class="nav-item active d-md-flex justify-content-center"
+          class="nav-item d-md-flex justify-content-center"
         >
           <button
             style="border: none; background: none; margin: auto"
@@ -108,11 +107,11 @@
         </li>
         <li
           v-else
-          class="nav-item active d-md-flex justify-content-center"
+          class="nav-item d-md-flex justify-content-center"
           style="display: none"
         ></li>
 
-        <li class="nav-item active d-md-flex justify-content-center me-4">
+        <li class="nav-item d-md-flex justify-content-center me-4">
           <router-link to="/ProfilePage" class="nav-link m-auto">
             <i class="bi bi-person-circle" style="font-size: 1.5rem"></i>
           </router-link>
@@ -226,6 +225,10 @@ nav {
 #navBtn {
   margin-right: 10px;
 }
+.nav-link:hover {
+  color: #40a9ff; 
+}
+
 .search-wrapper .input-holder {
   height: 70px;
   width: 70px;
