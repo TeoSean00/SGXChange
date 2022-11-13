@@ -87,11 +87,11 @@
               <div
                 v-for="(fav, index) in userFavDetails"
                 :key="index"
-                class=""
+                class="m-2"
                 style="width: 300px"
               >
                 <div
-                  class="package-item bg-white fav-card m-4"
+                  class="package-item bg-white fav-card"
                   style="height: 100%"
                 >
                   <img
@@ -200,8 +200,8 @@
           <div v-if="userReviewDetails.length > 0">
             <h6 class="theme-color lead">Your Reviews</h6>
             <div class="d-flex flex-wrap">
-              <div v-for="(review, index) in userReviewDetails" :key="index">
-                <div class="col-3">
+              <div v-for="(review, index) in userReviewDetails" :key="index" style="width:300px" class="m-2">
+                <div class="">
                   <div class="card my-3 package-item">
                     <div class="card-body">
                       <div class="d-flex justify-content-between">
