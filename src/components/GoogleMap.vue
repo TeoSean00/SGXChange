@@ -18,8 +18,8 @@
         <div :key="index" v-for="(m, index) in extras" class="mb-2">
           <!-- Nearby Attraction Cards -->
             <a class=" btn rounded-pill attraction-badge text-center"
-            style="cursor: pointer; 
-            font-size: 15px; 
+            style="cursor: pointer;
+            font-size: 15px;
             background-color: "
             @click="
               openMarker(m.id);
@@ -179,13 +179,13 @@ button {
 }
 
 .mapbox {
-  height: 50vh;
+  height: 30vh;
   position: relative;
 }
 .gMap {
   width: 100%;
   height: 100%;
-  min-height: 50vh;
+  min-height: 30vh;
   position: relative;
 }
 </style>
