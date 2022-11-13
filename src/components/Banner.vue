@@ -111,19 +111,6 @@ export default {
     height: 70%;
   }
 }
-/* .container-fluid {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f5f5f5;
-  margin-top: 160px;
-} */
-
-/* .banner {
-  height: 60vh;
-} */
 
 h1 {
   font-size: 3.5rem;
@@ -133,15 +120,16 @@ h1 {
 .typed-text {
   /* Original color */
   /* color: #6060db; */
-  color: #1890ff;
+  color:  #40a9ff;
 }
 
 .button:hover {
   /* background-color: #9191ec;
   border-color: #9191ec; */
   background-color: #40a9ff;
-  border-color: #40a9ff;
+  border:none;
   color: white;
+  box-shadow: none;
   /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
 }
 
