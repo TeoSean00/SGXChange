@@ -1,10 +1,4 @@
 <template>
-  <!-- <div id="searchbar">
-        <Search/>
-    </div> -->
-  <!-- <div id="carousel">
-        <Carousel/>
-    </div> -->
   <div class="bannerHero container-fluid m-0">
     <div class="row bannerHero align-items-center">
       <div class="col-md-6 col-12 text-center p-5">
@@ -192,8 +186,6 @@ export default {
   components: {
     Banner,
     ArrowAnimation,
-    // Search,
-    // Carousel,
     Marquee,
     BannerCarousel,
   },
@@ -220,9 +212,7 @@ h5 {
   color: #096dd9;
   font-weight: bold;
 }
-/* .details {
-  display: flex;
-} */
+
 
 .bannerHero {
   width: 100%;
@@ -234,30 +224,6 @@ h5 {
 #carousel {
   position: relative;
 }
-/* .button-banner {
-  height: 75vh;
-} */
-
-/* .btn {
-  transition: all 0.2s;
-  background-color: #f5f5f5;
-  border-radius: 2px;
-  border-color: black;
-  font-size: 1rem;
-  border-radius: 5px;
-  padding-left: 80px;
-  padding-right: 80px;
-  color: black;
-  font-weight: 500;
-  margin-top: 50px;
-}
-
-.btn:hover {
-  background-color: #9191ec;
-  border-color: #9191ec;
-  color: white;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-} */
 
 #bannerImg {
   height: 70vh;

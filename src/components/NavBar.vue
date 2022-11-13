@@ -171,14 +171,11 @@ export default {
     searchUni() {
       if (this.searchItem != "") {
         if (this.$route.name != "UniversityPageSearch") {
-          console.log("path1");
           this.$router.push({
             path: "/UniversityPage/search",
             query: { search: this.searchItem },
           });
         } else {
-          //I put catch because i dont know how to solve the error
-          console.log("path2");
           this.$router.push({
             path: "/UniversityPage/search",
             query: { search: this.searchItem },
@@ -191,7 +188,6 @@ export default {
       onAuthStateChanged(getAuth(), (user) => {
         if (user) {
           this.isLoggedIn = true;
-          console.log("logged in user from previous page is", user);
 
           const name = user.email.split("@")[0];
           const firstLetter = name.charAt(0);

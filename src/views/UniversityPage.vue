@@ -43,19 +43,6 @@
         :RegionId="uni.RegionId"
         :imgURL="uni.imgURL"
       />
-
-      <!-- <div class="w-100"></div> -->
-      <!-- <UniCardSmall class="col unicard" v-for="uni in items.slice(row2start,row2end)" :key="uni"
-            :universityName="uni.name"
-            :gpaReq="uni.gpaReq"
-            :IgpaNinetyPercentile = "uni.IgpaNinetyPercentile"
-            :IgpaTenPercentile = "uni.IgpaTenPercentile"
-            :NoOfPlacesSem1 = "uni.NoOfPlacesSem1"
-            :NoOfPlacesSem2 = "uni.NoOfPlacesSem2"
-            :CountryId = "uni.CountryId"
-            :RegionId = "uni.RegionId"
-            :imgURL = "uni.imgURL"
-            /> -->
     </div>
   </div>
   <br />
@@ -70,10 +57,6 @@
           <li class="page-item">
             <a class="page-link" @click="togglePage">Previous</a>
           </li>
-          <!-- this part should be v-for based on no. of items in data -->
-          <!-- they should be buttons that bind to v-model currentPage-->
-          <!-- paginated items should change as well , use array.slice(start,end)-->
-          <!-- create a new component for paginated items  -->
           <li class="page-item">
             <a class="page-link active" @click="togglePage">1</a>
           </li>
@@ -183,13 +166,6 @@ export default {
         this.currentPage = parseInt(event.target.text);
       }
       const pagelinks = document.getElementsByClassName("page-link");
-
-      // toggles active and disabled buttons
-
-      // goes through the pagination buttons and removes all active classes
-      // also checks if currentPage == 1, then add disbaled class to previous btn
-      // also if currentPage == last, then add disabled class to next btn
-
       for (const li of pagelinks) {
         li.classList.remove("active");
         li.classList.remove("disabled");
@@ -221,9 +197,6 @@ export default {
           let universityInfo = {};
           universityInfo["name"] = doc.data().HostUniversity;
           universityInfo["gpaReq"] = doc.data().gpaReq;
-          // universityInfo["IgpaNinetyPercentile"] =
-          //   doc.data().IgpaNinetyPercentile;
-          // universityInfo["IgpaTenPercentile"] = doc.data().IgpaTenPercentile;
           universityInfo["NoOfPlacesSem1"] = doc.data().NoOfPlacesSem1;
           universityInfo["NoOfPlacesSem2"] = doc.data().NoOfPlacesSem2;
           universityInfo["CountryId"] = doc.data().Country;
@@ -256,9 +229,6 @@ export default {
         collection(fireStore, "BasketToUniversities")
       );
       basketToUniversities.forEach((doc) => {
-        let basketInfo = {};
-        // console.log(doc.data()['Universities'])
-        // console.log(doc.id)
         let universities = doc.data()["Universities"];
         let basket = doc.id;
         for (let uni of universities) {
@@ -269,7 +239,6 @@ export default {
           }
         }
       });
-      // console.log(this.uniToBaskets)
     },
     async getBasketToModules() {
       // loop through the BasketToUni collection, for each basket, if the uni value not in UniToBasket obj, create new key. Else push to UniToBasket[uni] which will be an array of baskets
@@ -277,9 +246,6 @@ export default {
         collection(fireStore, "BasketToModules")
       );
       basketToModules.forEach((doc) => {
-        let basketInfo = {};
-        // console.log(doc.data()['Universities'])
-        // console.log(doc.id)
         let basket = doc.data()["Baskets"];
         let Modules = doc.data()["Modules"];
 
@@ -302,12 +268,6 @@ export default {
     row1end() {
       return this.row1start + this.perPage;
     },
-    // row2start(){
-    //   return this.row1end
-    // },
-    // row2end() {
-    //   return this.row2start+ this.perPage/2
-    // },
   },
 
   watch: {

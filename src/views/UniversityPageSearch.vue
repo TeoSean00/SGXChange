@@ -1,16 +1,18 @@
 <template>
-<div class="container-fluid mt-5">
+  <div class="container-fluid mt-5">
     <div class="row">
-        <div class="col-1"></div>
-        <div class="col"><h2>Searched for: {{ searchKey }}</h2></div>
-        <div class="col-1"></div>
+      <div class="col-1"></div>
+      <div class="col">
+        <h2>Searched for: {{ searchKey }}</h2>
+      </div>
+      <div class="col-1"></div>
     </div>
     <div class="row">
-        <div class="col-1"></div>
-        <!-- put variables as props -->
-        <div class="row row-cols-4 d-flex flex-wrap justify-content-center">
+      <div class="col-1"></div>
+      <!-- put variables as props -->
+      <div class="row row-cols-4 d-flex flex-wrap justify-content-center">
         <UniCardSmall
-          class="unicard "
+          class="unicard"
           v-for="(uni, index) in outputUni.slice(row1start, row1end)"
           :key="index"
           :universityName="uni.name"
@@ -23,74 +25,66 @@
           :RegionId="uni.RegionId"
           :imgURL="uni.imgURL"
         />
-        </div>
-        <div class="col-1"></div>
+      </div>
+      <div class="col-1"></div>
     </div>
-</div>
-<br>
-<br>
-<br>
-<br>
-<!-- PAGINATION -->
-<div class="row">
-  <div class="col">
-    <nav aria-label="Page navigation example">
-      <ul class="pagination justify-content-center">
-        <li class="page-item">
-          <a class="page-link" @click="togglePage">Previous</a>
-        </li>
-        <!-- this part should be v-for based on no. of items in data -->
-        <!-- they should be buttons that bind to v-model currentPage-->
-        <!-- paginated items should change as well , use array.slice(start,end)-->
-        <!-- create a new component for paginated items  -->
-        <li class="page-item">
-          <a class="page-link active" @click="togglePage">1</a>
-        </li>
-        <template v-if="lastPage>1">
-          <li class="page-item" v-for="num in lastPage-1" :key="num">
-            <a class="page-link" @click="togglePage">{{ num+1 }}</a>
-          </li>
-        </template>
-        <li class="page-item">
-          <a class="page-link" @click="togglePage">Next</a>
-        </li>
-      </ul>
-    </nav>
   </div>
-</div>
-<!-- PAGINATION END -->
-<br>
-<br>
-<br>
-
+  <br />
+  <br />
+  <br />
+  <br />
+  <!-- PAGINATION -->
+  <div class="row">
+    <div class="col">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item">
+            <a class="page-link" @click="togglePage">Previous</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link active" @click="togglePage">1</a>
+          </li>
+          <template v-if="lastPage > 1">
+            <li class="page-item" v-for="num in lastPage - 1" :key="num">
+              <a class="page-link" @click="togglePage">{{ num + 1 }}</a>
+            </li>
+          </template>
+          <li class="page-item">
+            <a class="page-link" @click="togglePage">Next</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <!-- PAGINATION END -->
+  <br />
+  <br />
+  <br />
 </template>
 
 <script>
 import UniCardSmall from "@/components/UniCardSmall.vue";
 
-import {fireStore} from "@/service/Firebase/firebaseInit"
+import { fireStore } from "@/service/Firebase/firebaseInit";
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
-
-
-
 
 export default {
   name: "UniversityPage",
   data() {
     return {
-        // items per page set to default
-        perPage: 3,
-        // this will be v-modelled to change according to what user clicks
-        currentPage: 1,
-        items: [],
-        outputUni: [],
-        searchKey: "",
-        // items per page set to default
-        perPage: 8,
-        // this will be v-modelled to change according to what user clicks
-        currentPage: 1,
-        firstPage: 1,
-        lastPage: 0,
+      // items per page set to default
+      perPage: 3,
+      // this will be v-modelled to change according to what user clicks
+      currentPage: 1,
+      items: [],
+      outputUni: [],
+      searchKey: "",
+      // items per page set to default
+      perPage: 8,
+      // this will be v-modelled to change according to what user clicks
+      currentPage: 1,
+      firstPage: 1,
+      lastPage: 0,
     };
   },
 
@@ -106,36 +100,37 @@ export default {
     },
   },
   components: {
-    UniCardSmall
+    UniCardSmall,
   },
-  methods:{
+  methods: {
     pagination() {
       const pagelinks = document.getElementsByClassName("page-link");
 
       this.lastPage = Math.ceil(this.outputUni.length / this.perPage);
-      this.currentPage = 1
+      this.currentPage = 1;
       // if filtering reduces the pages to 1, disable previous and next
-      if (this.lastPage == 1){
+      if (this.lastPage == 1) {
         for (const li of pagelinks) {
-          if (li.text == 'Previous'){
-              li.classList.add('disabled')
-          } else if (li.text == 'Next'){
-              li.classList.add('disabled')
-          } else if (parseInt(li.text) == this.currentPage){
-              li.classList.add('active')
+          if (li.text == "Previous") {
+            li.classList.add("disabled");
+          } else if (li.text == "Next") {
+            li.classList.add("disabled");
+          } else if (parseInt(li.text) == this.currentPage) {
+            li.classList.add("active");
           }
-      }}
+        }
+      }
       // if filtering does not reduce the page to 1, disable previous only
       else {
         for (const li of pagelinks) {
-          if (li.text == 'Previous'){
-              li.classList.add('disabled')
-          } else if (li.text == 'Next'){
-              li.classList.remove('disabled')
-          } else if (parseInt(li.text) == this.currentPage){
-              li.classList.add('active')
+          if (li.text == "Previous") {
+            li.classList.add("disabled");
+          } else if (li.text == "Next") {
+            li.classList.remove("disabled");
+          } else if (parseInt(li.text) == this.currentPage) {
+            li.classList.add("active");
           }
-      }
+        }
       }
     },
     togglePage: function () {
@@ -152,13 +147,6 @@ export default {
         this.currentPage = parseInt(event.target.text);
       }
       const pagelinks = document.getElementsByClassName("page-link");
-
-      // toggles active and disabled buttons
-
-      // goes through the pagination buttons and removes all active classes
-      // also checks if currentPage == 1, then add disbaled class to previous btn
-      // also if currentPage == last, then add disabled class to next btn
-
       for (const li of pagelinks) {
         li.classList.remove("active");
         li.classList.remove("disabled");
@@ -167,24 +155,29 @@ export default {
           console.log(li.text);
           li.classList.add("active");
         }
-        if (li.text == 'Previous' && this.currentPage==this.firstPage){
-            li.classList.add('disabled')
-        } else if (li.text == 'Next' && this.currentPage==this.lastPage){
-            li.classList.add('disabled')
-        } else if (parseInt(li.text) == this.currentPage){
-            event.target.classList.add('active')
+        if (li.text == "Previous" && this.currentPage == this.firstPage) {
+          li.classList.add("disabled");
+        } else if (li.text == "Next" && this.currentPage == this.lastPage) {
+          li.classList.add("disabled");
+        } else if (parseInt(li.text) == this.currentPage) {
+          event.target.classList.add("active");
         }
       }
     },
-    async searchFunc(searchItem){
-      this.outputUni = []
-      this.searchKey = searchItem
+    async searchFunc(searchItem) {
+      this.outputUni = [];
+      this.searchKey = searchItem;
       const getUni = await getDocs(collection(fireStore, "Universities2"));
       getUni.forEach((doc) => {
-        let universityInfo = {}
+        let universityInfo = {};
         // put key-value pairs
-        console.log(doc.data().HostUniversity)
-        if( doc.data().HostUniversity.toLowerCase().includes(this.searchKey.toLowerCase())){
+        console.log(doc.data().HostUniversity);
+        if (
+          doc
+            .data()
+            .HostUniversity.toLowerCase()
+            .includes(this.searchKey.toLowerCase())
+        ) {
           console.log(doc.data().HostUniversity);
           universityInfo["name"] = doc.data().HostUniversity;
           universityInfo["gpaReq"] = doc.data().GPA;
@@ -193,18 +186,17 @@ export default {
           universityInfo["CountryId"] = doc.data().Country;
           universityInfo["RegionId"] = doc.data().Region;
           universityInfo["imgURL"] = doc.data().UniImageLink1;
-          this.outputUni.push(universityInfo)
+          this.outputUni.push(universityInfo);
         }
-      })
-      this.pagination()
-    }
+      });
+      this.pagination();
+    },
   },
   async mounted() {
-    // console.log(this.$route)
-    this.searchFunc(this.$route.query.search)
+    this.searchFunc(this.$route.query.search);
   },
-  async beforeRouteUpdate(to, from, next){
-    this.searchFunc(to.query.search)
+  async beforeRouteUpdate(to, from, next) {
+    this.searchFunc(to.query.search);
   },
 };
 </script>
