@@ -79,68 +79,71 @@
         </div>
 
         <!-- Add the favorited universities here and the reviews -->
-        <div class="row">
-          <div v-if="userFavDetails.length > 0">
-            <!-- MY VERSION OF THE UNI CARD -->
+        <div class="container-fluid">
+          <div v-if="userFavDetails.length > 0" class="">
             <h6 class="theme-color lead">Your Favorites</h6>
-            <div
-              v-for="(fav, index) in userFavDetails"
-              :key="index"
-              class="col-3"
-            >
+            <!-- MY VERSION OF THE UNI CARD -->
+            <div class="d-flex flex-wrap">
               <div
-                class="package-item bg-white fav-card m-4"
-                style="height: 100%"
+                v-for="(fav, index) in userFavDetails"
+                :key="index"
+                class=""
+                style="width:300px"
               >
-                <img
-                  class="img-fluid card-img-top"
-                  :src="fav.UniImageLink1"
-                  alt=""
-                />
-                <div class="pt-2 px-2 pb-2">
-                  <a
-                    class="h5 text-decoration-none"
-                    style="
-                      color: #002766;
-                      display: flex;
-                      align-items: center;
-                      height: 5rem;
-                      font-weight: 600;
-                    "
-                    >{{ fav.HostUniversity }}</a
-                  >
-                  <div class="d-flex justify-content mb-2">
-                    <span class="mx-2" style="color: black"
-                      ><p
-                        class="fa fa-map-marker-alt mr-2"
-                        style="color: black"
-                      ></p>
-                      {{ fav.Country }}</span
+                <div
+                  class="package-item bg-white fav-card m-4"
+                  style="height: 100%"
+                >
+                  <img
+                    class="img-fluid card-img-top"
+                    :src="fav.UniImageLink1"
+                    alt=""
+                  />
+                  <div class="pt-2 px-2 pb-2">
+                    <a
+                      class="h5 text-decoration-none"
+                      style="
+                        color: #002766;
+                        display: flex;
+                        align-items: center;
+                        height: 5rem;
+                        font-weight: 600;
+                      "
+                      >{{ fav.HostUniversity }}</a
                     >
-                    <span class="mx-2" style="color: black"
-                      ><p
-                        class="fa-solid fa-earth-americas mr-2"
-                        style="color: black"
-                      ></p>
-                      {{ fav.Region }}</span
-                    >
-                  </div>
-                  <div class="mb-2">
-                    <span class="mx-2" style="color: black"
-                      ><p class="fa fa-user mr-2" style="color: black"></p>
-                      Min GPA: {{ fav.gpaReq }}</span
-                    >
-                  </div>
-                  <div class="mb-2 mx-2" style="color: #096dd9">
-                    <router-link :to="`/universityInfo/` + fav.HostUniversity"
-                      ><p class="fa-sharp fa-solid fa-school mr-2"></p>
-                      Go to university
-                    </router-link>
+                    <div class="d-flex justify-content mb-2">
+                      <span class="mx-2" style="color: black"
+                        ><p
+                          class="fa fa-map-marker-alt mr-2"
+                          style="color: black"
+                        ></p>
+                        {{ fav.Country }}</span
+                      >
+                      <span class="mx-2" style="color: black"
+                        ><p
+                          class="fa-solid fa-earth-americas mr-2"
+                          style="color: black"
+                        ></p>
+                        {{ fav.Region }}</span
+                      >
+                    </div>
+                    <div class="mb-2">
+                      <span class="mx-2" style="color: black"
+                        ><p class="fa fa-user mr-2" style="color: black"></p>
+                        Min GPA: {{ fav.gpaReq }}</span
+                      >
+                    </div>
+                    <div class="mb-2 mx-2" style="color: #096dd9">
+                      <router-link :to="`/universityInfo/` + fav.HostUniversity"
+                        ><p class="fa-sharp fa-solid fa-school mr-2"></p>
+                        Go to university
+                      </router-link>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
+            </div>
             <!-- <div class="col mb-3">
                 <div class="card">
                   <img
@@ -563,7 +566,7 @@ img {
   vertical-align: middle;
   border-style: none;
 }
-/* About Me 
+/* About Me
 ---------------------*/
 .about-text h3 {
   font-size: 45px;
