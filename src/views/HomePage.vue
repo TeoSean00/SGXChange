@@ -21,7 +21,7 @@
   <div class="container mt-3 mb-3">
     <div class="row align-items-center">
       <div
-        class="col-lg-6 col-md-6 order-2 order-md-1 mt-4 pt-2 mt-sm-0 opt-sm-0"
+        class="col-lg-6 col-md-6 order-2 order-md-1 mt-4 pt-2 mt-sm-5 opt-sm-0"
       >
         <div class="row align-items-center">
           <div class="col-lg-6 col-md-6 col-6" data-aos="fade-right">
