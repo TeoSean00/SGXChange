@@ -1,9 +1,6 @@
 <!-- Pull the images from firestore and the name of the place -->
 <template>
   <div class="marquee pt-4">
-    <!-- <h5 class="marquee-header text-center mt-3 pt-4">
-      Where do you want to go?
-    </h5> -->
     <Vue3Marquee :pauseOnHover="true" :duration="110">
       <div class="" v-for="uni in universities" :key="uni">
         <MarqueeCard
@@ -26,11 +23,9 @@
           <button class="marquee-btn marquee-btn-hide">Take me anywhere</button>
         </router-link>
       </div>
-
       <div class="text-center marquee-seeAllUni marquee-btn-hide">
         <router-link to="/UniversityPage" id="seeUni">
           See All Universities
-          <!-- <a-space><arrow-right-outlined /></a-space> -->
         </router-link>
       </div>
     </div>
@@ -38,12 +33,11 @@
 </template>
 
 <script>
-import { reactive, defineComponent } from "vue";
 import { Vue3Marquee } from "vue3-marquee";
 import { ArrowRightOutlined } from "@ant-design/icons-vue";
 import MarqueeCard from "./MarqueeCard.vue";
 import { fireStore } from "@/service/Firebase/firebaseInit";
-import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 
 export default {
   name: "CardsPauseOnHover",
@@ -68,13 +62,10 @@ export default {
     },
 
     hideBtn() {
-      // console.log("hello");
       this.hover = true;
-      // console.log(this.hover);
     },
     showBtn() {
       this.hover = false;
-      // console.log(this.hover);
     },
     async getInfo() {
       const getUniversities = await getDocs(
@@ -84,15 +75,7 @@ export default {
         let universityInfo = {};
         // put key-value pairs
         universityInfo["name"] = doc.data().HostUniversity;
-        // universityInfo['gpaReq'] = doc.data().GpaRequirement
-        // universityInfo['IgpaNinetyPercentile'] = doc.data().IgpaNinetyPercentile
-        // universityInfo['IgpaTenPercentile'] = doc.data().IgpaTenPercentile
-        // universityInfo['NoOfPlacesSem1'] = doc.data().NoOfPlacesSem1
-        // universityInfo['NoOfPlacesSem2'] = doc.data().NoOfPlacesSem2
-        // universityInfo['CountryId'] = doc.data().CountryId
-        // universityInfo['RegionId'] = doc.data().RegionId
         universityInfo["imgUrl"] = doc.data().UniImageLink1;
-        // console.log(universityInfo.imgURL);
         this.universities.push(universityInfo);
         this.universityNames.push(doc.data().HostUniversity);
       });

@@ -4,11 +4,6 @@
     v-on:click="selectModule"
   >
     <h4 :class="{ selected: select, unselected: !select }">{{ name }}</h4>
-    <!-- <span class="moduleCounter">
-        <i class="fa-solid fa-minus" v-on:click="minusCount"></i>
-        {{ moduleCount }}
-        <i class="fa-solid fa-plus" v-on:click="addCount"></i>
-      </span> -->
   </div>
 </template>
 <script>
