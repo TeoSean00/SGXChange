@@ -51,6 +51,9 @@
               >
             </div>
           </span>
+          <div v-if="signinError != '' " class="alert alert-danger p-2 my-3">
+            {{signinError }}
+          </div>
         </div>
         <div class="login100-more"></div>
       </div>
@@ -72,6 +75,7 @@ export default {
       password: "",
       router: useRouter(),
       current: null,
+      signinError: "",
     };
   },
   methods: {
@@ -84,15 +88,15 @@ export default {
           const remainingLetters = name1.slice(1);
           let shavedName = firstLetterCap + remainingLetters;
 
-          alert(
-            `Hi ${shavedName}, you have successfully signed in! Please wait as we re-direct you to your profile page!`
-          );
           console.log("successfully logged in user is", user);
           setTimeout(() => this.router.push("/ProfilePage"), 2000);
         })
         .catch((error) => {
           console.log("error.code");
-          alert(error.message);
+          // alert(error.message);
+          if (error.message == "Firebase: Error (auth/wrong-password).") {
+            this.signinError = "Incorrect password. Please Try again.";
+          }
         });
     },
   },

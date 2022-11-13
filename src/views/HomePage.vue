@@ -11,7 +11,7 @@
   </div>
   <ArrowAnimation></ArrowAnimation>
 
-  <!-- NEW COMPONENT -->
+  <!-- NEW COMPONENT for What We Do -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
@@ -121,7 +121,7 @@
 
           <div class="row" style="color: #096dd9" data-aos="fade-left">
             <div class="col-lg-6 mt-4 pt-2">
-              <div class="media align-items-center rounded shadow p-3">
+              <div class="media align-items-center rounded shadow p-3 offer">
                 <i class="fa fa-circle-info h4 mb-0 text-custom"></i>
                 <h6 class="ml-3 mb-0">
                   <a style="color: #096dd9">One-stop Portal</a>
@@ -129,7 +129,7 @@
               </div>
             </div>
             <div class="col-lg-6 mt-4 pt-2">
-              <div class="media align-items-center rounded shadow p-3">
+              <div class="media align-items-center rounded shadow p-3 offer">
                 <i class="fa fa-file-download h4 mb-0 text-custom"></i>
                 <h6 class="ml-3 mb-0">
                   <a style="color: #096dd9">Module Mapping</a>
@@ -137,7 +137,7 @@
               </div>
             </div>
             <div class="col-lg-6 mt-4 pt-2">
-              <div class="media align-items-center rounded shadow p-3">
+              <div class="media align-items-center rounded shadow p-3 offer">
                 <i class="fa fa-users h4 mb-0 text-custom"></i>
                 <h6 class="ml-3 mb-0">
                   <a style="color: #096dd9">Community</a>
@@ -145,7 +145,7 @@
               </div>
             </div>
             <div class="col-lg-6 mt-4 pt-2">
-              <div class="media align-items-center rounded shadow p-3">
+              <div class="media align-items-center rounded shadow p-3 offer">
                 <i class="fa fa-face-smile-beam h4 mb-0 text-custom"></i>
                 <h6 class="ml-3 mb-0">
                   <a style="color: #096dd9">User Friendly</a>
@@ -202,6 +202,10 @@ h2 {
 h5 {
   font-size: 1.1rem;
 }
+p {
+  font-size: 1rem;
+}
+
 #friends {
   width: 90%;
   height: 90%;
