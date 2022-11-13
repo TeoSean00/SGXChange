@@ -1,7 +1,7 @@
 <template>
   <div class="container mapbox overflow-auto">
     <div class="row">
-      <div class="col-12 col-md-4 navigation-panel overflow-auto" style="height:300px">
+      <div class="col-12 col-md-4 navigation-panel overflow-auto order-1 order-md-0" style="height:30vh">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
           <span>{{ uniName }} Map</span>
           <button
@@ -42,7 +42,7 @@
           </div>
         </div>
       </div>
-      <div class="col-12 col-md-8 order-0">
+      <div class="col-12 col-md-8 ">
         <GMapMap
           class="gMap"
           :center="center"
@@ -243,7 +243,7 @@ export default {
 }
 
 .mapbox {
-  height: 40vh;
+  height: 30vh;
   position: relative;
 }
 .gMap {
@@ -251,6 +251,5 @@ export default {
   height: 100%;
   min-height: 30vh;
   position: relative;
-
 }
 </style>
