@@ -174,18 +174,18 @@
         <hr />
       </div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
       <div class="col py-3 d-flex gap-3">
         <i class="bi bi-thermometer-half m-1"></i>
         <span style="font-size: large"><b>Climate : </b> Cool</span>
       </div>
-    </div>
+    </div> -->
     <!-- hr filler -->
-    <div class="row">
+    <!-- <div class="row">
       <div class="col">
         <hr />
       </div>
-    </div>
+    </div> -->
     <!-- description -->
     <div class="row" id="description">
       <div class="col py-3">
