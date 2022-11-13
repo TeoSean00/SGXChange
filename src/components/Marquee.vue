@@ -148,6 +148,5 @@ export default {
   background-color: #40a9ff;
   border-color: #40a9ff;
   color: white;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 </style>

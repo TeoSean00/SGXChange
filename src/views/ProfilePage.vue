@@ -81,7 +81,7 @@
         <!-- Add the favorited universities here and the reviews -->
         <div class="container-fluid">
           <div v-if="userFavDetails.length > 0" class="">
-            <h6 class="theme-color lead">Your Favorites</h6>
+            <h6 class="theme-color lead mt-5">Your Favorites</h6>
             <!-- MY VERSION OF THE UNI CARD -->
             <div class="d-flex flex-wrap">
               <div
@@ -145,7 +145,8 @@
             </div>
           </div>
           <div v-else>
-            <h5 class="mt-4" style="font-weight: normal">
+            <h6 class="mt-5 theme-color lead">Your Favourites</h6>
+            <h5 style="font-weight: normal">
               You do not have any favourited universities yet!
             </h5>
             <h6 style="font-weight: normal">
@@ -158,7 +159,7 @@
         <div class="container-fluid">
           <!-- Review Section -->
           <div v-if="userReviewDetails.length > 0">
-            <h6 class="theme-color lead">Your Reviews</h6>
+            <h6 class="theme-color lea mt-5">Your Reviews</h6>
             <div class="d-flex flex-wrap">
               <div
                 v-for="(review, index) in userReviewDetails"
@@ -199,7 +200,8 @@
             </div>
           </div>
           <div v-else>
-            <h5 class="mt-4" style="font-weight: normal">
+            <h6 class="mt-5 theme-color lead">Your Reviews</h6>
+            <h5 style="font-weight: normal">
               You have not left any university a review yet!
             </h5>
             <h6 style="font-weight: normal">

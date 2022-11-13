@@ -62,7 +62,7 @@
           </li>
           <template v-if="lastPage > 1">
             <li class="page-item" v-for="num in lastPage - 1" :key="num">
-              <a class="page-link" @click="togglePage">{{ num + 1 }}</a>
+              <a class="page-link"  @click="togglePage">{{ num + 1 }}</a>
             </li>
           </template>
           <li class="page-item">
