@@ -155,6 +155,7 @@
           <div v-if="signupError != ''" class="alert alert-danger p-2 my-3">
             {{ signupError }}
           </div>
+
         </div>
         <div class="login100-more"></div>
       </div>
@@ -230,7 +231,7 @@ export default {
       }
       if (this.selectedFirstDegree == "default") {
         this.invalidDegree = "Please Select a Degree";
-      } 
+      }
       else{
         this.invalidDegree = "";
       }
@@ -331,6 +332,7 @@ export default {
   top: 0px;
   left: auto;
   z-index: 1;
+  height: 140vh;
   background-image: url("../assets/SMU_1.jpeg");
 }
 
