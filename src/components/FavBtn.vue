@@ -14,26 +14,6 @@
   >
     <span id="favText">Favourite<i class="fa fa-heart-o px-1"></i></span>
   </button>
-
-  <!-- Favorite button validation -->
-  <!-- <div
-    v-if="isLoggedIn == true && favMsg != '' && favourited == false"
-    class="alert alert-danger p-2 my-3"
-  >
-    {{ favMsg }}
-  </div>
-  <div
-    v-if="isLoggedIn == true && favMsg != '' && favourited == true"
-    class="alert alert-success p-2 my-3"
-  >
-    {{ favMsg }}
-  </div> -->
-  <div
-    v-if="isLoggedIn == false && favLog != ''"
-    class="alert alert-danger p-2 my-3"
-  >
-    {{ favLog }}
-  </div>
 </template>
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -105,8 +85,8 @@ export default {
           }
         });
       } else {
-        this.favLog = "Please log in to add to favourites!";
         // alert("Log In First!");
+        this.$router.push('/SigninPage')
       }
     },
   },
