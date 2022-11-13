@@ -9,14 +9,14 @@
             x
           </button>
         </header>
-  
+
         <section class="modal-body">
             <div class="form-floating" style="width: 50%; height: 50%">
                 <textarea v-model="userReview" style="width: 100%; height: 100%" class="form-control" placeholder="Leave a review here" id="floatingTextarea"></textarea>
                 <label for="floatingTextarea">You may only leave one review!</label>
             </div>
          </section>
-  
+
         <footer class="modal-footer">
           <slot name="footer">
             Thank you for your review!
@@ -143,7 +143,7 @@
             })
         },
 
-        // When review submit button has been clicked, used to populate the specific firebase uni review collection 
+        // When review submit button has been clicked, used to populate the specific firebase uni review collection
         // where each review IDed by the current user email and to update parent
         async submitReview() {
             let testUni = this.uniNamePassed

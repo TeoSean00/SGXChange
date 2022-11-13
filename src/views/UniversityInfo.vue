@@ -103,27 +103,6 @@
           </button>
         </div>
       </div>
-
-      <!-- <div class="col-6">
-        <img src="../assets/440px-University_of_St._Gallen_EUR-HSG_Institute_Building.jpg" class="w-100" style=""
-          alt="uni-display" />
-      </div>
-      <div class="col-2">
-        <img
-          src="../assets/440px-University_of_St._Gallen_Convention_and_Executive_Education_Center.jpg"
-          class="w-100 mb-2"
-          alt=""
-        />
-        <img
-          src="../assets/a29feeb0-0635-4dc0-a247-e77a0f254dbd.webp"
-          class="w-100"
-          alt=""
-        />
-      </div>
-      <div class="col-2">
-        <img src="../assets/311ca332-dcb2-4b66-945c-ded8712a3543.webp" class="w-100 mb-2" alt="" />
-        <img src="../assets/HSG-SQUARE-2000x1125.jpeg" class="w-100" style="width: 18rem" alt="" />
-      </div> -->
     </div>
     <!-- gap -->
     <div class="row" id="activeNavbar">
@@ -278,7 +257,7 @@
         </div>
         <!-- modules -->
         <h2 class="my-4" id="modules">Module Information</h2>
-        
+
         <!-- one module each -->
         <div class="row">
           <div
@@ -412,7 +391,6 @@ import {
   getDocs,
   query,
   where,
-  orderBy,
 } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Modal from "@/components/Modal.vue";
@@ -420,7 +398,6 @@ import FavBtn from "@/components/FavBtn.vue";
 import axios from "axios";
 
 const auth = getAuth();
-const user = auth.currentUser;
 
 export default {
   name: "UniPage",
@@ -524,7 +501,6 @@ export default {
       console.log(this.places);
       try {
         const response = await axios.request(config);
-        // console.log(response.data.results);
         this.places = response.data.results;
         if (this.places.length > 10) {
           for (let i = 0; i < 10; i++) {
@@ -652,22 +628,14 @@ export default {
         this.igpaNinety = doc.data().iGpaNinety;
         // Uni Nearby Attractions
         this.getNearbyAttr();
-        // // Uni course url
-        // this.uniCourseUrl = doc.data().CourseCatalogLink
-        // // World Ranking
-        // this.uniRanking = doc.data().WorldRanking
         this.getLangauageCurrencyFromCountry();
       });
     },
     async getBaskets() {
-      // loop through the BasketToUni collection, for each basket, if the uni value not in UniToBasket obj, create new key. Else push to UniToBasket[uni] which will be an array of baskets
       var basketToUniversities = await getDocs(
         collection(fireStore, "BasketToUniversities")
       );
       basketToUniversities.forEach((doc) => {
-        let basketInfo = {};
-        // console.log(doc.data()['Universities'])
-        // console.log(doc.id)
         let universities = doc.data()["Universities"];
         let basket = doc.id;
         for (let uni of universities) {
@@ -676,7 +644,6 @@ export default {
           }
         }
       });
-      // console.log(this.uniToBaskets)
     },
     async getBasketToModules() {
       // loop through the BasketToUni collection, for each basket, if the uni value not in UniToBasket obj, create new key. Else push to UniToBasket[uni] which will be an array of baskets
@@ -684,8 +651,6 @@ export default {
         collection(fireStore, "BasketToModules")
       );
       basketToModules.forEach((doc) => {
-        // console.log(doc.data()['Universities'])
-        // console.log(doc.id)
         let basket = doc.data()["Baskets"];
         let module = doc.data()["Modules"];
 
@@ -698,7 +663,6 @@ export default {
           }
         }
       });
-      // console.log(this.moduleObjs)
     },
     async addModInfo() {
       var moduleToInfo = await getDocs(collection(fireStore, "ModuleToInfo"));

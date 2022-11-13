@@ -1,5 +1,4 @@
 <template>
-
   <div class="bannerHero container-fluid m-0">
     <div class="row bannerHero align-items-center">
       <div class="col-md-6 col-12 text-center p-5">
@@ -25,7 +24,7 @@
         class="col-lg-6 col-md-6 order-2 order-md-1 mt-4 pt-2 mt-sm-0 opt-sm-0"
       >
         <div class="row align-items-center">
-          <div class="col-lg-6 col-md-6 col-6">
+          <div class="col-lg-6 col-md-6 col-6" data-aos="fade-right">
             <div class="row">
               <div class="col-lg-12 col-md-12 mt-4 pt-2">
                 <div
@@ -52,7 +51,7 @@
           </div>
           <!--end col-->
 
-          <div class="col-lg-6 col-md-6 col-6">
+          <div class="col-lg-6 col-md-6 col-6" >
             <div class="row">
               <div class="col-lg-12 col-md-12">
                 <div
@@ -64,6 +63,7 @@
                     shadow-lg
                     overflow-hidden
                   "
+                  data-aos="fade-down"
                 >
                   <img
                     src="../assets/studentTravel.jpg"
@@ -85,6 +85,7 @@
                     shadow-lg
                     overflow-hidden
                   "
+                  data-aos="fade-up"
                 >
                   <img
                     src="../assets/studentsHappy.jpg"
@@ -113,14 +114,14 @@
           </h4>
           <p class="text-muted mb-0">
             As students ourselves, we understand how painful it is to
-            <br />collate information with it being scattered everywhere.<br />
-            Thus, with SGXchange your one-stop portal information <br />is
-            consolidated and easily accessible.
+            <br />collate information that is scattered everywhere.<br />
+            With SGXchange, your one-stop portal for university exchange, <br />
+            all the information is now easily accessible
           </p>
 
-          <div class="row" style="color: #096dd9">
+          <div class="row" style="color: #096dd9" data-aos="fade-left">
             <div class="col-lg-6 mt-4 pt-2">
-              <div class="media align-items-center rounded  p-3 offer">
+              <div class="media align-items-center rounded shadow p-3 offer">
                 <i class="fa fa-circle-info h4 mb-0 text-custom"></i>
                 <h6 class="ml-3 mb-0">
                   <a style="color: #096dd9">One-stop Portal</a>
@@ -128,7 +129,7 @@
               </div>
             </div>
             <div class="col-lg-6 mt-4 pt-2">
-              <div class="media align-items-center rounded  p-3 offer">
+              <div class="media align-items-center rounded shadow p-3 offer">
                 <i class="fa fa-file-download h4 mb-0 text-custom"></i>
                 <h6 class="ml-3 mb-0">
                   <a style="color: #096dd9">Module Mapping</a>
@@ -136,7 +137,7 @@
               </div>
             </div>
             <div class="col-lg-6 mt-4 pt-2">
-              <div class="media align-items-center rounded  p-3 offer">
+              <div class="media align-items-center rounded shadow p-3 offer">
                 <i class="fa fa-users h4 mb-0 text-custom"></i>
                 <h6 class="ml-3 mb-0">
                   <a style="color: #096dd9">Community</a>
@@ -144,7 +145,7 @@
               </div>
             </div>
             <div class="col-lg-6 mt-4 pt-2">
-              <div class="media align-items-center rounded  p-3 offer">
+              <div class="media align-items-center rounded shadow p-3 offer">
                 <i class="fa fa-face-smile-beam h4 mb-0 text-custom"></i>
                 <h6 class="ml-3 mb-0">
                   <a style="color: #096dd9">User Friendly</a>
@@ -158,11 +159,10 @@
     </div>
     <!--enr row-->
   </div>
-
-  <div>
+  <div data-aos="fade-up">
     <p
       class="d-flex align-items-center justify-content-center fw-bold"
-      style="font-size: 3rem; height: 20vh; text-align: center"
+      style="font-size: 3rem; height: 50vh; text-align: center"
     >
       Where do you want to go?
     </p>
@@ -186,8 +186,6 @@ export default {
   components: {
     Banner,
     ArrowAnimation,
-    // Search,
-    // Carousel,
     Marquee,
     BannerCarousel,
   },
@@ -216,10 +214,9 @@ p {
 
 .aboutUs {
   color: #096dd9;
+  font-weight: bold;
 }
-/* .details {
-  display: flex;
-} */
+
 
 .bannerHero {
   width: 100%;
@@ -230,11 +227,6 @@ p {
 
 #carousel {
   position: relative;
-}
-
-.offer{
-  transition: 0.5s;
-  box-shadow: 0 0 30px #e6f7ff;
 }
 
 #bannerImg {

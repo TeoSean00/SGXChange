@@ -4,13 +4,6 @@
     :gradientColor="[255, 255, 255]"
     :gradientWidth="`30%`"
   >
-    <!-- <img
-        :src="img"
-        v-for="img in imgArray"
-        :key="img"
-        class="image"
-        width="100"
-      /> -->
     <span> SGxchange Connecting students worldwide </span>
   </Vue3Marquee>
 </template>

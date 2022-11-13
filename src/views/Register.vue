@@ -58,7 +58,6 @@
             class="wrap-input100 validate-input"
             data-validate="School is required"
           >
-            <!-- <input class="input100" type="text" name="pass" v-model="school" placeholder=" " required/> -->
             <select
               class="input100 bootstrap-select"
               v-model="selectedUni"
@@ -173,14 +172,11 @@ import { useRouter } from "vue-router";
 import { fireStore } from "@/service/Firebase/firebaseInit";
 import {
   collection,
-  addDoc,
   getDocs,
   query,
   setDoc,
   doc,
 } from "firebase/firestore";
-import anime from "animejs/lib/anime.es.js";
-// import app from "../service/Firebase/firebaseInit";
 
 export default {
   name: "Register",
@@ -242,7 +238,6 @@ export default {
         this.signupError = "";
         createUserWithEmailAndPassword(getAuth(), this.email, this.password)
           .then((user) => {
-            //Adding user info as a document to the user collection in firebasd
             setDoc(doc(fireStore, "UserProfiles", this.email), {
               UserName: this.email.split("@")[0],
               Email: this.email,
@@ -269,8 +264,7 @@ export default {
             //   `Hi ${shavedName}, your account has been successfully created! Please wait as we re-direct you to your profile page!`
             // );
             console.log("successfully registered user is", user);
-            setTimeout(() => this.router.push("/ProfilePage"), 2000);
-            // this.router.push("/ProfilePage");
+            setTimeout( () => this.router.push("/ProfilePage"), 2000);
           })
           .catch((error) => {
             console.log("error.code");
@@ -292,25 +286,6 @@ export default {
     },
   },
 };
-
-// Initial adding of user document code
-// const dbRef = collection(fireStore, "UserProfiles");
-// const data = {
-//   UserName: this.email.split("@")[0],
-//   Email: this.email,
-//   FirstDegree: this.selectedFirstDegree,
-//   SecondDegree: this.selectedSecondDegree,
-//   School: this.selectedUni,
-//   Favourites: [],
-//   Reviews: [],
-// };
-// addDoc(dbRef, data)
-//   .then((docRef) => {
-//     console.log("Document has been added successfully");
-//   })
-//   .catch((error) => {
-//     console.log(error);
-//   });
 </script>
 
 <style scoped>
@@ -349,7 +324,6 @@ export default {
   flex-wrap: wrap;
   align-items: stretch;
   flex-direction: row-reverse;
-  /* position: relative; */
 }
 
 .login100-more {
@@ -464,7 +438,6 @@ export default {
   display: block;
   width: 100%;
   background: transparent;
-  /* border-color: transparent; */
   font-size: 18px;
   color: #555555;
   line-height: 1.2;
@@ -536,16 +509,6 @@ input.input100 {
 .input100:not(:placeholder-shown) {
   height: 48px !important;
 }
-
-/*
-.has-val {
-  height: 48px !important;
-}
-
-.has-val + .focus-input100 + .label-input100 {
-  top: 14px;
-  font-size: 13px;
-} */
 
 /*------------------------------------------------------------------
 [ Button ]*/
@@ -631,13 +594,6 @@ input.input100 {
 .validate-input {
   position: relative;
 }
-
-/* @media (max-width: 992px) {
-  .alert-validate::before {
-    visibility: visible;
-    opacity: 1;
-  }
-} */
 
 .input100:focus + .focus-input100 {
   visibility: visible;
