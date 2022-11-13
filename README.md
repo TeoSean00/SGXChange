@@ -1,6 +1,8 @@
 # WAD2_project
+SGXchange 
+Change the way you exchange
 
-Find us live at https://wad2-sgxchange.vercel.app/
+Find us live at https://sgxchange.vercel.app/
 
 
 # To navigate github,
@@ -9,9 +11,9 @@ Firstly, git pull
 To add your code, 'cd ..' to the main directory first -> 'git add .' -> 'git commit -m "wtv msg"' -> 'git push'
 
 
-# To add any required packages to be installed into requirements.txt -> 'pip install requirements.txt'
+# API KEYS 
+can be found in the .env file DO NOT PUSH ENVIRONMENT FILE TO GITHUB
 
-This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup
 
@@ -37,4 +39,9 @@ npm run dev
 
 ```sh
 npm run build
+```
+
+### Run Production
+```sh
+npm run preview
 ```
