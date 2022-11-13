@@ -334,7 +334,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .redirect{
   color: #1890ff;
 }
