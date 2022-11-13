@@ -18,8 +18,8 @@
         <div :key="index" v-for="(m, index) in extras" class="mb-2">
           <!-- Nearby Attraction Cards -->
             <a class=" btn rounded-pill attraction-badge text-center"
-            style="cursor: pointer; 
-            font-size: 15px; 
+            style="cursor: pointer;
+            font-size: 15px;
             background-color: "
             @click="
               openMarker(m.id);
