@@ -9,23 +9,36 @@
     </div>
     <div class="row">
       <div class="col-1"></div>
-      <!-- put variables as props -->
-      <div class="row row-cols-4 d-flex flex-wrap justify-content-center">
-        <UniCardSmall
-          class="unicard"
-          v-for="(uni, index) in outputUni.slice(row1start, row1end)"
-          :key="index"
-          :universityName="uni.name"
-          :gpaReq="uni.gpaReq"
-          :IgpaNinetyPercentile="uni.IgpaNinetyPercentile"
-          :IgpaTenPercentile="uni.IgpaTenPercentile"
-          :NoOfPlacesSem1="uni.NoOfPlacesSem1"
-          :NoOfPlacesSem2="uni.NoOfPlacesSem2"
-          :CountryId="uni.CountryId"
-          :RegionId="uni.RegionId"
-          :imgURL="uni.imgURL"
-        />
+
+      <!-- LOADING -->
+      <div v-if="pendingState" style="height: 60vh">
+        <div class="text-center py-6">
+          <p class="font-bold text-3x1">Loading Results...</p>
+        </div>
+        <div class="d-flex justify-content-center">
+          <div class="spinner-border" role="status"></div>
+        </div>
       </div>
+      <div v-else>
+        <div class="row row-cols-4 d-flex flex-wrap justify-content-center">
+          <UniCardSmall
+            class="unicard"
+            v-for="(uni, index) in outputUni.slice(row1start, row1end)"
+            :key="index"
+            :universityName="uni.name"
+            :gpaReq="uni.gpaReq"
+            :IgpaNinetyPercentile="uni.IgpaNinetyPercentile"
+            :IgpaTenPercentile="uni.IgpaTenPercentile"
+            :NoOfPlacesSem1="uni.NoOfPlacesSem1"
+            :NoOfPlacesSem2="uni.NoOfPlacesSem2"
+            :CountryId="uni.CountryId"
+            :RegionId="uni.RegionId"
+            :imgURL="uni.imgURL"
+          />
+        </div>
+      </div>
+      <!-- put variables as props -->
+
       <div class="col-1"></div>
     </div>
   </div>
@@ -85,6 +98,7 @@ export default {
       currentPage: 1,
       firstPage: 1,
       lastPage: 0,
+      pendingState: true,
     };
   },
 
@@ -188,6 +202,7 @@ export default {
           universityInfo["imgURL"] = doc.data().UniImageLink1;
           this.outputUni.push(universityInfo);
         }
+        this.pendingState = false;
       });
       this.pagination();
     },
