@@ -30,7 +30,7 @@
         class="col-lg-6 col-md-6 order-2 order-md-1 mt-4 pt-2 mt-sm-0 opt-sm-0"
       >
         <div class="row align-items-center">
-          <div class="col-lg-6 col-md-6 col-6">
+          <div class="col-lg-6 col-md-6 col-6" data-aos="fade-right">
             <div class="row">
               <div class="col-lg-12 col-md-12 mt-4 pt-2">
                 <div
@@ -57,7 +57,7 @@
           </div>
           <!--end col-->
 
-          <div class="col-lg-6 col-md-6 col-6">
+          <div class="col-lg-6 col-md-6 col-6" >
             <div class="row">
               <div class="col-lg-12 col-md-12">
                 <div
@@ -69,6 +69,7 @@
                     shadow-lg
                     overflow-hidden
                   "
+                  data-aos="fade-down"
                 >
                   <img
                     src="../assets/studentTravel.jpg"
@@ -90,6 +91,7 @@
                     shadow-lg
                     overflow-hidden
                   "
+                  data-aos="fade-up"
                 >
                   <img
                     src="../assets/studentsHappy.jpg"
@@ -118,12 +120,12 @@
           </h4>
           <p class="text-muted mb-0">
             As students ourselves, we understand how painful it is to
-            <br />collate information with it being scattered everywhere.<br />
-            Thus, with SGXchange your one-stop portal information <br />is
-            consolidated and easily accessible.
+            <br />collate information that is scattered everywhere.<br />
+            With SGXchange, your one-stop portal for university exchange, <br />
+            all the information is now easily accessible
           </p>
 
-          <div class="row" style="color: #096dd9">
+          <div class="row" style="color: #096dd9" data-aos="fade-left">
             <div class="col-lg-6 mt-4 pt-2">
               <div class="media align-items-center rounded shadow p-3">
                 <i class="fa fa-circle-info h4 mb-0 text-custom"></i>
@@ -163,62 +165,10 @@
     </div>
     <!--enr row-->
   </div>
-
-  <!-- TRYING SOMETHING NEW -->
-  <!-- BELOW IS THE OLD WHY SGXCHANGE -->
-  <!-- <div class="container-fluid textbox">
-    <div class="row">
-      <div
-        class="
-          col-md-6
-          d-lg-block
-          text-center
-          d-flex
-          align-items-center
-          justify-content-center
-        "
-      >
-        <img
-          id="friends"
-          src="../assets/friends.jpeg"
-          alt=""
-          class="float-end mx-auto d-none d-md-block"
-        />
-      </div>
-      <div class="col-md-6 col-12 d-flex align-items-center text-center px-5">
-        <div class="row">
-          <div class="col">
-            <div class="row">
-              <h5 class="aboutUs">WHAT MAKES US DIFFERENT</h5>
-              <h1>Why SGXchange</h1>
-            </div>
-            <div class="row my-5 text-start">
-              <h4>Consolidated University information</h4>
-              <p class="fs-6">
-                As students ourselves, we understand how painful it can be to
-                source information with information scattered everywhere.
-                SGXchange solves that by providing a platform where information
-                is consolidated.
-              </p>
-            </div>
-            <div class="row my-5 text-start">
-              <h4>Module Mapping</h4>
-              <p class="fs-6">
-                Module mapping is often a tedious mapping process. However,
-                thanks to SGXchange you can easily map your modules to exchange
-                universities
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
-  <!-- ENDS HERE -->
-  <div>
+  <div data-aos="fade-up">
     <p
       class="d-flex align-items-center justify-content-center fw-bold"
-      style="font-size: 3rem; height: 20vh; text-align: center"
+      style="font-size: 3rem; height: 50vh; text-align: center"
     >
       Where do you want to go?
     </p>
@@ -268,6 +218,7 @@ h5 {
 
 .aboutUs {
   color: #096dd9;
+  font-weight: bold;
 }
 /* .details {
   display: flex;
