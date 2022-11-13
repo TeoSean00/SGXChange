@@ -24,7 +24,7 @@
         class="col-lg-6 col-md-6 order-2 order-md-1 mt-4 pt-2 mt-sm-0 opt-sm-0"
       >
         <div class="row align-items-center">
-          <div class="col-lg-6 col-md-6 col-6">
+          <div class="col-lg-6 col-md-6 col-6" data-aos="fade-right">
             <div class="row">
               <div class="col-lg-12 col-md-12 mt-4 pt-2">
                 <div
@@ -51,7 +51,7 @@
           </div>
           <!--end col-->
 
-          <div class="col-lg-6 col-md-6 col-6">
+          <div class="col-lg-6 col-md-6 col-6" >
             <div class="row">
               <div class="col-lg-12 col-md-12">
                 <div
@@ -63,6 +63,7 @@
                     shadow-lg
                     overflow-hidden
                   "
+                  data-aos="fade-down"
                 >
                   <img
                     src="../assets/studentTravel.jpg"
@@ -84,6 +85,7 @@
                     shadow-lg
                     overflow-hidden
                   "
+                  data-aos="fade-up"
                 >
                   <img
                     src="../assets/studentsHappy.jpg"
@@ -112,12 +114,12 @@
           </h4>
           <p class="text-muted mb-0">
             As students ourselves, we understand how painful it is to
-            <br />collate information with it being scattered everywhere.<br />
-            Thus, with SGXchange your one-stop portal information <br />is
-            consolidated and easily accessible.
+            <br />collate information that is scattered everywhere.<br />
+            With SGXchange, your one-stop portal for university exchange, <br />
+            all the information is now easily accessible
           </p>
 
-          <div class="row" style="color: #096dd9">
+          <div class="row" style="color: #096dd9" data-aos="fade-left">
             <div class="col-lg-6 mt-4 pt-2">
               <div class="media align-items-center rounded shadow p-3">
                 <i class="fa fa-circle-info h4 mb-0 text-custom"></i>
@@ -157,10 +159,10 @@
     </div>
     <!--enr row-->
   </div>
-  <div>
+  <div data-aos="fade-up">
     <p
       class="d-flex align-items-center justify-content-center fw-bold"
-      style="font-size: 3rem; height: 20vh; text-align: center"
+      style="font-size: 3rem; height: 50vh; text-align: center"
     >
       Where do you want to go?
     </p>
@@ -208,6 +210,7 @@ h5 {
 
 .aboutUs {
   color: #096dd9;
+  font-weight: bold;
 }
 
 

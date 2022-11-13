@@ -1,6 +1,6 @@
 <template>
     <footer class="bg-white border border-top">
-        <div class="container py-4">
+        <div class="container pt-5 pb-3 mt-5">
         <div class="row py-3">
             <div class="col-lg-4 col-md-6 mb-4 mb-lg-0 ps-5 "><img src="../assets/WebsiteLogo.png" alt="" width="100" class="mb-3 ms-5">
             <p class="font-italic text-muted ms-3">Change the way you Xchange</p>
