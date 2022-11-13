@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg bg-light gap-1">
+  <nav class="navbar navbar-expand-lg bg-light">
     <router-link to="/" class="navbar-brand d-none d-sm-block ms-5">
       <img
         src="../assets/WebsiteLogo.png"
@@ -44,6 +44,7 @@
           me-auto
           align-items-center-md align-items-baseline
           justify-content-between
+          gap-3
         "
       >
         <li class="nav-item active d-flex align-middle">
@@ -158,8 +159,8 @@ export default {
     signUserOut() {
       signOut(auth)
         .then(() => {
-          alert("You have successfully signed out");
-          console.log("logged out user should be null:", auth.currentUser);
+          // alert("You have successfully signed out");
+          // console.log("logged out user should be null:", auth.currentUser);
           this.router.push("/SignInPage");
         })
         .catch((error) => {

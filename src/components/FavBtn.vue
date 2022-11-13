@@ -1,8 +1,9 @@
 <template>
   <button
     v-if="favourited == true"
-    class="btn btn-danger text-white d-flex align-items-center p-2"
+    class="btn btn-danger btn-sm text-white d-flex align-items-center p-2"
     v-on:click="addToFav()"
+    style="font-size:0.75rem;"
   >
     Added <i class="fa fa-heart px-1" style="color: white"></i>
   </button>
@@ -11,6 +12,7 @@
     class="btn btn-outline-danger d-flex align-items-center p-2 text-danger"
     v-on:click="addToFav()"
     id="fav"
+    style="font-size:0.75rem;"
   >
     <span id="favText">Favourite<i class="fa fa-heart-o px-1"></i></span>
   </button>

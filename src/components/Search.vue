@@ -30,13 +30,13 @@ export default {
     searchUni() {
       if (this.searchItem != "") {
         if (this.$route.name != "UniversityPageSearch") {
-          console.log("path1");
+          // console.log("path1");
           this.$router.push({
             path: "/UniversityPage/search",
             query: { search: this.searchItem },
           });
         } else {
-          console.log("path2");
+          // console.log("path2");
           this.$router.push({
             path: "/UniversityPage/search",
             query: { search: this.searchItem },
@@ -54,6 +54,7 @@ export default {
   top: 50%;
   left: 50%;
   height: auto;
+  
 }
 
 .search-wrapper .input-holder {
@@ -66,15 +67,14 @@ export default {
   transition: all 0.3s ease-in-out;
 }
 .search-wrapper.active .input-holder {
-  width: 450px;
+  width: 350px;
   border-radius: 50px;
   background: rgb(255, 255, 255);
-  transition: all 0.5s cubic-bezier(0, 0.105, 0.035, 1.57);
 }
 .search-wrapper .input-holder .search-input {
   width: 100%;
   height: 50px;
-  padding: 0px 70px 0 20px;
+  padding: 0px 20px 0 20px;
   opacity: 0;
   position: absolute;
   top: 0px;
@@ -89,8 +89,6 @@ export default {
   line-height: 20px;
   color: black;
   transform: translate(0, 60px);
-  transition: all 0.3s cubic-bezier(0, 0.105, 0.035, 1.57);
-  transition-delay: 0.3s;
 }
 .search-wrapper.active .input-holder .search-input {
   opacity: 1;

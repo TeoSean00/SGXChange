@@ -12,7 +12,6 @@ import { ref, onMounted } from "vue";
 import Footer from "@/components/Footer.vue";
 // animate on scroll library
 import AOS from 'aos'
-// import crudTest from './composables/firebase/crudTest.vue';
 const el = ref();
 
 export default {

@@ -3,35 +3,32 @@
   <div class="container-fluid px-5 py-3" style="max-width: fit-content">
     <div class="row mb-3">
       <div class="col h2">{{ uniName }}</div>
-      <div class="col text-end">
+    </div>
+    <!-- ratings -->
+    <div class="row mb-3">
+      <div class="col-lg-6 col-12 d-flex gap-4">
+
+        <!-- sean how to insert count of reviews here according to uni -->
+        <a href="#map" class="blue">{{ region }}∙{{ country }}</a>
+        <a href="#gpa" class="blue">Min Gpa: {{gpaReq}}</a>
+        <a href='#reviews' class="blue">{{ this.reviews.length }} Reviews</a>
+      </div>
+      <div class="col-lg-6 col-12">
+        <div class="col text-end">
         <!-- sharing and saving to link to function / api -->
         <!-- FACEBOOK -->
         <span class="d-flex flex-row gap-4 justify-content-end">
-          <a class="bi bi-facebook fs-4" @click="fbs_click" target="_blank">
+          <a class="bi bi-facebook fs-5" @click="fbs_click" target="_blank">
           </a>
           <!-- TWITTER -->
-          <a class="bi bi-twitter fs-4" @click="tbs_click" target="_blank"> </a>
+          <a class="bi bi-twitter fs-5" @click="tbs_click" target="_blank"> </a>
           <!-- LINKEDIN -->
-          <a class="bi bi-linkedin fs-4" @click="lbs_click" target="_blank">
+          <a class="bi bi-linkedin fs-5" @click="lbs_click" target="_blank">
           </a>
           <FavBtn :uniName="uniName"></FavBtn>
         </span>
       </div>
-    </div>
-    <!-- ratings -->
-    <div class="row mb-3">
-      <div class="col-6">
-        <div class="d-inline me-1">
-          <i class="bi bi-star-fill"></i>
-          <!-- to insert the review rating based on reviews system -->
-          4.64
-        </div>
-
-        <!-- sean how to insert count of reviews here according to uni -->
-        <a href="#" class="text-dark mx-1">{{ this.reviews.length }} Reviews</a>
-        <a href="#" class="text-dark mx-1">{{ region }}∙{{ country }}</a>
       </div>
-      <div class="col-6"></div>
     </div>
     <!-- carousel -->
     <div class="row mb-5">
@@ -112,21 +109,16 @@
     </div>
     <!-- GPA info -->
     <div class="row" id="gpa">
-      <div class="col d-flex gap-3 pt-3">
-        <i class="bi bi-book m-1"></i>
-        <b style="font-size: large">Gpa Info </b>
-      </div>
-    </div>
-    <div class="row">
       <div class="col py-3">
-        <div class="ps-5 pt-2 d-flex flex-column gap-4">
-          <span><b>Min Gpa : </b>{{ gpaReq }}</span>
-          <b
-            >10th/90th Percentile :
-            <span class="badge text-bg-danger m-1">{{ igpaTen }}</span>
+        <h4><span class="blue">Gpa Info </span><i class="bi bi-book m-1"></i></h4>
+        <div class="ps-4 pt-3 d-flex flex-column gap-4">
+          <span>Min Gpa : <b class="fs-5 px-2">{{ gpaReq }}</b></span>
+          <span>
+            10th/90th Percentile :
+            <span class="badge text-bg-danger m-1 fs-6">{{ igpaTen }}</span>
             |
-            <span class="badge text-bg-success m-1">{{ igpaNinety }}</span>
-          </b>
+            <span class="badge text-bg-success m-1 fs-6">{{ igpaNinety }}</span>
+          </span>
         </div>
       </div>
     </div>
@@ -136,15 +128,10 @@
         <hr />
       </div>
     </div>
-    <div class="row">
-      <div class="col d-flex gap-3 align-items-center pt-3">
-        <i class="bi bi-calendar4-week m-1"></i>
-        <b style="font-size: large"> Academic Window</b>
-      </div>
-    </div>
     <div class="row mt-4">
       <div class="col">
-        <div class="ps-5 pt-2" v-html="academicCalendar"></div>
+        <h4><span class="blue">Academic Window </span><i class="bi bi-calendar4-week m-1"></i></h4>
+        <div class="ps-4 pt-3" v-html="academicCalendar"></div>
       </div>
     </div>
     <!-- climate -->
@@ -153,22 +140,10 @@
         <hr />
       </div>
     </div>
-    <!-- <div class="row">
-      <div class="col py-3 d-flex gap-3">
-        <i class="bi bi-thermometer-half m-1"></i>
-        <span style="font-size: large"><b>Climate : </b> Cool</span>
-      </div>
-    </div> -->
-    <!-- hr filler -->
-    <!-- <div class="row">
-      <div class="col">
-        <hr />
-      </div>
-    </div> -->
     <!-- description -->
     <div class="row" id="description">
       <div class="col py-3">
-        <h4>Description</h4>
+        <h4 class="blue">Description</h4>
         <p>{{ uniDesc }}</p>
       </div>
     </div>
@@ -194,7 +169,7 @@
     <!-- general info -->
     <div class="row" id="general">
       <div class="col">
-        <h4>General Info</h4>
+        <h4 class="blue">General Info</h4>
         <ul style="list-style-type: none">
           <!-- conditional if accomodation provided -->
           <li class="my-4" v-if="hasAccom">
@@ -246,6 +221,7 @@
     <div class="row">
       <div class="col">
         <!-- GOOGLEMAP MAP API -->
+        <h4 class="blue my-2">Map</h4>
         <div id="map">
           <GoogleMap
             :lati="uniLat"
@@ -259,7 +235,7 @@
         <h2 class="my-4" id="modules">Module Information</h2>
 
         <!-- one module each -->
-        <div class="row">
+        <div class="row mb-5 pb-5">
           <div
             :key="idx"
             v-for="(modObj, idx) in this.moduleObjs"
@@ -288,24 +264,24 @@
                 >
                   <u>click to expand</u>
                 </a>
-                <!-- add to fav -->
-                <a href="#" class="btn btn-primary btn-sm">Favourite</a>
               </div>
             </div>
           </div>
         </div>
+        <!-- hr -->
+        <hr>
         <!-- Review component -->
-        <div class="container-fluid mt-5" id="reviews">
+        <div class="container-fluid my-5 p-0" id="reviews">
           <div class="row mb-0">
             <div class="col p-0">
-              <h2 class="mb-0">Reviews</h2>
+              <h2 class="mb-4 mx-3">Reviews</h2>
             </div>
             <div class="col d-flex align-items-center justify-content-end">
               <div v-if="!isLoggedIn">
-                <h5>
-                  You must be signed in to leave a review!
-                  <router-link to="/SigninPage">sign in</router-link>
-                </h5>
+                <h6>
+                  <router-link to="/SigninPage">sign in </router-link>
+                  <span class="text-muted">to leave a review</span>
+                </h6>
               </div>
               <div v-else>
                 <h5 class="text-muted mb-0 me-2">
@@ -338,25 +314,25 @@
               v-for="(review, index) in reviews"
               :key="index"
             >
-              <div class="card my-4">
+              <div class="card mt-2">
                 <div class="card-body">
                   <div class="d-flex justify-content-between">
                     <h5 class="card-title mb-2">{{ review.userName }}</h5>
                   </div>
-                  <h6 class="card-subtitle mb-2 text-muted">
+                  <!-- <h6 class="card-subtitle mb-2 text-muted">
                     Reviewed University: {{ review.uniName }}
-                  </h6>
+                  </h6> -->
                   <p class="card-text">
                     {{ review.info }}
                   </p>
                   <div class="d-flex justify-content-between">
                     <p class="card-text mb-0">
-                      <small class="text-muted">{{
+                      <small class="text-primary">{{
                         review.currentTime
                       }}</small>
                     </p>
                     <!-- More info function to be done if theres time -->
-                    <a href="#" class="card-link me-3 mb-0">more info</a>
+                    <!-- <a href="#" class="card-link me-3 mb-0">more info</a> -->
                   </div>
                 </div>
               </div>
@@ -383,7 +359,6 @@
 
 <script>
 import GoogleMap from "@/components/GoogleMap.vue";
-// console.log(import.meta.env.VITE_GOOGLE_MAP_API_KEY);
 import { fireStore } from "@/service/Firebase/firebaseInit";
 import {
   collection,
@@ -482,15 +457,14 @@ export default {
     async getNearbyAttr() {
       const proxyURL = "https://peaceful-sierra-78205.herokuapp.com/";
       var strLocation = this.uniLat + "," + this.uniLong;
-      console.log("strLocation is below");
-      console.log(strLocation);
+      // console.log("strLocation is below");
+      // console.log(strLocation);
       let config = {
         method: "get",
         url:
           proxyURL +
           `https://maps.googleapis.com/maps/api/place/nearbysearch/json`,
         params: {
-          // location: "43.66093,-79.3959",
           location: strLocation,
           radius: "2000",
           type: "tourist_attraction",
@@ -498,7 +472,7 @@ export default {
         },
         headers: {},
       };
-      console.log(this.places);
+      // console.log(this.places);
       try {
         const response = await axios.request(config);
         this.places = response.data.results;
@@ -561,11 +535,10 @@ export default {
             }
           }
         }
-        console.log("Places is below");
-        console.log(this.places);
-        console.log(this.nearbyName);
+        // console.log(this.places);
+        // console.log(this.nearbyName);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     },
     // Get Uni Info
@@ -576,7 +549,6 @@ export default {
       );
       let getDegreeUni = await getDocs(q);
       getDegreeUni.forEach((doc) => {
-        // console.log(doc.data())
         this.uniLat = doc.data().UniLatitude;
         this.uniLong = doc.data().UniLongtitude;
         var tempCal = doc.data().AcademicCalendar.split("/n");
@@ -591,7 +563,7 @@ export default {
         this.region = doc.data().Region;
         // country
         this.country = doc.data().Country;
-        console.log(this.country, "country");
+        // console.log(this.country, "country");
         // Gpa
         if (doc.data()["gpaReq"] == null) {
           this.gpaReq = "NA";
@@ -611,7 +583,7 @@ export default {
         for (let i = 1; i < 8; i++) {
           let key = `UniImageLink${i}`;
           var val = doc.data()[key];
-          console.log(val);
+          // console.log(val);
           if (val != null && val.trim() != null && val != "'") {
             this.uniImgArr.push(doc.data()[key]);
           }
@@ -677,7 +649,7 @@ export default {
           }
         }
       });
-      console.log(this.moduleObjs);
+      // console.log(this.moduleObjs);
     },
 
     // Check for current logged in user or if there isnt one
@@ -685,7 +657,7 @@ export default {
       onAuthStateChanged(getAuth(), (user) => {
         if (user) {
           this.isLoggedIn = true;
-          console.log("logged in user from previous page is", user);
+          // console.log("logged in user from previous page is", user);
 
           const name = user.email.split("@")[0];
           const firstLetter = name.charAt(0);
@@ -718,10 +690,10 @@ export default {
 
         if (currentUserEmail == doc.data().Email) {
           this.currentUserLeftReview = true;
-          console.log("current user has left review before");
+          // console.log("current user has left review before");
         }
       });
-      console.log(getUniReviews.docs.length);
+      // console.log(getUniReviews.docs.length);
       this.isReviewsLoaded = true;
     },
 
@@ -775,18 +747,23 @@ export default {
             "Take note that adding another will replace your existing review!"
         );
       }
-      console.log("modal opened from uniInfo");
+      // console.log("modal opened from uniInfo");
       this.isModalOpen = true;
     },
 
     // Closes the modal when adding of review function has been completed
     closeModal() {
-      console.log("modal closed from uniInfo");
+      // console.log("modal closed from uniInfo");
       this.isModalOpen = false;
     },
     toggleContentNavbar() {
-      console.log(window.yOffset);
+      // console.log(window.yOffset);
     },
   },
 };
 </script>
+<style>
+.blue {
+  color: #096dd9;
+}
+</style>
