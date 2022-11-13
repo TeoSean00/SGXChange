@@ -1,7 +1,5 @@
 <template>
-
   <nav class="navbar navbar-expand-md navbar-light bg-light">
-
     <router-link to="/" class="navbar-brand d-none d-sm-block">
       <img
         src="../assets/WebsiteLogo.png"
@@ -10,27 +8,45 @@
         alt=""
       />
     </router-link>
-      <div class="search-wrapper bg-light active d-md-none" style="width: ">
-        <div class="input-holder">
-          <input
-            v-model="searchItem"
-            type="text"
-            class="search-input"
-            placeholder="Enter key to search"
-            v-on:keyup.enter="searchUni"
-          />
-          <button class="search-icon">
-            <span></span>
-          </button>
-        </div>
+    <div class="search-wrapper bg-light active d-md-none" style="width: ">
+      <div class="input-holder">
+        <input
+          v-model="searchItem"
+          type="text"
+          class="search-input"
+          placeholder="Enter key to search"
+          v-on:keyup.enter="searchUni"
+        />
+        <button class="search-icon">
+          <span></span>
+        </button>
+      </div>
     </div>
-    <button id="navBtn" @click="closeNav()" class="navbar-toggler float-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button
+      id="navBtn"
+      @click="closeNav()"
+      class="navbar-toggler float-right"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ms-3 me-auto align-items-center-md align-items-baseline justify-content-between">
-        <li class="nav-item active d-flex align-middle" >
+      <ul
+        class="
+          navbar-nav
+          ms-3
+          me-auto
+          align-items-center-md align-items-baseline
+          justify-content-between
+        "
+      >
+        <li class="nav-item active d-flex align-middle">
           <router-link to="/" class="nav-link"> Home </router-link>
         </li>
 
@@ -49,9 +65,17 @@
 
       <ul class="navbar-nav ms-3">
         <li class="nav-item active mt-0 d-none d-md-block">
-          <Search/>
+          <Search />
         </li>
-        <li class="nav-item active d-md-flex justify-content-md-center align-items-baseline">
+        <li
+          class="
+            nav-item
+            active
+            d-md-flex
+            justify-content-md-center
+            align-items-baseline
+          "
+        >
           <router-link to="/RegisterPage" class="nav-link m-auto">
             Register
           </router-link>
@@ -70,7 +94,10 @@
           </router-link>
         </li>
 
-        <li v-if="isLoggedIn" class="nav-item active d-md-flex justify-content-center">
+        <li
+          v-if="isLoggedIn"
+          class="nav-item active d-md-flex justify-content-center"
+        >
           <button
             style="border: none; background: none; margin: auto"
             @click="signUserOut"
@@ -81,7 +108,6 @@
         <li
           v-else
           class="nav-item active d-md-flex justify-content-center"
-
           style="display: none"
         ></li>
 
@@ -111,17 +137,18 @@ export default {
     };
   },
   methods: {
-    closeNav(){
-      if(!this.navSet){
-        this.navSet = true
-        const navLinks = document.querySelectorAll('.nav-item')
-        const menuToggle = document.getElementById('navbarSupportedContent')
-        const bsCollapse = new bootstrap.Collapse(menuToggle)
+    closeNav() {
+      if (!this.navSet) {
+        this.navSet = true;
+        const navLinks = document.querySelectorAll(".nav-item");
+        const menuToggle = document.getElementById("navbarSupportedContent");
+        const bsCollapse = new bootstrap.Collapse(menuToggle);
         navLinks.forEach((l) => {
-            l.addEventListener('click', () => { bsCollapse.toggle() })
-        })
+          l.addEventListener("click", () => {
+            bsCollapse.toggle();
+          });
+        });
       }
-
     },
     scrollToAbout() {
       let element = document.getElementById("about");
@@ -189,7 +216,6 @@ export default {
 
   mounted() {
     this.checkIfLoggeddIn();
-
   },
 };
 </script>
@@ -198,12 +224,9 @@ nav {
   font-size: 1rem;
 }
 
-#navBtn{
+#navBtn {
   margin-right: 10px;
 }
-
-
-
 
 .search-wrapper .input-holder {
   height: 70px;
@@ -212,7 +235,6 @@ nav {
   background: rgba(255, 255, 255, 0);
   border-radius: 6px;
   position: relative;
-
 }
 .search-wrapper.active .input-holder {
   width: 300px;
@@ -291,5 +313,4 @@ nav {
   border-radius: 18px;
   border: 2px solid black;
 }
-
 </style>
