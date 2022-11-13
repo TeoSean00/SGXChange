@@ -6,7 +6,7 @@
             <p class="font-italic text-muted ms-3">Change the way you Xchange</p>
             </div>
             <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
-            <h6 class="text-uppercase font-weight-bold mb-4">Socials</h6>
+            <h6 class="text-uppercase font-weight-bold mb-4 blue">Socials</h6>
             <ul class="list-unstyled mb-0">
                 <li class="mb-2"><a @click="fbs_click()" target="_blank" class="text-muted"><i class="fa fa-facebook pe-2"></i
                 > Facebook</a></li>
@@ -17,7 +17,7 @@
             </ul>
             </div>
             <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
-            <h6 class="text-uppercase font-weight-bold mb-4">Account</h6>
+            <h6 class="text-uppercase font-weight-bold mb-4 blue">Account</h6>
             <ul class="list-unstyled mb-0">
                 <li class="mb-2"><router-link to="/SignInPage" class="text-muted">Login</router-link></li>
                 <li class="mb-2"><router-link to="/RegisterPage" class="text-muted">Register</router-link></li>
@@ -25,7 +25,7 @@
             </ul>
             </div>
             <div class="col-lg-4 col-md-6 mb-lg-0">
-            <h6 class="text-uppercase font-weight-bold mb-4">Newsletter</h6>
+            <h6 class="text-uppercase font-weight-bold mb-4 blue">Newsletter</h6>
             <p class="text-muted mb-4">
                 Get the latest news & updates with regards to exchange
             </p>
@@ -107,3 +107,8 @@ export default {
   },
 };
 </script>
+<style>
+.blue {
+  color:  #096dd9;
+}
+</style>
