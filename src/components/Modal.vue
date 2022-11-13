@@ -84,17 +84,23 @@
   color: #ffffff;
   background: transparent;
 }
+.btn-modal-close:hover {
+  color:#ffffff98;
+}
 
 .btn-modal-green {
   color: white;
   position: absolute;
   top: 50%;
   left: 39%;
-  background: #323030;
+  background: #096dd9;
   border: none;
   border-radius: 0.3rem;
   padding:0.5rem;
   margin-top: 1rem;
+}
+.btn-modal-green:hover {
+  background: #1879e1;
 }
 </style>
 
