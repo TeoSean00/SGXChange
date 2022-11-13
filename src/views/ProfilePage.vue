@@ -61,7 +61,7 @@
             </div>
           </div>
         </div>
-        <div class="counter mb-4">
+        <div class="counter mt-2 mb-4">
           <div class="row">
             <div class="col-6 col-lg-6">
               <div class="count-data text-center">
@@ -88,7 +88,7 @@
                 v-for="(fav, index) in userFavDetails"
                 :key="index"
                 class=""
-                style="width:300px"
+                style="width: 300px"
               >
                 <div
                   class="package-item bg-white fav-card m-4"
@@ -142,7 +142,6 @@
                   </div>
                 </div>
               </div>
-
             </div>
             <!-- <div class="col mb-3">
                 <div class="card">
@@ -186,7 +185,7 @@
               </div> -->
           </div>
           <div v-else>
-            <h5 style="font-weight: normal">
+            <h5 class="mt-4" style="font-weight: normal">
               You do not have any favourited universities yet!
             </h5>
             <h6 style="font-weight: normal">
@@ -196,36 +195,38 @@
             </h6>
           </div>
         </div>
-        <div class="row">
+        <div class="container-fluid">
           <!-- Review Section -->
-          <h6 class="theme-color lead">Your Reviews</h6>
           <div v-if="userReviewDetails.length > 0">
-            <div v-for="(review, index) in userReviewDetails" :key="index">
-              <div class="col-3">
-                <div class="card my-3 package-item">
-                  <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                      <h5 class="card-title mb-2">{{ review.UniName }}</h5>
-                      <div>
-                        <i
-                          class="fa fa-thumbs-up text-muted"
-                          style="font-size: 15px; margin-right: px"
-                        ></i>
-                        {{ review.Likes }}
+            <h6 class="theme-color lead">Your Reviews</h6>
+            <div class="d-flex flex-wrap">
+              <div v-for="(review, index) in userReviewDetails" :key="index">
+                <div class="col-3">
+                  <div class="card my-3 package-item">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between">
+                        <h5 class="card-title mb-2">{{ review.UniName }}</h5>
+                        <div>
+                          <i
+                            class="fa fa-thumbs-up text-muted"
+                            style="font-size: 15px; margin-right: px"
+                          ></i>
+                          {{ review.Likes }}
+                        </div>
                       </div>
-                    </div>
-                    <h6 class="card-text" style="font-weight: normal">
-                      {{ review.ReviewInfo }}
-                    </h6>
-                    <div class="d-flex justify-content-between">
-                      <p class="card-text mb-0">
-                        <small class="text-muted">{{
-                          review.currentTime
-                        }}</small>
-                      </p>
-                      <router-link :to="`/universityInfo/` + review.UniName"
-                        >Go to review</router-link
-                      >
+                      <h6 class="card-text" style="font-weight: normal">
+                        {{ review.ReviewInfo }}
+                      </h6>
+                      <div class="d-flex justify-content-between">
+                        <p class="card-text mb-0">
+                          <small class="text-muted">{{
+                            review.currentTime
+                          }}</small>
+                        </p>
+                        <router-link :to="`/universityInfo/` + review.UniName"
+                          >Go to review</router-link
+                        >
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -233,7 +234,7 @@
             </div>
           </div>
           <div v-else>
-            <h5 style="font-weight: normal">
+            <h5 class="mt-4" style="font-weight: normal">
               You have not left any university a review yet!
             </h5>
             <h6 style="font-weight: normal">
