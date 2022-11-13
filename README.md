@@ -45,3 +45,7 @@ npm run build
 ```sh
 npm run preview
 ```
+
+## Login Details (for Testing Purposes)
+Email: ryan@gmail.com
+password: password
