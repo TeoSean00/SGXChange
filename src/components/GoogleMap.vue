@@ -1,48 +1,42 @@
 <template>
-  <div class="container mapbox overflow-auto">
+  <div class="container mapbox overflow-auto my-4">
     <div class="row">
-      <div class="col-12 col-md-4 navigation-panel overflow-auto order-1 order-md-0" style="height:30vh">
-        <h4 class="d-flex justify-content-between align-items-center mb-3">
-          <span>{{ uniName }} Map</span>
+      <div class="col-12 col-xl-4 navigation-panel overflow-auto" style="height:50vh">
+        <h6 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-uppercase">Click on nearby attractions to explore</span>
+          <!-- <span>{{ uniName }} Map</span> -->
           <button
             type="button"
             class="btn attractionButton float-end"
             @click="resetCenter()"
           >
             Reset
-          </button>
-        </h4>
+        </button>
+        </h6>
         <hr />
-        <h5>Nearby Attractions</h5>
-
-        <div :key="index" v-for="(m, index) in extras" class="mx-0">
+        <h6 class="mb-3">Nearby Attractions:</h6>
+        <div :key="index" v-for="(m, index) in extras" class="mb-2">
           <!-- Nearby Attraction Cards -->
-          <div
-            class="attractionButton text-black px-4"
-            style="cursor: pointer; font-size: 15px; background-color: "
+            <a class=" btn rounded-pill attraction-badge text-center"
+            style="cursor: pointer; 
+            font-size: 15px; 
+            background-color: "
             @click="
               openMarker(m.id);
               reCenter(m.position.lat, m.position.lng);
-            "
-          >
-            <div class="text-left">
+            ">
               <span
                 class=""
-                style="
-
-
-                "
-                >{{ m.id + 1 }}. {{ m.name }}</span
+                >{{ m.name }}</span
               >
-              <p class="" style="font-size: 10px">
+              <p style="font-size: 10px; margin:0;">
                 Rating: {{ m.rating }}
                 <i v-if="m.rating != 'NA'" class="bi bi-star-fill"></i>
               </p>
-            </div>
-          </div>
+            </a>
         </div>
       </div>
-      <div class="col-12 col-md-8 ">
+      <div class="col-12 col-xl-8 ">
         <GMapMap
           class="gMap"
           :center="center"
@@ -128,13 +122,14 @@ export default {
   },
   methods: {
     openMarker(id) {
-      console.log(id);
-      console.log(this.openedMarkerID);
+      // console.log(id);
+      // console.log(this.openedMarkerID);
       if (this.openedMarkerID == id) {
         this.openedMarkerId = null;
       } else {
         this.openedMarkerID = id;
       }
+      self.scrollBy(0,100)
     },
     reCenter(lat, lng) {
       this.latitude = lat;
@@ -150,12 +145,35 @@ export default {
 
 <style scoped>
 .attractionButton {
-  background-color: #e6f7ff;
-  width: 100%;
+  background-color: #2fc78a;
+  width: 30%;
+  margin: 4px;
+  font-size: 1rem;
+  color:white;
+}
+button {
+  border:none;
+}
+.attractionButton:hover {
+  background-color: #2fc78a96;
+  width: 30%;
   margin: 4px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color:white;
+}
+.attraction-badge {
+  background-color: #40a9ff;
+  color:white;
+  width: 80%;
+  padding: 2px;
+}
+.attraction-badge:hover {
+  background-color: #40a9ffc5;
+  color:white;
+  width: 80%;
+  padding: 2px;
 }
 
 .navigation-panel {
@@ -163,13 +181,13 @@ export default {
 }
 
 .mapbox {
-  height: 30vh;
+  height: 50vh;
   position: relative;
 }
 .gMap {
   width: 100%;
   height: 100%;
-  min-height: 30vh;
+  min-height: 50vh;
   position: relative;
 }
 </style>
