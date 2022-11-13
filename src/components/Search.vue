@@ -30,13 +30,13 @@ export default {
     searchUni() {
       if (this.searchItem != "") {
         if (this.$route.name != "UniversityPageSearch") {
-          console.log("path1");
+          // console.log("path1");
           this.$router.push({
             path: "/UniversityPage/search",
             query: { search: this.searchItem },
           });
         } else {
-          console.log("path2");
+          // console.log("path2");
           this.$router.push({
             path: "/UniversityPage/search",
             query: { search: this.searchItem },

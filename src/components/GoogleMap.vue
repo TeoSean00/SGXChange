@@ -82,7 +82,7 @@
             >
               <div>
                 {{ m.id + 1 }}. {{ m.name }}
-                <MyComponent />
+                
               </div>
             </GMapInfoWindow>
           </GMapMarker>
@@ -128,8 +128,8 @@ export default {
   },
   methods: {
     openMarker(id) {
-      console.log(id);
-      console.log(this.openedMarkerID);
+      // console.log(id);
+      // console.log(this.openedMarkerID);
       if (this.openedMarkerID == id) {
         this.openedMarkerId = null;
       } else {

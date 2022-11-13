@@ -83,6 +83,7 @@ import { fireStore } from "@/service/Firebase/firebaseInit";
 import { collection, getDocs } from "firebase/firestore";
 import UniFilterBar from "../components/UniFilterBar.vue";
 import { defineComponent, ref } from "vue";
+import "ant-design-vue/dist/antd.css";
 
 export default {
   name: "UniversityPage",
@@ -171,7 +172,7 @@ export default {
         li.classList.remove("disabled");
 
         if (parseInt(li.text) === this.currentPage) {
-          console.log(li.text);
+          // console.log(li.text);
           li.classList.add("active");
         }
         if (li.text == "Previous" && this.currentPage == this.firstPage) {
@@ -190,7 +191,7 @@ export default {
     async getFilteredUniversities() {
       this.items = [];
       let region = this.regionId[this.current[0]];
-      console.log(region);
+      // console.log(region);
       if (region == "All") {
         this.getAllUni.forEach((doc) => {
           // put key-value pairs
@@ -255,7 +256,7 @@ export default {
           this.basketToModules[basket] = [Modules];
         }
       });
-      console.log(this.basketToModules);
+      // console.log(this.basketToModules);
     },
   },
   computed: {

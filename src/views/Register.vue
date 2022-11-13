@@ -212,7 +212,7 @@ export default {
       getDegreeUni.forEach((doc) => {
         this.degrees.push(doc.id);
       });
-      console.log(this.degrees);
+      // console.log(this.degrees);
     },
 
     async getUniversities() {
@@ -248,10 +248,10 @@ export default {
               Reviews: [],
             })
               .then(() => {
-                console.log("User document has been added successfully");
+                // console.log("User document has been added successfully");
               })
               .catch((error) => {
-                console.log(error);
+                // console.log(error);
               });
 
             const name1 = this.email.split("@")[0];
@@ -260,16 +260,12 @@ export default {
             const remainingLetters = name1.slice(1);
             let shavedName = firstLetterCap + remainingLetters;
 
-            // alert(
-            //   `Hi ${shavedName}, your account has been successfully created! Please wait as we re-direct you to your profile page!`
-            // );
-            console.log("successfully registered user is", user);
+            // console.log("successfully registered user is", user);
             setTimeout( () => this.router.push("/ProfilePage"), 2000);
           })
           .catch((error) => {
-            console.log("error.code");
-            // alert(error.message);
-            console.log(error.message);
+            // console.log("error.code");
+            // console.log(error.message);
             if (
               error.message == "Firebase: Error (auth/email-already-in-use)."
             ) {

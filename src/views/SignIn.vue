@@ -59,8 +59,6 @@
       </div>
     </div>
   </div>
-
-  <About></About>
 </template>
 
 <script>
@@ -88,7 +86,7 @@ export default {
           const remainingLetters = name1.slice(1);
           let shavedName = firstLetterCap + remainingLetters;
 
-          console.log("successfully logged in user is", user);
+          // console.log("successfully logged in user is", user);
           setTimeout(() => this.router.push("/ProfilePage"), 2000);
         })
         .catch((error) => {
