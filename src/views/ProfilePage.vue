@@ -65,13 +65,24 @@
           <div class="row">
             <div class="col-6 col-lg-6">
               <div class="count-data text-center">
-                <h6 class="count h2">{{ userFavDetails.length }}</h6>
+                <div v-if="userPendingState">
+                  <div class="spinner-border" role="status"></div>
+                </div>
+                <div v-else>
+                  <h6 class="count h2">{{ userFavDetails.length }}</h6>
+                </div>
+
                 <p class="m-0px font-w-600">Favorites</p>
               </div>
             </div>
             <div class="col-6 col-lg-6">
               <div class="count-data text-center">
-                <h6 class="count h2">{{ userReviewDetails.length }}</h6>
+                <div v-if="userPendingState">
+                  <div class="spinner-border" role="status"></div>
+                </div>
+                <div v-else>
+                  <h6 class="count h2">{{ userReviewDetails.length }}</h6>
+                </div>
                 <p class="m-0px font-w-600">Reviews</p>
               </div>
             </div>
@@ -79,136 +90,149 @@
         </div>
 
         <!-- Add the favorited universities here and the reviews -->
-        <div class="container-fluid">
-          <div v-if="userFavDetails.length > 0" class="">
-            <h6 class="theme-color lead mt-5">Your Favorites</h6>
-            <!-- MY VERSION OF THE UNI CARD -->
-            <div class="d-flex flex-wrap">
-              <div
-                v-for="(fav, index) in userFavDetails"
-                :key="index"
-                class="m-2"
-                style="width: 300px"
-              >
-                <div
-                  class="package-item bg-white fav-card"
-                  style="height: 100%"
-                >
-                  <img
-                    class="img-fluid card-img-top"
-                    :src="fav.UniImageLink1"
-                    alt=""
-                  />
-                  <div class="pt-2 px-2 pb-2">
-                    <a
-                      class="h5 text-decoration-none"
-                      style="
-                        color: #002766;
-                        display: flex;
-                        align-items: center;
-                        height: 5rem;
-                        font-weight: 600;
-                      "
-                      >{{ fav.HostUniversity }}</a
-                    >
-                    <div class="d-flex justify-content mb-2">
-                      <span class="mx-2" style="color: black"
-                        ><p
-                          class="fa fa-map-marker-alt mr-2"
-                          style="color: black"
-                        ></p>
-                        {{ fav.Country }}</span
-                      >
-                      <span class="mx-2" style="color: black"
-                        ><p
-                          class="fa-solid fa-earth-americas mr-2"
-                          style="color: black"
-                        ></p>
-                        {{ fav.Region }}</span
-                      >
-                    </div>
-                    <div class="mb-2">
-                      <span class="mx-2" style="color: black"
-                        ><p class="fa fa-user mr-2" style="color: black"></p>
-                        Min GPA: {{ fav.gpaReq }}</span
-                      >
-                    </div>
-                    <div class="mb-2 mx-2" style="color: #096dd9">
-                      <router-link :to="`/universityInfo/` + fav.HostUniversity"
-                        ><p class="fa-sharp fa-solid fa-school mr-2"></p>
-                        Go to university
-                      </router-link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <!-- Check if user results are still fetching -->
+        <div v-if="userPendingState">
+          <div class="text-center py-6">
+            <p class="font-bold text-3x1">Loading Favorites and Reviews...</p>
           </div>
-          <div v-else>
-            <h6 class="mt-5 theme-color lead">Your Favourites</h6>
-            <h5 style="font-weight: normal">
-              You do not have any favourited universities yet!
-            </h5>
-            <h6 style="font-weight: normal">
-              Click
-              <router-link :to="`/UniversityPage/`">here</router-link> to go to
-              the universities page to find a university to favourite!
-            </h6>
+          <div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status"></div>
           </div>
         </div>
-        <div class="container-fluid">
-          <!-- Review Section -->
-          <div v-if="userReviewDetails.length > 0">
-            <h6 class="theme-color lea mt-5">Your Reviews</h6>
-            <div class="d-flex flex-wrap">
-              <div
-                v-for="(review, index) in userReviewDetails"
-                :key="index"
-                style="width: 300px"
-                class="m-2"
-              >
-                <div class="">
-                  <div class="card my-3 package-item">
-                    <div class="card-body">
-                      <div class="d-flex justify-content-between">
-                        <h5 class="card-title mb-2">{{ review.UniName }}</h5>
-                        <div>
-                          <i
-                            class="fa fa-thumbs-up text-muted"
-                            style="font-size: 15px; margin-right: px"
-                          ></i>
-                          {{ review.Likes }}
-                        </div>
-                      </div>
-                      <h6 class="card-text" style="font-weight: normal">
-                        {{ review.ReviewInfo }}
-                      </h6>
-                      <div class="d-flex justify-content-between">
-                        <p class="card-text mb-0">
-                          <small class="text-muted">{{
-                            review.currentTime
-                          }}</small>
-                        </p>
-                        <router-link :to="`/universityInfo/` + review.UniName"
-                          >Go to review</router-link
+
+        <div v-else>
+          <div class="container-fluid">
+            <div v-if="userFavDetails.length > 0" class="">
+              <h6 class="theme-color lead mt-5">Your Favorites</h6>
+              <div class="d-flex flex-wrap">
+                <div
+                  v-for="(fav, index) in userFavDetails"
+                  :key="index"
+                  class="m-2"
+                  style="width: 300px"
+                >
+                  <div
+                    class="package-item bg-white fav-card"
+                    style="height: 100%"
+                  >
+                    <img
+                      class="img-fluid card-img-top"
+                      :src="fav.UniImageLink1"
+                      alt=""
+                    />
+                    <div class="pt-2 px-2 pb-2">
+                      <a
+                        class="h5 text-decoration-none"
+                        style="
+                          color: #002766;
+                          display: flex;
+                          align-items: center;
+                          height: 5rem;
+                          font-weight: 600;
+                        "
+                        >{{ fav.HostUniversity }}</a
+                      >
+                      <div class="d-flex justify-content mb-2">
+                        <span class="mx-2" style="color: black"
+                          ><p
+                            class="fa fa-map-marker-alt mr-2"
+                            style="color: black"
+                          ></p>
+                          {{ fav.Country }}</span
                         >
+                        <span class="mx-2" style="color: black"
+                          ><p
+                            class="fa-solid fa-earth-americas mr-2"
+                            style="color: black"
+                          ></p>
+                          {{ fav.Region }}</span
+                        >
+                      </div>
+                      <div class="mb-2">
+                        <span class="mx-2" style="color: black"
+                          ><p class="fa fa-user mr-2" style="color: black"></p>
+                          Min GPA: {{ fav.gpaReq }}</span
+                        >
+                      </div>
+                      <div class="mb-2 mx-2" style="color: #096dd9">
+                        <router-link
+                          :to="`/universityInfo/` + fav.HostUniversity"
+                          ><p class="fa-sharp fa-solid fa-school mr-2"></p>
+                          Go to university
+                        </router-link>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+            <div v-else>
+              <h6 class="mt-5 theme-color lead">Your Favourites</h6>
+              <h5 style="font-weight: normal">
+                You do not have any favourited universities yet!
+              </h5>
+              <h6 style="font-weight: normal">
+                Click
+                <router-link :to="`/UniversityPage/`">here</router-link> to go
+                to the universities page to find a university to favourite!
+              </h6>
+            </div>
           </div>
-          <div v-else>
-            <h6 class="mt-5 theme-color lead">Your Reviews</h6>
-            <h5 style="font-weight: normal">
-              You have not left any university a review yet!
-            </h5>
-            <h6 style="font-weight: normal">
-              Click <router-link :to="`/UniversityPage/`">here</router-link> to
-              go to the universities page to find a university to leave a review
-              for!
-            </h6>
+          <div class="container-fluid">
+            <!-- Review Section -->
+            <div v-if="userReviewDetails.length > 0">
+              <h6 class="theme-color lead mt-5">Your Reviews</h6>
+              <div class="d-flex flex-wrap">
+                <div
+                  v-for="(review, index) in userReviewDetails"
+                  :key="index"
+                  style="width: 300px"
+                  class="m-2"
+                >
+                  <div class="">
+                    <div class="card my-3 package-item">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                          <h5 class="card-title mb-2">{{ review.UniName }}</h5>
+                          <div>
+                            <i
+                              class="fa fa-thumbs-up text-muted"
+                              style="font-size: 15px; margin-right: px"
+                            ></i>
+                            {{ review.Likes }}
+                          </div>
+                        </div>
+                        <h6 class="card-text" style="font-weight: normal">
+                          {{ review.ReviewInfo }}
+                        </h6>
+                        <div class="d-flex justify-content-between">
+                          <p class="card-text mb-0">
+                            <small class="text-muted">{{
+                              review.currentTime
+                            }}</small>
+                          </p>
+                          <router-link :to="`/universityInfo/` + review.UniName"
+                            >Go to review</router-link
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div v-else>
+              <h6 class="mt-5 theme-color lead">Your Reviews</h6>
+              <h5 style="font-weight: normal">
+                You have not left any university a review yet!
+              </h5>
+              <h6 style="font-weight: normal">
+                Click
+                <router-link :to="`/UniversityPage/`">here</router-link> to go
+                to the universities page to find a university to leave a review
+                for!
+              </h6>
+            </div>
           </div>
         </div>
       </div>
@@ -223,11 +247,15 @@
     <div class="mt-4">
       <h4>
         Have an account?
-        <router-link to="/SignInPage" class="redirect">Sign In Here</router-link>
+        <router-link to="/SignInPage" class="redirect"
+          >Sign In Here</router-link
+        >
       </h4>
       <h4>
         Don't have an account?
-        <router-link to="/RegisterPage" class="redirect">Register Here</router-link>
+        <router-link to="/RegisterPage" class="redirect"
+          >Register Here</router-link
+        >
       </h4>
     </div>
   </div>
@@ -264,6 +292,7 @@ export default {
       userDetails: {},
       userReviewDetails: [],
       userFavDetails: [],
+      userPendingState: true,
     };
   },
 
@@ -316,6 +345,7 @@ export default {
               }
             });
           }
+          this.userPendingState = false;
           // console.log("userFavDetails is", this.userFavDetails);
         }
       });
@@ -335,7 +365,7 @@ export default {
 </script>
 
 <style>
-.redirect{
+.redirect {
   color: #1890ff;
 }
 

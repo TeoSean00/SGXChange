@@ -113,75 +113,105 @@
         id="form2"
       >
         <h3>Choose your baskets</h3>
-        <div class="displayModules">
-          <ModuleCard
-            v-for="basket in baskets"
-            :key="basket"
-            :name="basket"
-            v-on:addBasket="addToBasket"
-            v-on:removeBasket="removeFromBasket"
-          />
+        <!-- CHECK IF BASKETS LOADED -->
+        <div v-if="basketPendingState">
+          <div class="text-center py-6">
+            <p class="font-bold text-3x1">Loading Baskets...</p>
+          </div>
+          <div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status"></div>
+          </div>
         </div>
-        <button
-          class="btn btn-color float-start mt-2 mb-4"
-          v-on:click="stageZero()"
-        >
-          Previous
-        </button>
-        <button
-          class="btn btn-color float-end mt-2 mb-4"
-          v-on:click="submitData()"
-        >
-          Submit
-        </button>
-        <!-- Basket selection checks -->
-        <div style="margin-top: 5rem">
-          <div v-if="basketError != ''" class="alert alert-danger p-2 my-3">
-            {{ basketError }}
+        <!-- IF BASKETS LOADED -->
+        <div v-else>
+          <div class="displayModules">
+            <ModuleCard
+              v-for="basket in baskets"
+              :key="basket"
+              :name="basket"
+              v-on:addBasket="addToBasket"
+              v-on:removeBasket="removeFromBasket"
+            />
+          </div>
+          <button
+            class="btn btn-color float-start mt-2 mb-4"
+            v-on:click="stageZero()"
+          >
+            Previous
+          </button>
+          <button
+            class="btn btn-color float-end mt-2 mb-4"
+            v-on:click="submitData()"
+          >
+            Submit
+          </button>
+          <!-- Basket selection checks -->
+          <div style="margin-top: 5rem">
+            <div v-if="basketError != ''" class="alert alert-danger p-2 my-3">
+              {{ basketError }}
+            </div>
           </div>
         </div>
       </div>
-      <div :class="{ Output: testDisplay }">
-        <div class="d-flex flex-wrap">
-          <UniCardSmall
-            class="unicard"
-            v-for="(uni, index) in uniOutput.slice(row1start, row1end)"
-            :key="index"
-            :universityName="uni.name"
-            :gpaReq="uni.gpaReq"
-            :IgpaNinetyPercentile="uni.IgpaNinetyPercentile"
-            :IgpaTenPercentile="uni.IgpaTenPercentile"
-            :NoOfPlacesSem1="uni.NoOfPlacesSem1"
-            :NoOfPlacesSem2="uni.NoOfPlacesSem2"
-            :CountryId="uni.CountryId"
-            :RegionId="uni.RegionId"
-            :imgURL="uni.imgURL"
-          />
-        </div>
-        <!-- PAGINATION -->
-        <div class="row">
-          <div class="col">
-            <nav aria-label="Page navigation example">
-              <ul class="pagination justify-content-center">
-                <li class="page-item">
-                  <a class="page-link" @click="togglePage">Previous</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link active" @click="togglePage">1</a>
-                </li>
-                <template v-if="lastPage > 1">
-                  <li class="page-item" v-for="num in lastPage - 1" :key="num">
-                    <a class="page-link" @click="togglePage">{{ num + 1 }}</a>
-                  </li>
-                </template>
-                <li class="page-item">
-                  <a class="page-link" @click="togglePage">Next</a>
-                </li>
-              </ul>
-            </nav>
+      <div v-if="stage == 2">
+        <div v-if="resultPendingState">
+          <div class="text-center py-6">
+            <p class="font-bold text-3x1">Loading Results...</p>
+          </div>
+          <div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status"></div>
           </div>
         </div>
-        <!-- PAGINATION END -->
+        <div v-else>
+          <div :class="{ Output: testDisplay }">
+            <div class="d-flex flex-wrap">
+              <UniCardSmall
+                class="unicard"
+                v-for="(uni, index) in uniOutput.slice(row1start, row1end)"
+                :key="index"
+                :universityName="uni.name"
+                :gpaReq="uni.gpaReq"
+                :IgpaNinetyPercentile="uni.IgpaNinetyPercentile"
+                :IgpaTenPercentile="uni.IgpaTenPercentile"
+                :NoOfPlacesSem1="uni.NoOfPlacesSem1"
+                :NoOfPlacesSem2="uni.NoOfPlacesSem2"
+                :CountryId="uni.CountryId"
+                :RegionId="uni.RegionId"
+                :imgURL="uni.imgURL"
+              />
+            </div>
+            <!-- PAGINATION -->
+            <div class="row">
+              <div class="col">
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                      <a class="page-link" @click="togglePage">Previous</a>
+                    </li>
+                    <li class="page-item">
+                      <a class="page-link active" @click="togglePage">1</a>
+                    </li>
+                    <template v-if="lastPage > 1">
+                      <li
+                        class="page-item"
+                        v-for="num in lastPage - 1"
+                        :key="num"
+                      >
+                        <a class="page-link" @click="togglePage">{{
+                          num + 1
+                        }}</a>
+                      </li>
+                    </template>
+                    <li class="page-item">
+                      <a class="page-link" @click="togglePage">Next</a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+            <!-- PAGINATION END -->
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -224,6 +254,8 @@ export default {
       uniError: "",
       uniDegError: "",
       basketError: "",
+      basketPendingState: true,
+      resultPendingState: true,
     };
   },
   computed: {
@@ -387,6 +419,7 @@ export default {
               this.baskets.push(bask);
             }
           }
+          this.basketPendingState = false;
         }
       }
     },
@@ -456,6 +489,7 @@ export default {
             this.uniOutput.push(universityInfo);
           });
         }
+        this.resultPendingState = false;
         this.pagination();
         // End
       }
