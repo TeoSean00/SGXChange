@@ -18,12 +18,12 @@
           >
           <div class="d-flex justify-content mb-2">
             <span class="mx-2" style="color: black"
-              ><p class="fa fa-map-marker-alt mr-2" style="color: black"></p>
+              ><p class="fa fa-map-marker-alt me-1" style="color: black"></p>
               {{ CountryId }}</span
             >
             <span class="mx-2" style="color: black"
               ><p
-                class="fa-solid fa-earth-americas mr-2"
+                class="fa-solid fa-earth-americas me-1"
                 style="color: black"
               ></p>
               {{ RegionId }}</span
@@ -31,7 +31,7 @@
           </div>
           <div class="mb-2">
             <span class="mx-2" style="color: black"
-              ><p class="fa fa-user mr-2" style="color: black"></p>
+              ><p class="fa fa-user me-1" style="color: black"></p>
               Min GPA: {{ gpa }}</span
             >
           </div>

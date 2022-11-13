@@ -128,7 +128,6 @@ export default {
       } else {
         this.openedMarkerID = id;
       }
-      self.scrollBy(0,100)
     },
     reCenter(lat, lng) {
       this.latitude = lat;
