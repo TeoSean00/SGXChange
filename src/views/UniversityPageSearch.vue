@@ -180,7 +180,7 @@ export default {
         ) {
           // console.log(doc.data().HostUniversity);
           universityInfo["name"] = doc.data().HostUniversity;
-          universityInfo["gpaReq"] = doc.data().GPA;
+          universityInfo["gpaReq"] = doc.data().gpaReq;
           universityInfo["NoOfPlacesSem1"] = doc.data().NoOfPlacesSem1;
           universityInfo["NoOfPlacesSem2"] = doc.data().NoOfPlacesSem2;
           universityInfo["CountryId"] = doc.data().Country;
