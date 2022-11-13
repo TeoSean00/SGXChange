@@ -5,12 +5,18 @@
         <!-- remove validateform -->
         <div class="login100-form">
           <span class="login100-form-title p-b-43"> Sign In </span>
-
           <div
             class="wrap-input100 validate-input"
             data-validate="Valid email is required: ex@abc.xyz"
           >
-            <input class="input100" type="text" name="email" v-model="email" placeholder=" " required />
+            <input
+              class="input100"
+              type="text"
+              name="email"
+              v-model="email"
+              placeholder=" "
+              required
+            />
             <span class="focus-input100"></span>
             <span class="label-input100">Email</span>
           </div>
@@ -19,32 +25,40 @@
             class="wrap-input100 validate-input"
             data-validate="Password is required"
           >
-            <input class="input100" type="password" name="pass" v-model="password" placeholder=" " required/>
+            <input
+              class="input100"
+              type="password"
+              name="pass"
+              v-model="password"
+              placeholder=" "
+              required
+            />
             <span class="focus-input100"></span>
             <span class="label-input100">Password</span>
           </div>
 
-          <div class="flex-sb-m w-full p-t-3 p-b-32">
-            <!-- <div>
-              <a href="#" class="txt1"> Forgot Password? </a>
-            </div> -->
-          </div>
+          <div class="flex-sb-m w-full p-t-3 p-b-32"></div>
+
           <div class="container-login100-form-btn">
             <button @click="signIn()" class="login100-form-btn">Login</button>
           </div>
 
-          <p class="register">
-                Don't have an account?
-                <div
-                ><router-link to="/RegisterPage" style="color: #597ef7;">Register Here</router-link></div
-                >
-            </p>
+          <span class="register">
+            Don't have an account?
+            <div>
+              <router-link to="/RegisterPage" style="color: #597ef7"
+                >Register Here</router-link
+              >
+            </div>
+          </span>
+          <div v-if="signinError != '' " class="alert alert-danger p-2 my-3">
+            {{signinError }}
+          </div>
         </div>
         <div class="login100-more"></div>
       </div>
     </div>
   </div>
-
 
   <About></About>
 </template>
@@ -52,8 +66,6 @@
 <script>
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "vue-router";
-import anime from "animejs/lib/anime.es.js";
-// import About from "../components/About.vue";
 
 export default {
   name: "SignIn",
@@ -63,6 +75,7 @@ export default {
       password: "",
       router: useRouter(),
       current: null,
+      signinError: "",
     };
   },
   methods: {
@@ -75,67 +88,18 @@ export default {
           const remainingLetters = name1.slice(1);
           let shavedName = firstLetterCap + remainingLetters;
 
-          alert(`Hi ${shavedName}, you have successfully signed in! Please wait as we re-direct you to your profile page!`);
           console.log("successfully logged in user is", user);
-          setTimeout( () => this.router.push("/ProfilePage"), 2000);
+          setTimeout(() => this.router.push("/ProfilePage"), 2000);
         })
         .catch((error) => {
           console.log("error.code");
-          alert(error.message);
+          // alert(error.message);
+          if (error.message == "Firebase: Error (auth/wrong-password).") {
+            this.signinError = "Incorrect password. Please Try again.";
+          }
         });
     },
-    // onEmail() {
-    //   if (this.current) this.current.pause();
-    //   this.current = anime({
-    //     targets: "path",
-    //     strokeDashoffset: {
-    //       value: 0,
-    //       duration: 700,
-    //       easing: "easeOutQuart",
-    //     },
-    //     strokeDasharray: {
-    //       value: "240 1386",
-    //       duration: 700,
-    //       easing: "easeOutQuart",
-    //     },
-    //   });
-    // },
-    // onPassword() {
-    //   if (this.current) this.current.pause();
-    //   this.current = anime({
-    //     targets: "path",
-    //     strokeDashoffset: {
-    //       value: -336,
-    //       duration: 700,
-    //       easing: "easeOutQuart",
-    //     },
-    //     strokeDasharray: {
-    //       value: "240 1386",
-    //       duration: 700,
-    //       easing: "easeOutQuart",
-    //     },
-    //   });
-    // },
-    // onSubmit() {
-    //   if (this.current) this.current.pause();
-    //   this.current = anime({
-    //     targets: "path",
-    //     strokeDashoffset: {
-    //       value: -730,
-    //       duration: 700,
-    //       easing: "easeOutQuart",
-    //     },
-    //     strokeDasharray: {
-    //       value: "530 1386",
-    //       duration: 700,
-    //       easing: "easeOutQuart",
-    //     },
-    //   });
-    // },
   },
-  // components: {
-  //     About,
-  // },
 };
 </script>
 
@@ -338,16 +302,6 @@ input.input100 {
   height: 48px !important;
 }
 
-/* 
-.has-val {
-  height: 48px !important;
-}
-
-.has-val + .focus-input100 + .label-input100 {
-  top: 14px;
-  font-size: 13px;
-} */
-
 /*------------------------------------------------------------------
 [ Button ]*/
 .container-login100-form-btn {
@@ -432,13 +386,6 @@ input.input100 {
 .validate-input {
   position: relative;
 }
-
-/* @media (max-width: 992px) {
-  .alert-validate::before {
-    visibility: visible;
-    opacity: 1;
-  }
-} */
 
 .input100:focus + .focus-input100 {
   visibility: visible;

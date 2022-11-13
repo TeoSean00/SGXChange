@@ -22,17 +22,6 @@ import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   components: {},
-  // methods: {
-  //   async getUni() {
-  //     if (current == "All") {
-  //       let q = query(collection(fireStore, "Universities"));
-  //     }
-  //     let q = query(
-  //       collection(fireStore, "Universities"),
-  //       where("RegionID", "==", this.current)
-  //     );
-  //   },
-  // },
   setup() {
     const current = ref(["All"]);
     return {

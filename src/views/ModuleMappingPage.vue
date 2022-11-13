@@ -141,10 +141,6 @@
                 <li class="page-item">
                   <a class="page-link" @click="togglePage">Previous</a>
                 </li>
-                <!-- this part should be v-for based on no. of items in data -->
-                <!-- they should be buttons that bind to v-model currentPage-->
-                <!-- paginated items should change as well , use array.slice(start,end)-->
-                <!-- create a new component for paginated items  -->
                 <li class="page-item">
                   <a class="page-link active" @click="togglePage">1</a>
                 </li>
@@ -175,7 +171,6 @@ import {
   getDocs,
   where,
   query,
-  limit,
   doc,
   getDoc,
 } from "firebase/firestore";
@@ -330,26 +325,9 @@ export default {
       let q = query(collection(fireStore, "DegreeToBaskets"));
       let getDegreeUni = await getDocs(q);
       getDegreeUni.forEach((doc) => {
-        // console.log(doc.data().Universities)
-        // if(this.getDegreeName(doc.data().Universities)){
-        //   this.degrees.push(doc.id)
-        // }
         this.degrees.push(doc.id);
       });
     },
-    // async getDegreeName(uniArray) {
-    //   // console.log(uniArray.includes(this.selectedUni))
-
-    //   if(uniArray.includes(this.selectedUni)){
-    //     return true
-    //   }
-    //   return false
-    //   // let degreeName = query(collection(fireStore, "Degrees"), where("DegreeId", "==", degreeId))
-    //   // let getDegreeName = await getDocs(degreeName)
-    //   // getDegreeName.forEach((doc) => {
-    //   //   this.degrees.push(doc.data().DegreeName)
-    //   // })
-    // },
     async showForm() {
       this.form2 = false;
 
@@ -433,9 +411,6 @@ export default {
             // put key-value pairs
             universityInfo["name"] = doc.data().HostUniversity;
             universityInfo["gpaReq"] = doc.data().GPA;
-            // universityInfo["IgpaNinetyPercentile"] =
-            //   doc.data().IgpaNinetyPercentile;
-            // universityInfo["IgpaTenPercentile"] = doc.data().IgpaTenPercentile;
             universityInfo["NoOfPlacesSem1"] = doc.data().NoOfPlacesSem1;
             universityInfo["NoOfPlacesSem2"] = doc.data().NoOfPlacesSem2;
             universityInfo["CountryId"] = doc.data().Country;

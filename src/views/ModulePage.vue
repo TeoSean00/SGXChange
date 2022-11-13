@@ -1,3 +1,0 @@
-<template>
-    Module Page
-</template>

@@ -1,5 +1,5 @@
 <template>
-  <div id="searchwrapper" class="search-wrapper bg-light ">
+  <div id="searchwrapper" class="search-wrapper bg-light">
     <div class="input-holder">
       <input
         v-model="searchItem"
@@ -36,7 +36,6 @@ export default {
             query: { search: this.searchItem },
           });
         } else {
-          //I put catch because i dont know how to solve the error
           console.log("path2");
           this.$router.push({
             path: "/UniversityPage/search",
@@ -49,14 +48,6 @@ export default {
 };
 </script>
 <style scoped>
-/* body {
-   background: #212129;
-}
-
-::selection {
-   background: #212129;
-} */
-
 .search-wrapper {
   position: relative;
   transform: translate(-50%, -50%);
