@@ -1,5 +1,5 @@
 <template>
-  <div class="limiter">
+  <div class="limiter" v-on:keyup.enter="signIn()">
     <div class="container-login100">
       <div class="wrap-login100">
         <!-- remove validateform -->
@@ -32,6 +32,7 @@
               v-model="password"
               placeholder=" "
               required
+              
             />
             <span class="focus-input100"></span>
             <span class="label-input100">Password</span>

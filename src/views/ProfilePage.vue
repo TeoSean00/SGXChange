@@ -157,12 +157,12 @@
         <div class="container-fluid">
           <!-- Review Section -->
           <div v-if="userReviewDetails.length > 0">
-            <h6 class="theme-color lea my-5">Your Reviews</h6>
+            <h6 class="theme-color lead my-5">Your Reviews</h6>
             <div class="d-flex flex-wrap">
               <div
                 v-for="(review, index) in userReviewDetails"
                 :key="index"
-                style="width: 300px"
+                style="width: 30rem;"
                 class="m-2"
               >
                 <div class="">
