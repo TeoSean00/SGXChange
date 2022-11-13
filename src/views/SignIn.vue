@@ -51,16 +51,14 @@
               >
             </div>
           </span>
-          <div v-if="signinError != '' " class="alert alert-danger p-2 my-3">
-            {{signinError }}
+          <div v-if="signinError != ''" class="alert alert-danger p-2 my-3">
+            {{ signinError }}
           </div>
         </div>
         <div class="login100-more"></div>
       </div>
     </div>
   </div>
-
-  <About></About>
 </template>
 
 <script>
@@ -88,14 +86,16 @@ export default {
           const remainingLetters = name1.slice(1);
           let shavedName = firstLetterCap + remainingLetters;
 
-          console.log("successfully logged in user is", user);
+          // console.log("successfully logged in user is", user);
           setTimeout(() => this.router.push("/ProfilePage"), 2000);
         })
         .catch((error) => {
-          console.log("error.code");
-          // alert(error.message);
+          // console.log(error.message);
           if (error.message == "Firebase: Error (auth/wrong-password).") {
             this.signinError = "Incorrect password. Please Try again.";
+          }
+          if (error.message == "Firebase: Error (auth/invalid-email).") {
+            this.signinError = "Invalid email. Please Try again.";
           }
         });
     },

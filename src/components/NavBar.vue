@@ -158,8 +158,8 @@ export default {
     signUserOut() {
       signOut(auth)
         .then(() => {
-          alert("You have successfully signed out");
-          console.log("logged out user should be null:", auth.currentUser);
+          // alert("You have successfully signed out");
+          // console.log("logged out user should be null:", auth.currentUser);
           this.router.push("/SignInPage");
         })
         .catch((error) => {

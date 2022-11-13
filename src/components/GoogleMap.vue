@@ -76,7 +76,6 @@
             >
               <div>
                 {{ m.id + 1 }}. {{ m.name }}
-                <MyComponent />
               </div>
             </GMapInfoWindow>
           </GMapMarker>

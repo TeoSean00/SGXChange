@@ -152,7 +152,7 @@ export default {
         li.classList.remove("disabled");
 
         if (parseInt(li.text) === this.currentPage) {
-          console.log(li.text);
+          // console.log(li.text);
           li.classList.add("active");
         }
         if (li.text == "Previous" && this.currentPage == this.firstPage) {
@@ -171,14 +171,14 @@ export default {
       getUni.forEach((doc) => {
         let universityInfo = {};
         // put key-value pairs
-        console.log(doc.data().HostUniversity);
+        // console.log(doc.data().HostUniversity);
         if (
           doc
             .data()
             .HostUniversity.toLowerCase()
             .includes(this.searchKey.toLowerCase())
         ) {
-          console.log(doc.data().HostUniversity);
+          // console.log(doc.data().HostUniversity);
           universityInfo["name"] = doc.data().HostUniversity;
           universityInfo["gpaReq"] = doc.data().GPA;
           universityInfo["NoOfPlacesSem1"] = doc.data().NoOfPlacesSem1;

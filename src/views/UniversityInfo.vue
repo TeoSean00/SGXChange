@@ -140,18 +140,6 @@
         <hr />
       </div>
     </div>
-    <!-- <div class="row">
-      <div class="col py-3 d-flex gap-3">
-        <i class="bi bi-thermometer-half m-1"></i>
-        <span style="font-size: large"><b>Climate : </b> Cool</span>
-      </div>
-    </div> -->
-    <!-- hr filler -->
-    <!-- <div class="row">
-      <div class="col">
-        <hr />
-      </div>
-    </div> -->
     <!-- description -->
     <div class="row" id="description">
       <div class="col py-3">
@@ -276,8 +264,6 @@
                 >
                   <u>click to expand</u>
                 </a>
-                <!-- add to fav -->
-                <a href="#" class="btn btn-primary btn-sm">Favourite</a>
               </div>
             </div>
           </div>
@@ -373,7 +359,6 @@
 
 <script>
 import GoogleMap from "@/components/GoogleMap.vue";
-// console.log(import.meta.env.VITE_GOOGLE_MAP_API_KEY);
 import { fireStore } from "@/service/Firebase/firebaseInit";
 import {
   collection,
@@ -472,15 +457,14 @@ export default {
     async getNearbyAttr() {
       const proxyURL = "https://peaceful-sierra-78205.herokuapp.com/";
       var strLocation = this.uniLat + "," + this.uniLong;
-      console.log("strLocation is below");
-      console.log(strLocation);
+      // console.log("strLocation is below");
+      // console.log(strLocation);
       let config = {
         method: "get",
         url:
           proxyURL +
           `https://maps.googleapis.com/maps/api/place/nearbysearch/json`,
         params: {
-          // location: "43.66093,-79.3959",
           location: strLocation,
           radius: "2000",
           type: "tourist_attraction",
@@ -488,7 +472,7 @@ export default {
         },
         headers: {},
       };
-      console.log(this.places);
+      // console.log(this.places);
       try {
         const response = await axios.request(config);
         this.places = response.data.results;
@@ -551,11 +535,10 @@ export default {
             }
           }
         }
-        console.log("Places is below");
-        console.log(this.places);
-        console.log(this.nearbyName);
+        // console.log(this.places);
+        // console.log(this.nearbyName);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     },
     // Get Uni Info
@@ -566,7 +549,6 @@ export default {
       );
       let getDegreeUni = await getDocs(q);
       getDegreeUni.forEach((doc) => {
-        // console.log(doc.data())
         this.uniLat = doc.data().UniLatitude;
         this.uniLong = doc.data().UniLongtitude;
         var tempCal = doc.data().AcademicCalendar.split("/n");
@@ -581,7 +563,7 @@ export default {
         this.region = doc.data().Region;
         // country
         this.country = doc.data().Country;
-        console.log(this.country, "country");
+        // console.log(this.country, "country");
         // Gpa
         if (doc.data()["gpaReq"] == null) {
           this.gpaReq = "NA";
@@ -601,7 +583,7 @@ export default {
         for (let i = 1; i < 8; i++) {
           let key = `UniImageLink${i}`;
           var val = doc.data()[key];
-          console.log(val);
+          // console.log(val);
           if (val != null && val.trim() != null && val != "'") {
             this.uniImgArr.push(doc.data()[key]);
           }
@@ -667,7 +649,7 @@ export default {
           }
         }
       });
-      console.log(this.moduleObjs);
+      // console.log(this.moduleObjs);
     },
 
     // Check for current logged in user or if there isnt one
@@ -675,7 +657,7 @@ export default {
       onAuthStateChanged(getAuth(), (user) => {
         if (user) {
           this.isLoggedIn = true;
-          console.log("logged in user from previous page is", user);
+          // console.log("logged in user from previous page is", user);
 
           const name = user.email.split("@")[0];
           const firstLetter = name.charAt(0);
@@ -708,10 +690,10 @@ export default {
 
         if (currentUserEmail == doc.data().Email) {
           this.currentUserLeftReview = true;
-          console.log("current user has left review before");
+          // console.log("current user has left review before");
         }
       });
-      console.log(getUniReviews.docs.length);
+      // console.log(getUniReviews.docs.length);
       this.isReviewsLoaded = true;
     },
 
@@ -765,17 +747,17 @@ export default {
             "Take note that adding another will replace your existing review!"
         );
       }
-      console.log("modal opened from uniInfo");
+      // console.log("modal opened from uniInfo");
       this.isModalOpen = true;
     },
 
     // Closes the modal when adding of review function has been completed
     closeModal() {
-      console.log("modal closed from uniInfo");
+      // console.log("modal closed from uniInfo");
       this.isModalOpen = false;
     },
     toggleContentNavbar() {
-      console.log(window.yOffset);
+      // console.log(window.yOffset);
     },
   },
 };

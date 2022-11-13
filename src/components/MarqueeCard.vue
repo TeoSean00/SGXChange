@@ -25,20 +25,18 @@ export default {
       hover: false,
     };
   },
-  mounted() {
-  },
+  mounted() {},
 };
 </script>
 
 <style scoped>
 h6 {
-  font-weight:400;
+  font-weight: 400;
 }
 
 .marquee-uni-image {
   transition: all 0.4s;
   position: absolute;
-  /* border-radius: 25px; */
   object-fit: cover;
 }
 

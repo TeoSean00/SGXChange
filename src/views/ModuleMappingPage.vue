@@ -51,7 +51,7 @@
             </template>
           </select>
         </div>
-        <!-- Select FIrst Degree -->
+        <!-- Select First Degree -->
         <div class="mb-3">
           <label for="degreeInput" class="form-label question"
             >Which Degree are you taking?</label
@@ -87,9 +87,22 @@
             </template>
           </select>
         </div>
-        <button v-on:click="showForm()" class="btn btn-color float-end mt-1">
+        <button
+          v-on:click="showForm()"
+          class="btn btn-color float-end mt-2 mb-4"
+        >
           Next
         </button>
+
+        <!-- Step one error msgs -->
+        <div style="margin-top: 5rem">
+          <div v-if="uniError != ''" class="alert alert-danger p-2 my-3">
+            {{ uniError }}
+          </div>
+          <div v-if="uniDegError != ''" class="alert alert-danger p-2 my-3">
+            {{ uniDegError }}
+          </div>
+        </div>
       </div>
 
       <!-- Step two -->
@@ -109,12 +122,24 @@
             v-on:removeBasket="removeFromBasket"
           />
         </div>
-        <button class="btn btn-color float-start mt-1" v-on:click="stageZero()">
+        <button
+          class="btn btn-color float-start mt-2 mb-4"
+          v-on:click="stageZero()"
+        >
           Previous
         </button>
-        <button class="btn btn-color float-end mt-1" v-on:click="submitData()">
+        <button
+          class="btn btn-color float-end mt-2 mb-4"
+          v-on:click="submitData()"
+        >
           Submit
         </button>
+        <!-- Basket selection checks -->
+        <div style="margin-top: 5rem">
+          <div v-if="basketError != ''" class="alert alert-danger p-2 my-3">
+            {{ basketError }}
+          </div>
+        </div>
       </div>
       <div :class="{ Output: testDisplay }">
         <div class="d-flex flex-wrap">
@@ -196,6 +221,9 @@ export default {
       currentPage: 1,
       firstPage: 1,
       lastPage: 0,
+      uniError: "",
+      uniDegError: "",
+      basketError: "",
     };
   },
   computed: {
@@ -282,7 +310,7 @@ export default {
         li.classList.remove("disabled");
 
         if (parseInt(li.text) === this.currentPage) {
-          console.log(li.text);
+          // console.log(li.text);
           li.classList.add("active");
         }
         if (li.text == "Previous" && this.currentPage == this.firstPage) {
@@ -333,10 +361,18 @@ export default {
 
       var tempDegrees = [];
       if (this.selectedUni == "default") {
-        alert("Please Select a University!");
-      } else if (this.selectedDegree == "default") {
-        alert("Please Select a Degree!");
+        // alert("Please Select a University!");
+        this.uniError = "Please Select a University!";
       } else {
+        this.uniError = "";
+      }
+      if (this.selectedDegree == "default") {
+        this.uniDegError = "Please Select a Degree!";
+        // alert("Please Select a Degree!");
+      } else {
+        this.uniDegError = "";
+      }
+      if (this.selectedUni != "default" && this.selectedDegree != "default") {
         this.stageOne();
         tempDegrees.push(this.selectedDegree);
         if (this.selectedSecondDegree != "default") {
@@ -377,7 +413,8 @@ export default {
 
     async submitData() {
       if (this.selectedBaskets.length == 0) {
-        alert("Please select at least one basket!");
+        // alert("Please select at least one basket!");
+        this.basketError = "Please select at least one basket!";
       } else {
         this.stageTwo();
         this.form1 = true;
@@ -410,7 +447,7 @@ export default {
             let universityInfo = {};
             // put key-value pairs
             universityInfo["name"] = doc.data().HostUniversity;
-            universityInfo["gpaReq"] = doc.data().GPA;
+            universityInfo["gpaReq"] = doc.data().gpaReq;
             universityInfo["NoOfPlacesSem1"] = doc.data().NoOfPlacesSem1;
             universityInfo["NoOfPlacesSem2"] = doc.data().NoOfPlacesSem2;
             universityInfo["CountryId"] = doc.data().Country;

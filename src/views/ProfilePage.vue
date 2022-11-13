@@ -15,7 +15,7 @@
                 <div class="col-md-6">
                   <div class="media">
                     <label>Birthday</label>
-                    <p>4th april 1999</p>
+                    <p>4th April 1999</p>
                   </div>
                   <div class="media">
                     <label>Age</label>
@@ -81,7 +81,7 @@
         <!-- Add the favorited universities here and the reviews -->
         <div class="container-fluid">
           <div v-if="userFavDetails.length > 0" class="">
-            <h6 class="theme-color lead">Your Favorites</h6>
+            <h6 class="theme-color lead mt-5">Your Favorites</h6>
             <!-- MY VERSION OF THE UNI CARD -->
             <div class="d-flex flex-wrap">
               <div
@@ -145,7 +145,8 @@
             </div>
           </div>
           <div v-else>
-            <h5 class="mt-4" style="font-weight: normal">
+            <h6 class="mt-5 theme-color lead">Your Favourites</h6>
+            <h5 style="font-weight: normal">
               You do not have any favourited universities yet!
             </h5>
             <h6 style="font-weight: normal">
@@ -158,7 +159,7 @@
         <div class="container-fluid">
           <!-- Review Section -->
           <div v-if="userReviewDetails.length > 0">
-            <h6 class="theme-color lead">Your Reviews</h6>
+            <h6 class="theme-color lea mt-5">Your Reviews</h6>
             <div class="d-flex flex-wrap">
               <div
                 v-for="(review, index) in userReviewDetails"
@@ -199,7 +200,8 @@
             </div>
           </div>
           <div v-else>
-            <h5 class="mt-4" style="font-weight: normal">
+            <h6 class="mt-5 theme-color lead">Your Reviews</h6>
+            <h5 style="font-weight: normal">
               You have not left any university a review yet!
             </h5>
             <h6 style="font-weight: normal">
@@ -221,11 +223,11 @@
     <div class="mt-4">
       <h4>
         Have an account?
-        <router-link to="/SignInPage">Sign In Here</router-link>
+        <router-link to="/SignInPage" class="redirect">Sign In Here</router-link>
       </h4>
       <h4>
         Don't have an account?
-        <router-link to="/RegisterPage">Register Here</router-link>
+        <router-link to="/RegisterPage" class="redirect">Register Here</router-link>
       </h4>
     </div>
   </div>
@@ -270,7 +272,7 @@ export default {
       onAuthStateChanged(getAuth(), async (user) => {
         if (user) {
           this.isLoggedIn = true;
-          console.log("logged in user is", user);
+          // console.log("logged in user is", user);
 
           const name = user.email.split("@")[0];
           const firstLetter = name.charAt(0);
@@ -278,7 +280,7 @@ export default {
           const remainingLetters = name.slice(1);
           this.name = firstLetterCap + remainingLetters;
           this.email = user.email;
-          console.log("email retrieved", this.email);
+          // console.log("email retrieved", this.email);
 
           // To query user details based on unique email
           let q = query(collection(fireStore, "UserProfiles"));
@@ -289,7 +291,7 @@ export default {
               this.userDetails = doc.data();
             }
           });
-          console.log("user details retrieved and saved", this.userDetails);
+          // console.log("user details retrieved and saved", this.userDetails);
 
           // To get nested user review collection with unique user email
           let targetEmail = this.email;
@@ -299,13 +301,13 @@ export default {
           userReviewInfo.forEach((doc) => {
             this.userReviewDetails.push(doc.data());
           });
-          console.log(this.userReviewDetails);
+          // console.log(this.userReviewDetails);
 
           // To get uni details for the favourited unis
-          console.log("favourites", this.userDetails.Favourites);
+          // console.log("favourites", this.userDetails.Favourites);
           let favourites = this.userDetails.Favourites;
           for (let fav of favourites) {
-            console.log(fav);
+            // console.log(fav);
             let q3 = query(collection(fireStore, "Universities2"));
             let userFavInfo = await getDocs(q3);
             userFavInfo.forEach((doc) => {
@@ -314,7 +316,7 @@ export default {
               }
             });
           }
-          console.log("userFavDetails is", this.userFavDetails);
+          // console.log("userFavDetails is", this.userFavDetails);
         }
       });
     },
@@ -333,6 +335,10 @@ export default {
 </script>
 
 <style>
+.redirect{
+  color: #1890ff;
+}
+
 .profile-page {
   min-height: 70vh;
 }
@@ -411,8 +417,6 @@ img {
 .about-section .counter {
   padding: 22px 20px;
   background: #f5f5f5;
-  /* border-radius: 10px; */
-  /* box-shadow: 0 0 30px rgba(31, 45, 61, 0.125); */
 }
 .about-section .counter .count-data {
   margin-top: 10px;
