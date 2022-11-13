@@ -40,6 +40,22 @@
 
           <div
             class="wrap-input100 validate-input"
+            data-validate="Password is required"
+          >
+            <input
+              class="input100"
+              type="password"
+              name="pass"
+              v-model="confirm_password"
+              placeholder=" "
+              required
+            />
+            <span class="focus-input100"></span>
+            <span class="label-input100">Confirm Password</span>
+          </div>
+
+          <div
+            class="wrap-input100 validate-input"
             data-validate="School is required"
           >
             <select
@@ -117,6 +133,28 @@
               Register
             </button>
           </div>
+
+          <div
+            v-if="password != confirm_password && confirm_password != ''"
+            class="alert alert-danger p-2 my-3"
+          >
+            Passwords do not match!
+          </div>
+          <div v-if="password == confirm_password && confirm_password != ''" class="alert alert-success p-2 my-3">
+            Passwords match!
+          </div>
+
+          <div v-if="invalidUni != ''" class="alert alert-danger p-2 my-3">
+            {{ invalidUni }}
+          </div>
+
+          <div v-if="invalidDegree != ''" class="alert alert-danger p-2 my-3">
+            {{ invalidDegree }}
+          </div>
+
+          <div v-if="signupError != ''" class="alert alert-danger p-2 my-3">
+            {{ signupError }}
+          </div>
         </div>
         <div class="login100-more"></div>
       </div>
@@ -125,7 +163,11 @@
 </template>
 
 <script>
-import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
 import { useRouter } from "vue-router";
 import { fireStore } from "@/service/Firebase/firebaseInit";
 import {
@@ -142,6 +184,7 @@ export default {
     return {
       email: "",
       password: "",
+      confirm_password: "",
       router: useRouter(),
       current: null,
       firstDegree: "",
@@ -152,7 +195,10 @@ export default {
       selectedFirstDegree: "default",
       selectedSecondDegree: "default",
       selectLableClass: ".select-label-input100",
-      name: ''
+      name: "",
+      invalidUni: "",
+      invalidDegree: "",
+      signupError: "",
     };
   },
   mounted() {
@@ -177,10 +223,19 @@ export default {
     },
     register() {
       if (this.selectedUni == "default") {
-        alert("Please Enter a University");
-      } else if (this.selectedFirstDegree == "default") {
-        alert("Please Enter a First Degree");
-      } else {
+        this.invalidUni = "Please Select a University";
+      }
+      else{
+        this.invalidUni = "";
+      }
+      if (this.selectedFirstDegree == "default") {
+        this.invalidDegree = "Please Select a Degree";
+      } 
+      else{
+        this.invalidDegree = "";
+      }
+      if (this.selectedFirstDegree != "default" && this.selectedUni != "default") {
+        this.signupError = "";
         createUserWithEmailAndPassword(getAuth(), this.email, this.password)
           .then((user) => {
             setDoc(doc(fireStore, "UserProfiles", this.email), {
@@ -205,15 +260,27 @@ export default {
             const remainingLetters = name1.slice(1);
             let shavedName = firstLetterCap + remainingLetters;
 
-            alert(
-              `Hi ${shavedName}, your account has been successfully created! Please wait as we log you in and re-direct you to your profile page!`
-            );
+            // alert(
+            //   `Hi ${shavedName}, your account has been successfully created! Please wait as we re-direct you to your profile page!`
+            // );
             console.log("successfully registered user is", user);
             setTimeout( () => this.router.push("/ProfilePage"), 2000);
           })
           .catch((error) => {
             console.log("error.code");
-            alert(error.message);
+            // alert(error.message);
+            console.log(error.message);
+            if (
+              error.message == "Firebase: Error (auth/email-already-in-use)."
+            ) {
+              this.signupError =
+                "Registration failed. Email entered is already in use.";
+            } else if (
+              error.message == "Firebase: Error (auth/invalid-email)."
+            ) {
+              this.signupError =
+                "Registration failed. You have entered an invalid email address.";
+            }
           });
       }
     },
