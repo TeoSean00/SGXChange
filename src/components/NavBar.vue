@@ -1,6 +1,6 @@
 <template>
-  <nav class="navbar navbar-expand-md navbar-light bg-light">
-    <router-link to="/" class="navbar-brand d-none d-sm-block">
+  <nav class="navbar navbar-expand-lg bg-light gap-1">
+    <router-link to="/" class="navbar-brand d-none d-sm-block ms-5">
       <img
         src="../assets/WebsiteLogo.png"
         class="m-1"
@@ -8,7 +8,7 @@
         alt=""
       />
     </router-link>
-    <div class="search-wrapper bg-light active d-md-none" style="width: ">
+    <div class="search-wrapper bg-light active d-lg-none">
       <div class="input-holder">
         <input
           v-model="searchItem"
@@ -67,7 +67,7 @@
         <li class="nav-item active mt-0 d-none d-md-block">
           <Search />
         </li>
-        <li
+        <li v-if="!isLoggedIn"
           class="
             nav-item
             active
@@ -83,10 +83,10 @@
 
         <li
           v-if="isLoggedIn"
-          class="nav-item active d-md-flex justify-content-center"
-          style="margin: auto"
+          class="nav-item active d-md-flex justify-content-center blue mx-2"
+          style="margin: auto;"
         >
-          Hello, {{ finalName }}
+          Hello, {{ finalName }} !
         </li>
         <li v-else class="nav-item active d-md-flex justify-content-center">
           <router-link to="/SigninPage" class="nav-link m-auto">
@@ -111,7 +111,7 @@
           style="display: none"
         ></li>
 
-        <li class="nav-item active d-md-flex justify-content-center">
+        <li class="nav-item active d-md-flex justify-content-center me-4">
           <router-link to="/ProfilePage" class="nav-link m-auto">
             <i class="bi bi-person-circle" style="font-size: 1.5rem"></i>
           </router-link>
@@ -223,17 +223,18 @@ export default {
 nav {
   font-size: 1rem;
 }
-
+.blue {
+  color: #096dd9;
+}
 #navBtn {
   margin-right: 10px;
 }
-
 .search-wrapper .input-holder {
   height: 70px;
   width: 70px;
   overflow: hidden;
   background: rgba(255, 255, 255, 0);
-  border-radius: 6px;
+  border-radius: px;
   position: relative;
 }
 .search-wrapper.active .input-holder {
