@@ -3,7 +3,16 @@
   <div v-if="isLoggedIn">
     <section class="section about-section gray-bg" id="about">
       <div class="container">
-        <div class="row align-items-center flex-row-reverse">
+        <div class="row align-items-end flex-row mb-5">
+          <div class="col-lg-6 d-flex">
+            <div class="about-avatar my-4 img-fluid">
+              <img
+                src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                title=""
+                alt=""
+              />
+            </div>
+          </div>
           <div class="col-lg-6">
             <div class="about-text go-to">
               <h3 class="dark-color">{{ name }}</h3>
@@ -13,51 +22,42 @@
               <p>{{ userDetails.FirstDegree }} Student</p>
               <div class="row about-list">
                 <div class="col-md-6">
-                  <div class="media">
+                  <div class="media my-2">
                     <label>Birthday</label>
                     <p>4th April 1999</p>
                   </div>
-                  <div class="media">
+                  <div class="media my-2">
                     <label>Age</label>
                     <p>23 Yr</p>
                   </div>
-                  <div class="media">
+                  <div class="media my-2">
                     <label>Country</label>
                     <p>Singapore</p>
                   </div>
-                  <div class="media">
+                  <div class="media my-2">
                     <label>Address</label>
                     <p>Singapore</p>
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <div class="media">
+                  <div class="media my-2">
                     <label>E-mail</label>
                     <p>{{ email }}</p>
                   </div>
-                  <div class="media">
+                  <div class="media my-2">
                     <label>Phone</label>
                     <p>96767765</p>
                   </div>
-                  <div class="media">
+                  <div class="media my-2">
                     <label>1st Major</label>
                     <p>{{ userDetails.FirstDegree }}</p>
                   </div>
-                  <div class="media">
+                  <div class="media my-2">
                     <label>2nd Degree</label>
                     <p>{{ secondDegree }}</p>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="about-avatar">
-              <img
-                src="https://bootdey.com/img/Content/avatar/avatar7.png"
-                title=""
-                alt=""
-              />
             </div>
           </div>
         </div>
@@ -102,7 +102,8 @@
 
         <div v-else>
           <div class="container-fluid">
-            <div v-if="userFavDetails.length > 0" class="">
+            <!-- Review Section -->
+            <div v-if="userFavDetails.length > 0">
               <h6 class="theme-color lead mt-5">Your Favorites</h6>
               <div class="d-flex flex-wrap">
                 <div
@@ -123,8 +124,7 @@
                     <div class="pt-2 px-2 pb-2">
                       <a
                         class="h5 text-decoration-none"
-                        style="
-                          color: #002766;
+                        style="color: #002766;
                           display: flex;
                           align-items: center;
                           height: 5rem;
@@ -167,16 +167,14 @@
               </div>
             </div>
             <div v-else>
-              <h6 class="mt-5 theme-color lead">Your Favourites</h6>
-              <h5 style="font-weight: normal">
-                You do not have any favourited universities yet!
-              </h5>
-              <h6 style="font-weight: normal">
-                Click
-                <router-link :to="`/UniversityPage/`">here</router-link> to go
-                to the universities page to find a university to favourite!
-              </h6>
-            </div>
+            <h6 class="mt-5 theme-color lead mb-5">Your Favourites</h6>
+            <p class="text-muted">
+              You do not have any favourited universities yet!
+            </p>
+            <h6>
+                <router-link class="btn btn-success" style="background-color:#2fc78a;border:none;" :to="`/UniversityPage/`">Explore universities</router-link>
+            </h6>
+          </div>
           </div>
           <div class="container-fluid">
             <!-- Review Section -->
@@ -186,7 +184,7 @@
                 <div
                   v-for="(review, index) in userReviewDetails"
                   :key="index"
-                  style="width: 300px"
+                  style="width: 30rem"
                   class="m-2"
                 >
                   <div class="">
@@ -222,20 +220,18 @@
               </div>
             </div>
             <div v-else>
-              <h6 class="mt-5 theme-color lead">Your Reviews</h6>
-              <h5 style="font-weight: normal">
-                You have not left any university a review yet!
-              </h5>
-              <h6 style="font-weight: normal">
-                Click
-                <router-link :to="`/UniversityPage/`">here</router-link> to go
-                to the universities page to find a university to leave a review
-                for!
-              </h6>
+              <h6 class="mt-5 theme-color lead my-5">Your Reviews</h6>
+            <p class="text-muted">
+              You have not left any university a review yet!
+            </p>
+            <h6>
+                <router-link class="btn btn-success" style="background-color:#2fc78a;border:none;" :to="`/UniversityPage/`">Explore universities</router-link>
+            </h6>
             </div>
-          </div>
         </div>
       </div>
+      </div>
+      
     </section>
   </div>
 
@@ -364,8 +360,8 @@ export default {
 };
 </script>
 
-<style>
-.redirect {
+<style scoped>
+.redirect{
   color: #1890ff;
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="limiter">
+  <div class="limiter" v-on:keyup.enter="signIn()">
     <div class="container-login100">
       <div class="wrap-login100">
         <!-- remove validateform -->
@@ -32,6 +32,7 @@
               v-model="password"
               placeholder=" "
               required
+              
             />
             <span class="focus-input100"></span>
             <span class="label-input100">Password</span>
@@ -43,14 +44,14 @@
             <button @click="signIn()" class="login100-form-btn">Login</button>
           </div>
 
-          <span class="register">
-            Don't have an account?
+          <div class="my-5">
+            <p class="text-muted">Don't have an account?</p>
             <div>
               <router-link to="/RegisterPage" style="color: #597ef7"
                 >Register Here</router-link
               >
             </div>
-          </span>
+          </div>
           <div v-if="signinError != ''" class="alert alert-danger p-2 my-3">
             {{ signinError }}
           </div>
@@ -400,9 +401,6 @@ input.input100 {
 
 /* This is the original styling */
 
-.register {
-  padding-top: 20px;
-}
 
 label {
   color: #c2c2c5;
