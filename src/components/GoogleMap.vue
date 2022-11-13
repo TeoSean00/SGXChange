@@ -1,7 +1,15 @@
 <template>
   <div class="container mapbox overflow-auto">
     <div class="row">
-      <div class="col-12 col-md-4 navigation-panel overflow-auto order-1 order-md-0" style="height:30vh">
+      <div
+        class="
+          col-12 col-md-4
+          navigation-panel
+          overflow-auto
+          order-1 order-md-0
+        "
+        style="height: 30vh"
+      >
         <h4 class="d-flex justify-content-between align-items-center mb-3">
           <span>{{ uniName }} Map</span>
           <button
@@ -26,14 +34,7 @@
             "
           >
             <div class="text-left">
-              <span
-                class=""
-                style="
-
-
-                "
-                >{{ m.id + 1 }}. {{ m.name }}</span
-              >
+              <span class="" style="">{{ m.id + 1 }}. {{ m.name }}</span>
               <p class="" style="font-size: 10px">
                 Rating: {{ m.rating }}
                 <i v-if="m.rating != 'NA'" class="bi bi-star-fill"></i>
@@ -42,7 +43,7 @@
           </div>
         </div>
       </div>
-      <div class="col-12 col-md-8 ">
+      <div class="col-12 col-md-8">
         <GMapMap
           class="gMap"
           :center="center"
@@ -82,7 +83,6 @@
             >
               <div>
                 {{ m.id + 1 }}. {{ m.name }}
-                <MyComponent />
               </div>
             </GMapInfoWindow>
           </GMapMarker>
@@ -128,8 +128,8 @@ export default {
   },
   methods: {
     openMarker(id) {
-      console.log(id);
-      console.log(this.openedMarkerID);
+      // console.log(id);
+      // console.log(this.openedMarkerID);
       if (this.openedMarkerID == id) {
         this.openedMarkerId = null;
       } else {

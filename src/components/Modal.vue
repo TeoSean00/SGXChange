@@ -116,13 +116,13 @@
     methods: {
         // When closed button is clicked in modal component and then to update parent
         close() {
-            console.log('closing from modal')
+            // console.log('closing from modal')
             this.$emit('close');
         },
 
         // When review has been submitted in modal component and then to update parent
         reviewDone(){
-            console.log('review done from modal')
+            // console.log('review done from modal')
             this.$emit('review-done')
         },
 
@@ -205,7 +205,7 @@
     },
     created(){
         this.getCurrentUser()
-        console.log('data from parent is', this.uniNamePassed)
+        // console.log('data from parent is', this.uniNamePassed)
     },
     props: ['uniNamePassed']
   };

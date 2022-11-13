@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import Tilt from "@/components/Tilt.vue";
+
 
 export default {
   data() {
@@ -57,9 +57,7 @@ export default {
     "RegionId",
     "imgURL",
   ],
-  components: {
-    Tilt,
-  },
+
   computed: {
     gpa() {
       if (this.gpaReq != null) {
