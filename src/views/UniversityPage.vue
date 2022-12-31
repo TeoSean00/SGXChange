@@ -26,52 +26,63 @@
     <br />
 
     <!-- UniFilterBar -->
+    <div v-if="pendingState" style="height: 60vh">
+      <div class="text-center py-6">
+        <p class="font-bold text-3x1">Loading Universities...</p>
+        <!-- <div>HELLO</div> -->
+      </div>
+      <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status"></div>
+      </div>
+    </div>
+    <div v-else>
+      <div class="row row-cols-4 d-flex flex-wrap justify-content-center">
+        <!-- put variables as props -->
+        <UniCardSmall
+          class="unicard col"
+          v-for="(uni, index) in items.slice(row1start, row1end)"
+          :key="index"
+          :universityName="uni.name"
+          :gpaReq="uni.gpaReq"
+          :IgpaNinetyPercentile="uni.IgpaNinetyPercentile"
+          :IgpaTenPercentile="uni.IgpaTenPercentile"
+          :NoOfPlacesSem1="uni.NoOfPlacesSem1"
+          :NoOfPlacesSem2="uni.NoOfPlacesSem2"
+          :CountryId="uni.CountryId"
+          :RegionId="uni.RegionId"
+          :imgURL="uni.imgURL"
+        />
+      </div>
+      <div class="row">
+        <div class="col">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+              <li class="page-item">
+                <a class="page-link" @click="togglePage">Previous</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link active" @click="togglePage">1</a>
+              </li>
+              <template v-if="lastPage > 1">
+                <li class="page-item" v-for="num in lastPage - 1" :key="num">
+                  <a class="page-link" @click="togglePage">{{ num + 1 }}</a>
+                </li>
+              </template>
+              <li class="page-item">
+                <a class="page-link" @click="togglePage">Next</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <!-- pagination -->
+  </div>
 
-    <div class="row row-cols-4 d-flex flex-wrap justify-content-center">
-      <!-- put variables as props -->
-      <UniCardSmall
-        class="unicard col"
-        v-for="(uni, index) in items.slice(row1start, row1end)"
-        :key="index"
-        :universityName="uni.name"
-        :gpaReq="uni.gpaReq"
-        :IgpaNinetyPercentile="uni.IgpaNinetyPercentile"
-        :IgpaTenPercentile="uni.IgpaTenPercentile"
-        :NoOfPlacesSem1="uni.NoOfPlacesSem1"
-        :NoOfPlacesSem2="uni.NoOfPlacesSem2"
-        :CountryId="uni.CountryId"
-        :RegionId="uni.RegionId"
-        :imgURL="uni.imgURL"
-      />
-    </div>
-  </div>
-  <br />
-  <br />
-  <br />
-  <br />
-  <!-- pagination -->
-  <div class="row">
-    <div class="col">
-      <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-          <li class="page-item">
-            <a class="page-link" @click="togglePage">Previous</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link active" @click="togglePage">1</a>
-          </li>
-          <template v-if="lastPage > 1">
-            <li class="page-item" v-for="num in lastPage - 1" :key="num">
-              <a class="page-link"  @click="togglePage">{{ num + 1 }}</a>
-            </li>
-          </template>
-          <li class="page-item">
-            <a class="page-link" @click="togglePage">Next</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
   <br />
   <br />
   <br />
@@ -113,6 +124,7 @@ export default {
       uniToBaskets: {},
       // key will be baskets, val will be specific modules in that basket mappable
       basketToModules: {},
+      pendingState: true,
     };
   },
   setup() {
@@ -186,6 +198,8 @@ export default {
     },
     async getAllUniversities() {
       this.getAllUni = await getDocs(collection(fireStore, "Universities2"));
+      console.log("getAllUni done");
+      this.pendingState = false;
     },
 
     async getFilteredUniversities() {

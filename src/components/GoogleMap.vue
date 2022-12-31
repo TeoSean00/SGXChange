@@ -1,7 +1,11 @@
 <template>
   <div class="container mapbox overflow-auto my-4">
     <div class="row">
+<<<<<<< HEAD
       <div class="col-12 col-xl-4 navigation-panel overflow-auto  order-1 order-xl-0" style="height:50vh">
+=======
+      <div class="col-12 col-xl-4 navigation-panel overflow-auto order-1 order-xl-0" style="height:50vh">
+>>>>>>> 1da48273ac1aca089261634d08f8b732bc88125e
         <h6 class="d-flex justify-content-between align-items-center mb-3">
           <span class="text-uppercase">Click on nearby attractions to explore</span>
           <!-- <span>{{ uniName }} Map</span> -->

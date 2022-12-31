@@ -140,7 +140,10 @@
           >
             Passwords do not match!
           </div>
-          <div v-if="password == confirm_password && confirm_password != ''" class="alert alert-success p-2 my-3">
+          <div
+            v-if="password == confirm_password && confirm_password != ''"
+            class="alert alert-success p-2 my-3"
+          >
             Passwords match!
           </div>
 
@@ -155,6 +158,7 @@
           <div v-if="signupError != ''" class="alert alert-danger p-2 my-3">
             {{ signupError }}
           </div>
+
         </div>
         <div class="login100-more"></div>
       </div>
@@ -170,13 +174,7 @@ import {
 } from "firebase/auth";
 import { useRouter } from "vue-router";
 import { fireStore } from "@/service/Firebase/firebaseInit";
-import {
-  collection,
-  getDocs,
-  query,
-  setDoc,
-  doc,
-} from "firebase/firestore";
+import { collection, getDocs, query, setDoc, doc } from "firebase/firestore";
 
 export default {
   name: "Register",
@@ -199,6 +197,7 @@ export default {
       invalidUni: "",
       invalidDegree: "",
       signupError: "",
+      passwordShortError: "",
     };
   },
   mounted() {
@@ -224,17 +223,19 @@ export default {
     register() {
       if (this.selectedUni == "default") {
         this.invalidUni = "Please Select a University";
-      }
-      else{
+      } else {
         this.invalidUni = "";
       }
       if (this.selectedFirstDegree == "default") {
         this.invalidDegree = "Please Select a Degree";
-      } 
+      }
       else{
         this.invalidDegree = "";
       }
-      if (this.selectedFirstDegree != "default" && this.selectedUni != "default") {
+      if (
+        this.selectedFirstDegree != "default" &&
+        this.selectedUni != "default"
+      ) {
         this.signupError = "";
         createUserWithEmailAndPassword(getAuth(), this.email, this.password)
           .then((user) => {
@@ -261,7 +262,7 @@ export default {
             let shavedName = firstLetterCap + remainingLetters;
 
             // console.log("successfully registered user is", user);
-            setTimeout( () => this.router.push("/ProfilePage"), 2000);
+            setTimeout(() => this.router.push("/ProfilePage"), 2000);
           })
           .catch((error) => {
             // console.log("error.code");
@@ -296,7 +297,7 @@ export default {
 
 .container-login100 {
   width: 100%;
-  min-height: 100vh;
+  height: 110vh;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -310,6 +311,7 @@ export default {
 
 .wrap-login100 {
   width: 100%;
+  min-height: 110vh;
   background: #fff;
   overflow: hidden;
   display: -webkit-box;
@@ -331,6 +333,7 @@ export default {
   top: 0px;
   left: auto;
   z-index: 1;
+  height: 110vh;
   background-image: url("../assets/SMU_1.jpeg");
 }
 
@@ -360,7 +363,7 @@ export default {
   min-height: 100vh;
   display: block;
   background-color: #f7f7f7;
-  padding: 100px 55px 55px 25px;
+  padding: 25px 55px 55px 25px;
 }
 
 .login100-form-title {
