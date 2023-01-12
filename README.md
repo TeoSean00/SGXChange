@@ -1,9 +1,9 @@
-# SMU_WAD2_Project
-SGXchange, Changing the way you Exchange
+# SMU_WAD2_Project (SGXChange)
+SGXChange, changing the way you Exchange.
 
 Find us live at https://sgxchange.vercel.app/
 
-A website designed to help students with the overseas exchange application process by consolidating all the vital scatterered information, along with an automated module mapping, user authentication, nearby attractions locater and a review reading/adding system functionality that is made unique to every university. A collaborative team effort together with a group of friends.
+A website designed to help students with the overseas exchange application process by consolidating all the vital scatterered information, along with an automated module mapping, user authentication, nearby attractions locater, a review reading/adding and university favouriting system functionality that is made unique to every university. A collaborative team effort developed together with a group of friends.
 
 
 # To navigate github,
