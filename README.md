@@ -1,6 +1,5 @@
 # SMU_WAD2_Project
-SGXchange 
-Change the way you exchange
+SGXchange, Changing the way you Exchange
 
 Find us live at https://sgxchange.vercel.app/
 
