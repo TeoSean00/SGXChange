@@ -3,7 +3,7 @@ SGXChange, changing the way you Exchange.
 
 Find us live at https://sgxchange.vercel.app/
 
-A website designed to help students with the overseas exchange application process by consolidating all the vital scatterered information, along with an automated module mapping, user authentication, nearby attractions locater, a review reading/adding and university favouriting system functionality that is made unique to every university. A collaborative team effort developed together with a group of friends.
+A website designed to help students with the overseas exchange application process by web scraping and consolidating all the vital scatterered information, along with originally designed and self-built system functionalities such as automated modules mapping, user authentication, nearby attractions locater, a review system for reading/adding and a university favouriting system functionality that is made unique to every university. A collaborative team effort developed together with a group of friends.
 
 
 # To navigate github,
