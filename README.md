@@ -1,9 +1,9 @@
-# SMU_WAD2_Project (SGXChange)
+# SGXChange
 SGXChange, changing the way you Exchange.
 
 Find us LIVE at https://smu-wad2-teosean-sgxchange.vercel.app/
 
-A website designed to help students with the overseas exchange application process by web scraping and consolidating all the vital scatterered information, along with originally designed and self-built system functionalities such as automated modules mapping, user authentication, nearby attractions locater, a review system for reading/adding and a university favouriting system functionality that is made unique to every university. A collaborative team effort brainstormed and developed together with a group of friends!
+A website designed to help students with the overseas exchange application process by web scraping and consolidating all the vital scatterered information, along with originally designed and self-built system functionalities such as user authentication, automated modules mapping, a university nearby attractions locater, a university review and favouriting functionality, where all of these functionalities are made unique to every university. A collaborative team effort brainstormed and developed together with a group of friends!
 
 
 ## Recommended IDE Setup
